@@ -4,7 +4,9 @@ require_once '../app/bootstrap.php';
 
 //Init Core Libraries
 
-$init = new Core
+$init = new Core;
+
+echo "lalala";
 
 
 ?>
