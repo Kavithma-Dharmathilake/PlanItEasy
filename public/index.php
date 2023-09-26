@@ -8,7 +8,8 @@ $init = new Core;
 
 echo "lalala";
 
-echo "abcdesf"
+echo "abcdesf";
+echo "jdcknsdkjc";
 
 
 ?>
