@@ -6,12 +6,6 @@ require_once '../app/bootstrap.php';
 
 $init = new Core;
 
-echo "lalala";
-
-echo "abcdesf";
-echo "jdcknsdkjc";
-
-echo "eulll";
 
 
 ?>
