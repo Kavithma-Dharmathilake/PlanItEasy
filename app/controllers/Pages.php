@@ -1,31 +1,64 @@
 <?php
 
 
-class Pages extends Controller {
+class Pages extends Controller
+{
 
-public function __construct(){
+    public function __construct()
+    {
 
 
- 
-}
 
-public function index(){
+    }
 
-    $data = [ 
-        'title' => 'Welcome'
-    ];
-   $this->view('pages/index', $data);
-}
+    public function index()
+    {
 
-public function about(){
+        $data = [
+            'title' => 'Welcome'
+        ];
+        $this->view('pages/index', $data);
+    }
 
-    $data = [ 
-        'title' => 'About us'
-    ];
+    public function about()
+    {
 
-    $this->view('pages/about', $data);
-}
+        $data = [
+            'title' => 'About us'
+        ];
 
+        $this->view('pages/about', $data);
+    }
+
+    public function eventplanners()
+    {
+
+        $data = [
+            'title' => 'EventPlanners'
+        ];
+
+        $this->view('pages/eventplanners', $data);
+    }
+
+    public function suppliers()
+    {
+
+        $data = [
+            'title' => 'Suppliers'
+        ];
+
+        $this->view('pages/suppliers', $data);
+    }
+
+    public function join()
+    {
+
+        $data = [
+            'title' => 'Suppliers'
+        ];
+
+        $this->view('pages/join', $data);
+    }
 }
 
 ?>
