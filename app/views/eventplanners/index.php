@@ -8,6 +8,7 @@
     <title>Dashboard</title>
     <!-- MATERIAL CDN -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- STYLESHEET -->
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/public/css/admindash.css">
     <script>
@@ -48,9 +49,6 @@
                             cell.textContent = '';
                         } else {
                             cell.textContent = date;
-                            // Add your logic to display events on specific dates here
-                            // You can add event data to the cell if needed
-                            // Example: cell.dataset.date = `${year}-${month + 1}-${date}`;
                             date++;
                         }
                         row.appendChild(cell);
@@ -72,7 +70,41 @@
                 currentDate.setMonth(currentDate.getMonth() + 1);
                 generateCalendar();
             });
+
+
+            // Generate random data
+            const data = [];
+            const labels = ["Januray", "February", "March", "April", "June", "July", "August", "September", "October", "November", "December"];
+
+            for (let i = 0; i < 12; i++) {
+                data.push(Math.floor(Math.random() * 15)); // Generate random data values between 0 and 100
+               
+            }
+
+            // Create a bar chart
+            const ctx = document.getElementById('barChart').getContext('2d');
+            const barChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Events Completed per month',
+                        data: data,
+                        backgroundColor: '#011f4b',
+                        borderWidth: 1,
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
         });
+
+
 
     </script>
 </head>
@@ -95,66 +127,66 @@
                     <h3>Dashboard</h3>
                 </a>
 
-                <a href="">
+                <a href="<?php echo URLROOT ?>eventplanners/packages">
                     <span class="material-icons-sharp">
                         inventory
                     </span>
                     <h3>Packages</h3>
                 </a>
 
-                <a href="">
+                <a href="<?php echo URLROOT ?>eventplanners/eventRequest">
                     <span class="material-icons-sharp">
                         festival
                     </span>
                     <h3>Event Requests</h3>
                 </a>
 
-                <a href="">
+                <a href="<?php echo URLROOT ?>eventplanners/quoteReq">
                     <span class="material-icons-sharp">
                         note_add
                     </span>
                     <h3>Quoatation Requests</h3>
                 </a>
-                <a href="">
+                <a href="<?php echo URLROOT ?>eventplanners/supplierReq">
                     <span class="material-icons-sharp">
                         request_quote
                     </span>
                     <h3>Supplier Quotations</h3>
                 </a>
-                <a href="">
+                <a href="<?php echo URLROOT ?>eventplanners/budget">
                     <span class="material-icons-sharp">
                         paid
                     </span>
                     <h3>Budget Plans</h3>
                 </a>
 
-                <a href="">
+                <a href="<?php echo URLROOT ?>eventplanners/calendar">
                     <span class="material-icons-sharp">
                         calendar_month
                     </span>
-                    <h3>Calendar</h3>
+                    <h3>Calender</h3>
                 </a>
 
-                <a href="">
+                <a href="<?php echo URLROOT ?>eventplanners/profile">
                     <span class="material-icons-sharp">
                         account_box
                     </span>
                     <h3>Profile</h3>
                 </a>
 
-                <a href="#">
+                <a href="<?php echo URLROOT ?>eventplanners/messages">
                     <span class="material-icons-sharp">mail</span>
                     <h3>Messages</h3>
                     <span class="message-count">26</span>
                 </a>
 
-                <a href="">
+                <a href="<?php echo URLROOT ?>eventplanners/inquiry">
                     <span class="material-icons-sharp">
                         info
                     </span>
                     <h3>Inquiry</h3>
                 </a>
-                <a href="#">
+                <a href="<?php echo URLROOT ?>">
                     <span class="material-icons-sharp">logout</span>
                     <h3>Logout</h3>
                 </a>
@@ -163,9 +195,6 @@
 
         <main>
             <h1>Dashboard</h1>
-            <div class="date">
-                <input type="date">
-            </div>
 
             <div class="insights">
                 <div class="users">
@@ -204,6 +233,12 @@
                     </div>
 
                 </div>
+
+            </div>
+            <div class="recent-trans">
+                <h2>Event Completed</h2>
+                <canvas id="barChart"></canvas>
+
             </div>
             <!------------End of insights------------>
 
