@@ -1,0 +1,25 @@
+.joinTheTeam{
+    position: relative;
+    top: 6rem;
+    overflow: hidden;
+    height: 80vh;
+    margin-bottom: 6rem;
+}
+
+.joinTheTeam_container{
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 5rem;
+    height: 90%;
+    padding: 2rem 2rem;
+    border: 2px solid var(--color-background);
+    border-radius: var(--border-radius-3);
+    
+}
+
+.joinTheTeamL h2{
+    color: var(--color-warning);
+    margin: 1rem 0 1rem;
+}
