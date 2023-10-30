@@ -36,12 +36,21 @@
         </div>
     </nav>
 
-    <div class="login">
+    <div class="login" style="margin-top:100px">
         <div class="wrapper">
             <form action="">
                 <h2>Let's create your account</h2>
                 <div class="input-box">
                     <input type="text" placeholder="E-mail" required>
+                </div>
+                <div class="input-box">
+                    <input type="text" placeholder="Name" required>
+                </div>
+                <div class="input-box">
+                    <input type="text" placeholder="Contact" required>
+                </div>
+                 <div class="input-box">
+                    <input type="text" placeholder="Address" required>
                 </div>
                 <div class="input-box">
                     <input type="text" placeholder="Password" required>

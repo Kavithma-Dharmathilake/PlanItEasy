@@ -23,7 +23,7 @@
                 <h4>PlanItEasy</h4>
             </a>
             <ul class="nav__menu">
-                <li><a href="<?php echo URLROOT; ?>pages/">Home</a></li>
+                <li><a href="<?php echo URLROOT; ?>">Home</a></li>
                 <li><a href="<?php echo URLROOT; ?>pages/about">Who Are We</a></li>
                 <li><a href="<?php echo URLROOT; ?>pages/eventplanners">Event Planners</a></li>
                 <li><a href="<?php echo URLROOT; ?>pages/suppliers">Suppliers</a></li>

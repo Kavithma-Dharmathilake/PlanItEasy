@@ -1,0 +1,130 @@
+
+body {
+    min-height: 100vh;
+    display: flex;
+    padding: 5rem;
+}
+
+.regForm{
+    align-items: center;
+    justify-content: center;
+}
+
+.back_btn{
+    margin-left: 0%;
+    position: fixed;
+    top: 1rem;
+    z-index: 11;
+}
+
+.reg_form_container {
+  position: relative;
+  max-width: 700px;
+  width: 100%;
+  background: #fff;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+.reg_form_container header {
+  margin-top: -5rem;
+  font-size: 2.5rem;
+  color: var(--color-danger);
+  font-weight: 600;
+  text-align: center;
+}
+.reg_form_container .form {
+  margin-top: -30rem;
+}
+.form .input-box {
+  width: 100%;
+  margin-top: 20px;
+}
+.input-box label {
+  color: #333;
+}
+.form :where(.input-box input, .select-box) {
+  position: relative;
+  height: 50px;
+  width: 100%;
+  outline: none;
+  font-size: 1rem;
+  color: #707070;
+  margin-top: 8px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 0 15px;
+}
+.input-box input:focus {
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+}
+.form .column {
+  display: flex;
+  column-gap: 2rem;
+}
+.form .gender-box {
+  margin-top: 2rem;
+}
+.gender-box h3 {
+  color: #333;
+  font-size: 1rem;
+  font-weight: 400;
+  margin-bottom: 8px;
+}
+.form :where(.gender-option, .gender) {
+  display: flex;
+  align-items: center;
+  column-gap: 50px;
+  flex-wrap: wrap;
+}
+.form .gender {
+  column-gap: 0.6rem;
+}
+.gender input {
+  color: var(--color-primary);
+}
+.form :where(.gender input, .gender label) {
+  cursor: pointer;
+}
+.gender label {
+  color: #707070;
+}
+.address :where(input, .select-box) {
+  margin-top: 2rem;
+}
+.select-box select {
+  height: 100%;
+  width: 100%;
+  outline: none;
+  border: none;
+  color: #707070;
+  font-size: 1rem;
+}
+.form button {
+  height: 55px;
+  width: 100%;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 400;
+}
+.form button:hover {
+  background: rgb(88, 56, 250);
+}
+
+.upload_btn{
+    display: inline-block;
+    background:var(--color-dark);
+    color: var(--color-white);
+    padding: 1rem 2rem;
+    border: 1px solid transparent;
+    font-weight: 500;
+    transition: var(--transition);
+    border-radius: var(--border-radius-3);
+    margin-top: 3rem;
+}
+
+.upload_btn:hover{
+    background: transparent;
+    color: var(--color-black);
+    border-color: var(--color-black);
+}

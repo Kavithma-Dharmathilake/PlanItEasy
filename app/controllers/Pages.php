@@ -59,6 +59,16 @@ class Pages extends Controller
 
         $this->view('pages/join', $data);
     }
+
+    public function joinreg()
+    {
+
+        $data = [
+            'title' => 'Suppliers'
+        ];
+
+        $this->view('pages/joinreg', $data);
+    }
 }
 
 ?>
