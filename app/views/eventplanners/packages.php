@@ -142,11 +142,13 @@
             </div>
             <!-- Add button -->
             <div style="padding-top:40px;">
-                <button class="package-add">
+
+                <a href="<?php echo URLROOT ?>eventplanners/addNewPackage" class="package-add">
                     <i class="fa fa-add" style="font-size: 18px; padding-right:15px;">
                     </i>
                     Add new Package
-                </button>
+                </a>
+
             </div>
 
             <!-- List of packages -->

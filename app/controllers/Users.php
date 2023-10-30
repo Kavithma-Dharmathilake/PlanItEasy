@@ -20,6 +20,12 @@ class Users extends Controller{
 
     }
 
+    public function logout(){
+
+       redirect('index');
+
+    }
+
 
 
 }
