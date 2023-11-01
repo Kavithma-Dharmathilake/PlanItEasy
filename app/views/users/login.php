@@ -38,13 +38,13 @@
 
     <div class="login">
     <div class="wrapper">
-        <form action="">
+        <form action="<?php echo URLROOT; ?>/users/login">
             <h1>Welcome Back</h1>
             <div class="input-box">
-                <input type="text" placeholder="User Name" required>
+                <input type="email" placeholder="Email" name="email" required>
             </div>
             <div class="input-box">
-                <input type="text" placeholder="Password" required>
+                <input type="text" placeholder="Password" name="password" required>
             </div>
             <div class="remember-forgot">
                 <label><input type="checkbox">Remeber Me</label>

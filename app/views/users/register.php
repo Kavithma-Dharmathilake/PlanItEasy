@@ -38,25 +38,43 @@
 
     <div class="login" style="margin-top:100px">
         <div class="wrapper">
-            <form action="">
+            <form action="<?php echo URLROOT; ?>/users/register" method="post">
                 <h2>Let's create your account</h2>
-                <div class="input-box">
-                    <input type="text" placeholder="E-mail" required>
+                <div class="input-box <?php echo (!empty($data['email_err'])) ? 'is-invalid' : ''; ?>">
+                    <input type="text" name="email" placeholder="E-mail">
+                    <span class="invalid-feedback">
+                        <?php echo $data['email_err']; ?>
+                    </span>
                 </div>
-                <div class="input-box">
-                    <input type="text" placeholder="Name" required>
+                <div class="input-box <?php echo (!empty($data['name_err'])) ? 'is-invalid' : ''; ?>">
+                    <input type="text" name="name" placeholder="Name">
+                    <span class="invalid-feedback">
+                        <?php echo $data['name_err']; ?>
+                    </span>
                 </div>
-                <div class="input-box">
-                    <input type="text" placeholder="Contact" required>
+                <div class="input-box <?php echo (!empty($data['contact_err'])) ? 'is-invalid' : ''; ?>">
+                    <input type="text" name="contact" placeholder="Contact">
+                    <span class="invalid-feedback">
+                        <?php echo $data['contact_err']; ?>
+                    </span>
                 </div>
-                 <div class="input-box">
-                    <input type="text" placeholder="Address" required>
+                 <div class="input-box <?php echo (!empty($data['address_err'])) ? 'is-invalid' : ''; ?>">
+                    <input type="text" name="address" placeholder="Address">
+                    <span class="invalid-feedback">
+                        <?php echo $data['address_err']; ?>
+                    </span>
                 </div>
-                <div class="input-box">
-                    <input type="text" placeholder="Password" required>
+                <div class="input-box <?php echo (!empty($data['password_err'])) ? 'is-invalid' : ''; ?>">
+                    <input type="text" name="password" placeholder="Password">
+                    <span class="invalid-feedback">
+                        <?php echo $data['password_err']; ?>
+                    </span>
                 </div>
-                <div class="input-box">
-                    <input type="text" placeholder="Confirm your Password" required>
+                <div class="input-box <?php echo (!empty($data['confirm_password_err'])) ? 'is-invalid' : ''; ?>">
+                    <input type="text"name="confirm_password" placeholder="Confirm your Password">
+                    <span class="invalid-feedback">
+                        <?php echo $data['confirm_password_err']; ?>
+                    </span>
                 </div>
                 <div class="remember-forgot">
                     <label><input type="checkbox">Remeber Me</label>
