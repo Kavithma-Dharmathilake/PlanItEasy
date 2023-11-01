@@ -37,27 +37,34 @@
     </nav>
 
     <div class="login">
-    <div class="wrapper">
-        <form action="<?php echo URLROOT; ?>/users/login">
-            <h1>Welcome Back</h1>
-            <div class="input-box">
-                <input type="email" placeholder="Email" name="email" required>
-            </div>
-            <div class="input-box">
-                <input type="text" placeholder="Password" name="password" required>
-            </div>
-            <div class="remember-forgot">
-                <label><input type="checkbox">Remeber Me</label>
-                <a href="">Forgot Password?</a>
-            </div>
+        <div class="wrapper">
+            <form action="<?php echo URLROOT; ?>users/login" method="post">
+                <h1>Welcome Back</h1>
+                <div class="input-box <?php echo (!empty($data['email_err'])) ? 'is-invalid' : ''; ?>">
+                    <input type="text" name="email" placeholder="E-mail" value="<?php echo $data['email']; ?>">
+                    <span class="invalid-feedback">
+                        <?php echo $data['email_err']; ?>
+                    </span>
+                </div>
+                <div class="input-box <?php echo (!empty($data['password_err'])) ? 'is-invalid' : ''; ?>">
+                    <input type="password" name="password" placeholder="Password" value="<?php echo $data['password']; ?>">
+                    <span class="invalid-feedback">
+                        <?php echo $data['password_err']; ?>
+                    </span>
+                </div>
+                <div class="remember-forgot">
+                    <label><input type="checkbox">Remeber Me</label>
+                    <a href="">Forgot Password?</a>
+                </div>
 
-            <button type="submit" class="btn">Login</button>
-            <div class="sign-up">
-                <p>Don't have an Account?<a href="<?php echo URLROOT; ?>users/register">Sign up</a></p>
-            </div>
-        </form>
+                <button type="submit" class="btn">Login</button>
+                <div class="sign-up">
+                    <p>Don't have an Account?<a href="<?php echo URLROOT; ?>users/register">Sign up</a></p>
+                </div>
+            </form>
+        </div>
     </div>
-    </div>
-    
+
 </body>
+
 </html>

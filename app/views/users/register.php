@@ -41,31 +41,31 @@
             <form action="<?php echo URLROOT; ?>/users/register" method="post">
                 <h2>Let's create your account</h2>
                 <div class="input-box <?php echo (!empty($data['email_err'])) ? 'is-invalid' : ''; ?>">
-                    <input type="text" name="email" placeholder="E-mail">
+                    <input type="text" name="email" placeholder="E-mail" value="<?php echo $data['email']; ?>">
                     <span class="invalid-feedback">
                         <?php echo $data['email_err']; ?>
                     </span>
                 </div>
                 <div class="input-box <?php echo (!empty($data['name_err'])) ? 'is-invalid' : ''; ?>">
-                    <input type="text" name="name" placeholder="Name">
+                    <input type="text" name="name" placeholder="Name" value="<?php echo $data['name']; ?>">
                     <span class="invalid-feedback">
                         <?php echo $data['name_err']; ?>
                     </span>
                 </div>
                 <div class="input-box <?php echo (!empty($data['contact_err'])) ? 'is-invalid' : ''; ?>">
-                    <input type="text" name="contact" placeholder="Contact">
+                    <input type="text" name="contact" placeholder="Contact" value="<?php echo $data['contact']; ?>">
                     <span class="invalid-feedback">
                         <?php echo $data['contact_err']; ?>
                     </span>
                 </div>
                  <div class="input-box <?php echo (!empty($data['address_err'])) ? 'is-invalid' : ''; ?>">
-                    <input type="text" name="address" placeholder="Address">
+                    <input type="text" name="address" placeholder="Address" value="<?php echo $data['address']; ?>">
                     <span class="invalid-feedback">
                         <?php echo $data['address_err']; ?>
                     </span>
                 </div>
                 <div class="input-box <?php echo (!empty($data['password_err'])) ? 'is-invalid' : ''; ?>">
-                    <input type="text" name="password" placeholder="Password">
+                    <input type="text" name="password" placeholder="Password" value="<?php echo $data['password']; ?>">
                     <span class="invalid-feedback">
                         <?php echo $data['password_err']; ?>
                     </span>
