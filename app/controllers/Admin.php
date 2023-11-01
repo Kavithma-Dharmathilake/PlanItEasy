@@ -33,6 +33,23 @@ class  Admin extends Controller
         
     }
 
+    public function newsupplier(){
+        $this->view('admin/newsupplier');
+        
+    }
+
+    
+    public function suppliers(){
+        $this->view('admin/suppliers');
+        
+    }
+
+    public function eventplanners(){
+        $this->view('admin/eventplanners');
+        
+    }
+
+
     public function userreq(){
         $this->view('admin/userreq');
     }

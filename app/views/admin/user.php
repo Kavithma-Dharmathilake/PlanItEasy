@@ -13,7 +13,7 @@
 </head>
 <body>
     <div class="dash-container">
-        <aside>
+    <aside>
             <div class="top">
                 <div class="logo">
                 <img src="<?php echo URLROOT; ?>/public/images/logo.jpg">
@@ -33,7 +33,7 @@
                     <h3>Users</h3>
                 </a>
                 <a href="<?php echo URLROOT ?>admin/analytics">
-                    <span class="material-icons-sharp">monitoring</span>
+                    <span class="material-icons-sharp">leaderboard</span>
                     <h3>Analytics</h3>
                 </a>
                 <a href="<?php echo URLROOT ?>admin/messages">
@@ -46,7 +46,7 @@
                     <h3>Suppliers</h3>
                 </a>
                 <a href="#">
-                    <span class="material-icons-sharp">person_apron</span>
+                    <span class="material-icons-sharp">group</span>
                     <h3>Event Planners</h3>
                 </a>
                 <a href="<?php echo URLROOT ?>admin/userreq">
@@ -66,14 +66,11 @@
 
         <main>
             <h1>Users</h1>
-            <div class="date">
-                <input type="date">
-            </div>
-
+         
           
             <!------------End of insights------------>
             <div class="recent-trans">
-                <h2>Recent Transactions</h2>
+                <h2></h2>
                 <table>
                     <thead>
                         <tr>
