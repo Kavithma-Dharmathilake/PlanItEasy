@@ -73,43 +73,17 @@
 
 
             <h3>Total Users</h3>
-            <canvas id="pieChart" width="400" height="400"></canvas>
-            <button id="generateReportButton">Generate Report</button>
-
-            <script>
-                var ctx = document.getElementById('pieChart').getContext('2d');
-                var data = {
-                    labels: ['Customers', 'Event Planners', 'Suppliers'],
-                    datasets: [{
-                        data: [80, 20, 30],
-                        backgroundColor: ['#7380ec', '#41f1b6', '#ffbb55']
-                    }]
-                };
-                var pieChart = new Chart(ctx, {
-                    type: 'pie',
-                    data: data,
-                    options: {
-                        responsive: false,
-                        maintainAspectRatio: false,
-                        layout: {
-                            padding: {
-                                left: 10,
-                                right: 10,
-                                top: 10,
-                                bottom: 10
-                            }
-                        }
-                    }
-                });
-                document.getElementById('generateReportButton').addEventListener('click', function () {
-                    // You can add report generation logic here
-                    alert('Report generation initiated. This is where you would generate the report.');
-                });
-            </script>
+        <div>
+            <div style="display:flex">
+                <div style="width:500px">ekcnkjcne   djbcjbdjcbd</div>
+                <div style="width:400px">wekckjnckebccv  cdjcjdbc</div>
+            </div>
+            <div></div>
+        </div>
 
 
         </main>
-        <!--------------END OF MAIN-------------->
+
 
     </div>
 

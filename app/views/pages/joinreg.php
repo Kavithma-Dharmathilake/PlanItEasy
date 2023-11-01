@@ -8,7 +8,7 @@
 
     <section class="reg_form_container">
       <header>Registration Form</header>
-      <form action="#" class="form">
+      <form method="post" action="" class="form">
         <div class="input-box">
           <label>Full Name</label>
           <input type="text" placeholder="Enter full name" required />
@@ -42,7 +42,7 @@
         </div>
         <div class="input-box address">
           <label>Address</label>
-          <input type="text" placeholder="Enter street address" required />
+          <input type="text" placeholder="Enter address" required />
           <input type="text" placeholder="Enter street address line 2" required />
           <input type="text" placeholder="Enter your city" required />
         </div>
