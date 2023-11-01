@@ -4,7 +4,7 @@
  require APPROOT .'/views/inc/header.php'
 ?>
 
-    <div class="regForm" style="justify-content:center; margin-right:100px;" >
+    <div class="regForm" style="margin-left:300px; margin-top:70px" >
 
     <section class="reg_form_container">
       <header>Registration Form</header>
