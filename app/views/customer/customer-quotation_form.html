@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- MATERIAL CDN -->
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp"
+      rel="stylesheet"
+    />
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="customer.css" />
+    <link rel="stylesheet" href="customer.css" />
+    <script>
+      function showAlertWithTextarea() {
+          var text = prompt("Enter your text:");
+          if (text !== null) {
+              alert("You entered the following text:\n" + text);
+          }
+      }
+  </script>
+  </head>
+  <body>
+    <ul>
+      <li><img src="/Users/maho/Documents/home/images/logo.PNG" />
+        <h2>PlanItEasy</h2></li>
+      <li style="float:right"><a href=""><p>Hey, <b>pawani</b></p>
+        <small class="text-muted">Customer</small>
+        <img src="images/photo2.jpg" /> </a></li>
+    </ul>
+
+    <div class="dash-container">
+      <aside>
+        
+        <div class="sidebar">
+          <a href="customer main.html">
+            <span class="material-icons-sharp">calendar_today</span>
+            <h3>Ongoing Events</h3>
+          </a>
+          <a href="#" class="active">
+            <span class="material-icons-sharp">event_available</span>
+            <h3>Completed Events</h3>
+          </a>
+          <a href="#">
+            <span class="material-icons-sharp">man</span>
+            <h3>Event Planners</h3>
+          </a>
+          <a href="#">
+            <span class="material-icons-sharp">list_alt</span>
+            <h3>Orders</h3>
+            <span class="message-count">26</span>
+          </a>
+          <a href="#">
+            <span class="material-icons-sharp">payments</span>
+            <h3>Payments</h3>
+          </a>
+          <a href="#">
+            <span class="material-icons-sharp">message</span>
+            <h3>Messages</h3>
+          </a>
+          <a href="#">
+            <span class="material-icons-sharp">person</span>
+            <h3>profile</h3>
+          </a>
+          <a href="#">
+            <span class="material-icons-sharp">logout</span>
+            <h3>Logout</h3>
+        </a>
+        </a>
+        </div>
+      </aside>
+    <div class="dash-container">
+      <main>
+        <!------------End of insights------------>
+        <div class="recent-trans">
+          <table>
+            <thead>
+                <tr>
+                
+                    <th colspan="2">Customer Quotation</th>
+                    
+                  </tr>
+                  <!--<tr>
+                    <th width="10%"></th>
+                    <th width="10%"></th>
+                  </tr>-->
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                      <label for="">Event Planner ID</label>
+                      <div class="cus_c1">
+                        <input type="text">
+                    </div>
+  
+                    </td>
+                    <td>
+                      <label for="">Number of Participants</label>
+                      <div class="cus_c1">
+                        <input type="text">
+                    </div>
+                    </td>
+                  </tr>
+                  
+  
+                <tr>
+                  <td>
+                    <label for="">Theme</label>
+  
+                      <div class="cus_c1">
+                          <input type="text">
+                      </div>
+                  </td>
+                  <td>
+                    <label for="">Budget</label>
+  
+                    <div class="cus_c1">
+                        <input type="text">
+                    </div>
+                </td>
+              </tr>
+  
+  
+              <tr>
+                <td>
+                    <label for="">Date</label>
+                    <div class="cus_c2">
+                        <input type="date" name="date">
+                    </div>
+                </td>
+                <td>
+                    <label for="">Time</label>
+                    <br>
+                    <label for="fromTime">From:</label>
+                    <input type="time" class="cus_c2" required>
+                    
+                    <label for="toTime">To:</label>
+                    <input type="time" class="cus_c2" required>
+                </td>
+            </tr>
+              
+            
+            <tr>
+              <th colspan="2">
+                <div class="cus_c3">
+                  <div class="customer-card">
+                    <div class="right-align">
+                      Photography
+                    </div>
+                    <!-- Add Buttons Here -->
+                    <div class="buttons">
+                      <div class="dropdown">
+                        <button onclick="myFunction1()" class="dropbtn">Need</button>
+                        <div id="myDropdown1" class="dropdown-content">
+                         <input type="text" id="lname" name="lname" value=""onclick="event.stopPropagation();"><br><br>
+                         <input type="submit" value="Submit">
+                        </div>
+                      </div>
+                      <button class="customer-button">Not Need</button>
+                    </div>
+                  </div>
+                </div>
+              </th>
+            </tr>
+
+            <tr>
+              <th colspan="2">
+                <div class="cus_c3">
+                  <div class="customer-card">
+                    <div class="right-align">
+                      Videography
+                    </div>
+                    <!-- Add Buttons Here -->
+                    <div class="buttons">
+                      <div class="dropdown">
+                        <button onclick="myFunction2()" class="dropbtn">Need</button>
+                        <div id="myDropdown2" class="dropdown-content">
+                         <input type="text" id="lname" name="lname" value=""      onclick="event.stopPropagation();"><br><br>
+                         <input type="submit" value="Submit">
+                        </div>
+                      </div>
+                      <button class="customer-button">Not Need</button>
+                    </div>
+                  </div>
+                </div>
+              </th>
+            </tr>
+            <tr>
+              <th colspan="2">
+                <div class="cus_c3">
+                  <div class="customer-card">
+                    <div class="right-align">
+                      Cacke
+                    </div>
+                    <!-- Add Buttons Here -->
+                    <div class="buttons">
+                      <div class="dropdown">
+                        <button onclick="myFunction3()" class="dropbtn">Need</button>
+                        <div id="myDropdown3" class="dropdown-content">
+                         <input type="text" id="lname" name="lname" value=""onclick="event.stopPropagation();"><br><br>
+                         <input type="submit" value="Submit">
+                        </div>
+                      </div>
+                      <button class="customer-button">Not Need</button>
+                    </div>
+                  </div>
+                </div>
+              </th>
+            </tr> 
+  
+            <tr>
+              <th colspan="2">
+                <div class="cus_c3">
+                  <div class="customer-card">
+                    <div class="right-align">
+                      Reciption Hall
+                    </div>
+                    <!-- Add Buttons Here -->
+                    <div class="buttons">
+                      <div class="dropdown">
+                        <button onclick="myFunction4()" class="dropbtn">Need</button>
+                        <div id="myDropdown4" class="dropdown-content">
+                         <input type="text" id="lname" name="lname" value=""onclick="event.stopPropagation();"><br><br>
+                         <input type="submit" value="Submit">
+                        </div>
+                      </div>
+                      <button class="customer-button">Not Need</button>
+                    </div>
+                  </div>
+                </div>
+              </th>
+            </tr>
+  
+            <tr>
+              <th colspan="2">
+                <div class="cus_c3">
+                  <div class="customer-card">
+                    <div class="right-align">
+                     Catering
+                    </div>
+                    <!-- Add Buttons Here -->
+                    <div class="buttons">
+                      <div class="dropdown">
+                        <button onclick="myFunction5()" class="dropbtn">Need</button>
+                        <div id="myDropdown5" class="dropdown-content">
+                         <input type="text" id="lname" name="lname" value="" onclick="event.stopPropagation();"><br><br>
+                         <input type="submit" value="Submit">
+                        </div>
+                      </div>
+                      <button class="customer-button">Not Need</button>
+                    </div>
+                  </div>
+                </div>
+              </th>
+            </tr>
+            <tr>
+              <th colspan="2">
+                <div class="cus_c3">
+                  <div class="customer-card">
+                    <div class="right-align">
+                      Decorations 
+                    </div>
+                    <!-- Add Buttons Here -->
+                    <div class="buttons">
+                      <div class="dropdown">
+                        <button onclick="myFunction6()" class="dropbtn">Need</button>
+                        <div id="myDropdown6" class="dropdown-content">
+                         <input type="text" id="lname" name="lname" value="" onclick="event.stopPropagation();"><br><br>
+                         <input type="submit" value="Submit">
+                        </div>
+                      </div>
+                      <button class="customer-button">Not Need</button>
+                    </div>
+                  </div>
+                </div>
+              </th>
+            </tr>
+
+          <tr>
+            <th colspan="2">
+              <div class="cus_c3">
+                <div class="customer-card">
+               <div  class="right-align" >
+                  Music/Dj
+               </div>
+               <div class="buttons">
+                 <div class="dropdown">
+                  <button onclick="myFunction6()" class="dropbtn">Need</button>
+                  <div id="myDropdown6" class="dropdown-content">
+                   <input type="text" id="lname" name="lname" value="" onclick="event.stopPropagation();"><br><br>
+                   <input type="submit" value="Submit">
+                  </div>
+                 </div>
+                 <button class="customer-button">Not Need</button>
+               </div>
+                </div>
+
+              </div>
+            </th>
+          </tr>
+  
+            <tr>
+              <th colspan="2">
+                <div class="cus_c3">
+                  <div class="customer-card">
+                    <div class="right-align">
+                      Other
+                    </div>
+                    <input type="text" class="customer-input">
+                  </div>
+                </div>
+              </th>
+            </tr>
+            <tr>
+              <th colspan="2">
+                <div class="cus_c3">
+                <div class="buttons"> 
+                      <button type="submit" value="Submit" class="submit-button">Submit</button>
+                </div> 
+                </div>
+              </th>
+            </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </main>
+      <!--------------END OF MAIN-------------->
+    </div>
+    </div>
+
+    <script>
+      /* When the user clicks on the button, 
+      toggle between hiding and showing the dropdown content */
+      function myFunction() {
+        document.getElementById("myDropdown").classList.toggle("show");
+      }
+      
+      // Close the dropdown if the user clicks outside of it
+      window.onclick = function(event) {
+        if (!event.target.matches('.dropbtn') && !event.target.matches('#lname')) {
+          var dropdowns = document.getElementsByClassName("dropdown-content");
+          var i;
+          for (i = 0; i < dropdowns.length; i++) {
+            var openDropdown = dropdowns[i];
+            if (openDropdown.classList.contains('show')) {
+              openDropdown.classList.remove('show');
+            }
+          }
+        }
+      }
+
+      function myFunction1() {
+        document.getElementById("myDropdown1").classList.toggle("show");
+      }
+      
+      // Close the dropdown if the user clicks outside of it
+      window.onclick = function(event) {
+        if (!event.target.matches('.dropbtn') && !event.target.matches('#lname')) {
+          var dropdowns = document.getElementsByClassName("dropdown-content");
+          var i;
+          for (i = 0; i < dropdowns.length; i++) {
+            var openDropdown = dropdowns[i];
+            if (openDropdown.classList.contains('show')) {
+              openDropdown.classList.remove('show');
+            }
+          }
+        }
+      }
+
+      function myFunction2() {
+        document.getElementById("myDropdown2").classList.toggle("show");
+      }
+      
+      // Close the dropdown if the user clicks outside of it
+      window.onclick = function(event) {
+        if (!event.target.matches('.dropbtn') && !event.target.matches('#lname')) {
+          var dropdowns = document.getElementsByClassName("dropdown-content");
+          var i;
+          for (i = 0; i < dropdowns.length; i++) {
+            var openDropdown = dropdowns[i];
+            if (openDropdown.classList.contains('show')) {
+              openDropdown.classList.remove('show');
+            }
+          }
+        }
+      }
+
+      function myFunction3() {
+        document.getElementById("myDropdown3").classList.toggle("show");
+      }
+      
+      // Close the dropdown if the user clicks outside of it
+      window.onclick = function(event) {
+        if (!event.target.matches('.dropbtn') && !event.target.matches('#lname')) {
+          var dropdowns = document.getElementsByClassName("dropdown-content");
+          var i;
+          for (i = 0; i < dropdowns.length; i++) {
+            var openDropdown = dropdowns[i];
+            if (openDropdown.classList.contains('show')) {
+              openDropdown.classList.remove('show');
+            }
+          }
+        }
+      }
+
+      function myFunction4() {
+        document.getElementById("myDropdown4").classList.toggle("show");
+      }
+      
+      // Close the dropdown if the user clicks outside of it
+      window.onclick = function(event) {
+        if (!event.target.matches('.dropbtn') && !event.target.matches('#lname')) {
+          var dropdowns = document.getElementsByClassName("dropdown-content");
+          var i;
+          for (i = 0; i < dropdowns.length; i++) {
+            var openDropdown = dropdowns[i];
+            if (openDropdown.classList.contains('show')) {
+              openDropdown.classList.remove('show');
+            }
+          }
+        }
+      }
+
+      function myFunction5() {
+        document.getElementById("myDropdown5").classList.toggle("show");
+      }
+      
+      // Close the dropdown if the user clicks outside of it
+      window.onclick = function(event) {
+        if (!event.target.matches('.dropbtn') && !event.target.matches('#lname')) {
+          var dropdowns = document.getElementsByClassName("dropdown-content");
+          var i;
+          for (i = 0; i < dropdowns.length; i++) {
+            var openDropdown = dropdowns[i];
+            if (openDropdown.classList.contains('show')) {
+              openDropdown.classList.remove('show');
+            }
+          }
+        }
+      }
+
+      function myFunction6() {
+        document.getElementById("myDropdown6").classList.toggle("show");
+      }
+      
+      // Close the dropdown if the user clicks outside of it
+      window.onclick = function(event) {
+        if (!event.target.matches('.dropbtn') && !event.target.matches('#lname')) {
+          var dropdowns = document.getElementsByClassName("dropdown-content");
+          var i;
+          for (i = 0; i < dropdowns.length; i++) {
+            var openDropdown = dropdowns[i];
+            if (openDropdown.classList.contains('show')) {
+              openDropdown.classList.remove('show');
+            }
+          }
+        }
+      }
+      </script>
+  </body>
+</html>
