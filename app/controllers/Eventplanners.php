@@ -95,6 +95,21 @@ class Eventplanners extends Controller
 
     }
 
+    public function findsupplier()
+    {
+
+        $this->view('eventplanners/findsupplier');
+
+    }
+
+    public function recivedquote()
+    {
+
+        $this->view('eventplanners/recivedquote');
+
+    }
+
+
 
 
 

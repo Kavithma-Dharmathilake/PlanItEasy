@@ -75,14 +75,19 @@
             width: 50px;
             height: 50px;
             padding: 50px;
-            color: var(--color-primary-variant)
-            font-size: 30px;
+            color: var(--color-primary-variant);
+            font-size: 20px;
         }
 
         /* Highlight Current Date */
         .calendar-table1 td {
             background-color: #fff;
             font-size: 30px;
+        }
+
+        .calendar-table1 td:hover {
+            background-color: var(--color-primary);
+            color:var(--color-primary-variant);
         }
 
         /* Add styles for specific dates with events here */

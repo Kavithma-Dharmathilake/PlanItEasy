@@ -69,6 +69,16 @@ class Pages extends Controller
 
         $this->view('pages/joinreg', $data);
     }
+
+    public function contact()
+    {
+
+        $data = [
+            'title' => 'Suppliers'
+        ];
+
+        $this->view('pages/contact', $data);
+    }
 }
 
 ?>

@@ -122,50 +122,158 @@
             <div style="display:flex">
 
                 <div class="planner-title">
-                    <h1>Event Request</h1>
+                    <h1>Event Request ID - #R123</h1>
                 </div>
 
 
             </div>
             <div style="display:flex; margin-top:40px">
-                <div class="event-details">
-                    <p>Event details</p>
+                <div>
+                <h2 style="text-align:center; margin-top:50px">General details</h2>
+                    <div class="event-details">
+                        <p  style="text-align:center">Event details</p>
 
-                    <div style="display:flex; margin-top:20px; margin-left:30px;">
-                        <div class="req-title" style="width:50%">Event Type </div>
-                        <div class="req-data" style="width:50%">Wedding</div>
+                        <div style="display:flex; margin-top:20px; margin-left:30px;">
+                            <div class="req-title" style="width:50%">Event Type </div>
+                            <div class="req-data" style="width:50%">Wedding</div>
+                        </div>
+                        <div style="display:flex; margin-top:20px; margin-left:30px;">
+                            <div class="req-title" style="width:50%">Event Theme </div>
+                            <div class="req-data" style="width:50%">Ocean</div>
+                        </div>
+                        <div style="display:flex; margin-top:20px; margin-left:30px;">
+                            <div class="req-title" style="width:50%">Tenative date </div>
+                            <div class="req-data" style="width:50%">2023/10/12</div>
+                        </div>
+                        <div style="display:flex; margin-top:20px; margin-left:30px;">
+                            <div class="req-title" style="width:50%">Budget </div>
+                            <div class="req-data" style="width:50%">100,000.00 LKR</div>
+                        </div>
+                        <div style="display:flex; margin-top:20px; margin-left:30px;">
+                            <div class="req-title" style="width:50%">Guest Count </div>
+                            <div class="req-data" style="width:50%">250</div>
+                        </div>
+                        <div style="display:flex; margin-top:20px; margin-left:30px;">
+                            <div class="req-title" style="width:50%">Time</div>
+                            <div class="req-data" style="width:50%">8.00 A.M. - 4.30 P.M.</div>
+                        </div>
                     </div>
-                    <div style="display:flex; margin-top:20px; margin-left:30px;">
-                        <div class="req-title" style="width:50%">Event Theme </div>
-                        <div class="req-data" style="width:50%">Ocean</div>
-                    </div>
-                    <div style="display:flex; margin-top:20px; margin-left:30px;">
-                        <div class="req-title" style="width:50%">Tenative date </div>
-                        <div class="req-data" style="width:50%">2023/10/12</div>
-                    </div>
-                    <div style="display:flex; margin-top:20px; margin-left:30px;">
-                        <div class="req-title" style="width:50%">Budget </div>
-                        <div class="req-data" style="width:50%">100,000.00 LKR</div>
-                    </div>
-                    <div style="display:flex; margin-top:20px; margin-left:30px;">
-                        <div class="req-title" style="width:50%">Guest Count </div>
-                        <div class="req-data" style="width:50%">250</div>
-                    </div>
-                    <div style="display:flex; margin-top:20px; margin-left:30px;">
-                        <div class="req-title" style="width:50%">Time</div>
-                        <div class="req-data" style="width:50%">8.00 A.M. - 4.30 P.M.</div>
+                    <div class="event-details">
+                        
+                        <p style="text-align:center;">Customer details</p>
+
+                        <div style="display:flex; margin-top:20px; margin-left:30px;">
+                            <div class="req-title" style="width:50%">Name </div>
+                            <div class="req-data" style="width:50%">Inoka Kumari</div>
+                        </div>
+                        <div style="display:flex; margin-top:20px; margin-left:30px;">
+                            <div class="req-title" style="width:50%">Email </div>
+                            <div class="req-data" style="width:50%">inoka@gmail.com</div>
+                        </div>
+                        <div style="display:flex; margin-top:20px; margin-left:30px;">
+                            <div class="req-title" style="width:50%">Telephone </div>
+                            <div class="req-data" style="width:50%">074444444</div>
+                        </div>
+
                     </div>
                 </div>
                 <div class="search-quoate">
-                    sss dcdc
-                </div>
+                <h2 style="text-align:center; margin-top:50px; margin-left:-330px;">Service Details</h2>
+                  <div style="display:flex; flex-direction:row">
+                  <div class="event-details">
+                        <p style="text-align:center">Reception Request</p>
 
+                        <div style="display:flex; margin-top:20px; margin-left:30px;">
+                            <div class="req-title" style="width:50%">Indoor/Outdoor</div>
+                            <div class="req-data" style="width:50%">Indoor</div>
+                        </div>
+                        <div style="display:flex; margin-top:20px; margin-left:30px;">
+                            <div class="req-title" style="width:50%">Type</div>
+                            <div class="req-data" style="width:50%">Banquet</div>
+                        </div>
+                        <div style="display:flex; margin-top:20px; margin-left:30px;">
+                            <div class="req-title" style="width:50%">Guest No</div>
+                            <div class="req-data" style="width:50%">225</div>
+                        </div>
+                        <div style="display:flex; margin-top:20px; margin-left:30px;">
+                            <div class="req-title" style="width:50%">Date</div>
+                            <div class="req-data" style="width:50%">Remarks</div>
+                        </div>
+
+                    </div>
+                    <div>
+                        <p style="margin:20px; padding:20px; margin-top:100px;">   
+                        <a href=""> Requested - 3</a>   |    <a href="<?php echo URLROOT ?>eventplanners/recivedquote">Receieved -2</a></p>
+                        <a href="<?php echo URLROOT ?>eventplanners/findsupplier"><button style="margin-top:-100px; margin-left:60px;padding:20px">Search Suppliers</button></a>
+                    </div>
+                  </div>
+                  <div style="display:flex; flex-direction:row">
+                    <div> <div class="event-details">
+                        <p style="text-align:center">Catering Request</p>
+
+                        <div style="display:flex; margin-top:20px; margin-left:30px;">
+                            <div class="req-title" style="width:50%">Cusine Type </div>
+                            <div class="req-data" style="width:50%">Western</div>
+                        </div>
+                        <div style="display:flex; margin-top:20px; margin-left:30px;">
+                            <div class="req-title" style="width:50%">Time </div>
+                            <div class="req-data" style="width:50%">Breakfast/Lunch</div>
+                        </div>
+                        <div style="display:flex; margin-top:20px; margin-left:30px;">
+                            <div class="req-title" style="width:50%">Event Services </div>
+                            <div class="req-data" style="width:50%">Sever</div>
+                        </div>
+                        <div style="display:flex; margin-top:20px; margin-left:30px;">
+                            <div class="req-title" style="width:50%">Veg/Non Veg</div>
+                            <div class="req-data" style="width:50%">Veg</div>
+                        </div>
+                        <div style="display:flex; margin-top:20px; margin-left:30px;">
+                            <div class="req-title" style="width:50%">Remarks</div>
+                            <div class="req-data" style="width:50%">none</div>
+                        </div>
+
+                    </div></div>
+                    <div style="margin:20px; padding:20px; margin-top:100px;">   
+                        <p>   <a href=""> Requested - 3</a>   |    <a href="<?php echo URLROOT ?>eventplanners/recivedquote">Receieved -2</a></p>
+                        <a href="<?php echo URLROOT ?>eventplanners/findsupplier"> <button style="padding:20px">Search Suppliers</button></a></div>
+                  </div>
+                  <div style="display:flex; flex-direction:row">
+                  <div class="event-details">
+                        <p style="text-align:center">Reception Request</p>
+
+                        <div style="display:flex; margin-top:20px; margin-left:30px;">
+                            <div class="req-title" style="width:50%">Indoor/Outdoor</div>
+                            <div class="req-data" style="width:50%">Indoor</div>
+                        </div>
+                        <div style="display:flex; margin-top:20px; margin-left:30px;">
+                            <div class="req-title" style="width:50%">Type</div>
+                            <div class="req-data" style="width:50%">Banquet</div>
+                        </div>
+                        <div style="display:flex; margin-top:20px; margin-left:30px;">
+                            <div class="req-title" style="width:50%">Guest No</div>
+                            <div class="req-data" style="width:50%">225</div>
+                        </div>
+                        <div style="display:flex; margin-top:20px; margin-left:30px;">
+                            <div class="req-title" style="width:50%">Date</div>
+                            <div class="req-data" style="width:50%">Remarks</div>
+                        </div>
+
+                    </div>
+                    <div>
+                        <p style="margin:20px; padding:20px; margin-top:100px;">   
+                        <a href=""> Requested - 3</a>   |    <a href="<?php echo URLROOT ?>eventplanners/recivedquote">Receieved -2</a></p>
+                        <a href="<?php echo URLROOT ?>eventplanners/findsupplier"><button style="margin-top:-100px; margin-left:60px; padding:20px;">Search Suppliers</button></a>
+                    </div>
+                  </div>
+                </div>
             </div>
 
-
-
-
         </div>
+
+
+
+
+    </div>
 
 
 </body>

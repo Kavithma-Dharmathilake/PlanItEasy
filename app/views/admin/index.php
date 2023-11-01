@@ -33,7 +33,7 @@
                     <h3>Users</h3>
                 </a>
                 <a href="<?php echo URLROOT ?>admin/analytics">
-                    <span class="material-icons-sharp">monitoring</span>
+                    <span class="material-icons-sharp">leaderboard</span>
                     <h3>Analytics</h3>
                 </a>
                 <a href="<?php echo URLROOT ?>admin/messages">
@@ -46,7 +46,7 @@
                     <h3>Suppliers</h3>
                 </a>
                 <a href="#">
-                    <span class="material-icons-sharp">person_apron</span>
+                    <span class="material-icons-sharp">group</span>
                     <h3>Event Planners</h3>
                 </a>
                 <a href="<?php echo URLROOT ?>admin/userreq">
