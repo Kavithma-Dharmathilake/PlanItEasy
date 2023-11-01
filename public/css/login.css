@@ -189,3 +189,9 @@ body{
         border-radius: 50%;
         display: inline-block;
 }
+
+.invalid-feedback{
+    color:red;
+    font-weight: bold;
+    font-size:small;
+}

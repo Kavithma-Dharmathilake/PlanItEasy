@@ -362,13 +362,13 @@ input[type='submit']:hover {
 /* One event request page ==> */
 .event-details {
     width: 400px;
+    margin: 30px;
     background-color: var(--color-light);
     border-radius: var(--card-border-radius);
-    text-align: center;
-    justify-content: center;
     box-shadow: var(--box-shadow);
     transition: all 300ms ease;
     padding-top: 40px;
+    padding: 50px;
 
 }
 
@@ -377,12 +377,20 @@ input[type='submit']:hover {
 }
 
 .event-details p {
-    color:var(--color-primary);
+    color: var(--color-primary);
     font-size: large;
     font-weight: 700;
     border-bottom: 1px solid var(--color-primary);
     padding-bottom: 15px;
 }
+
+
+.search-quoate button:hover {
+    background-color: #7380ec;
+    color: white;
+}
+
+
 
 .event-details div {
     font-weight: 700;
@@ -390,7 +398,82 @@ input[type='submit']:hover {
 
 
 .search-quoate {
-    width: 600px;
-    background-color: #7380ec;
+    width: 800px;
+    display: flex;
+    flex-direction: column;
+
 }
 
+.search-quoate button {
+    padding: 10px;
+    margin: 20px;
+    border-radius: 15px;
+    background-color: #41f1b6;
+
+}
+
+.sup-body {
+    width: 1000px;
+    padding-top: 20px;
+
+}
+
+.filter {
+    width: 300px;
+    padding:20px;
+    margin-top: 200px;
+}
+
+.filter input{
+margin:20px;
+}
+
+.fil-3 {
+    display: flex;
+    flex-direction: row;
+}
+
+.fil-3 input {
+    margin: 20px;
+    padding: 10px;
+    border-radius: 20px;
+}
+
+.card {
+    box-shadow: var(--box-shadow);
+    border-radius: var(--border-radius-1);
+    max-width: 300px;
+    margin:30px;
+    text-align: center;
+}
+
+.card:hover{
+    box-shadow: none;
+}
+
+.card img{
+    border-radius: 20px;
+    margin:10px;
+}
+
+.price {
+    color: grey;
+    font-size: 17px;
+}
+
+.card button {
+    border: none;
+    padding: 12px;
+    color: white;
+    background-color:#7380ec;
+    margin:20px;
+    border-radius: 30px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.card button:hover {
+   background-color: #011f4b;
+   color:white;
+}
