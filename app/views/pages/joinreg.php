@@ -10,25 +10,25 @@
       <header>Registration Form</header>
       <form method="post" action="" class="form">
         <div class="input-box">
-          <label>Full Name</label>
+          <label>Full Name<span style="color:red"><sup>*</sup></span></label>
           <input type="text" placeholder="Enter full name" required />
         </div>
         <div class="input-box">
-          <label>Email Address</label>
+          <label>Email Address<span style="color:red"><sup>*</sup></label>
           <input type="text" placeholder="Enter email address" required />
         </div>
         <div class="column">
           <div class="input-box">
-            <label>Phone Number</label>
+            <label>Phone Number<span style="color:red"><sup>*</sup></label>
             <input type="number" placeholder="Enter phone number" required />
           </div>
           <div class="input-box">
-            <label>Birth Date</label>
+            <label>Birth Date<span style="color:red"><sup>*</sup></label>
             <input type="date" placeholder="Enter birth date" required />
           </div>
         </div>
         <div class="gender-box">
-          <h3>Gender</h3>
+          <h3>Gender<span style="color:red"><sup>*</sup></h3>
           <div class="gender-option">
             <div class="gender">
               <input type="radio" id="check-male" name="gender" checked />
@@ -41,14 +41,14 @@
           </div>
         </div>
         <div class="input-box address">
-          <label>Address</label>
+          <label>Address<span style="color:red"><sup>*</sup></label>
           <input type="text" placeholder="Enter address" required />
           <input type="text" placeholder="Enter street address line 2" required />
           <input type="text" placeholder="Enter your city" required />
         </div>
 
         <div class="input-box address">
-            <label>Business Details</label>
+            <label>Business Details<span style="color:red"><sup>*</sup></label>
             <input type="text" placeholder="Enter your Business name" required />
             <div class="column">
                 <div class="select-box">
@@ -69,11 +69,21 @@
         </div>
 
         <div class="input-box address">
-        <label>Upload proof of documents of your business</label>
+        <label>Upload proof of documents of your business (Certification of Incorporation of a Private Company)<span style="color:red"><sup>*</sup> </label>
         </div>
 
         <input type="file" id="myFile" name="filename" /hidden>
         <label class="upload_btn" for="myFile">Choose File</label>
+        <div class="column">
+          <div class="input-box">
+            <label>Password<span style="color:red"><sup>*</sup></label>
+            <input type="password" placeholder="Enter password" required />
+          </div>
+          <div class="input-box">
+            <label>Confirm Password<span style="color:red"><sup>*</sup></label>
+            <input type="password" placeholder="Re-enter Password" required />
+          </div>
+        </div>
 
         <button class="btn">Submit</button>
 
