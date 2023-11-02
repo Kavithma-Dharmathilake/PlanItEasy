@@ -193,7 +193,8 @@ class Pages extends Controller
             if (empty($data['name_err']) && empty($data['email_err']) && empty($data['phone_err']) && empty($data['bday_err']) && empty($data['address_err']) && empty($data['bname_err']) && empty($data['bno_err']) && empty($data['baddress_err']) && empty($data['password_err']) && empty($data['confirm_password_err'])) {
              
                
-             
+                $selected_date = $data['bday'];
+                $b_date = date("Y-m-d", strtotime($selected_date));
 
                 $hashed_password = password_hash($data['password'], PASSWORD_DEFAULT);
 
@@ -201,7 +202,7 @@ class Pages extends Controller
                     'name' => $data['name'],
                     'email' => $data['email'],
                     'phone' => $data['phone'],
-                    'bday' => $data['bday'],
+                    'bday' => $b_date,
                     'gender' => $data['gender'],
                     'address' => $data['address'],
                     'bname' => $data['bname'],
@@ -216,7 +217,10 @@ class Pages extends Controller
                 ];
 
                 if($this->userModel->userReq($userData))
-                redirect('pages/index');
+                {
+                   echo '<script> alert("Your request sent successfully")</script>';
+                  
+                }
             } else {
                 // There were validation errors; return the data and errors to the view
                 $this->view('pages/joinreg', $data);
