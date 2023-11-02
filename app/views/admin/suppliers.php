@@ -83,6 +83,7 @@
                                 <th>Business Type</th>
                                 <th>BR Number</th>
                                 <th></th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -94,6 +95,7 @@
                                 <td>360 photography</td>
                                 <td>Photographer</td>
                                 <td>354902749</td>
+                                <td><button class="btn_accept" type="button">Update</button><button class="btn_reject" type="button">Delete</button></td>
                                 <td><a href="url">more</a></td>
                             </tr>
                             
