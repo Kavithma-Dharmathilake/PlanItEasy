@@ -1,10 +1,11 @@
 <?php
 
-class  Admin extends Controller
+class Admin extends Controller
 {
 
     public function __construct()
     {
+        $this->userModel = $this->model('UserReq');
 
     }
 
@@ -23,51 +24,60 @@ class  Admin extends Controller
     }
 
 
-    public function analytics(){
+    public function analytics()
+    {
         $this->view('admin/analytics');
 
     }
 
-    public function messages(){
+    public function messages()
+    {
         $this->view('admin/messages');
-        
+
     }
 
-    public function newsupplier(){
+    public function newsupplier()
+    {
         $this->view('admin/newsupplier');
-        
+
     }
 
-    
-    public function suppliers(){
+
+    public function suppliers()
+    {
         $this->view('admin/suppliers');
-        
+
     }
 
-    public function eventplanners(){
+    public function eventplanners()
+    {
         $this->view('admin/eventplanners');
-        
-    }
-
-
-    public function userreq(){
-
-        
-        $this->view('admin/userreq');
-
 
     }
 
-    public function inquiry(){
+
+    public function userreq()
+    {
+
+  
+    }
+
+
+
+
+
+    public function inquiry()
+    {
         $this->view('admin/inquiry');
     }
 
-    public function feedback(){
+    public function feedback()
+    {
         $this->view('admin/feedback');
     }
 
 
-    
+
 
 
 }
