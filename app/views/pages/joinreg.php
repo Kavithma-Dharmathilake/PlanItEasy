@@ -66,8 +66,6 @@ require APPROOT . '/views/inc/header.php'
       <div class="input-box address">
         <label>Address<span style="color:red"><sup>*</sup></label>
         <input type="text" placeholder="Enter address" name="address" value="<?php echo $data['address']; ?>" />
-        <input type="text" placeholder="Enter street address line 2" />
-        <input type="text" placeholder="Enter your city" />
         <span class="invalid-feedback">
           <?php echo $data['address_err']; ?>
         </span>
