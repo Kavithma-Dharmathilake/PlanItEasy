@@ -529,3 +529,15 @@ main .recent-trans a {
 .calendar-table td:empty {
     visibility: hidden;
 }
+
+.supplierdashcolumn {
+    float: left;
+    width: 50%;
+  }
+  
+  /* Clear floats after the columns */
+  .supplierdashrow:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
