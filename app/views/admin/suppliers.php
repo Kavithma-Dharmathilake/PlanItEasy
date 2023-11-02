@@ -15,8 +15,8 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-    <div class="dash-container">
-    <aside>
+<div class="dash-container">
+        <aside>
             <div class="top">
                 <div class="logo">
                 <img src="<?php echo URLROOT; ?>/public/images/logo.jpg">
@@ -27,11 +27,11 @@
                 </div>
             </div>
             <div class="sidebar">
-                <a href="<?php echo URLROOT ?>admin/index" >
+                <a href="<?php echo URLROOT ?>admin/index">
                     <span class="material-icons-sharp">grid_view</span>
                     <h3>Dashboard</h3>
                 </a>
-                <a href="<?php echo URLROOT ?>admin/user" >
+                <a href="<?php echo URLROOT ?>admin/user">
                     <span class="material-icons-sharp">group</span>
                     <h3>Users</h3>
                 </a>
@@ -57,6 +57,10 @@
                     <h3>User Requests</h3>
                 </a>
                 <a href="#">
+                    <span class="material-icons-sharp">settings</span>
+                    <h3>Settings</h3>
+                </a>
+                <a href="#">
                     <span class="material-icons-sharp">logout</span>
                     <h3>Logout</h3>
                 </a>
@@ -64,73 +68,44 @@
         </aside>
 
         <main>
+
             <h1>Suppliers</h1>
-            <a href="<?php echo URLROOT ?>admin/newsupplier">   <i class="fa fa-add" style="font-size: 18px; padding-right:15px;">
-                    </i>Add New Supplier</a>
-         
-          
-            <!------------End of insights------------>
-            <div class="recent-trans">
-                <h2></h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Supplier ID</th>
-                            <th>Supplier Name</th>
-                            <th>Email</th>
-                            <th>Contact</th>
-                            <th>Business Name</th>
-                            <th>Service Type</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>0001</td>
-                            <td>A.A.Silva</td>
-                            <td>B.C.Fernando</td>
-                            <td>1,000,000 lkr</td>
-                            <td>21/10/2023</td>
-                            <td class="warning">Pending</td>
-                        </tr>
-                        <tr>
-                            <td>0001</td>
-                            <td>A.A.Silva</td>
-                            <td>B.C.Fernando</td>
-                            <td>1,000,000 lkr</td>
-                            <td>21/10/2023</td>
-                            <td class="warning">Pending</td>
-                        </tr>
-                        <tr>
-                            <td>0001</td>
-                            <td>A.A.Silva</td>
-                            <td>B.C.Fernando</td>
-                            <td>1,000,000 lkr</td>
-                            <td>21/10/2023</td>
-                            <td class="warning">Pending</td>
-                        </tr>
-                        <tr>
-                            <td>0001</td>
-                            <td>A.A.Silva</td>
-                            <td>B.C.Fernando</td>
-                            <td>1,000,000 lkr</td>
-                            <td>21/10/2023</td>
-                            <td class="warning">Pending</td>
-                        </tr>
-                        <tr>
-                            <td>0001</td>
-                            <td>A.A.Silva</td>
-                            <td>B.C.Fernando</td>
-                            <td>1,000,000 lkr</td>
-                            <td>21/10/2023</td>
-                            <td class="warning">Pending</td>
-                        </tr>
-                    </tbody>
-                </table>
-               
+
+            <div class="userRequest_table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Supplier ID</th>
+                                <th>Supplier Name</th>
+                                <th>NIC</th>
+                                <th>E-mail</th>
+                                <th>Business Name</th>
+                                <th>Business Type</th>
+                                <th>BR Number</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>0001</td>
+                                <td>A.A.Silva</td>
+                                <td>354902749</td>
+                                <td>aasilva@gmail.com</td>
+                                <td>360 photography</td>
+                                <td>Photographer</td>
+                                <td>354902749</td>
+                                <td><button class="btn_accept" type="button">Update</button><button class="btn_reject" type="button">Delete</button></td>
+                                <td><a href="url">more</a></td>
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+            </div>
+
+            
             </div>
         </main>
-        <!--------------END OF MAIN-------------->
-
     </div>
 
 </body>
