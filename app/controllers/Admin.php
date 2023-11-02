@@ -51,7 +51,11 @@ class  Admin extends Controller
 
 
     public function userreq(){
+
+        
         $this->view('admin/userreq');
+
+
     }
 
     public function inquiry(){
