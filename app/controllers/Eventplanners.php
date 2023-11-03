@@ -105,6 +105,16 @@ class Eventplanners extends Controller
 
     }
 
+    public function createbudget()
+    {
+
+
+
+        $this->view('eventplanners/createbudget');
+        
+
+    }
+
 
     public function eventRequest()
     {

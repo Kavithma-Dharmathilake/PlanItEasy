@@ -123,7 +123,7 @@
             <div class="planner-title" style="padding-bottom:50px;">
                 <h1>Add Products</h1>
             </div>
-            <form action="<?php echo URLROOT; ?>suppliers/addNewProduct" method="post" enctype="multipart/form-data">
+            <form action="<?php echo URLROOT; ?>suppliers/updatepackage/<?php echo $data['id'] ?>" method="post" enctype="multipart/form-data">
                 <div class="form-add-package">
                     <div class="form-wrapper">
                         <div class="form-heading">
