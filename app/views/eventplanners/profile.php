@@ -96,7 +96,7 @@
                     </span>
                     <h3>Inquiry</h3>
                 </a>
-                <a href="<?php echo URLROOT ?>">
+                <a href="<?php echo URLROOT ?>users/logout">
                     <span class="material-icons-sharp">logout</span>
                     <h3>Logout</h3>
                 </a>
@@ -139,9 +139,9 @@
                     <div  >
 
                         <label style="display:flex">Name</label>
-                        <input style="display:flex" type="text" placeholder="Sapumal" required />
+                        <input style="display:flex" type="text" placeholder="kavithma" required />
                         <label style="display:flex">Email Address</label>
-                        <input style="display:flex" type="email" placeholder="" required />
+                        <input style="display:flex" type="email" placeholder="kavithma@gmail.com" required />
                         <label style="display:flex">Address</label>
                         <input style="display:flex" type="text" placeholder="Enter full name" required />
 
@@ -149,11 +149,11 @@
                     </div>
                     <div style="margin-left:50px">
                         <label style="display:flex">Username</label>
-                        <input style="display:flex" type="text" placeholder="Enter full name" required />
+                        <input style="display:flex" type="text" placeholder="Kavithma" required />
                         <label style="display:flex">Phone Number</label>
-                        <input style="display:flex" type="phone" placeholder="Enter full name" required />
+                        <input style="display:flex" type="phone" placeholder="07025631452" required />
                         <label style="display:flex">password</label>
-                        <input style="display:flex" type="password" placeholder="Enter full name" required />
+                        <input style="display:flex" type="password" placeholder="******" required />
                     </div>
                 </div>
 
@@ -163,21 +163,21 @@
                     <div style="flex-direction:column;">
 
                         <label style="display:flex">Business Name</label>
-                        <input style="display:flex" type="text" placeholder="Sapumal" required />
+                        <input style="display:flex" type="text" placeholder="Blissful stories" required />
                         <label style="display:flex"> Service Type</label>
-                        <input style="display:flex" type="email" placeholder="" required />
+                        <input style="display:flex" type="text" placeholder="Event Planning" required />
                         <label style="display:flex">Service Description</label>
-                        <input style="display:flex" type="text" placeholder="Enter full name" required />
+                        <input style="display:flex" type="text" placeholder="Evenet planning" required />
 
 
                     </div>
                     <div style="margin-left:50px">
                         <label style="display:flex">Business Registration No</label>
-                        <input style="display:flex" type="text" placeholder="Enter full name" required />
+                        <input style="display:flex" type="text" placeholder="12313131" required />
                         <label style="display:flex">Service Location</label>
-                        <input style="display:flex" type="phone" placeholder="Enter full name" required />
+                        <input style="display:flex" type="txt" placeholder="Colobo" required />
                         <label style="display:flex">password</label>
-                        <input style="display:flex" type="password" placeholder="Enter full name" required />
+                        <input style="display:flex" type="password" placeholder="" required />
                     </div>
                 </div>
     

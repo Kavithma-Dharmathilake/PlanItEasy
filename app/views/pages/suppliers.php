@@ -67,8 +67,8 @@
                     <small>4.5 rating</small>
                 </div>
                 <div class="supplier_btns">
-                    <button class="btn" type="submit">View Profile</button>
-                    <button class="booknow_btn" type="submit">Book Now</button>
+                <a href="<?php echo URLROOT; ?>/pages/oneportfolio"><button class="btn" type="submit">View Profile</button></a>
+                    <a href="<?php echo URLROOT; ?>/pages/oneportfolio"><button class="booknow_btn" type="submit">Book Now</button></a>
                 </div>
                 
             </article>

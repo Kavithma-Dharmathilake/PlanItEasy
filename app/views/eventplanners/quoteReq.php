@@ -148,12 +148,11 @@
                 <table>
                     <thead>
                         <tr>
+                            <th>Request ID</th>
                             <th>Event ID</th>
-                            <th>Event type</th>
-                            <th>Number of Guests</th>
-                            <th>Budget</th>
-                            <th>Tentative Date</th>
-                            <th>Event Status</th>
+                            <th>Request type</th>
+                            <th>Supplier name</th>
+                            <th>Date of request</th>
                             <th>More</th>
                           
                         </tr>
@@ -161,41 +160,51 @@
                     <tbody>
                       
                         <tr>
-                            <td>0001</td>
-                            <td>Wedding</td>
-                            <td>250</td>
-                            <td>1,000,000 LKR</td>
-                            <td>21/10/2023</td>
-                            <td>Pending</td>
-                            <td><a href="<?php echo URLROOT ?>eventplanners/onerequest">:</a></td>
+                            <td>#QR001</td>
+                            <td>#ER003</td>
+                            <td>Decoration</td>
+                            <td>Lassana Flora</td>
+                            <td>2023/12/12</td>
+                            <td>></td>
+                            
                         </tr>
                         <tr>
-                            <td>0001</td>
-                            <td>Wedding</td>
-                            <td>250</td>
-                            <td>1,000,000 LKR</td>
-                            <td>21/10/2023</td>
-                            <td>Pending</td>
-                            <td><a href="">:</a></td>
+                            <td>#QR002</td>
+                            <td>#ER003</td>
+                            <td>Reception</td>
+                            <td>Sri Malee Grand Meridian</td>
+                            <td>2023/12/12</td>
+                            <td>></td>
+                            
                         </tr>
                         <tr>
-                            <td>0001</td>
-                            <td>Wedding</td>
-                            <td>250</td>
-                            <td>1,000,000 LKR</td>
-                            <td>21/10/2023</td>
-                            <td>Pending</td>
-                            <td><a href="">:</a></td>
+                            <td>#QR003</td>
+                            <td>#ER001</td>
+                            <td>Phtography</td>
+                            <td>CaptureX</td>
+                            <td>2023/12/12</td>
+                            <td>></td>
+                            
                         </tr>
-                         <tr>
-                            <td>0001</td>
-                            <td>Wedding</td>
-                            <td>250</td>
-                            <td>1,000,000 LKR</td>
-                            <td>21/10/2023</td>
-                            <td>Pending</td>
-                            <td><a href="">:</a></td>
+                        <tr>
+                            <td>#QR004</td>
+                            <td>#ER001</td>
+                            <td>Catering</td>
+                            <td>Rasa Bojun</td>
+                            <td>2023/12/12</td>
+                            <td>></td>
+                            
                         </tr>
+                        <tr>
+                            <td>#QR001</td>
+                            <td>#ER003</td>
+                            <td>Decoration</td>
+                            <td>Lassana Flora</td>
+                            <td>2023/12/12</td>
+                            <td>></td>
+                            
+                        </tr>
+                     
                        
                     </tbody>
                 </table>
