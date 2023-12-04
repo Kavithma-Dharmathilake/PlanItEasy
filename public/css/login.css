@@ -1,0 +1,197 @@
+/*------------------------login/signup--------------------*/
+
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&family=Marcellus&family=Playfair+Display&family=Roboto:wght@400;700&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;
+
+}
+
+a{
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+}
+
+:root{
+    --color-primary:#7380ec;
+    --color-danger: #ff7782;
+    --color-success: #41f1b6;
+    --color-warning: #ffbb55;
+    --color-white:#fff;
+    --color-black: rgb(0, 0, 0);
+    --color-info-dark: #7d8da1;
+    --color-info-light: #dce1eb;
+    --color-dark: #011f4b;
+    --color-light: #eaf7ff;
+    --color-primary-variant:#03396c; /** Dark Background**/
+    --color-dark-variant: #005b96; /** Light Background**/
+    --color-background: #f6f6f9;
+
+    --card-border-radius: 2rem;
+    --border-radius-1: 0.4rem;
+    --border-radius-2: 0.8rem;
+    --border-radius-3: 1.2rem;
+
+    --card-padding: 1.8rem;
+    --padding-1: 1.2rem;
+
+    --box-shadow: 0 1rem 2rem #9c9c9c;
+
+    --container-width-lg: 80%;
+    --container-width-md: 90%;
+    --container-width-sm: 94%;
+
+    --transition: all 300ms ease;
+}
+
+body{
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.7;
+    color: var(--color-white);
+    background: var(--color-dark);
+}
+
+
+.login{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background-image: url('images\index_bg.jpg') no-repeat;
+    background-color: var(--color-primary-variant);
+    
+    
+
+    /* background: red; */
+    /* background-size: cover; */
+    /* background-position: center; */
+}
+
+.wrapper{
+    width: 480px;
+    background: transparent;
+    border: 2px solid;
+    backdrop-filter: blur(20px);
+    color: whitesmoke;
+    border-radius: 10px;
+    padding: 30px 40px;
+    box-shadow: 0 0 10px rgb(0,0,0,.2);
+}
+.wrapper h1{
+    font-size: 36px;
+    text-align: center;
+}
+
+.wrapper h2{
+    font-size: 36px;
+    text-align: center;
+}
+
+.wrapper .input-box{
+    width:100%;
+    height: 50px;
+    margin: 30px 0;
+}
+
+.input-box input{
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    border: 2px solid black;
+    border-radius: 40px;
+    font-size: 16px;
+    color: #f5f5f5;
+    padding: 20px 45px 20px 20px;
+}
+
+.input-box ::placeholder{
+    color: #f5f5f5;
+}
+
+.wrapper .remember-forgot{
+    display: flex;
+    justify-content: center;
+    justify-content: space-around;
+    font-size: 14.5px;
+    margin: -15px 0 15px;
+}
+
+.remember-forgot label input{
+    accent-color: #fff;
+    margin-right: 3px;
+}
+
+.remember-forgot a{
+    color: #fff;
+}
+
+.wrapper .btn{
+    width: 100%;
+    height: 40px;
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgb(0,0,0,.1);
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.wrapper .sign-up{
+    text-align: center;
+    font-size: 14.5px;
+    margin-top: 20px;
+}
+
+.sign-up p a{
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.sign-up p a:hover{
+    text-decoration: underline;
+}
+
+.wrapper .log-in{
+    text-align: center;
+    font-size: 14.5px;
+    margin-top: 20px;
+}
+
+.log-in p a{
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.sign-up p a:hover{
+    text-decoration: underline;
+}
+
+.circle{
+        height: 60px;
+        width: 60px;
+        background-color: #bbb;
+        border-radius: 50%;
+        display: inline-block;
+}
+
+.invalid-feedback{
+    color:red;
+    font-weight: bold;
+    font-size:small;
+}
