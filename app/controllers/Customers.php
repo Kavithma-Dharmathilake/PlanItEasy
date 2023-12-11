@@ -56,14 +56,61 @@ class Customers extends Controller
         $this->view('customers/ongoing', $data);
     }
 
-    public function quotation()
+    public function quotation1()
     {
 
         $data = [
             'title' => 'Welcome'
         ];
-        $this->view('customers/quotation', $data);
+        $this->view('customers/cus_quo(1)', $data);
     }
+
+    public function quotation2()
+    {
+
+        $data = [
+            'title' => 'Welcome'
+        ];
+        $this->view('customers/cus_quo(2)', $data);
+    }
+
+    public function quotation3()
+    {
+
+        $data = [
+            'title' => 'Welcome'
+        ];
+        $this->view('customers/cus_quo(3)', $data);
+    }
+
+    public function quotation4()
+    {
+
+        $data = [
+            'title' => 'Welcome'
+        ];
+        $this->view('customers/cus_quo(4)', $data);
+    }
+
+    public function quotation5()
+    {
+
+        $data = [
+            'title' => 'Welcome'
+        ];
+        $this->view('customers/cus_quo(5)', $data);
+    }
+
+
+    public function quotation6()
+    {
+
+        $data = [
+            'title' => 'Welcome'
+        ];
+        $this->view('customers/cus_quo(6)', $data);
+    }
+
 
     public function profile()
     {
