@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="<?php echo URLROOT; ?>public/css/eventplannerdash.css">
 
 
-</head>
+</head>///
 
 <body>
     <div class="dash-container">
