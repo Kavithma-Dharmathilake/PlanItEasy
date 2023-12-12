@@ -131,7 +131,8 @@
   <td></td>
   
   <td  class="button-container">
-    <a href="cus_quo(4).html" class="cus_c1m">Previous &raquo;</a>
+    
+    <a href="<?php echo URLROOT; ?>customers/quotation5" class="cus_c1m">Previous &raquo;</a>
     <button class="container2" id="btn">
       <p id="btnText">Submit</p>
       <div class="check-box">

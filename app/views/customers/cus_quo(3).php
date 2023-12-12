@@ -86,14 +86,8 @@
             <tbody>
                 <tr>
                     <td class="equal-width">
-                      <label for="">Theme Preferences</label><br><br>
-                      <select class="classic">
-                        <option>Traditional</option>
-                        <option>Romantic</option>
-                        <option>Modern</option>
-                        <option>Beach</option>
-                        <option>Tropical</option>
-                      </select>
+                    <label for="">Any specific colors for the theme</label><br><br>
+                    <input type="text" class="cus_c1m2-1" name="shorts" required />
                     </td>
                     
                     <td></td>
@@ -110,33 +104,7 @@
 
                   </tr>
 
-                  <tr>
-                    <td class="equal-width">
-                      <label for="">Lighting</label><br><br>
-                      <select class="classic">
-                        <option>Chandeliers</option>
-                        <option>Fairy Lights</option>
-                        <option>Edison Bulbs</option>
-                        <option>Candles</option>
-                      </select>
-                    </td>
-                    
-                    <td></td>
-                    
-                    <td  colspan="2" class="equal-width">
-                        <label for="">Any specific colors for the flowers</label><br><br>
-                        <select class="classic">
-                          <option>Red</option>
-                          <option>Pink</option>
-                          <option>White </option>
-                          <option>Blue </option>
-                          <option>Yellow</option>
-                          <option>Purple </option>
-                          <option>Pastels </option>
-                        </select>
-                      </td>
-
-                  </tr>
+                
                   
   
                 
@@ -162,9 +130,9 @@
             <td></td>
             <td></td>
             <td colspan="2" class="button-container">
-              <a href="cus_quo(4).html" class="cus_c1m">Skip &raquo;</a>
-              <a href="cus_quo(2).html" class="cus_c1m">Previous &raquo;</a>
-              <a href="cus_quo(4).html" class="cus_c1m">Next &raquo;</a>
+            <a href="<?php echo URLROOT; ?>customers/quotation4" class="cus_c1m">Skip &raquo;</a>
+              <a href="<?php echo URLROOT; ?>customers/quotation2" class="cus_c1m">Previous &raquo;</a>
+              <a href="<?php echo URLROOT; ?>customers/quotation4" class="cus_c1m">Next &raquo;</a>
             </td>
           </tr>
             <br><br>

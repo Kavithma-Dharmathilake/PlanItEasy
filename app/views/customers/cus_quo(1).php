@@ -153,7 +153,7 @@
               <td></td>
               <td  class="button-container">
                
-                <a href="cus_quo(2).html" class="cus_c1m">Next &raquo;</a>
+                <a href="<?php echo URLROOT; ?>customers/quotation2" class="cus_c1m">Next &raquo;</a>
               </td>
             </tr>
             <br><br>

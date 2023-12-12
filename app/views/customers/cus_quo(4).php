@@ -150,9 +150,9 @@
             <td></td>
             <td></td>
             <td colspan="2" class="button-container">
-              <a href="cus_quo(5).html" class="cus_c1m">Skip &raquo;</a>
-              <a href="cus_quo(3).html" class="cus_c1m">Previous &raquo;</a>
-              <a href="cus_quo(5).html" class="cus_c1m">Next &raquo;</a>
+            <a href="<?php echo URLROOT; ?>customers/quotation5" class="cus_c1m">Skip &raquo;</a>
+              <a href="<?php echo URLROOT; ?>customers/quotation3" class="cus_c1m">Previous &raquo;</a>
+              <a href="<?php echo URLROOT; ?>customers/quotation5" class="cus_c1m">Next &raquo;</a>
             </td>
           </tr>
             <br><br>

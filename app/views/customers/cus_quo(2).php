@@ -84,37 +84,14 @@
                   
             </thead>
             <tbody>
-                <tr>
-                    <td class="equal-width">
-                      <label for="">Photography Style</label><br><br>
-                      <select class="classic">
-                        <option>Traditional</option>
-                        <option>Candid</option>
-                        <option>Artistic/Editorial</option>
-                        <option>Photojournalistic</option>
-                      </select>
-                    </td>
-                    
-                    <td></td>
-                    
-                  <td  colspan="2" class="equal-width">
-                        <label for="">Videography Style</label><br><br>
-                        <select class="classic">
-                          <option>Cinematic</option>
-                          <option>Documentary</option>
-                          <option>Highlight Reel</option>
-                          
-                        </select>
-                      </td>
-
-                  </tr>
+         
                   
   
                 <tr>
-                    <td class="equal-width">
-                        <label for="">Number of Photographers</label><br><br>
-                        <input type="number" class="cus_c1m2" name="num_Photo" required />
-                    </td>
+                <td class="equal-width">
+                    <label for="">Coverage Hours</label><br><br>
+                    <input type="number" class="cus_c1m2" name="hours" required />
+                </td>
                       
                     <td></td>
                     <td  colspan="2" class="equal-width">
@@ -147,25 +124,20 @@
   
               <tr>
                 <td class="equal-width">
-                    <label for="">Coverage Hours</label><br><br>
-                    <input type="number" class="cus_c1m2" name="hours" required />
+                <label for="">Specific Shots</label><br><br>
+                    <input type="text" class="cus_c1m2-1" name="shorts" required />
                 </td>
                   
-                <td></td>
-                    
-                <td  colspan="2"class="equal-width">
-                    <label for="">Specific Shots</label><br><br>
-                    <input type="text" class="cus_c1m2-1" name="shorts" required />
-                  </td>
+              
           </tr>
 
           <tr>
             <td></td>
             <td></td>
             <td colspan="2" class="button-container">
-              <a href="cus_quo(3).html" class="cus_c1m">Skip &raquo;</a>
-              <a href="cus_quo(1).html" class="cus_c1m">Previous &raquo;</a>
-              <a href="cus_quo(3).html" class="cus_c1m">Next &raquo;</a>
+              <a href="<?php echo URLROOT; ?>customers/quotation2" class="cus_c1m">Skip &raquo;</a>
+              <a href="<?php echo URLROOT; ?>customers/quotation1" class="cus_c1m">Previous &raquo;</a>
+              <a href="<?php echo URLROOT; ?>customers/quotation3" class="cus_c1m">Next &raquo;</a>
             </td>
           </tr>
             <br><br>

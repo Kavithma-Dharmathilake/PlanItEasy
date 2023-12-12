@@ -98,6 +98,39 @@
                                 <td><button class="btn_accept" type="button">Update</button><button class="btn_reject" type="button">Delete</button></td>
                                 <td><a href="url">more</a></td>
                             </tr>
+                            <tr>
+                                <td>0001</td>
+                                <td>A.A.Silva</td>
+                                <td>354902749</td>
+                                <td>aasilva@gmail.com</td>
+                                <td>360 Events</td>
+                                <td>Event Planner</td>
+                                <td>354902749</td>
+                                <td><button class="btn_accept" type="button">Update</button><button class="btn_reject" type="button">Delete</button></td>
+                                <td><a href="url">more</a></td>
+                            </tr>
+                            <tr>
+                                <td>0001</td>
+                                <td>A.A.Silva</td>
+                                <td>354902749</td>
+                                <td>aasilva@gmail.com</td>
+                                <td>360 Events</td>
+                                <td>Event Planner</td>
+                                <td>354902749</td>
+                                <td><button class="btn_accept" type="button">Update</button><button class="btn_reject" type="button">Delete</button></td>
+                                <td><a href="url">more</a></td>
+                            </tr>
+                            <tr>
+                                <td>0001</td>
+                                <td>A.A.Silva</td>
+                                <td>354902749</td>
+                                <td>aasilva@gmail.com</td>
+                                <td>360 Events</td>
+                                <td>Event Planner</td>
+                                <td>354902749</td>
+                                <td><button class="btn_accept" type="button">Update</button><button class="btn_reject" type="button">Delete</button></td>
+                                <td><a href="url">more</a></td>
+                            </tr>
                             
                         </tbody>
                     </table>

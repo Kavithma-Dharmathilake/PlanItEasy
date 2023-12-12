@@ -15,6 +15,7 @@
     <!-- STYLESHEET -->
     <link rel="stylesheet" href="<?php echo URLROOT; ?>public/css/admindash.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>public/css/eventplannerdash.css">
+  
 
 
 </head>
@@ -22,7 +23,12 @@
 <body>
     <div class="dash-container">
         <aside>
+           
             <div class="sidebar">
+            <a href="<?php echo URLROOT; ?>customers">
+                    <span class="material-icons-sharp" class="active">grid_view</span>
+                    <h3>Dashboard</h3>
+                </a>
                 <a href="<?php echo URLROOT; ?>customers">
                     <span class="material-icons-sharp">man</span>
                     <h3>Create New Event</h3>
@@ -31,7 +37,7 @@
                     <span class="material-icons-sharp">calendar_today</span>
                     <h3>Ongoing Events</h3>
                 </a>
-                <a href="<?php echo URLROOT; ?>customers/complete" class="active">
+                <a href="<?php echo URLROOT; ?>customers/complete" >
                     <span class="material-icons-sharp">event_available</span>
                     <h3>Completed Events</h3>
                 </a>
