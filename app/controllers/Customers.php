@@ -7,18 +7,124 @@ class Customers extends Controller
     public function __construct()
     {
 
-        $this->userModel = $this->model('Quoate');
 
+        if (!isLoggedIn()) {
+            redirect('users/login');
+        }
+
+        $this->customerModel = $this->model('Customer');
     }
 
     public function index()
     {
 
+
+        $events = $this->customerModel->getAllEvents($_SESSION['user_id']);
+
+        $data = [
+            'title' => 'Welcome',
+            'events' => $events
+        ];
+
+        $this->view('customers/index', $data);
+    }
+
+    public function events()
+    {
+
+        $events = $this->customerModel->getAllEvents($_SESSION['user_id']);
+
+        $data = [
+            'title' => 'Welcome',
+            'events' => $events
+        ];
+
+        $this->view('customers/events', $data);
+    }
+
+    public function newevent()
+    {
+
         $data = [
             'title' => 'Welcome'
         ];
-        $this->view('customers/index', $data);
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $_EVENT = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $data = [
+                'type' => trim($_POST['type']),
+                'min' => trim($_POST['minbudget']),
+                'max' => trim($_POST['maxbudget']),
+                'date' => trim($_POST['date']),
+                'start' => trim($_POST['start']),
+                'end' => trim($_POST['end']),
+                'loc' => trim($_POST['location']),
+                'date' => trim($_POST['date']),
+                'count' => trim($_POST['count']),
+                'theme' => trim($_POST['theme']),
+                'estatus' => 'ongoing',
+                'pstatus' => 'pending',
+                'cusid' => $_SESSION['user_id'],
+                'title_err' => '',
+                'body_err' => ''
+            ];
+
+
+            $this->customerModel->newevent($data);
+        }
+
+        $this->view('customers/newevent', $data);
     }
+
+    public function oneevent($id)
+    {
+
+
+        $request = $this->customerModel->getEventById($id);
+
+        $data = [
+            'request' => $request,
+        ];
+
+
+
+        $this->view('customers/oneevent', $data);
+    }
+
+    public function supplier($id)
+    {
+
+
+        $request = $this->customerModel->getEventById($id);
+
+        $data = [
+            'request' => $request,
+        ];
+
+
+
+        $this->view('customers/supplier', $data);
+    }
+
+    public function supplierport($id, $type)
+    {
+
+
+        $request = $this->customerModel->getEventById($id);
+
+        $data = [
+            'request' => $request,
+        ];
+
+
+        if ($type == 'photo') {
+            $this->view('customers/photo', $data);
+        }
+    }
+
+
 
     public function payments()
     {
@@ -125,7 +231,6 @@ class Customers extends Controller
     {
         $data = $this->userModel->getAllEvents();
         $this->view('customers/viewquote', $data);
-       
     }
 
     public function addquoate()
@@ -141,13 +246,13 @@ class Customers extends Controller
                 'date_err' => '',
                 'stime_err' => '',
                 'etime_err' => '',
-                'remarks_err' =>''
+                'remarks_err' => ''
             ];
 
             if (empty($data['name'])) {
                 $data['name_err'] = 'Name is required';
             }
-            if (empty($data['date'])) 
+            if (empty($data['date']))
                 $data['date_err'] = 'Date is required';
             if (empty($data['stime'])) {
                 $data['stime_err'] = 'Time is required';
@@ -155,14 +260,14 @@ class Customers extends Controller
             if (empty($data['etime'])) {
                 $data['etime_err'] = 'Time is required';
             }
-            if (empty($data['name_err']) && empty($data['date_err']) && empty($data['stime_err']) && empty($data['etime_err']) ) {
-             $package = [
+            if (empty($data['name_err']) && empty($data['date_err']) && empty($data['stime_err']) && empty($data['etime_err'])) {
+                $package = [
                     'name' => $data['name'],
                     'stime' => $data['stime'],
-                    'etime'=>$data['etime'],
-                    'remarks'=>$data['remarks'],
-                    'date'=>$data['date'],
-                    'status'=>'ongoing',
+                    'etime' => $data['etime'],
+                    'remarks' => $data['remarks'],
+                    'date' => $data['date'],
+                    'status' => 'ongoing',
                 ];
                 if ($this->userModel->eventnew($package)) {
                     echo '<script> prompt("Quotation Added Succfully")</script>';
@@ -170,14 +275,12 @@ class Customers extends Controller
                 } else {
                     $this->view('customers/addquoate', $data);
                 }
-
             } else {
                 $this->view('customers/addquoate', $data);
             }
-
         } else {
             $data = [
-                
+
                 'name' => '',
                 'date' => '',
                 'stime' => '',
@@ -190,9 +293,6 @@ class Customers extends Controller
                 'remarks_err' => '',
             ];
             $this->view('customers/addquoate', $data);
-
-
-
         }
     }
 
@@ -202,7 +302,7 @@ class Customers extends Controller
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-          
+
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
             $result = $this->userModel->getUserById($id);
 
@@ -213,7 +313,7 @@ class Customers extends Controller
                 'stime' => trim($_POST['stime']),
                 'etime' => trim($_POST['etime']),
                 'remarks' => trim($_POST['remarks']),
-             
+
             ];
 
             if (!empty($data['name']) && !empty($data['date']) && !empty($data['stime']) && !empty($data['etime'])) {
@@ -224,19 +324,16 @@ class Customers extends Controller
                 } else {
                     die('Something went wrong');
                 }
-
             }
-
-
         } else {
             $result = $this->userModel->getUserById($id);
             $data = [
                 'id' => $result->id,
                 'name' => $result->name,
                 'date' => $result->date,
-                'stime'=>$result->stime,
-                'etime'=>$result->etime,
-                'remarks'=>$result->remarks
+                'stime' => $result->stime,
+                'etime' => $result->etime,
+                'remarks' => $result->remarks
             ];
             $this->view('customers/editquote', $data);
         }
@@ -253,13 +350,5 @@ class Customers extends Controller
         } else {
             die("something went wrong");
         }
-
     }
-
-    }
-
-
-    
-
-
-?>
+}

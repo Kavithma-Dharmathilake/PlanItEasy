@@ -88,7 +88,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php foreach ($data as $i): ?>
+                            <?php foreach ($data as $i) : ?>
                                 <tr>
 
                                     <td>#RQ
@@ -109,17 +109,15 @@
                                     <td>
                                         <?php echo $i->bno ?>
                                     </td>
-                                    <td> <a href="<?php echo URLROOT ?><?php echo $i->proof ?>" target="_blank">
-                                            <img src="<?php echo URLROOT ?><?php echo $i->proof ?>" alt="Image">
+                                    <td> <a href="<?php echo URLROOT ?><?php echo $i->proof ?>" target="_blank">View Image
+                                            <!-- <img src="<?php echo URLROOT ?><?php echo $i->proof ?>" alt="Image"> -->
                                         </a></button>
                                     </td>
                                     <td>
-                                       <a href="<?php echo URLROOT ?>admin/accept/<?php echo $i->id ?>"><button class="btn_accept" type="button"
-                                            onclick="confirmAccept(<?php echo $i->id ?>)">Accept</button></a>
-                                        <button class="btn_reject" type="button"
-                                            onclick="confirmReject(<?php echo $i->id ?>)">Reject</button>
+                                        <a href="<?php echo URLROOT ?>admin/accept/<?php echo $i->id ?>"><button class="btn_accept" type="button" onclick="confirmAccept(<?php echo $i->id ?>)">Accept</button></a>
                                     </td>
-                                    <td><a href="">more</a>
+                                    <td>
+                                        <button class="btn_reject" type="button" onclick="confirmReject(<?php echo $i->id ?>)">Reject</button>
                                     </td>
 
                                 </tr>
@@ -149,7 +147,7 @@
 
         function acceptRequest(requestId) {
             alert('Request #' + requestId + ' has been accepted.');
-          
+
         }
 
         function confirmReject(requestId) {

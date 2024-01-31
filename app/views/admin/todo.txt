@@ -1,0 +1,1 @@
+When accepting requests the acceptance or rejection should be emailed to the business owners email.

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Packages</title>
+    <title>Events</title>
     <!-- MATERIAL CDN -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -14,14 +14,22 @@
     <link rel="stylesheet" href="<?php echo URLROOT; ?>public/css/admindash.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>public/css/eventplannerdash.css">
 
-
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>public/css/event-form.css">
 
 </head>
 
 <body>
     <div class="dash-container">
         <aside>
-
+            <div class="top">
+                <div class="logo">
+                    <img src="<?php echo URLROOT; ?>/public/images/logo.jpg">
+                    <h2>PlanItEasy</h2>
+                </div>
+                <div class="close" id="close-btn">
+                    <span class="material-icons-sharp">close</span>
+                </div>
+            </div>
             <div class="sidebar">
                 <a href="<?php echo URLROOT; ?>customers">
                     <span class="material-icons-sharp" class="active">grid_view</span>
@@ -52,73 +60,71 @@
                     <h3>Logout</h3>
                 </a>
             </div>
-
-
         </aside>
-
 
 
         <!-- Content start here -->
         <div>
             <div class="profile end">
                 <div class="info" style="padding-right:25px;">
-                    <p>Hey, <b>Pawani</b></p>
-                    <small class="text-muted">Customer</small>
+                    <p>Hey, <b>Sunimal</b></p>
+                    <small class="text-muted"></small>
                 </div>
                 <div class="profile-photo">
                     <img src="<?php echo URLROOT ?>public/images/photo2.jpg">
                 </div>
             </div>
 
-            <!-- Heading and search bar -->
+            <!-- The Title -->
 
+            <div style="display:flex">
 
-            <div class="planner-title" style="padding-bottom:50px;">
-                <h1>Dashboard</h1>
-            </div>
-            <main>
-
-
-
-                <div class="insights">
-
-
-                    <div class="users">
-                        <span class="material-icons-sharp">man</span>
-                        <div class="middle">
-                            <div class="left">
-
-                                <h1><a href="<?php echo URLROOT ?>pages/eventplanners">Select The Event Planner</a></h1>
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="eventplanners">
-                        <span class="material-icons-sharp">groups</span>
-                        <div class="middle">
-                            <div class="left">
-
-                                <h1><a href="<?php echo URLROOT ?>pages/suppliers">Select Suppliers</a></h1>
-                            </div>
-
-                        </div>
-                    </div>
-
-
+                <div class="planner-title">
+                    <h1>Search Suppliers</h1>
                 </div>
+
+
+            </div>
+            <div style="display:flex">
+                <div class="sup-body">
+                    <div class="fil-3">
+                        <input type="text" placeholder="Search by Location">
+                        <input type="text" placeholder="Search by price">
+                        <input type="date" placeholder="">
+                    </div>
+                    <div>
+                        <div class="pro">
+                            
+                            <div style="display:flex; flex-direction:row">
+
+                                <div class="card">
+                                    <img src="<?php echo URLROOT ?>public/images/photo2.jpg" style="width:250px; height:250px">
+                                    <h2>CaptureX Studio <br />Wedding Package</h2>
+                                    <p class="price">Rs.40,000.00</p>
+                                    <p><button>Send a Quote</button></p>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+               
+            </div>
+
+
+
+
 
 
 
         </div>
-        </main>
+
+
+
+
     </div>
 
 
-
-    </div>
 
 </body>
 

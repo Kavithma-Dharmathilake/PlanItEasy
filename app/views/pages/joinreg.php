@@ -17,6 +17,7 @@ require APPROOT . '/views/inc/header.php'
         </span>
       </div>
 
+      
       <div class="input-box">
         <label>Email Address<span style="color:red"><sup>*</sup></label>
         <input type="text" placeholder="Enter email address" name="email" value="<?php echo $data['email']; ?>" />
