@@ -118,6 +118,8 @@
 
             <!-- Heading and search bar -->
 
+            
+
 
             <div class="planner-title" style="padding-bottom:50px;">
                 <h1>Packages and Services</h1>
