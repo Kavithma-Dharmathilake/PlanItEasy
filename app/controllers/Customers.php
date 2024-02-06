@@ -13,6 +13,8 @@ class Customers extends Controller
         }
 
         $this->customerModel = $this->model('Customer');
+        $this->supplierModel = $this->model('Supplier');
+        $this->userModel = $this->model('User');
     }
 
     public function index()
@@ -93,38 +95,126 @@ class Customers extends Controller
         $this->view('customers/oneevent', $data);
     }
 
-    public function supplier($id)
+    public function supplier($id, $type = "none")
     {
 
 
         $request = $this->customerModel->getEventById($id);
+        $photo = $this->supplierModel->getPhotographers('Photographer');
+        $cater = $this->supplierModel->getPhotographers('Catering Service');
+        $reception = $this->supplierModel->getPhotographers('Reception hall');
+        $deco = $this->supplierModel->getPhotographers('Decorations');
+        $cake = $this->supplierModel->getPhotographers('Cake Service');
 
-        $data = [
+        $data1 = [
             'request' => $request,
+            'supplier' => $photo,
+            'type' => "photography",
         ];
 
-
-
-        $this->view('customers/supplier', $data);
-    }
-
-    public function supplierport($id, $type)
-    {
-
-
-        $request = $this->customerModel->getEventById($id);
-
-        $data = [
+        $data2 = [
             'request' => $request,
+            'supplier' => $cater,
+            'type' => "catering"
         ];
 
+        $data3 = [
+            'request' => $request,
+            'supplier' => $reception,
+            'type' => "reception"
+        ];
+        $data4 = [
+            'request' => $request,
+            'supplier' => $deco,
+            'type' => "decoration"
+        ];
 
-        if ($type == 'photo') {
-            $this->view('customers/photo', $data);
+        $data5 = [
+            'request' => $request,
+            'supplier' => $cake,
+            'type' => "cake"
+        ];
+
+        if ($type == "none") {
+            $this->view('customers/supplier', $data1);
+        } else if ($type == "photography") {
+            $this->view('customers/gallery', $data1);
+        } else if ($type == "catering") {
+            $this->view('customers/gallery', $data2);
+        } else if ($type == "reception") {
+            $this->view('customers/gallery', $data3);
+        } else if ($type == "decoration") {
+            $this->view('customers/gallery', $data4);
+        } else if ($type == "cake") {
+            $this->view('customers/gallery', $data5);
         }
     }
 
+    public function photography($id)
+    {
+        $request = $this->customerModel->getEventById($id);
 
+        $photo = $this->supplierModel->getPhotographers('Photographer');
+        $data1 = [
+            'request' => $request,
+            'supplier' => $photo,
+            'type' => "photography",
+        ];
+        $this->view('customers/gallery', $data1);
+    }
+
+    public function caterings($id)
+    {
+        $request = $this->customerModel->getEventById($id);
+        $cater = $this->supplierModel->getPhotographers('Catering Service');
+
+        $data2 = [
+            'request' => $request,
+            'supplier' => $cater,
+            'type' => "catering"
+        ];
+        $this->view('customers/gallery', $data2);
+    }
+
+    public function reception($id)
+    {
+        $request = $this->customerModel->getEventById($id);
+        $reception = $this->supplierModel->getPhotographers('Reception hall');
+
+        $data3 = [
+            'request' => $request,
+            'supplier' => $reception,
+            'type' => "reception"
+        ];
+        $this->view('customers/gallery', $data3);
+    }
+
+    public function portfolio($sid, $eid)
+    {
+        $request = $this->customerModel->getEventById($eid);
+        $user = $this->userModel->getUserById($sid);
+
+        $data = [
+            'request' => $request,
+            'user' => $user,
+
+        ];
+        $this->view('customers/portfolio', $data);
+    }
+
+
+    public function catering()
+    {
+
+
+        $this->view('customers/catering-quote');
+    }
+
+
+    public function receptions()
+    {
+        $this->view('customers/reception-quote');
+    }
 
     public function payments()
     {
@@ -161,6 +251,89 @@ class Customers extends Controller
         ];
         $this->view('customers/ongoing', $data);
     }
+
+
+
+    public function sendquote($sid, $eid)
+    {
+        $request = $this->customerModel->getEventById($eid);
+        $supplier = $this->supplierModel->getOneSupplier($sid);
+
+        $type = $supplier->stype;
+
+        $data = [
+            'request' => $request,
+            'supplier' => $supplier,
+        ];
+
+
+
+        if ($type == "none") {
+            $this->view('customers/index', $data);
+        } else if ($type == "Photographer") {
+
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+                $package = $_POST['type'];
+                $stime = $_POST['start'];
+                $etime = $_POST['end'];
+                $remark = $_POST['remark'];
+
+                $quote = [
+                    'package' => $package,
+                    'stime' => $stime,
+                    'etime' => $etime,
+                    'remark' => $remark,
+                    'rid' => $request->id,
+                    'sid' => $supplier->id
+                ];
+
+
+
+                if ($this->customerModel->RequestPhotoQuote($quote)) {
+                    echo '<script> alert("Quotation Added Succfully")</script>';
+                } else {
+                    $this->view('customers/gallery', $data);
+                }
+            } else {
+                $this->view('customers/photo-quote', $data);
+            }
+        } else if ($type == "catering") {
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+                $package = $_POST['type'];
+                $stime = $_POST['start'];
+                $etime = $_POST['end'];
+                $remark = $_POST['remark'];
+
+                $quote = [
+                    'package' => $package,
+                    'stime' => $stime,
+                    'etime' => $etime,
+                    'remark' => $remark,
+                    'rid' => $request->id,
+                    'sid' => $supplier->id
+                ];
+
+
+
+                if ($this->customerModel->RequestPhotoQuote($quote)) {
+                    echo '<script> alert("Quotation Added Succfully")</script>';
+                } else {
+                    $this->view('customers/gallery', $data);
+                }
+            } else {
+                $this->view('customers/reception-quote', $data);
+            }
+        } else if ($type == "reception") {
+            $this->view('customers/gallery', $data);
+        } else if ($type == "decoration") {
+            $this->view('customers/gallery', $data);
+        } else if ($type == "cake") {
+            $this->view('customers/gallery', $data);
+        }
+    }
+
 
     public function quotation1()
     {
@@ -350,5 +523,24 @@ class Customers extends Controller
         } else {
             die("something went wrong");
         }
+    }
+
+
+    public function quotations($id)
+    {
+
+        $quote = $this->customerModel->getAllQuote($id);
+
+        $data = [
+            'quote' => $quote,
+        ];
+
+        $this->view('customers/allquote', $data);
+    }
+
+    public function getOneSupplier($id)
+    {
+        $supplier = $this->supplierModel->getOneSupplier($id);
+        return $supplier->bname;
     }
 }

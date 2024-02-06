@@ -1,18 +1,21 @@
 <?php
 
-class Customer{
+class Customer
+{
 
     private $db;
 
-    public function __construct(){
+    public function __construct()
+    {
 
         $this->db = new Database;
     }
 
-    public function  newevent($data){
+    public function  newevent($data)
+    {
 
         //adding new event to the system
-   
+
         $this->db->query('INSERT INTO general_requests(event_type,theme,guest_count,minbudget,maxbudget,location,starttime, endtime,date,event_status,pay_status,idcustomer) 
         VALUES(:event_type, :theme,:guest_count,:minbudget,:maxbudget,:location,:starttime, :endtime,:date,:event_status, :pay_status,:idcustomer) ');
         $this->db->bind(':event_type', $data['type']);
@@ -27,7 +30,7 @@ class Customer{
         $this->db->bind(':event_status', $data['estatus']);
         $this->db->bind(':pay_status', $data['pstatus']);
         $this->db->bind(':idcustomer', $data['cusid']);
-      
+
 
         //Execute the query
         if ($this->db->execute()) {
@@ -35,14 +38,42 @@ class Customer{
         } else {
             return false;
         }
+    }
 
+    public function  RequestPhotoQuote($data)
+    {
+
+        $sent = "Request Sent";
+        $date = date("Y-m-d");
+
+        $this->db->query('INSERT INTO quoate(package,eid,sid,etime,stime,remarks,status,additional_services,send_date) 
+        VALUES(:package,:eid,:sid,:etime,:stime,:remarks,:status,:additional_services,:send_date) ');
+        $this->db->bind(':package', $data['package']);
+        $this->db->bind(':eid', $data['rid']);
+        $this->db->bind(':sid', $data['sid']);
+        $this->db->bind(':etime', $data['stime']);
+        $this->db->bind(':stime', $data['etime']);
+        $this->db->bind(':remarks', $data['remark']);
+        $this->db->bind(':status', $sent);
+        $this->db->bind(':additional_services', $sent);
+        $this->db->bind(':send_date', $date);
+
+
+        //Execute the query
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 
-    public function getAllEvents($id){
-    
+
+    public function getAllEvents($id)
+    {
+
         $this->db->query('SELECT * FROM general_requests Where idcustomer =:id');
-      
+
         $this->db->bind(':id', $id);
         $result = $this->db->resultSet();
         return $result;
@@ -52,13 +83,13 @@ class Customer{
     {
         $this->db->query('UPDATE events SET name=:name, type=:type, price=:price, description=:description, img=:img WHERE id=:id');
 
-     
+
         //bind values
         $this->db->bind(':name', $data['name']);
         $this->db->bind(':type', $data['type']);
         $this->db->bind(':price', $data['price']);
         $this->db->bind(':description', $data['description']);
-         $this->db->bind(':img', $data['img']);
+        $this->db->bind(':img', $data['img']);
         $this->db->bind(':id', $data['id']);
 
 
@@ -88,13 +119,14 @@ class Customer{
         return $row;
     }
 
-    public function deleteUser($id){
+    public function deleteUser($id)
+    {
 
         $this->db->query('DELETE FROM events WHERE id=:id');
 
         //bind values
         $this->db->bind(':id', $id);
-        
+
 
         //Execute the query
         if ($this->db->execute()) {
@@ -102,13 +134,17 @@ class Customer{
         } else {
             return false;
         }
-
-    
     }
 
+    public function getAllQuote($id)
+    {
 
-   
+        $this->db->query('SELECT * 
+        FROM quoate q, user u
+        WHERE q.eid=:id AND q.sid = u.id');
+        //bind values
+        $this->db->bind(':id', $id);
+        $result = $this->db->resultSet();
+        return $result;
+    }
 }
-
-
-?>

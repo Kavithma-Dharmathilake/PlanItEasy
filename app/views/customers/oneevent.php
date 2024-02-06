@@ -118,7 +118,7 @@
                         </span><br />Guest List
                     </div>
                 </a>
-                <a href="<?php echo URLROOT ?>customers/checklist/<?php echo $data['request']->id ?>">
+                <a href="<?php echo URLROOT ?>customers/quotations/<?php echo $data['request']->id ?>">
                     <div class="event-tabs">
                         <span class="material-icons-sharp">
                             request_quote
