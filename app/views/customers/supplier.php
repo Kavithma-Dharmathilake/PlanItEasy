@@ -13,8 +13,7 @@
     <!-- STYLESHEET -->
     <link rel="stylesheet" href="<?php echo URLROOT; ?>public/css/admindash.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>public/css/eventplannerdash.css">
-
-    <link rel="stylesheet" href="<?php echo URLROOT; ?>public/css/event-form.css">
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>public/css/customerdash.css">
 
 </head>
 
@@ -88,55 +87,64 @@
             </div>
 
             <!-- Vendor types -->
-            <div class="vendor-card">
-                <div style="display: flex;">
-                    <div style="background-color:#03396c;border-radius:30rem;width:4rem;height:4rem; padding:1rem">
+            <div class="vendor-gallery">
+                <div class="vendor-row">
+                    <a href="<?php echo URLROOT ?>customers/photography/<?php echo $data['request']->id; ?>">
+                        <div class="vendor-tab">
+                            <img src="<?php echo URLROOT ?>public/images/photography.jpg" alt="">
+                            <p>Photography</p>
 
-                        <span class="material-icons-sharp" style="font-size: 2rem;">
-                            location_city
-                        </span>
-                    </div>
-                    <p>Your <?php echo $data['request']->event_type ?> venue</p>
-                    <a href="<?php echo URLROOT ?>customers/supplierport/<?php echo $data['request']->id ?>/photo" style="margin-left:16rem;"><Button>Search Suppliers</Button></a>
+                        </div>
+                    </a>
+                    <a href="<?php echo URLROOT ?>customers/reception/<?php echo $data['request']->id; ?>">
+                        <div class="vendor-tab">
+                            <img src="<?php echo URLROOT ?>public/images/reception.jpg" alt="">
+                            <p>Reception</p>
+                        </div>
+                    </a>
+
+                    <a href="<?php echo URLROOT ?>customers/caterings/<?php echo $data['request']->id; ?>">
+                        <div class="vendor-tab">
+                            <img src="<?php echo URLROOT ?>public/images/catering1.jpg" alt="">
+                            <p>Catering</p>
+                        </div>
+                    </a>
+                    <a href="<?php echo URLROOT ?>customers/supplier/<?php echo $data['request']->id; ?>/decoration">
+                        <div class="vendor-tab">
+                            <img src="<?php echo URLROOT ?>public/images/band.webp" alt="">
+                            <p>Music Band</p>
+                        </div>
+                    </a>
+
                 </div>
-            </div>
+                <div class="vendor-row">
+                    <a href="<?php echo URLROOT ?>customers/supplier/<?php echo $data['request']->id; ?>/decoration">
+                        <div class="vendor-tab">
+                            <img src="<?php echo URLROOT ?>public/images/deco3.jpg" alt="">
+                            <p>Decorations</p>
 
-            <div class="vendor-card">
-                <div style="display: flex;">
-                    <div style="background-color:#03396c;border-radius:30rem;width:4rem;height:4rem; padding:1rem">
+                        </div>
+                    </a>
+                    <a href="#">
+                        <div class="vendor-tab">
+                            <img src="<?php echo URLROOT ?>public/images/dj.jpeg" alt="">
+                            <p>DJ</p>
+                        </div>
+                    </a>
 
-                        <span class="material-icons-sharp" style="font-size: 2rem;">
-                            location_city
-                        </span>
-                    </div>
-                    <p>Your   <?php echo $data['request']->event_type ?> photographer</p>
-                    <a href="#" style="margin-left:10rem;"><Button>Search Suppliers</Button></a>
-                </div>
-            </div>
+                    <a href="<?php echo URLROOT ?>customers/supplier/<?php echo $data['request']->id; ?>/cake">
+                        <div class="vendor-tab">
+                            <img src="<?php echo URLROOT ?>public/images/cake1.jpg" alt="">
+                            <p>Cake Services</p>
+                        </div>
+                    </a>
+                    <a href="#">
+                        <div class="vendor-tab">
+                            <img src="<?php echo URLROOT ?>public/images/band.webp" alt="">
+                            <p>Stationary</p>
+                        </div>
+                    </a>
 
-            <div class="vendor-card">
-                <div style="display: flex;">
-                    <div style="background-color:#03396c;border-radius:30rem;width:4rem;height:4rem; padding:1rem">
-
-                        <span class="material-icons-sharp" style="font-size: 2rem;">
-                            location_city
-                        </span>
-                    </div>
-                    <p>Your <?php echo $data['request']->event_type ?> Catering</p>
-                    <a href="#" style="margin-left:14rem;"><Button>Search Suppliers</Button></a>
-                </div>
-            </div>
-
-            <div class="vendor-card">
-                <div style="display: flex;">
-                    <div style="background-color:#03396c;border-radius:30rem;width:4rem;height:4rem; padding:1rem">
-
-                        <span class="material-icons-sharp" style="font-size: 2rem;">
-                            location_city
-                        </span>
-                    </div>
-                    <p>Your <?php echo $data['request']->event_type ?> decoration</p>
-                    <a href="#" style="margin-left:13rem;"><Button>Search Suppliers</Button></a>
                 </div>
             </div>
 
