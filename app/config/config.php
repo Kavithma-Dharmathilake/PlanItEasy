@@ -15,4 +15,6 @@ define('URLROOT', 'http://localhost/planiteasy/PlanItEasy/');
 //Site name
 define('SITENAME', 'PlanItEasy');
 
+
+
 ?>

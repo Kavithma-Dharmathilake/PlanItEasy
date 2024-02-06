@@ -30,6 +30,7 @@ class Admin extends Controller
             'bno' => $request->bno,
             'nic' => $request->nic,
             'address' => $request->address,
+            'stype' => $request->stype,
 
         ];
         if ($this->userModel->addUser($data)) {

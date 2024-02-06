@@ -1,0 +1,5 @@
+-->in the photo-uotation requests need to know about checkboxes with albums and all
+
+-->dancing, event planner
+
+-->form validations

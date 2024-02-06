@@ -1,15 +1,3 @@
-<?php
-$eventsArr = array();
-if ($data['events']->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        array_push($eventsArr, $row);
-    }
-}
-
-// Render event data in JSON format 
-echo json_encode($eventsArr);
-
-?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -26,13 +14,21 @@ echo json_encode($eventsArr);
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js'></script>
     <script src="<?php echo URLROOT; ?>public/js/calender.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@3.10.2/dist/fullcalendar.min.css" />
+
+
+
+
     <!-- STYLESHEET -->
     <link rel="stylesheet" href="<?php echo URLROOT; ?>public/css/admindash.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>public/css/eventplannerdash.css">
+
+
+
 </head>
 
 <body>
-
     <div class="dash-container">
         <aside>
             <div class="top">
@@ -115,6 +111,10 @@ echo json_encode($eventsArr);
                 </a>
             </div>
         </aside>
+
+
+
+
         <!-- Content start here -->
         <div>
             <div class="profile end">
@@ -126,12 +126,25 @@ echo json_encode($eventsArr);
                     <img src="<?php echo URLROOT ?>public/images/photo2.jpg">
                 </div>
             </div>
+
+
+
             <!-- Heading and search bar -->
+
+
             <div class="planner-title">
                 <h1>Calendar</h1>
+
             </div>
+
+
             <div id="calendar">
+
             </div>
+
+
+
+
         </div>
 
     </div>
@@ -140,3 +153,36 @@ echo json_encode($eventsArr);
 
 </html>
 
+<script>
+    $(document).ready(function() {
+        $('#calendar').fullCalendar({
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'month,agendaWeek,agendaDay'
+            },
+            events: '<?php echo URLROOT; ?>/suppliers/fetch'
+        });
+    });
+
+    function addEvent() {
+        var eventName = $('#eventName').val();
+        var eventDate = $('#eventDate').val();
+
+        $.ajax({
+            url: '<?php echo URLROOT; ?>/suppliers/add',
+            type: 'POST',
+            data: { eventName: eventName, eventDate: eventDate },
+            success: function(response) {
+                $('#calendar').fullCalendar('refetchEvents');
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+    }
+</script>
+
+</body>
+
+</html>

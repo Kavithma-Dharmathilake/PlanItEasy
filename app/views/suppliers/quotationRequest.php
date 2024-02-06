@@ -2,25 +2,23 @@
 <html lang="en">
 
 <head>
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Packages</title>
     <!-- MATERIAL CDN -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- STYLESHEET -->
     <link rel="stylesheet" href="<?php echo URLROOT; ?>public/css/admindash.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>public/css/eventplannerdash.css">
-    
+
 </head>
 
 <body>
     <div class="dash-container">
-    <aside>
+        <aside>
             <div class="top">
                 <div class="logo">
                     <img src="<?php echo URLROOT; ?>public/images/logo.jpg">
@@ -105,107 +103,79 @@
 
 
         <main>
-           
 
-             <!-- Content start here -->
-        <div>
-            <div class="profile end">
-                <div class="info" style="padding-right:25px;">
-                    <p>Hey, <b>Abhi</b></p>
-                    <small class="text-muted">Supplier</small>
+
+            <!-- Content start here -->
+            <div>
+                <div class="profile end">
+                    <div class="info" style="padding-right:25px;">
+                        <p>Hey, <b>Abhi</b></p>
+                        <small class="text-muted">Supplier</small>
+                    </div>
+                    <div class="profile-photo">
+                        <img src="images/photo1.jpg">
+                    </div>
                 </div>
-                <div class="profile-photo">
-                    <img src="images/photo1.jpg">
+
+
+
+                <!-- Heading and search bar -->
+                <div style="display:flex">
+
+                    <div class="planner-title">
+                        <h1>Quotation Requests</h1>
+
+
+                    </div>
+                    <div class="planner-search">
+                        <form action="#" method="post">
+
+                            <input type="search" id="query" name="q" placeholder="       Search Requests" class="planner-textbox">
+
+                            <button>
+                                <i class="fa fa-search" style="font-size: 18px;">
+                                </i>
+                            </button>
+                        </form>
+                    </div>
+
                 </div>
+
+                <!-- Event Request Table -->
+                <div class="event-request" style="margin-top:60px">
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Request ID</th>
+                                <th>Package</th>
+                                <th>Received Date</th>
+                                <th>Request Status</th>
+                                <th>More</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr>
+                                <?php foreach ($data['request'] as $req) : ?>
+                                    <td>#RQ<?php echo $req->id ?></td>
+                                    <td><?php echo $req->package ?></td>
+                                    <td><?php echo $req->send_date ?></td>
+                                    <td><?php echo $req->q_status ?></td>
+                                    <td><a href="<?php echo URLROOT; ?>suppliers/oneRequest/<?php echo $req->id ?>"><i class="fa-solid fa-angles-right"></i></a></td>
+                            </tr>
+                        <?php endforeach; ?>
+
+
+
+                        </tbody>
+                    </table>
+                </div>
+
+
+
             </div>
-
-
-
-            <!-- Heading and search bar -->
-            <div style="display:flex">
-
-                <div class="planner-title">
-                    <h1>Quotation Requests</h1>
-
-
-                </div>
-                <div class="planner-search">
-                    <form action="#" method="post">
-
-                        <input type="search" id="query" name="q" placeholder="       Search Requests"
-                            class="planner-textbox">
-
-                        <button>
-                            <i class="fa fa-search" style="font-size: 18px;">
-                            </i>
-                        </button>
-                    </form>
-                </div>
-
-            </div>
-
-            <!-- Event Request Table -->
-            <div class="event-request" style="margin-top:60px">
-           
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Event ID</th>
-                            <th>Event type</th>
-                            <th>Number of Guests</th>
-                            <th>Budget</th>
-                            <th>Tentative Date</th>
-                            <th>Event Status</th>
-                            <th>More</th>
-                          
-                        </tr>
-                    </thead>
-                    <tbody>
-                      
-                        <tr>
-                            <td>0001</td>
-                            <td>Wedding</td>
-                            <td>250</td>
-                            <td>1,000,000 LKR</td>
-                            <td>21/10/2023</td>
-                            <td>Pending</td>
-                            <td><a href="#"><i class="fa-solid fa-angles-right"></i></a></td>
-                        </tr>
-                        <tr>
-                            <td>0001</td>
-                            <td>Wedding</td>
-                            <td>250</td>
-                            <td>1,000,000 LKR</td>
-                            <td>21/10/2023</td>
-                            <td>Pending</td>
-                            <td><a href=""><i class="fa-solid fa-angles-right"></i></a></td>
-                        </tr>
-                        <tr>
-                            <td>0001</td>
-                            <td>Wedding</td>
-                            <td>250</td>
-                            <td>1,000,000 LKR</td>
-                            <td>21/10/2023</td>
-                            <td>Pending</td>
-                            <td><a href=""><i class="fa-solid fa-angles-right"></i></a></td>
-                        </tr>
-                         <tr>
-                            <td>0001</td>
-                            <td>Wedding</td>
-                            <td>250</td>
-                            <td>1,000,000 LKR</td>
-                            <td>21/10/2023</td>
-                            <td>Pending</td>
-                            <td><a href=""><i class="fa-solid fa-angles-right"></i></a></td>
-                        </tr>
-                       
-                    </tbody>
-                </table>
-            </div>
-
-
-
-        </div>
 
 </body>
 
