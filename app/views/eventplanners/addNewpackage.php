@@ -124,89 +124,82 @@
             <div class="planner-title" style="padding-bottom:50px;">
                 <h1>Packages and Services</h1>
             </div>
-<form action="#" method="post">
-            <div class="form-add-package">
-                <div class="form-wrapper">
-                    <div class="form-heading">
-                        <h2 style="padding: 20px;">Add New Package</h2>
-                    </div>
-                    <div class="form-content">
-                        <div class="input-box">
-                            <input type="text" placeholder="Package Name" required>
+            <form action="<?php echo URLROOT ?>eventplanners/addNewPackage" method="post" enctype="multipart/form-data">
+                <div class="form-add-package">
+                    <div class="form-wrapper">
+                        <div class="form-heading">
+                            <h2 style="padding: 20px;">Add New Package</h2>
                         </div>
-                        <div class="input-box">
-                            <input type="text" placeholder="Event type" required>
-                        </div>
-                        <div class="input-box">
-                            <input type="text" placeholder="Service type" required>
-                        </div>
-                        <div class="input-box">
-                            <input type="text" placeholder="Price" required>
-                        </div>
-                        <div class="text-box">
-                            <textarea name="description" id="descript" cols="50" rows="5">         Enter a description for the package
+                        <div class="form-content">
+
+                            <div class="input-box">
+                                <label>Package Name<span style="color:red"><sup>*</sup></span></label><br />
+                                <input type="text" placeholder="Enter Package Name" name="name"
+                                    value="<?php echo $data['name']; ?>">
+                               
+                            </div>
+                            <div class="input-box">
+                                <div class="select-box">
+                                    <label>Event type<span style="color:red"><sup>*</sup></span></label><br />
+                                    <select name="type" style=" border-color:var(--color-primary);">
+                                        <option value="" selected>Select Event type</option>
+                                        <option value="Wedding">Wedding</option>
+                                        <option value="Birthday">Birthday</option>
+                                        <option value="Gender Reveal">Gender Reveal</option>
+                                        <option value="Engagements">Engagements</option>
+                                        <option value="Anniversary">Anniversary</option>
+                                        <option value="Other">Other</option>
+                                        <!-- Add more event types as needed -->
+                                    </select>
+                                </div>
+                                    
+                                <span style="color:red; font-size:7px font-weight:bold">
+                                    <?php echo $data['type_err']; ?>
+                                </span>
+                            </div>
+                            <div class="input-box">
+                                <label>Price<span style="color:red"><sup>*</sup></span></label><br />
+                                <input type="text" placeholder="Price" name="price"
+                                    value="<?php echo $data['price']; ?>">
+                                    <span style="color:red; font-size:7px font-weight:bold">
+                                    <?php echo $data['price_err']; ?>
+                                </span>
+                            </div>
+                            <div class="text-box">
+                                <label>Description for package<span style="color:red"><sup>*</sup></span></label><br />
+                                <textarea name="description" id="descript" cols="50" rows="5"
+                                    value="<?php echo $data['description']; ?>">        
                           </textarea>
+                          <span style="color:red; font-size:7px font-weight:bold">
+                                    <?php echo $data['description_err']; ?>
+                                </span>
+                            </div>
+                            <label>Images For The Pacakge<span style="color:red"><sup>*</sup></span></label><br />
+                            <div class="package-imgs">
+
+
+                                <div class="package-img">
+                                    <input type="file" id="file-selector1" accept=".jpg, .jpeg, .png"
+                                        style="display: none;" name="img">
+                                    <label for="file-selector1" id="file-label1">
+                                        <i class="fa fa-add" style="font-size: 18px; padding-right:15px;">
+                                        </i>
+                                    </label>
+                                </div>
+                              
+                                <script src="<?php echo URLROOT; ?>public/js/planner.js"></script>
+                            </div>
+
+                            <div class="input-box">
+                                <input type="Submit" value="Submit" class="input-submit">
+                            </div>
+
+
+
+
                         </div>
-                        <div class="package-imgs">
-
-                            <div class="package-img">
-                                <input type="file" id="file-selector1" accept=".jpg, .jpeg, .png" style="display: none;">
-                                <label for="file-selector1" id="file-label1">
-                                    <i class="fa fa-add" style="font-size: 18px; padding-right:15px;">
-                                    </i>
-                                </label>
-                            </div>
-                            <div class="package-img">
-                                <input type="file" id="file-selector2" accept=".jpg, .jpeg, .png" style="display: none;">
-                                <label for="file-selector2" id="file-label2">
-                                    <i class="fa fa-add" style="font-size: 18px; padding-right:15px;">
-                                    </i>
-                                </label>
-                            </div>
-                            <div class="package-img">
-                                <input type="file" id="file-selector3" accept=".jpg, .jpeg, .png" style="display: none;">
-                                <label for="file-selector3" id="file-label3">
-                                    <i class="fa fa-add" style="font-size: 18px; padding-right:15px;">
-                                    </i>
-                                </label>
-                            </div>
-                            <script src="<?php echo URLROOT; ?>public/js/planner.js"></script>
-                        </div>
-                        <div class="package-imgs">
-
-                            <div class="package-img">
-                                <input type="file" id="file-selector4" accept=".jpg, .jpeg, .png" style="display: none;">
-                                <label for="file-selector4" id="file-label4">
-                                    <i class="fa fa-add" style="font-size: 18px; padding-right:15px;">
-                                    </i>
-                                </label>
-                            </div>
-                            <div class="package-img">
-                                <input type="file" id="file-selector5" accept=".jpg, .jpeg, .png" style="display: none;">
-                                <label for="file-selector5" id="file-label5">
-                                    <i class="fa fa-add" style="font-size: 18px; padding-right:15px;">
-                                    </i>
-                                </label>
-                            </div>
-                            <div class="package-img">
-                                <input type="file" id="file-selector6" accept=".jpg, .jpeg, .png" style="display: none;">
-                                <label for="file-selector6" id="file-label6">
-                                    <i class="fa fa-add" style="font-size: 18px; padding-right:15px;">
-                                    </i>
-                                </label>
-                            </div>
-                            <script src="<?php echo URLROOT; ?>public/js/planner.js"></script>
-                        </div>
-                        <div class="input-box">
-                            <input type="Submit" value="Submit" class="input-submit">
-                        </div>
-
-
-
-
                     </div>
                 </div>
-            </div>
             </form>
 
 

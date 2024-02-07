@@ -15,6 +15,10 @@ class Pages extends Controller
     {
         $this->view('pages/index');
     }
+    public function oneportfolio()
+    {
+        $this->view('pages/oneportfolio');
+    }
 
     public function about()
     {
@@ -66,7 +70,7 @@ class Pages extends Controller
                 'email' => trim($_POST['email']),
                 'phone' => trim($_POST['contact']),
                 'bday' => trim($_POST['bday']),
-                'gender' =>trim($_POST['gender']),
+                'gender' =>'male',
                 'address' => trim($_POST['address']),
                 'nic' =>trim($_POST['nic']),
                 'stype' => trim($_POST['stype']),
@@ -138,7 +142,7 @@ class Pages extends Controller
                 } elseif (strlen($nic) === 12) {
                     $firstFourDigits = substr($nic, 0, 4);
                     if (!in_array($firstFourDigits, ['2001', '2002', '2003', '2004'])) {
-                        $data['nic_err'] = 'Invalid NIC format for 12 digits';
+                        $data['nic_err'] = 'Invalid NIC format';
                     }
                 }
             }
@@ -218,7 +222,9 @@ class Pages extends Controller
 
                 if($this->userModel->userReq($userData))
                 {
-                   echo '<script> alert("Your request sent successfully")</script>';
+                   echo '<script> prompt("Your request sent successfully")</prompt>';
+                   $this->view('pages/joinreg', $data);
+
                   
                 }
             } else {

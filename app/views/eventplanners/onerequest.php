@@ -147,7 +147,7 @@
                         </div>
                         <div style="display:flex; margin-top:20px; margin-left:30px;">
                             <div class="req-title" style="width:50%">Budget </div>
-                            <div class="req-data" style="width:50%">100,000.00 LKR</div>
+                            <div class="req-data" style="width:50%">100,000.00 LKR - 200,000 .00 LKR</div>
                         </div>
                         <div style="display:flex; margin-top:20px; margin-left:30px;">
                             <div class="req-title" style="width:50%">Guest Count </div>
@@ -175,6 +175,11 @@
                             <div class="req-data" style="width:50%">074444444</div>
                         </div>
 
+                    </div>
+
+                    <div>
+                        
+                        <a href="<?php echo URLROOT ?>eventplanners/createbudget"><button style=" margin:20px; padding:20px; background-color:#7380ec; color:white; border-radius:15px;">Create Budget</button></a>
                     </div>
                 </div>
                 <div class="search-quoate">

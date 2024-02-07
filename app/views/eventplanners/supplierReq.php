@@ -148,12 +148,12 @@
                 <table>
                     <thead>
                         <tr>
+                            <th>Quotation ID</th>
                             <th>Event ID</th>
-                            <th>Event type</th>
-                            <th>Number of Guests</th>
-                            <th>Budget</th>
-                            <th>Tentative Date</th>
-                            <th>Event Status</th>
+                            <th>Request ID</th>
+                            <th>Supplier name</th>
+                            <th>Charges</th>
+                            <th>Remarks</th>
                             <th>More</th>
                           
                         </tr>
@@ -161,40 +161,49 @@
                     <tbody>
                       
                         <tr>
-                            <td>0001</td>
-                            <td>Wedding</td>
-                            <td>250</td>
-                            <td>1,000,000 LKR</td>
-                            <td>21/10/2023</td>
-                            <td>Pending</td>
-                            <td><a href="<?php echo URLROOT ?>eventplanners/onerequest">:</a></td>
+                           <td>#SQ003</td>
+                           <td>#R0003</td>
+                           <td>#QR005</td>
+                           <td>CaptureX</td>
+                           <td>Rs.10000.00</td>
+                           <td>--none--</td>
+                           <td>></td>
                         </tr>
                         <tr>
-                            <td>0001</td>
-                            <td>Wedding</td>
-                            <td>250</td>
-                            <td>1,000,000 LKR</td>
-                            <td>21/10/2023</td>
-                            <td>Pending</td>
-                            <td><a href="">:</a></td>
+                           <td>#SQ003</td>
+                           <td>#R0003</td>
+                           <td>#QR005</td>
+                           <td>CaptureX</td>
+                           <td>Rs.10000.00</td>
+                           <td>--none--</td>
+                           <td>></td>
                         </tr>
                         <tr>
-                            <td>0001</td>
-                            <td>Wedding</td>
-                            <td>250</td>
-                            <td>1,000,000 LKR</td>
-                            <td>21/10/2023</td>
-                            <td>Pending</td>
-                            <td><a href="">:</a></td>
+                           <td>#SQ004</td>
+                           <td>#R0006</td>
+                           <td>#QR008</td>
+                           <td>Sri Malee Grand</td>
+                           <td>Rs.10000.00</td>
+                           <td>--none--</td>
+                           <td>></td>
                         </tr>
-                         <tr>
-                            <td>0001</td>
-                            <td>Wedding</td>
-                            <td>250</td>
-                            <td>1,000,000 LKR</td>
-                            <td>21/10/2023</td>
-                            <td>Pending</td>
-                            <td><a href="">:</a></td>
+                        <tr>
+                           <td>#SQ001</td>
+                           <td>#R0003</td>
+                           <td>#QR002</td>
+                           <td>rasa bojun</td>
+                           <td>Rs.10000.00</td>
+                           <td>--none--</td>
+                           <td>></td>
+                        </tr>
+                        <tr>
+                           <td>#SQ006</td>
+                           <td>#R0003</td>
+                           <td>#QR0014</td>
+                           <td>Lassana Flora</td>
+                           <td>Rs.10000.00</td>
+                           <td>--none--</td>
+                           <td>></td>
                         </tr>
                        
                     </tbody>

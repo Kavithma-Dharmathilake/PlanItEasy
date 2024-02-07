@@ -135,6 +135,7 @@ nav{
     position: fixed;
     top: 0;
     z-index: 11;
+    color:white;
 }
 
 .window-scroll{

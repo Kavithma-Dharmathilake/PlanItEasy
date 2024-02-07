@@ -209,8 +209,8 @@ body {
     justify-content: center;
     align-items: center;
     padding-left: 100px;
-
 }
+
 
 .form-wrapper {
     width: 800px;
@@ -249,12 +249,26 @@ body {
     width: 100%;
     height: 100%;
     background: transparent;
-    outline: none;
     border: 2px solid var(--color-primary);
     /* border-radius: 40px; */
     font-size: 15px;
     color: var(--color-dark);
     padding: 20px 45px 20px 20px;
+}
+
+.select-box select {
+    width:300px;
+    height: 100%;
+    background: transparent;
+    border: 2px solid var(--color-primary);
+    font-size: 15px;
+    color: var(--color-dark);
+    padding: 20px 45px 20px 20px;
+
+}
+
+.input-box label {
+    margin: 10px;
 }
 
 .input-box input:focus {
@@ -420,12 +434,12 @@ input[type='submit']:hover {
 
 .filter {
     width: 300px;
-    padding:20px;
+    padding: 20px;
     margin-top: 200px;
 }
 
-.filter input{
-margin:20px;
+.filter input {
+    margin: 20px;
 }
 
 .fil-3 {
@@ -443,17 +457,17 @@ margin:20px;
     box-shadow: var(--box-shadow);
     border-radius: var(--border-radius-1);
     max-width: 300px;
-    margin:30px;
+    margin: 30px;
     text-align: center;
 }
 
-.card:hover{
+.card:hover {
     box-shadow: none;
 }
 
-.card img{
+.card img {
     border-radius: 20px;
-    margin:10px;
+    margin: 10px;
 }
 
 .price {
@@ -465,8 +479,8 @@ margin:20px;
     border: none;
     padding: 12px;
     color: white;
-    background-color:#7380ec;
-    margin:20px;
+    background-color: #7380ec;
+    margin: 20px;
     border-radius: 30px;
     text-align: center;
     cursor: pointer;
@@ -474,6 +488,6 @@ margin:20px;
 }
 
 .card button:hover {
-   background-color: #011f4b;
-   color:white;
+    background-color: #011f4b;
+    color: white;
 }

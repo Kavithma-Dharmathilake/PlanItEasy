@@ -212,7 +212,7 @@ class Users extends Controller
 
             if ($userType === 'customer') {
                 // Redirect customer to the customer dashboard
-                redirect('customer');
+                redirect('customers');
             } elseif ($userType === 'eventplanner') {
                 // Redirect admin to the admin dashboard
                 redirect('eventplanners');
@@ -222,7 +222,7 @@ class Users extends Controller
 
             } elseif ($userType === 'supplier') {
                 // Redirect admin to the admin dashboard
-                redirect('supplier');
+                redirect('suppliers');
             } else {
                 // Handle other user types or show an error message
                 echo "Invalid user type";

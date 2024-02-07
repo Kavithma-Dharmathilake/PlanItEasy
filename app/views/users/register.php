@@ -65,13 +65,13 @@
                     </span>
                 </div>
                 <div class="input-box <?php echo (!empty($data['password_err'])) ? 'is-invalid' : ''; ?>">
-                    <input type="text" name="password" placeholder="Password" value="<?php echo $data['password']; ?>">
+                    <input type="password" name="password" placeholder="Password" value="<?php echo $data['password']; ?>">
                     <span class="invalid-feedback">
                         <?php echo $data['password_err']; ?>
                     </span>
                 </div>
                 <div class="input-box <?php echo (!empty($data['confirm_password_err'])) ? 'is-invalid' : ''; ?>">
-                    <input type="text"name="confirm_password" placeholder="Confirm your Password">
+                    <input type="password"name="confirm_password" placeholder="Confirm your Password">
                     <span class="invalid-feedback">
                         <?php echo $data['confirm_password_err']; ?>
                     </span>
