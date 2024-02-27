@@ -157,7 +157,7 @@ class Suppliers extends Controller
         }
     }
 
-    public function deleteuser($id)
+    public function deleteUser($id)
     {
 
 
@@ -220,7 +220,23 @@ class Suppliers extends Controller
         $this->view('suppliers/sentRequests', $data);
     }
 
+    // public function supplierCalendar()
+    // {
+
+    //     $this->view('suppliers/supplierCalendar');
+
+    // }
     
+    public function supplierCalendar()
+    {
+
+        $data = [
+            'title' => 'Welcome'
+        ];
+        
+        $this->view('suppliers/supplierCalender', $data);
+    }
+
 }
 
 ?>
