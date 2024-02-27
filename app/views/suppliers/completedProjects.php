@@ -13,8 +13,8 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- STYLESHEET -->
-    <link rel="stylesheet" href="./css/admindash.css">
-    <link rel="stylesheet" href="./css/eventplannerdash.css">
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>public/css/admindash.css">
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>public/css/eventplannerdash.css">
     
 </head>
 
