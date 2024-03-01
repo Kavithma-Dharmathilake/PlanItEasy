@@ -160,7 +160,7 @@
                     <h3>Budget Plans</h3>
                 </a>
 
-                <a href="<?php echo URLROOT ?>eventplanners/calendar">
+                <a href="<?php echo URLROOT ?>eventplanners/calendar"> 
                     <span class="material-icons-sharp">
                         calendar_month
                     </span>
