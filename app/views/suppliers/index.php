@@ -161,7 +161,7 @@
                     <h3>Completed Projects</h3>
                 </a>
 
-                <a href="<?php echo URLROOT; ?>suppliers/supplierCalender">
+                <a href="<?php echo URLROOT; ?>suppliers/eventplanners/calendar">
                     <span class="material-icons-sharp">
                         calendar_month
                     </span>
