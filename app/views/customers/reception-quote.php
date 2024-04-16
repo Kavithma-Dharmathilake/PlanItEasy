@@ -12,7 +12,6 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- STYLESHEET -->
     <link rel="stylesheet" href="<?php echo URLROOT; ?>public/css/admindash.css">
-    <link rel="stylesheet" href="<?php echo URLROOT; ?>public/css/eventplannerdash.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>public/css/event-form.css">
 
 
@@ -71,10 +70,10 @@
 
             <div class="gen-detail">
 
-                <form action="" method="post">
+                <form action="<?php echo URLROOT; ?>customers/sendquote/<?php echo $data['supplier']->id ?>/<?php echo $data['request']->id ?>" method="post">
                     <div>
                         <h1>
-                            Request Quote - Sri Malee GrandMeridian
+                            Request Quote - <?php echo $data['supplier']->bname ?>
                         </h1>
                     </div>
                     <div style="display:flex;">
@@ -94,14 +93,6 @@
                                     <option name="packageType" value="gold"> Gold package</option>
 
                                 </select>
-                            </div>
-
-                            <p class="form-text" style="margin-top:2rem;"> Time</p>
-                            <div style="display:flex;">
-                                <input style="margin:15px;" type="checkbox" name="services" value="additional">Breakfast <br />
-                                <input style="margin:15px;" type="checkbox" value="non digital">Lunch <br />
-                                <input style="margin:15px;" type="checkbox" name="services" value="additional">Brunch<br />
-                                <input style="margin:15px;" type="checkbox" value="non digital">Dinner
                             </div>
 
                         </div>
@@ -126,6 +117,7 @@
                             </div>
 
 
+
                         </div>
                     </div>
                     <p class="form-text" style="margin-top:2rem; margin-left:2rem;  margin-right:2rem">Additional Remarks for the Sri Malee GrandMeridian</p>
@@ -133,7 +125,7 @@
                         <textarea name="remark" id="theme" cols="80" rows="5"></textarea>
 
                     </div>
-                    <input type="submit">
+                    <input style="padding:1rem; margin:1rem; background-color:#7380ec;color:white; border-radius:0.4rem" type="submit">
                 </form>
             </div>
 

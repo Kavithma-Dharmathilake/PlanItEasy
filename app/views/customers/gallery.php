@@ -21,81 +21,85 @@
 </head>
 
 <body>
-    <div class="suppliers-intro">
-        <P>Photographers </P>
-    </div>
 
-    <!-- *******VENDOR-GRID************* -->
-    <div class="vendor-grid">
-        <?php foreach ($data['supplier'] as $i) : ?>
-
-            <div class="vendor-card">
-                <a href="<?php echo URLROOT; ?>customers/portfolio/<?php echo $i->id."/".$data['request']->id ?>">
-                    <div class="vendor-image">
-                        <img src="https://images.unsplash.com/photo-1604017011826-d3b4c23f8914?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="vendor image">
-                    </div>
-                    <div class="vendor-details">
-                        <span class="vendor-catagory">Photographer</span>
-                        <h4><?php echo $i->bname ?></h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero, possimus nostrum!</p>
-                        <div class="Vendor-bottom-details">
-                            <a href="<?php echo URLROOT; ?>customers/sendquote/<?php echo $i->id."/".$data['request']->id ?>">
-                                <div class="vendor-price">Send Request</div>
-                            </a>
-
-                        </div>
-                    </div>
+    <div class="dash-container">
+        <aside>
+            <div class="top">
+                <div class="logo">
+                    <img src="<?php echo URLROOT; ?>/public/images/logo.jpg">
+                    <h2>PlanItEasy</h2>
+                </div>
+                <div class="close" id="close-btn">
+                    <span class="material-icons-sharp">close</span>
+                </div>
+            </div>
+            <div class="sidebar">
+                <a href="<?php echo URLROOT; ?>customers">
+                    <span class="material-icons-sharp" class="active">grid_view</span>
+                    <h3>Dashboard</h3>
+                </a>
+                <a href="<?php echo URLROOT; ?>customers/events">
+                    <span class="material-icons-sharp">man</span>
+                    <h3>Events</h3>
+                </a>
+                <a href="<?php echo URLROOT; ?>customers/payments">
+                    <span class="material-icons-sharp">payments</span>
+                    <h3>Payments</h3>
+                </a>
+                <a href="<?php echo URLROOT; ?>customers/message">
+                    <span class="material-icons-sharp">message</span>
+                    <h3>Messages</h3>
+                </a>
+                <a href="<?php echo URLROOT; ?>customers/viewquote">
+                    <span class="material-icons-sharp"> note_add</span>
+                    <h3>supplier quotation</h3>
+                </a>
+                <a href="<?php echo URLROOT; ?>customers/profile">
+                    <span class="material-icons-sharp">person</span>
+                    <h3>profile</h3>
+                </a>
+                <a href="<?php echo URLROOT; ?>user/logout">
+                    <span class="material-icons-sharp">logout</span>
+                    <h3>Logout</h3>
                 </a>
             </div>
+        </aside>
+
+     
+        <!-- *******VENDOR-GRID************* -->
+        <div class="vendor-grid">
 
 
-        <?php endforeach ?>
+            <?php foreach ($data['supplier'] as $i) : ?>
 
+                <div class="vendor-card">
+                    <a href="<?php echo URLROOT; ?>customers/portfolio/<?php echo $i->id . "/" . $data['request']->id ?>">
+                        <div class="vendor-image">
+                            <img src="https://images.unsplash.com/photo-1604017011826-d3b4c23f8914?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="vendor image">
+                        </div>
+                        <div class="vendor-details">
+                            <span class="vendor-catagory"><?php echo $data['type'] ?></span>
+                            <h4><?php echo $i->bname ?></h4>
+                           
+                            <div class="Vendor-bottom-details">
+                                <a href="<?php echo URLROOT; ?>customers/sendquote/<?php echo $i->id . "/" . $data['request']->id ?>">
+                                    <div class="vendor-price">Send Request</div>
+                                </a>
+
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                
+
+                
+
+            <?php endforeach ?>
+
+
+        </div>
 
     </div>
-
-    <!-- *********OTHER VENDORS********* -->
-
-    <hr>
-
-    <div class="other-vendors">
-        <h2>Other <span>Suppliers</span> in Galle</h2>
-    </div>
-
-    <section class="vendor-section">
-        <div class="card-grid">
-            <a class="card" href="#">
-                <div class="card__background" style="background-image: url(https://images.unsplash.com/photo-1565661834013-d196ca46e14e?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8d2VkZGluZyUyMGNha2V8ZW58MHx8MHx8fDA%3D)"></div>
-                <div class="card__content">
-                    <p class="card__category">Top Rated</p>
-                    <h3 class="card__heading">Cake Artists</h3>
-                </div>
-            </a>
-            <a class="card" href="#">
-                <div class="card__background" style="background-image: url(https://images.unsplash.com/photo-1561593367-66c79c2294e6?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8d2VkZGluZyUyMHJlY2VwdGlvbnxlbnwwfHwwfHx8MA%3D%3D)"></div>
-                <div class="card__content">
-                    <p class="card__category">Top Rated</p>
-                    <h3 class="card__heading">Reception Halls</h3>
-                </div>
-            </a>
-            <a class="card" href="#">
-                <div class="card__background" style="background-image: url(https://images.unsplash.com/photo-1618107095181-e3ba0f53ee59?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8d2VkZGluZyUyMGRqfGVufDB8fDB8fHww)"></div>
-                <div class="card__content">
-                    <p class="card__category">Top Rated</p>
-                    <h3 class="card__heading">Sounds & DJ</h3>
-                </div>
-                </li>
-                <a class="card" href="#">
-                    <div class="card__background" style="background-image: url(https://images.unsplash.com/photo-1627045778010-b3a8c6b171b0?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fHdlZGRpbmclMjBkZWNvcmF0aW9ufGVufDB8fDB8fHww)"></div>
-                    <div class="card__content">
-                        <p class="card__category">Top Rated</p>
-                        <h3 class="card__heading">Event Decorations</h3>
-                    </div>
-                </a>
-                <div>
-    </section>
-
-
 
 
 

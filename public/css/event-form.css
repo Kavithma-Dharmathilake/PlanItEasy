@@ -132,6 +132,42 @@
 	background-color:var(--color-dark-variant);
 	color:white;
 	border-radius: 3rem;
-	padding:1rem;
-
+	padding:1rem;	
 }
+
+.vendor-type{
+	margin:2rem;
+	padding:1rem;
+	border: 1px solid black;
+	border-radius: var(--border-radius-2);
+}
+
+.vendor-type input[type="checkbox"] {
+	appearance: none;
+	width: 20px;
+	height: 20px;
+	margin: 0;
+	padding: 0;
+	border: 2px solid #ccc;
+	border-radius: 4px;
+	background-color: #fff;
+	cursor: pointer;
+	outline: none;
+  }
+  
+  .vendor-type  input[type="checkbox"]:checked {
+	background-color:#7380ec
+  }
+
+  .vendor-type  input[type="checkbox"] + label {
+	padding-left: 50px;
+	font-size: 1.25rem;
+	color:#7380ec;
+  }
+
+  
+  .vendor-type{
+	padding-left: 50px;
+	font-size: 1.25rem;
+	color:#7380ec;
+  }

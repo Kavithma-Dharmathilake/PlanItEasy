@@ -65,15 +65,7 @@
 
         <!-- Content start here -->
         <div>
-            <div class="profile end">
-                <div class="info" style="padding-right:25px;">
-                    <p>Hey, <b>Sunimal</b></p>
-                    <small class="text-muted"></small>
-                </div>
-                <div class="profile-photo">
-                    <img src="<?php echo URLROOT ?>public/images/photo2.jpg">
-                </div>
-            </div>
+         
 
             <!-- The Title -->
 
@@ -104,7 +96,7 @@
                             storefront
                         </span> <br />Suppliers</div>
                 </a>
-                <a href="<?php echo URLROOT ?>customers/checklist/<?php echo $data['request']->id ?>">
+                <a href="<?php echo URLROOT ?>customers/budget/<?php echo $data['request']->id ?>">
                     <div class="event-tabs">
                         <span class="material-icons-sharp">
                             paid

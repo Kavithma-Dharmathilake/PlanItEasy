@@ -63,9 +63,10 @@ body {
     padding: 0.5rem;
     width: 300px;
     height: 300px;
-    transition: transform 0.2s
-
+    transition: transform 0.2s;
+    position: relative; /* Add this line to make the vendor-tab div a positioned ancestor */
 }
+    
 
 .vendor-tab :hover {
     opacity: 50%;
@@ -75,14 +76,51 @@ body {
 .vendor-tab img {
     border-radius: var(--border-radius-3);
     z-index: -12;
+    filter: brightness(50%);
     height: 250px;
 }
 
 .vendor-tab p {
     z-index: 10;
-    margin-top: -40px;
+    margin-top: -60px;
     margin-left: 1rem;
     font-weight: bolder;
     color:aliceblue;
-    font-size: large;
+    font-size: 30px;
+    position: absolute; /* Add this line to position the p tag absolutely within the vendor-tab div */
+}
+
+
+.vendor-long-tab {
+    margin: 0.5rem;
+    padding: 0.5rem;
+    width: 600px;
+    height: 300px;
+    transition: transform 0.2s;
+    position: relative;
+    
+
+}
+
+.vendor-long-tab :hover {
+    opacity: 50%;
+  
+    
+}
+
+.vendor-long-tab img {
+    border-radius: var(--border-radius-3);
+    filter: brightness(50%);
+    z-index: -12;
+    height: 250px;
+}
+
+.vendor-long-tab p {
+    z-index: 100;
+    margin-top: -60px;
+    margin-left: 1rem;
+    font-weight: bolder;
+    color:aliceblue;
+    font-size: 30px;
+    position: absolute;
 }

@@ -131,7 +131,7 @@
                     <span class="material-icons-sharp">
                         inventory
                     </span>
-                    <h3>Products</h3>
+                    <h3>Portfolio</h3>
                 </a>
 
                 <a href="<?php echo URLROOT; ?>suppliers/quotationRequest">

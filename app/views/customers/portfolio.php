@@ -91,12 +91,7 @@
                     <li class="result">
                         <a href="#"><img src="https://images.unsplash.com/photo-1608068071876-4787af8c930b?q=80&w=1587&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" width="500" height="500" alt=""></a>
                     </li>
-                    <li class="result">
-                        <a href="#"><img src="https://images.unsplash.com/photo-1597323840229-a560489a94fa?q=80&w=1587&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" width="500" height="500" alt=""></a>
-                    </li>
-                    <li class="result">
-                        <a href="#"><img src="https://images.unsplash.com/photo-1597881303422-dd93f853b0ac?q=80&w=1587&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" width="500" height="500" alt=""></a>
-                    </li>
+                
                 </ul>
             </div>
         </div>

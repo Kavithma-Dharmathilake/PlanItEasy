@@ -221,21 +221,42 @@ class Suppliers extends Controller
     public function oneRequest($id)
     {
         $result = $this->supplierModel->getOneReq($id);
+   
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
            
-            $sid =$result->id; 
+            $sid =$result->id;
+            $accept = isset($_POST['accept']) ? 'Accept' : null;
+            $decline = isset($_POST['decline']) ? 'Decline' : null;
+           
          
             $data2 = [
                 'id' =>$sid,
-                'price' => trim($_POST['price']),
+                'price' => trim($_POST['r_price']),
                 'remark' => trim($_POST['remark'])
             ];
 
-            if($this->supplierModel->acceptQuote($data2)){
-                echo '<script> prompt("Quotation Sent  Successfully") </script>'; 
-                redirect('suppliers/quotationRequest');
+            if($accept != null){
+
+                if($this->supplierModel->acceptQuote($data2)){
+                    echo '<script> prompt("Quotation Sent  Successfully") </script>'; 
+                    redirect('suppliers/quotationRequest');
+                }else{
+                    echo '<script> prompt("Something Went Wrong") </script>'; 
+                    redirect('suppliers/quotationRequest');
+                }
+
+            }else{
+                if($this->supplierModel->declineQuote($data2)){
+                    echo '<script> prompt("Quotation Declined") </script>'; 
+                    redirect('suppliers/quotationRequest');
+                }else{
+                    echo '<script> prompt("Something Went Wrong") </script>'; 
+                    redirect('suppliers/quotationRequest');
+                }
+                
             }
+            
         }
         else{
             $result = $this->supplierModel->getOneReq($id);

@@ -37,25 +37,24 @@ class Customers extends Controller
         $events = $this->customerModel->getAllEvents($_SESSION['user_id']);
 
         $data = [
-            'title' => 'Welcome',
             'events' => $events
         ];
 
         $this->view('customers/events', $data);
     }
 
+    //creating new event
     public function newevent()
     {
 
-        $data = [
-            'title' => 'Welcome'
-        ];
+        $data = [];
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-            $_EVENT = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            $_EVENT = filter_input_array(INPUT_POST);
 
             $data = [
+
                 'type' => trim($_POST['type']),
                 'min' => trim($_POST['minbudget']),
                 'max' => trim($_POST['maxbudget']),
@@ -69,17 +68,18 @@ class Customers extends Controller
                 'estatus' => 'ongoing',
                 'pstatus' => 'pending',
                 'cusid' => $_SESSION['user_id'],
-                'title_err' => '',
-                'body_err' => ''
             ];
 
 
-            $this->customerModel->newevent($data);
+            $eid = $this->customerModel->newevent($data);
+            echo '<script>alert("New Event Created Successfully");';
+            echo 'window.location.href = "' . URLROOT . 'customers/oneevent/' . $eid . '";</script>';
+        } else {
+            $this->view('customers/newevent', $data);
         }
-
-        $this->view('customers/newevent', $data);
     }
 
+    //viewing one event
     public function oneevent($id)
     {
 
@@ -95,61 +95,21 @@ class Customers extends Controller
         $this->view('customers/oneevent', $data);
     }
 
-    public function supplier($id, $type = "none")
+    //viewing all suppliers
+    public function supplier($id)
     {
 
 
         $request = $this->customerModel->getEventById($id);
-        $photo = $this->supplierModel->getPhotographers('Photographer');
-        $cater = $this->supplierModel->getPhotographers('Catering Service');
-        $reception = $this->supplierModel->getPhotographers('Reception hall');
-        $deco = $this->supplierModel->getPhotographers('Decorations');
-        $cake = $this->supplierModel->getPhotographers('Cake Service');
 
-        $data1 = [
-            'request' => $request,
-            'supplier' => $photo,
-            'type' => "photography",
+        $data = [
+            'request' => $request
         ];
 
-        $data2 = [
-            'request' => $request,
-            'supplier' => $cater,
-            'type' => "catering"
-        ];
-
-        $data3 = [
-            'request' => $request,
-            'supplier' => $reception,
-            'type' => "reception"
-        ];
-        $data4 = [
-            'request' => $request,
-            'supplier' => $deco,
-            'type' => "decoration"
-        ];
-
-        $data5 = [
-            'request' => $request,
-            'supplier' => $cake,
-            'type' => "cake"
-        ];
-
-        if ($type == "none") {
-            $this->view('customers/supplier', $data1);
-        } else if ($type == "photography") {
-            $this->view('customers/gallery', $data1);
-        } else if ($type == "catering") {
-            $this->view('customers/gallery', $data2);
-        } else if ($type == "reception") {
-            $this->view('customers/gallery', $data3);
-        } else if ($type == "decoration") {
-            $this->view('customers/gallery', $data4);
-        } else if ($type == "cake") {
-            $this->view('customers/gallery', $data5);
-        }
+        $this->view('customers/supplier', $data);
     }
 
+    //viewing only photographers
     public function photography($id)
     {
         $request = $this->customerModel->getEventById($id);
@@ -163,6 +123,7 @@ class Customers extends Controller
         $this->view('customers/gallery', $data1);
     }
 
+    //only catering suppliers
     public function caterings($id)
     {
         $request = $this->customerModel->getEventById($id);
@@ -176,6 +137,7 @@ class Customers extends Controller
         $this->view('customers/gallery', $data2);
     }
 
+    //only reception suppliers
     public function reception($id)
     {
         $request = $this->customerModel->getEventById($id);
@@ -184,9 +146,22 @@ class Customers extends Controller
         $data3 = [
             'request' => $request,
             'supplier' => $reception,
-            'type' => "reception"
+            'type' => "Reception"
         ];
         $this->view('customers/gallery', $data3);
+    }
+
+    public function eventplanner($id)
+    {
+        $request = $this->customerModel->getEventById($id);
+        $reception = $this->supplierModel->getPhotographers('Event Planner');
+
+        $data = [
+            'request' => $request,
+            'supplier' => $reception,
+            'type' => "Event Planners"
+        ];
+        $this->view('customers/gallery', $data);
     }
 
     public function portfolio($sid, $eid)
@@ -203,17 +178,36 @@ class Customers extends Controller
     }
 
 
-    public function catering()
+    public function catering($id)
     {
+        $request = $this->customerModel->getEventById($id);
+        $supplier = $this->supplierModel->getPhotographers('Catering Service');
 
-
-        $this->view('customers/catering-quote');
+        $data = [
+            'request' => $request,
+            'supplier' => $supplier,
+            'type' => "Catering"
+        ];
+        $this->view('customers/gallery', $data);
     }
 
 
     public function receptions()
     {
         $this->view('customers/reception-quote');
+    }
+
+    public function decorations($id)
+    {
+        $request = $this->customerModel->getEventById($id);
+        $supplier = $this->supplierModel->getPhotographers('Decorations');
+
+        $data = [
+            'request' => $request,
+            'supplier' => $supplier,
+            'type' => "Decorations"
+        ];
+        $this->view('customers/gallery', $data);
     }
 
     public function payments()
@@ -266,18 +260,24 @@ class Customers extends Controller
             'supplier' => $supplier,
         ];
 
-
-
         if ($type == "none") {
             $this->view('customers/index', $data);
         } else if ($type == "Photographer") {
 
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
+
+                $album = isset($_POST['album']) ? 'Album' : null;
+                $additional = isset($_POST['additional']) ? 'Additional Photographer' : null;
+                $booth = isset($_POST['photobooth']) ? 'Photobooth' : null;
+                $photoservices = implode(', ', array_filter([$album, $additional, $booth]));
+
+
                 $package = $_POST['type'];
                 $stime = $_POST['start'];
                 $etime = $_POST['end'];
                 $remark = $_POST['remark'];
+
 
                 $quote = [
                     'package' => $package,
@@ -285,20 +285,320 @@ class Customers extends Controller
                     'etime' => $etime,
                     'remark' => $remark,
                     'rid' => $request->id,
-                    'sid' => $supplier->id
+                    'sid' => $supplier->id,
+                    'uid' => $_SESSION['user_id'],
+                    'stype' => 'photography',
+                    'services' => $photoservices
                 ];
 
 
 
                 if ($this->customerModel->RequestPhotoQuote($quote)) {
-                    echo '<script> alert("Quotation Added Succfully")</script>';
+                    echo '<script>alert("Request Quotation sent successfully")</script>';
+                    echo '<script>window.location.href = "' . URLROOT . 'customers/photography/' . $request->id. '";</script>';
                 } else {
+
                     $this->view('customers/gallery', $data);
                 }
             } else {
                 $this->view('customers/photo-quote', $data);
             }
-        } else if ($type == "catering") {
+        } else if ($type == "Event Planner") {
+
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+                //event planner -->
+                $package = $_POST['ptype'];
+                $plannerremark = $_POST['remark'];
+                //reception
+                $reception = isset($_POST['needreception']) ? 0 : -1;
+                if ($reception !== -1) {
+                    $receptionType = isset($_POST['receptionType']) ? $_POST['receptionType'] : null;
+                    $recepremark = isset($_POST['reception-remark']) ? $_POST['reception-remark'] : null;
+                    $r_start = isset($_POST['recept-start']) ? $_POST['recept-start'] : null;
+                    $r_end = isset($_POST['recept-end']) ? $_POST['recept-end'] : null;
+
+                    $data1 = [
+                        'type' => $receptionType,
+                        'remark' => $recepremark,
+                        'start' => $r_start,
+                        'end' => $r_end
+                    ];
+
+                    $reception = $this->customerModel->PlannerReception($data1);
+                }
+                //catering
+                $catering = isset($_POST['needcatering']) ? 0 : -1;
+                if ($catering !== -1) {
+                    $lunch = isset($_POST['lunch']) ? 'Lunch ' : null;
+                    $dinner = isset($_POST['dinner']) ? 'Dinner ' : null;
+                    $breakfast = isset($_POST['breakfast']) ? 'Breakfast ' : null;
+
+                    $time = implode(', ', array_filter([$lunch, $dinner, $breakfast]));
+
+                    $c_start = isset($_POST['cater-start']) ? $_POST['cater-start'] : null;
+                    $c_end = isset($_POST['cater-end']) ? $_POST['cater-end'] : null;
+
+                    $packets = isset($_POST['Packets']) ? 'Packets ' : null;
+                    $servers = isset($_POST['Servers']) ? 'Servers ' : null;
+                    $delivery = isset($_POST['Delivery']) ? 'Delivery ' : null;
+                    $caterservices = implode(', ', array_filter([$packets, $servers, $delivery]));
+
+                    $priceperplate = isset($_POST['pricePerPlate']) ? $_POST['pricePerPlate'] : null;
+                    $caterRemark = isset($_POST['cater-remark']) ? $_POST['cater-remark'] : null;
+
+                    $data2 = [
+                        'time' => $time,
+                        'start' => $c_start,
+                        'end' => $c_end,
+                        'services' => $caterservices,
+                        'price' => $priceperplate,
+                        'remark' => $caterRemark
+                    ];
+
+                    $catering = $this->customerModel->PlannerCatering($data2);
+                }
+                //photography
+                $photography = isset($_POST['needphoto']) ? 0 : -1;
+                if ($photography !== -1) {
+                    $coverage = isset($_POST['cover']) ? $_POST['coverage'] : null;
+
+                    $album = isset($_POST['album']) ? 'Album' : null;
+                    $additional = isset($_POST['additional']) ? 'Additional Photographer' : null;
+                    $booth = isset($_POST['photobooth']) ? 'Photobooth' : null;
+                    $photoservices = implode(', ', array_filter([$album, $additional, $booth]));
+
+                    $p_start = isset($_POST['photo-start']) ? $_POST['photo-start'] : null;
+                    $p_end = isset($_POST['photo-end']) ? $_POST['photo-end'] : null;
+
+                    $photoRemark = isset($_POST['photo-remark']) ? $_POST['photo-remark'] : null;
+
+                    $data3 = [
+                        'coverage' => $coverage,
+                        'start' => $p_start,
+                        'end' => $p_end,
+                        'services' => $photoservices,
+                        'remark' => $photoRemark
+                    ];
+
+                    $photography = $this->customerModel->PlannerPhotography($data3);
+                }
+                //decorations
+                $decoration = isset($_POST['needdeco']) ? 0 : -1;
+                if ($decoration !== -1) {
+
+                    $poruwa = isset($_POST['poruwa']) ? 'Poruwa ' : null;
+                    $seteeBack = isset($_POST['Setee-Back']) ? 'Setee Back ' : null;
+                    $tabledeco = isset($_POST['Table-Deco']) ? 'Table Arrangements ' : null;
+                    $bouquet = isset($_POST['Bouquets']) ? 'Bouquets ' : null;
+                    $entrance = isset($_POST['Entrance-deco']) ? 'Entrance Deco ' : null;
+                    $seating = isset($_POST['Seating-deco']) ? 'Seating Arrangements' : null;
+                    $lighting = isset($_POST['Lighting-deco'])  ? 'Lighting Deco' : null;
+                    $ceiling = isset($_POST['Ceiling-deco']) ? 'Ceiling Deco' : null;
+                    $decoservices = implode(', ', array_filter([$poruwa, $seteeBack, $tabledeco, $bouquet, $entrance, $seating, $lighting, $ceiling]));
+
+                    $natural = isset($_POST['Natural']) ? 'Natural ' : null;
+                    $artificial = isset($_POST['Artificial']) ? 'Artificial ' : null;
+                    $flowers = implode(', ', array_filter([$natural, $artificial]));
+                    $decoremark = isset($_POST['deco-remark']) ? $_POST['deco-remark'] : null;
+
+                    $data4 = [
+                        'flowers' => $flowers,
+                        'services' => $decoservices,
+                        'remark' => $decoremark
+                    ];
+
+                    $decoration = $this->customerModel->PlannerDecoration($data4);
+                }
+                //cake services
+                $cake = isset($_POST['needcake']) ? 0 : -1;
+                if ($cake !== -1) {
+                    $cakeremark = isset($_POST['cake-remark']) ? $_POST['cake-remark'] : null;
+
+                    $data5 = [
+                        'remark' => $cakeremark
+                    ];
+
+                    $cake = $this->customerModel->PlannerCake($data5);
+                }
+                //dancing crew
+                $dance = isset($_POST['needdance']) ? 0 : -1;
+                if ($dance !== -1) {
+                    $danceremark = isset($_POST['dance-remark']) ? $_POST['dance-remark'] : null;
+
+                    $da_start = isset($_POST['dance-start']) ? $_POST['photo-start'] : null;
+                    $da_end = isset($_POST['dance-end']) ? $_POST['photo-end'] : null;
+
+                    $data6 = [
+                        'remark' => $danceremark,
+                        'start' => $da_start,
+                        'end' => $da_end
+                    ];
+
+                    $dance = $this->customerModel->PlannerDance($data6);
+                }
+                //music band
+                $music = isset($_POST['needmusic']) ? 0 : -1;
+                if ($music !== -1) {
+                    $musicremark = isset($_POST['music-remark']) ? $_POST['music-remark'] : null;
+                    $mu_start = isset($_POST['music-start']) ? $_POST['photo-start'] : null;
+                    $mu_end = isset($_POST['music-end']) ? $_POST['photo-end'] : null;
+
+                    $data7 = [
+                        'remark' => $musicremark,
+                        'start' => $mu_start,
+                        'end' => $mu_end
+                    ];
+
+                    $music = $this->customerModel->PlannerMusic($data7);
+                }
+                //dj
+                $dj = isset($_POST['needdj']) ? 0  : -1;
+                if ($dj !== -1) {
+                    $djremark = isset($_POST['dj-remark']) ? $_POST['dj-remark'] : null;
+                    $djcoverage = isset($_POST['dj-coverage']) ? $_POST['dj-coverage'] : null;
+
+                    $smoke = isset($_POST['Smoke']) ? 'Smokescreen' : null;
+                    $lazer = isset($_POST['Lazer']) ? 'Lazer' : null;
+                    $fire = isset($_POST['firemachines']) ? 'Firemachines' : null;
+                    $djservices = implode(',', array_filter([$smoke, $fire, $lazer]));
+
+                    $dj_start = isset($_POST['dj-start']) ? $_POST['dj-start'] : null;
+                    $dj_end = isset($_POST['dj-end']) ? $_POST['dj-end'] : null;
+
+                    $data8 = [
+                        'coverage' => $djcoverage,
+                        'start' => $dj_start,
+                        'end' => $dj_end,
+                        'services' => $djservices,
+                        'remark' => $djremark
+                    ];
+
+                    $dj = $this->customerModel->PlannerDJ($data8);
+                }
+
+                $quote = [
+
+                    'package' => $package,
+                    'plannerremark' => $plannerremark,
+                    'rid' => $request->id,
+                    'sid' => $supplier->id,
+                    'uid' => $_SESSION['user_id'],
+                    'reception' => $reception,
+                    'catering' => $catering,
+                    'photography' => $photography,
+                    'decoration' => $decoration,
+                    'cake' => $cake,
+                    'dance' => $dance,
+                    'music' => $music,
+                    'dj' => $dj,
+
+                ];
+
+                if ($this->customerModel->RequestEventQuote($quote)) {
+                    echo '<script> alert("Quotation Added Succfully")</script>';
+                    header('location: ' . URLROOT . 'customers/quotations/' . $request->id);
+                } else {
+                    $this->view('customers/gallery', $data);
+                }
+            } else {
+                $this->view('customers/planner-quote', $data);
+            }
+        } else if ($type == "Reception hall") {
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+
+
+                $package = $_POST['type'];
+                $stime = $_POST['start'];
+                $etime = $_POST['end'];
+                $remark = $_POST['remark'];
+
+
+                $quote = [
+                    'package' => $package,
+                    'stime' => $stime,
+                    'etime' => $etime,
+                    'remark' => $remark,
+                    'rid' => $request->id,
+                    'sid' => $supplier->id,
+                    'uid' => $_SESSION['user_id'],
+                    'stype' => 'reception'
+                ];
+
+
+
+                if ($this->customerModel->RequestReceptQuote($quote)) {
+                    echo '<script> alert("Quotation Added Succfully")</script>';
+                    header('location: ' . URLROOT . 'customers/reception/' . $request->id);
+                } else {
+
+                    $this->view('customers/gallery', $data);
+                }
+            } else {
+                $this->view('customers/reception-quote', $data);
+            }
+        } else if ($type == "Decorations") {
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+
+
+                $package = $_POST['type'];
+                $stime = $_POST['start'];
+                $etime = $_POST['end'];
+                $remark = $_POST['remark'];
+
+                $poruwa = isset($_POST['poruwa']) ? 'Poruwa ' : null;
+                $seteeBack = isset($_POST['Setee-Back']) ? 'Setee Back ' : null;
+                $tabledeco = isset($_POST['Table-Deco']) ? 'Table Arrangements ' : null;
+                $bouquet = isset($_POST['Bouquets']) ? 'Bouquets ' : null;
+                $entrance = isset($_POST['Entrance-deco']) ? 'Entrance Deco ' : null;
+                $seating = isset($_POST['Seating-deco']) ? 'Seating Arrangements' : null;
+                $lighting = isset($_POST['Lighting-deco'])  ? 'Lighting Deco' : null;
+                $ceiling = isset($_POST['Ceiling-deco']) ? 'Ceiling Deco' : null;
+                $decoservices = implode(', ', array_filter([$poruwa, $seteeBack, $tabledeco, $bouquet, $entrance, $seating, $lighting, $ceiling]));
+
+                $natural = isset($_POST['Natural']) ? 'Natural ' : null;
+                $artificial = isset($_POST['Artificial']) ? 'Artificial ' : null;
+                $flowers = implode(', ', array_filter([$natural, $artificial]));
+
+
+
+                $quote = [
+                    'package' => $package,
+                    'stime' => $stime,
+                    'etime' => $etime,
+                    'remark' => $remark,
+                    'rid' => $request->id,
+                    'sid' => $supplier->id,
+                    'services' => $decoservices,
+                    'flowers' => $flowers,
+                    'uid' => $_SESSION['user_id'],
+                    'stype' => 'decoration'
+                ];
+
+
+
+                if ($this->customerModel->RequestDecoQuote($quote)) {
+                    echo '<script> alert("Quotation Added Succfully")</script>';
+                    header('location: ' . URLROOT . 'customers/decorations/' . $request->id);
+                } else {
+
+                    $this->view('customers/gallery', $data);
+                }
+            } else {
+                $this->view('customers/deco-quote', $data);
+            }
+        } else if ($type == "cake") {
+            $this->view('customers/gallery', $data);
+        } else if ($type == "dj") {
+            $this->view('customers/gallery', $data);
+        } else if ($type == "music") {
+            $this->view('customers/gallery', $data);
+        } else if ($type == "dancing") {
+            $this->view('customers/gallery', $data);
+        } else if ($type == "Catering Service") {
+
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                 $package = $_POST['type'];
@@ -306,90 +606,47 @@ class Customers extends Controller
                 $etime = $_POST['end'];
                 $remark = $_POST['remark'];
 
+                $lunch = isset($_POST['Lunch']) ? 'Lunch ' : null;
+                $dinner = isset($_POST['Dinner']) ? 'Dinner ' : null;
+                $breakfast = isset($_POST['Breakfast']) ? 'Breakfast ' : null;
+
+                $time = implode(', ', array_filter([$lunch, $dinner, $breakfast]));
+
+                $packets = isset($_POST['Packets']) ? 'Packets ' : null;
+                $servers = isset($_POST['Servers']) ? 'Servers ' : null;
+                $delivery = isset($_POST['Delivery']) ? 'Delivery ' : null;
+                $caterservices = implode(', ', array_filter([$packets, $servers, $delivery]));
+
+
+
+
+
                 $quote = [
                     'package' => $package,
                     'stime' => $stime,
                     'etime' => $etime,
                     'remark' => $remark,
+                    'time' => $time,
+                    'services' => $caterservices,
                     'rid' => $request->id,
-                    'sid' => $supplier->id
+                    'sid' => $supplier->id,
+                    'uid' => $_SESSION['user_id'],
+                    'stype' => 'catering'
                 ];
 
 
 
-                if ($this->customerModel->RequestPhotoQuote($quote)) {
+                if ($this->customerModel->RequestCaterQuote($quote)) {
                     echo '<script> alert("Quotation Added Succfully")</script>';
+                    header('location: ' . URLROOT . 'customers/catering/' . $request->id);
                 } else {
                     $this->view('customers/gallery', $data);
                 }
             } else {
-                $this->view('customers/reception-quote', $data);
+                $this->view('customers/catering-quote', $data);
             }
-        } else if ($type == "reception") {
-            $this->view('customers/gallery', $data);
-        } else if ($type == "decoration") {
-            $this->view('customers/gallery', $data);
-        } else if ($type == "cake") {
-            $this->view('customers/gallery', $data);
         }
     }
-
-
-    public function quotation1()
-    {
-
-        $data = [
-            'title' => 'Welcome'
-        ];
-        $this->view('customers/cus_quo(1)', $data);
-    }
-
-    public function quotation2()
-    {
-
-        $data = [
-            'title' => 'Welcome'
-        ];
-        $this->view('customers/cus_quo(2)', $data);
-    }
-
-    public function quotation3()
-    {
-
-        $data = [
-            'title' => 'Welcome'
-        ];
-        $this->view('customers/cus_quo(3)', $data);
-    }
-
-    public function quotation4()
-    {
-
-        $data = [
-            'title' => 'Welcome'
-        ];
-        $this->view('customers/cus_quo(4)', $data);
-    }
-
-    public function quotation5()
-    {
-
-        $data = [
-            'title' => 'Welcome'
-        ];
-        $this->view('customers/cus_quo(5)', $data);
-    }
-
-
-    public function quotation6()
-    {
-
-        $data = [
-            'title' => 'Welcome'
-        ];
-        $this->view('customers/cus_quo(6)', $data);
-    }
-
 
     public function profile()
     {
@@ -514,10 +771,6 @@ class Customers extends Controller
 
     public function deleteuser($id)
     {
-
-
-
-
         if ($this->userModel->deleteUser($id)) {
             redirect('customers/viewquote');
         } else {
@@ -529,18 +782,133 @@ class Customers extends Controller
     public function quotations($id)
     {
 
+
         $quote = $this->customerModel->getAllQuote($id);
+
 
         $data = [
             'quote' => $quote,
+            'eventid' => $id
         ];
 
         $this->view('customers/allquote', $data);
     }
 
-    public function getOneSupplier($id)
+
+    public function budget($id)
     {
-        $supplier = $this->supplierModel->getOneSupplier($id);
-        return $supplier->bname;
+        $quote = $this->customerModel->getAllQuote($id);
+
+
+        $budget = $this->customerModel->getAllBudget($id);
+
+        $data = [
+            'quote' => $quote,
+            'eventid' => $id,
+            'budget' => $budget,
+        ];
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+             $budgetid = $this->customerModel->createbudget($id);
+
+             $result = $this->customerModel->lowestbudget($id);
+
+            foreach ($result as $r) {
+                $item = [
+                    'bid' => $budgetid,
+                    'qid' => $r->id,
+                    'bname' => $r->bname,
+                    'price' => $r->r_price,
+                    'stype' => $r->stype
+                ];
+                // $this->customerModel->insertBudgetItem($item);
+            }
+
+            echo '<script> alert("New Budget Created")</script>';
+            header('location: ' . URLROOT . 'customers/pricebudgetsheet/' . $budgetid . '/' . $id);
+        }
+
+
+        $this->view('customers/budget', $data);
     }
+
+    public function pricebudgetsheet($bid, $id)
+    {
+        $quote = $this->customerModel->getAcceptedQuote($id);
+        $request = $this->customerModel->getEventById($id);
+        $items = $this->customerModel->getBudgetItems($bid);
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $price = $_POST['total'];
+
+            $data1 = [
+                'price' => $price,
+                'id' => $bid
+            ];
+
+            if ($this->customerModel->updateTotal($data1)) {
+                redirect('customers/budget', $id);
+            }
+        } else {
+
+            $data = [
+                'quote' => $quote,
+                'eventid' => $id,
+                'result' => $items,
+                'request' => $request,
+                'bid' => $bid
+            ];
+
+
+
+            $this->view('customers/budgetsheet', $data);
+        }
+    }
+
+    public function updateBudget($bid, $eid,  $price)
+    {
+
+
+
+
+
+        $data1 = [
+            'price' => $price,
+            'id' => $bid
+
+        ];
+
+        if ($this->customerModel->updateTotal($data1)) {
+            header('location: ' . URLROOT . 'customers/budget/' . $eid);
+        }
+    }
+
+
+    public function addItem($rid, $bid, $qid)
+    {
+
+        $r = $this->customerModel->getOneQuote($qid);
+
+
+        $data = [
+            'bid' => $bid,
+            'qid' => $r->id,
+            'bname' => $r->bname,
+            'price' => $r->r_price,
+            'stype' => $r->stype
+        ];
+
+        if ($this->customerModel->insertBudgetItem($data)) {
+            echo '<script> prompt("New Budget Item Added")</script>';
+            echo '<script> alert("New Budget Created")</script>';
+            header('location: ' . URLROOT . 'customers/pricebudgetsheet/' . $bid . '/' . $rid);
+        } else {
+            echo '<script>  prompt("New Budget Created")</script>';
+            redirect('customers/budgetsheet', $rid, $bid);
+        }
+    }
+
+    
 }

@@ -12,7 +12,6 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- STYLESHEET -->
     <link rel="stylesheet" href="<?php echo URLROOT; ?>public/css/admindash.css">
-    <link rel="stylesheet" href="<?php echo URLROOT; ?>public/css/eventplannerdash.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>public/css/event-form.css">
 
 
@@ -71,7 +70,7 @@
 
             <div class="gen-detail">
 
-                <form action="<?php echo URLROOT; ?>customers/sendquote/photography/<?php echo $data['request']->id ?>/<?php echo $data['supplier']->id ?>" method="post">
+                <form action="<?php echo URLROOT; ?>customers/sendquote/<?php echo $data['supplier']->id ?>/<?php echo $data['request']->id ?>" method="post">
                     <div>
                         <h1>
                             Request Quote - <?php echo $data['supplier']->bname ?>
@@ -96,16 +95,13 @@
                                 </select>
                             </div>
 
-                            <p class="form-text" style="margin-top:2rem;"> Additional Services</p>
-                            <div style="display:flex;">
-                                <input type="checkbox" name="services" value="additional">Additional Photographer <br />
-                                <input type="checkbox" value="non digital">Non Digital Products(Albums,prints etc.)
-                            </div>
-
-
-
-
-
+                            <p class="form-text" style="margin-top:2rem; margin-left:1rem;  margin-right:2rem">Additional Services</p>
+                                <input type="checkbox" id="album" name="album">
+                                <label for="album" style="font-size: 15px;">Non Digital Products(Albums,prints etc.)</label><br />
+                                <input type="checkbox" id="additonal" name="additonal">
+                                <label for="additional" style="font-size: 15px;">Additional Photographer</label><br />
+                                <input type="checkbox" id="photobooth" name="photobooth">
+                                <label for="photobooth" style="font-size: 15px;">Photobooth</label><br />
 
                         </div>
                         <div style="width:20rem; margin-left:2rem">
@@ -118,12 +114,12 @@
                             <div style="display:flex;">
                                 <div>Start Time<br />
                                     <div class="input-field2">
-                                        <input type="time" name="start">
+                                        <input type="time" name="start" value="<?php echo $data['request']->starttime ?>">
                                     </div>
                                 </div>
                                 <div>End Time
                                     <div class="input-field2">
-                                        <input type="time" name="end">
+                                        <input type="time" name="end"  value="<?php echo $data['request']->endtime ?>">
                                     </div>
                                 </div>
                             </div>
@@ -136,7 +132,7 @@
                         <textarea name="remark" id="theme" cols="80" rows="5"></textarea>
 
                     </div>
-                    <input type="submit">
+                    <input style="padding:1rem; margin:1rem; background-color:#7380ec;color:white; border-radius:0.4rem" type="submit" value="submit">
                 </form>
             </div>
 

@@ -34,7 +34,8 @@ class Customer
 
         //Execute the query
         if ($this->db->execute()) {
-            return true;
+            $id = $this->db->lastInsertedId();
+            return $id;
         } else {
             return false;
         }
@@ -46,16 +47,18 @@ class Customer
         $sent = "Request Sent";
         $date = date("Y-m-d");
 
-        $this->db->query('INSERT INTO quoate(package,eid,sid,etime,stime,remarks,status,additional_services,send_date) 
-        VALUES(:package,:eid,:sid,:etime,:stime,:remarks,:status,:additional_services,:send_date) ');
+        $this->db->query('INSERT INTO quoate(package,eid,sid,uid,etime,stime,remarks,status,additional_services,send_date,stype)
+        VALUES(:package,:eid,:sid,:uid,:etime,:stime,:remarks,:status,:additional_services,:send_date,:stype) ');
         $this->db->bind(':package', $data['package']);
         $this->db->bind(':eid', $data['rid']);
         $this->db->bind(':sid', $data['sid']);
+        $this->db->bind(':uid', $data['uid']);
         $this->db->bind(':etime', $data['stime']);
         $this->db->bind(':stime', $data['etime']);
         $this->db->bind(':remarks', $data['remark']);
+        $this->db->bind(':stype', $data['stype']);
         $this->db->bind(':status', $sent);
-        $this->db->bind(':additional_services', $sent);
+        $this->db->bind(':additional_services', $data['services']);
         $this->db->bind(':send_date', $date);
 
 
@@ -67,7 +70,292 @@ class Customer
         }
     }
 
+    public function  RequestReceptQuote($data)
+    {
 
+        $sent = "Request Sent";
+        $date = date("Y-m-d");
+
+        $this->db->query('INSERT INTO quoate(package,eid,sid,uid,etime,stime,remarks,status,additional_services,send_date,stype) 
+        VALUES(:package,:eid,:sid,:uid,:etime,:stime,:remarks,:status,:additional_services,:send_date,:stype) ');
+        $this->db->bind(':package', $data['package']);
+        $this->db->bind(':eid', $data['rid']);
+        $this->db->bind(':sid', $data['sid']);
+        $this->db->bind(':uid', $data['uid']);
+        $this->db->bind(':etime', $data['stime']);
+        $this->db->bind(':stime', $data['etime']);
+        $this->db->bind(':remarks', $data['remark']);
+        $this->db->bind(':status', $sent);
+        $this->db->bind(':additional_services', $sent);
+        $this->db->bind(':send_date', $date);
+        $this->db->bind(':stype', $data['stype']);
+
+
+        //Execute the query
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function  PlannerReception($data)
+    {
+
+        $this->db->query('INSERT INTO reception (type,remark,start,end) VALUES(:type,:remark,:start,:end) ');
+        $this->db->bind(':type', $data['type']);
+        $this->db->bind(':remark', $data['remark']);
+        $this->db->bind(':start', $data['start']);
+        $this->db->bind(':end', $data['end']);
+
+        //Execute the query
+        if ($this->db->execute()) {
+            $id = $this->db->lastInsertedId();
+            return $id;
+        } else {
+            return false;
+        }
+    }
+
+    public function  PlannerCatering($data)
+    {
+
+        $this->db->query('INSERT INTO catering(time,services,remark,start,end,price) VALUES(:time,:services,:remark,:start,:end,:price) ');
+        $this->db->bind(':time', $data['time']);
+        $this->db->bind(':services', $data['services']);
+        $this->db->bind(':remark', $data['remark']);
+        $this->db->bind(':start', $data['start']);
+        $this->db->bind(':end', $data['end']);
+        $this->db->bind(':price', $data['price']);
+
+        //Execute the query
+        if ($this->db->execute()) {
+            $id = $this->db->lastInsertedId();
+            return $id;
+        } else {
+            return false;
+        }
+    }
+
+
+    public function  PlannerPhotography($data)
+    {
+
+        $this->db->query('INSERT INTO photography(coverage,services,remark,start,end) VALUES(:coverage,:services,:remark,:start,:end) ');
+        $this->db->bind(':coverage', $data['coverage']);
+        $this->db->bind(':services', $data['services']);
+        $this->db->bind(':remark', $data['remark']);
+        $this->db->bind(':start', $data['start']);
+        $this->db->bind(':end', $data['end']);
+
+        //Execute the query
+        if ($this->db->execute()) {
+            $id = $this->db->lastInsertedId();
+            return $id;
+        } else {
+            return false;
+        }
+    }
+
+    public function  PlannerDecoration($data)
+    {
+
+        $this->db->query('INSERT INTO decoration(services,remark) VALUES(services,:remark) ');
+        $this->db->bind(':services', $data['services']);
+        $this->db->bind(':remark', $data['remark']);
+
+        //Execute the query
+        if ($this->db->execute()) {
+            $id = $this->db->lastInsertedId();
+            return $id;
+        } else {
+            return false;
+        }
+    }
+
+
+    public function  PlannerCake($data)
+    {
+
+        $this->db->query('INSERT INTO cake(remark) VALUES(:remark) ');
+        $this->db->bind(':remark', $data['remark']);
+
+        //Execute the query
+        if ($this->db->execute()) {
+            $id = $this->db->lastInsertedId();
+            return $id;
+        } else {
+            return false;
+        }
+    }
+
+    public function  PlannerDance($data)
+    {
+
+        $this->db->query('INSERT INTO dancing(remark,start,end) VALUES(:remark,:start,:end) ');
+        $this->db->bind(':remark', $data['remark']);
+        $this->db->bind(':start', $data['start']);
+        $this->db->bind(':end', $data['end']);
+
+        //Execute the query
+        if ($this->db->execute()) {
+            $id = $this->db->lastInsertedId();
+            return $id;
+        } else {
+            return false;
+        }
+    }
+
+    public function  PlannerMusic($data)
+    {
+
+        $this->db->query('INSERT INTO music(remark,start,end) VALUES(:remark,:start,:end) ');
+        $this->db->bind(':remark', $data['remark']);
+        $this->db->bind(':start', $data['start']);
+        $this->db->bind(':end', $data['end']);
+
+        //Execute the query
+        if ($this->db->execute()) {
+            $id = $this->db->lastInsertedId();
+            return $id;
+        } else {
+            return false;
+        }
+    }
+
+    public function  PlannerDJ($data)
+    {
+
+        $this->db->query('INSERT INTO dj(coverage,services,remark,start,end) VALUES(:coverage,:services,:remark,:start,:end) ');
+        $this->db->bind(':coverage', $data['coverage']);
+        $this->db->bind(':services', $data['services']);
+        $this->db->bind(':remark', $data['remark']);
+        $this->db->bind(':start', $data['start']);
+        $this->db->bind(':end', $data['end']);
+
+        //Execute the query
+        if ($this->db->execute()) {
+            $id = $this->db->lastInsertedId();
+            return $id;
+        } else {
+            return false;
+        }
+    }
+
+    public function  RequestEventQuote($data)
+    {
+
+        $sent = "Request Sent";
+        $date = date("Y-m-d");
+        $price = 10000.00;
+
+        $this->db->query('INSERT INTO event_quote(sid, rid, uid, package, c_remark, p_price, s_date,status, reception, catering, photography, decoration, cake, dancing, music, dj) 
+        VALUES (:sid,:rid,:uid,:package,:c_remark, :p_price,:s_date,:status,:reception,:catering,:photography,:decoration,:cake,:dancing,:music,:dj)');
+        $this->db->bind(':package', $data['package']);
+        $this->db->bind(':rid', $data['rid']);
+        $this->db->bind(':sid', $data['sid']);
+        $this->db->bind(':uid', $data['uid']);
+        $this->db->bind(':c_remark', $data['plannerremark']);
+        $this->db->bind(':p_price', $price);
+        $this->db->bind(':reception', $data['reception']);
+        $this->db->bind(':photography', $data['photography']);
+        $this->db->bind(':decoration', $data['decoration']);
+        $this->db->bind(':cake', $data['cake']);
+        $this->db->bind(':dancing', $data['dance']);
+        $this->db->bind(':music', $data['music']);
+        $this->db->bind(':dj', $data['dj']);
+        $this->db->bind(':catering', $data['catering']);
+        $this->db->bind(':status', $sent);
+        $this->db->bind(':s_date', $date);
+
+
+
+        //Execute the query
+        if ($this->db->execute()) {
+            $sent = "none";
+            $date = date("Y-m-d");
+            $stype = 'eventplanner';
+
+            $this->db->query('INSERT INTO quoate(package,eid,sid,uid,remarks,status,send_date,stype) 
+            VALUES(:package,:eid,:sid,:uid,:remarks,:status,:send_date,:stype) ');
+            $this->db->bind(':package', $data['package']);
+            $this->db->bind(':eid', $data['rid']);
+            $this->db->bind(':sid', $data['sid']);
+            $this->db->bind(':uid', $data['uid']);
+            $this->db->bind(':remarks', $data['plannerremark']);
+            $this->db->bind(':status', $sent);
+            $this->db->bind(':stype', $stype);
+            $this->db->bind(':send_date', $date);
+
+            $this->db->execute();
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+    public function  RequestCaterQuote($data)
+    {
+
+        $sent = "Request Sent";
+        $date = date("Y-m-d");
+
+        $this->db->query('INSERT INTO quoate(package,eid,sid,uid,etime,stime,remarks,status,additional_services,send_date,time,stype) 
+        VALUES(:package,:eid,:sid,:uid,:etime,:stime,:remarks,:status,:additional_services,:send_date,:time,:stype) ');
+        $this->db->bind(':package', $data['package']);
+        $this->db->bind(':eid', $data['rid']);
+        $this->db->bind(':sid', $data['sid']);
+        $this->db->bind(':uid', $data['uid']);
+        $this->db->bind(':etime', $data['stime']);
+        $this->db->bind(':stime', $data['etime']);
+        $this->db->bind(':time', $data['time']);
+        $this->db->bind(':remarks', $data['remark']);
+        $this->db->bind(':stype', $data['stype']);
+        $this->db->bind(':status', $sent);
+        $this->db->bind(':additional_services',  $data['services']);
+        $this->db->bind(':send_date', $date);
+
+
+        //Execute the query
+        if ($this->db->execute()) {
+            $id = $this->db->lastInsertedId();
+            return $id;
+        } else {
+            return false;
+        }
+    }
+
+    public function  RequestDecoQuote($data)
+    {
+
+        $sent = "Request Sent";
+        $date = date("Y-m-d");
+
+        $this->db->query('INSERT INTO quoate(package,eid,sid,uid,etime,stime,remarks,status,additional_services,send_date,stype,flowers) 
+        VALUES(:package,:eid,:sid,:uid,:etime,:stime,:remarks,:status,:additional_services,:send_date,:stype,:flowers) ');
+        $this->db->bind(':package', $data['package']);
+        $this->db->bind(':eid', $data['rid']);
+        $this->db->bind(':sid', $data['sid']);
+        $this->db->bind(':uid', $data['uid']);
+        $this->db->bind(':flowers', $data['flowers']);
+        $this->db->bind(':etime', $data['stime']);
+        $this->db->bind(':stime', $data['etime']);
+        $this->db->bind(':remarks', $data['remark']);
+        $this->db->bind(':stype', $data['stype']);
+        $this->db->bind(':status', $sent);
+        $this->db->bind(':additional_services',  $data['services']);
+        $this->db->bind(':send_date', $date);
+
+
+        //Execute the query
+        if ($this->db->execute()) {
+            $id = $this->db->lastInsertedId();
+            return $id;
+        } else {
+            return false;
+        }
+    }
 
     public function getAllEvents($id)
     {
@@ -75,6 +363,19 @@ class Customer
         $this->db->query('SELECT * FROM general_requests Where idcustomer =:id');
 
         $this->db->bind(':id', $id);
+        $result = $this->db->resultSet();
+        return $result;
+    }
+
+    public function getEventQuote()
+    {
+
+        $uid = $_SESSION['user_id'];
+        $this->db->query('SELECT * 
+        FROM event_quote q, general_requests g
+        WHERE sid=:id AND q.rid = g.id');
+        //bind values
+        $this->db->bind(':id', $uid);
         $result = $this->db->resultSet();
         return $result;
     }
@@ -139,12 +440,208 @@ class Customer
     public function getAllQuote($id)
     {
 
+        $uid = $_SESSION['user_id'];
         $this->db->query('SELECT * 
         FROM quoate q, user u
-        WHERE q.eid=:id AND q.sid = u.id');
+        WHERE q.eid=:id AND q.sid = u.id AND q.uid = :uid');
+        //bind values
+        $this->db->bind(':id', $id);
+        $this->db->bind(':uid', $uid);
+        $result = $this->db->resultSet();
+        return $result;
+    }
+
+    public function getAcceptedQuote($id)
+    {
+
+        $uid = $_SESSION['user_id'];
+        $status = 'Accepted';
+        $eventplanner = 'eventplanner';
+        $this->db->query('SELECT q.id, q.r_price, q.q_status, q.stype, u.bname,q.eid 
+        FROM quoate q, user u
+        WHERE q.eid=:id AND q.sid = u.id AND q.uid = :uid AND q.q_status =:status AND q.stype != :except1');
+
+        //bind values
+        $this->db->bind(':id', $id);
+        $this->db->bind(':uid', $uid);
+        $this->db->bind(':status', $status);
+        $this->db->bind(':except1', $eventplanner);
+        $result = $this->db->resultSet();
+        return $result;
+    }
+
+    public function lowestbudget($id)
+    {
+
+        $uid = $_SESSION['user_id'];
+        $status = 'Accepted';
+        $eventplanner = 'eventplanner';
+
+        $this->db->query('SELECT u.id AS user, u.bname, q.stype, q.id, q.r_price
+        FROM planiteasy.quoate q 
+        JOIN planiteasy.user u ON q.sid = u.id
+        JOIN (
+            SELECT stype, MIN(r_price) AS min_quotation
+            FROM planiteasy.quoate 
+            WHERE q_status = :status AND stype != :except1 AND eid = :event_id
+            GROUP BY stype
+        ) AS min_prices
+        ON q.stype = min_prices.stype AND q.r_price = min_prices.min_quotation');
+
+        //bind values
+        $this->db->bind(':event_id', $id);
+        $this->db->bind(':status', $status);
+        $this->db->bind(':except1', $eventplanner);
+        $result = $this->db->resultSet();
+        return $result;
+    }
+
+    public function ratingbudget($id)
+    {
+
+        $uid = $_SESSION['user_id'];
+        $status = 'Accepted';
+        $eventplanner = 'eventplanner';
+
+        $this->db->query('SELECT u.id AS user, u.bname, q.stype, q.id, q.r_price
+        FROM planiteasy.quoate q 
+        JOIN planiteasy.user u ON q.sid = u.id
+        JOIN (
+            SELECT stype, MIN(r_price) AS min_quotation
+            FROM planiteasy.quoate 
+            WHERE q_status = :status AND stype != :except1 AND eid = :event_id
+            GROUP BY stype
+        ) AS min_prices
+        ON q.stype = min_prices.stype AND q.r_price = min_prices.min_quotation');
+
+        //bind values
+        $this->db->bind(':event_id', $id);
+        $this->db->bind(':status', $status);
+        $this->db->bind(':except1', $eventplanner);
+        $result = $this->db->resultSet();
+        return $result;
+    }
+
+
+    public function createbudget($id)
+    {
+
+
+        $this->db->query('INSERT INTO budget(rid) VALUES(:rid)');
+        $this->db->bind(':rid', $id);
+        $this->db->execute();
+        $id = $this->db->lastInsertedId();
+        return $id;
+    }
+
+    public function findSupplierName($id)
+    {
+
+
+        $this->db->query('SELECT bname FROM user WHERE id = :id');
+        $this->db->bind(':id', $id);
+
+        $row = $this->db->single();
+        return $row;
+    }
+
+    public function insertBudgetItem($data)
+    {
+        $this->db->query('SELECT  * FROM budget_item WHERE qid = :qid');
+        $this->db->bind(':qid', $data['qid']);
+        $result = $this->db->single();
+
+        if ($result != null) {
+            return -1;
+        } else {
+
+            $this->db->query('INSERT INTO budget_item(bid,qid,bname,r_price,stype) VALUES(:bid,:qid,:bname,:price,:stype)');
+
+            $this->db->bind(':bid', $data['bid']);
+            $this->db->bind(':qid', $data['qid']);
+            $this->db->bind(':bname', $data['bname']);
+            $this->db->bind(':price', $data['price']);
+            $this->db->bind(':stype', $data['stype']);
+            $this->db->execute();
+            $id = $this->db->lastInsertedId();
+            return $id;
+        }
+    }
+
+    public function addBudgetItem($bid, $qid)
+    {
+        $this->db->query('SELECT COUNT(*) AS count FROM budget_item WHERE qid = :qid');
+        $this->db->bind(':qid', $qid);
+        $result = $this->db->single();
+
+        if ($result['count'] > 0) {
+            return false;
+        } else {
+
+            $this->db->query('INSERT INTO budget_item(bid,qid,bname,r_price,stype) VALUES(:bid,:qid,:bname,:price,:stype)');
+
+            $this->db->bind(':bid', $bid);
+            $this->db->bind(':qid', $qid);
+            $this->db->bind(':bname', $data->bname);
+            $this->db->bind(':price', $data->r_price);
+            $this->db->bind(':stype', $data->stype);
+            $this->db->execute();
+        
+            return true;
+        }
+    }
+
+    public function getBudgetItems($id)
+    {
+
+        $this->db->query('SELECT * 
+        FROM budget_item
+        WHERE bid=:id');
+
         //bind values
         $this->db->bind(':id', $id);
         $result = $this->db->resultSet();
         return $result;
     }
+
+    public function getAllBudget($id)
+    {
+
+        $this->db->query('SELECT * 
+        FROM budget
+        WHERE rid=:id');
+
+        //bind values
+        $this->db->bind(':id', $id);
+        $result = $this->db->resultSet();
+        return $result;
+    }
+
+
+    public function getOneQuote($id){
+        $this->db->query('SELECT * FROM quoate q, user u WHERE q.id = :id AND q.sid = u.id');
+        $this->db->bind(':id', $id);
+        $data = $this->db->single();
+      
+        return $data;
+
+    }
+
+    public function updateTotal($data)
+    {
+        $this->db->query('UPDATE budget SET price=:price WHERE id=:id');
+
+        $this->db->bind(':id', $data['id']);
+        $this->db->bind(':price', $data['price']);
+
+
+
+        //Execute the query
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }

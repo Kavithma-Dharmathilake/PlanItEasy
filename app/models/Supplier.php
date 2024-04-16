@@ -86,9 +86,10 @@ class Supplier
 
     public function getAllReq()
     {
-        $this->db->query('SELECT * FROM quoate');
+        $sid = $_SESSION['user_id'];
+        $this->db->query('SELECT * FROM quoate WHERE sid = :sid');
+        $this->db->bind(':sid', $sid);
         $result = $this->db->resultSet();
-
         return $result;
     }
 
@@ -99,6 +100,8 @@ class Supplier
         $row = $this->db->single();
         return $row;
     }
+
+
 
     public function getCustomer($id)
     {
@@ -133,9 +136,9 @@ class Supplier
 
     public function acceptQuote($data)
     {
-        $this->db->query('UPDATE quoate SET price=:price, status=:status, s_remark=:remark, received_date=:date, q_status=:qstatus WHERE id=:id');
-        $qstatus = "Request Sent";
-        $status = "Request Received";
+        $this->db->query('UPDATE quoate SET r_price=:price, status=:status, s_remark=:remark, received_date=:date, q_status=:qstatus WHERE id=:id');
+        $qstatus = "Accepted";
+        $status = "Request Accepted";
         date_default_timezone_set('UTC');
         $date = date('Y-m-d');
 
@@ -146,8 +149,6 @@ class Supplier
         $this->db->bind(':qstatus', $qstatus);
         $this->db->bind(':date', $date);
         $this->db->bind(':id', $data['id']);
-        die($data['id']);
-
         //Execute the query
         if ($this->db->execute()) {
             return true;
@@ -155,6 +156,29 @@ class Supplier
             return false;
         }
     }
+
+    public function declineQuote($data)
+    {
+        $this->db->query('UPDATE quoate SET status=:status, s_remark=:remark, received_date=:date, q_status=:qstatus WHERE id=:id');
+        $qstatus = "Declined";
+        $status = "Request Declined";
+        date_default_timezone_set('UTC');
+        $date = date('Y-m-d');
+
+        //bind values
+        $this->db->bind(':remark', $data['remark']);
+        $this->db->bind(':status', $status);
+        $this->db->bind(':qstatus', $qstatus);
+        $this->db->bind(':date', $date);
+        $this->db->bind(':id', $data['id']);
+        //Execute the query
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
     public function deleteUser($id)
     {
@@ -217,7 +241,6 @@ class Supplier
         $result = $this->db->resultSet();
 
         return $result;
-
     }
 
     public function addEvent($eventName, $eventDate)
@@ -252,5 +275,4 @@ class Supplier
             return false;
         }
     }
-
 }

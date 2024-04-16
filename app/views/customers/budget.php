@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Events</title>
+    <title>PlanItEasy</title>
     <!-- MATERIAL CDN -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -13,8 +13,6 @@
     <!-- STYLESHEET -->
     <link rel="stylesheet" href="<?php echo URLROOT; ?>public/css/admindash.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>public/css/eventplannerdash.css">
-
-
 
 
 </head>
@@ -65,14 +63,24 @@
 
 
         <!-- Content start here -->
+        <div>
+            <div class="profile end">
+                <div class="info" style="padding-right:25px;">
+                    <p>Hey, <b>Sunimal</b></p>
+                    <small class="text-muted"></small>
+                </div>
+                <div class="profile-photo">
+                    <img src="<?php echo URLROOT ?>public/images/photo2.jpg">
+                </div>
+            </div>
 
-        <div class="right">
+
 
             <!-- Heading and search bar -->
             <div style="display:flex">
 
                 <div class="planner-title">
-                    <h1>Your Events</h1>
+                    <h1>Your Budgets</h1>
 
 
                 </div>
@@ -83,60 +91,51 @@
             <!-- Event Request Table -->
 
 
-            <a href="<?php echo URLROOT; ?>customers/newevent">
-                <button style="padding:1rem; margin:1rem; background-color:#7380ec;color:white; border-radius:0.4rem">Add New Event</button>
-            </a>
-            <div class="event-request" style="margin-top:20px">
 
-                <table>
+            <div class="event-request" style="margin-top:60px">
+            <div style="display:flex;">
+                <form action="<?php echo URLROOT ?>customers/budget/<?php echo $data['eventid']?>" method="POST" >
+                    <input  style="padding:1rem; margin:1rem; background-color:#7380ec;color:white; border-radius:0.4rem" type="submit" value="Budget by Price" >
+                </form>
+                <form action="<?php echo URLROOT ?>customers/budget/<?php echo $data['eventid']?>" method="POST" >
+                    <input style="padding:1rem; margin:1rem; background-color:#7380ec;color:white; border-radius:0.4rem"  type="submit" value="Budget by Ratings" >
+                </form>
+                <form action="<?php echo URLROOT ?>customers/budget/<?php echo $data['eventid']?>" method="POST" >
+                    <input  style="padding:1rem; margin:1rem; background-color:#7380ec;color:white; border-radius:0.4rem" type="submit" value="Budget from Scratch" >
+                </form>
+                
+                </div>
+                <table style="width:1000px">
                     <thead>
                         <tr>
-                            <th>Event ID</th>
-                            <th>Event type</th>
-                            <th>Tentative Date</th>
-                            <th>Event Status</th>
-                            <th>Action </th>
-                            <th>More </th>
-
+                            <th>ID</th>
+                            <th>Payment Status</th>
+                            <th>Final Price</th>
+                            <th>Actions</th>
 
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($data['events'] as $event) : ?>
-
+                        <?php foreach ($data['budget'] as $q) : ?>
+                            
                             <tr>
-                                <td><?php echo $event->id; ?></td>
-                                <td> <?php echo $event->event_type; ?> </td>
-                                <td><?php echo $event->date; ?> </td>
-                                <td><?php echo $event->event_status; ?> </td>
-                                <td><a href="#">
-                                        Edit | Delete
-                                    </a></td>
-                                <td><a href="<?php echo URLROOT ?>customers/oneevent/<?php echo $event->id; ?>">
-                                        <span class="material-icons-sharp">
 
-                                            expand_circle_down
-
-                                        </span>
-                                    </a></td>
-
+                                <td><?php echo $q->id; ?></td>
+                                <td> <?php echo $q->status; ?>
+                                <td>LKR. <?php echo $q->price; ?></td>
+                                <td>Pay</td>
+                              
 
                             </tr>
                         <?php endforeach; ?>
 
                     </tbody>
                 </table>
-
             </div>
 
 
 
-
-
         </div>
-
-
-
 
 
 </body>

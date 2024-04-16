@@ -147,6 +147,10 @@
                             <div class="req-title" style="width:50%">Time</div>
                             <div class="req-data" style="width:50%"><?php echo  $data['event']->starttime  ?> - <?php echo  $data['event']->endtime  ?></div>
                         </div>
+                        <div style="display:flex; margin-top:20px; margin-left:30px;">
+                            <div class="req-title" style="width:50%">Location</div>
+                            <div class="req-data" style="width:50%"><?php echo  $data['event']->location  ?></div>
+                        </div>
                     </div>
                     <div class="event-details">
 
@@ -178,7 +182,7 @@
 
                             <div style="display:flex; margin-top:20px; margin-left:30px;">
                                 <div class="req-title" style="width:50%">Package</div>
-                                <div class="req-data" style="width:50%"><?php echo  $data['request']->package  ?></div>
+                                <div class="req-data" style="width:50%"><?php echo  $data['request']->package  ?> - (LKR. <?php echo  $data['request']->price ?>)</div>
                             </div>
 
                             <div style="display:flex; margin-top:20px; margin-left:30px;">
@@ -190,30 +194,52 @@
                                 <div class="req-data" style="width:50%"><?php echo  $data['request']->stime  ?> to <?php echo  $data['request']->etime  ?> </div>
                             </div>
                             <div style="display:flex; margin-top:20px; margin-left:30px;">
+                                <div class="req-title" style="width:50%">Additional Services</div>
+                                <div class="req-data" style="width:50%"><?php echo  $data['request']->additional_services ?> </div>
+                            </div>
+                            <?php if ($data['request']->stype == 'decoration') : ?>
+                                <!-- Display types of flowers for decoration -->
+                                <div style="display:flex; margin-top:20px; margin-left:30px;">
+                                    <div class="req-title" style="width:50%">Types of Flowers</div>
+                                    <div class="req-data" style="width:50%"><?php echo $data['request']->flowers; ?></div>
+                                </div>
+                            <?php endif; ?>
+
+                            <?php if ($data['request']->stype == 'catering') : ?>
+
+                                <div style="display:flex; margin-top:20px; margin-left:30px;">
+                                    <div class="req-title" style="width:50%">Time </div>
+                                    <div class="req-data" style="width:50%"><?php echo $data['request']->time; ?></div>
+                                </div>
+                            <?php endif; ?>
+                            <div style="display:flex; margin-top:20px; margin-left:30px;">
                                 <div class="req-title" style="width:50%">Quotation Status</div>
                                 <div class="req-data" style="width:50%"><?php echo  $data['request']->q_status  ?></div>
                             </div>
-                            <form action="" method="post">
+
+                            <?php
+                            $disabled = ($data['request']->q_status !== 'Pending') ? 'disabled' : '';
+
+                            ?>
+                            <form action="<?php echo URLROOT ?>suppliers/oneRequest/<?php echo $data['request']->id ?>" method="post">
                                 <div style="display:flex; margin-top:20px; margin-left:30px;">
-                                    <div class="req-title" style="width:50%">Charges for the Service</div>
+                                    <div class="req-title" style="width:50%">Final Charge</div>
                                     <div class="req-data" style="width:10%">
-                                        <input type="number" value="120000.00" name="price" style="padding:7px;border-radius:5px;">
+                                        <input type="number" value="<?php echo  $data['request']->r_price ?>" name="r_price" style="padding:7px;border-radius:5px;" <?php echo $disabled; ?>>
                                     </div>
                                 </div>
                                 <div style="display:flex; margin-top:20px; margin-left:30px;">
                                     <div class="req-title" style="width:50%">Remarks for the Customer</div>
                                     <div class="req-data" style="width:10%">
-                                        <textarea id="remark" cols="30" rows="5" name="remark">    </textarea>
+                                        <textarea id="remark" cols="30" rows="5" name="remark" <?php echo $disabled; ?>>  <?php echo $data['request']->s_remark ?>  </textarea>
                                     </div>
                                 </div>
 
 
-                                <button type="submit" style="margin-left:150px">Send Quote</button>
+                                <input name="accept" type="submit" value="Accept" style="margin-left:150px; padding:1rem" <?php echo $disabled; ?> />
+                                <input name="decline" type="submit" style="margin-left:150px; padding:1rem" value="Decline" <?php echo $disabled; ?> />
 
-                                <button id="decline-btn">Decline Request</button>
                             </form>
-                            <textarea id="decline-reason" style="display:none;">Please enter the reason for declining</textarea>
-                            <button id="decline-submit-btn" style="display:none;">Submit</button>
 
                         </div>
 
@@ -235,17 +261,3 @@
 </body>
 
 </html>
-<script>
-    $(document).ready(function() {
-        $("#decline-btn").click(function() {
-            $("#decline-reason").show();
-            $("#decline-submit-btn").show();
-        });
-
-        $("#decline-submit-btn").click(function() {
-            var declineReason = $("#decline-reason").val();
-            // Do something with the declineReason, such as sending it to a server
-            console.log("Decline reason: " + declineReason);
-        });
-    });
-</script>
