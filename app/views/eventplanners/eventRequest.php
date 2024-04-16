@@ -158,44 +158,18 @@
                         </tr>
                     </thead>
                     <tbody>
-                      
+                      <?php foreach($data['quote'] as $b){ ?>
                         <tr>
-                            <td>0001</td>
-                            <td>Wedding</td>
-                            <td>250</td>
-                            <td>1,000,000 LKR</td>
-                            <td>21/10/2023</td>
+                            <td><?php echo $b->id ?></td>
+                            <td><?php echo $b->event_type ?></td>
+                            <td><?php echo $b->guest_count ?></td>
+                            <td><?php echo $b->maxbudget ?></td>
+                            <td><?php echo $b->date ?></td>
                             <td>Pending</td>
                             <td><a href="<?php echo URLROOT ?>eventplanners/onerequest">:</a></td>
                         </tr>
-                        <tr>
-                            <td>0001</td>
-                            <td>Wedding</td>
-                            <td>250</td>
-                            <td>1,000,000 LKR</td>
-                            <td>21/10/2023</td>
-                            <td>Pending</td>
-                            <td><a href="">:</a></td>
-                        </tr>
-                        <tr>
-                            <td>0001</td>
-                            <td>Wedding</td>
-                            <td>250</td>
-                            <td>1,000,000 LKR</td>
-                            <td>21/10/2023</td>
-                            <td>Pending</td>
-                            <td><a href="">:</a></td>
-                        </tr>
-                         <tr>
-                            <td>0001</td>
-                            <td>Wedding</td>
-                            <td>250</td>
-                            <td>1,000,000 LKR</td>
-                            <td>21/10/2023</td>
-                            <td>Pending</td>
-                            <td><a href="">:</a></td>
-                        </tr>
-                       
+                        <?php  }?>
+                      
                     </tbody>
                 </table>
             </div>

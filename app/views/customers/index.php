@@ -8,13 +8,12 @@
     <title>Packages</title>
     <!-- MATERIAL CDN -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- STYLESHEET -->
     <link rel="stylesheet" href="<?php echo URLROOT; ?>public/css/admindash.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>public/css/eventplannerdash.css">
+
 
 
 </head>
@@ -22,18 +21,15 @@
 <body>
     <div class="dash-container">
         <aside>
+
             <div class="sidebar">
                 <a href="<?php echo URLROOT; ?>customers">
+                    <span class="material-icons-sharp" class="active">grid_view</span>
+                    <h3>Dashboard</h3>
+                </a>
+                <a href="<?php echo URLROOT; ?>customers/events">
                     <span class="material-icons-sharp">man</span>
-                    <h3>Create New Event</h3>
-                </a>
-                <a href="<?php echo URLROOT; ?>customers/ongoing">
-                    <span class="material-icons-sharp">calendar_today</span>
-                    <h3>Ongoing Events</h3>
-                </a>
-                <a href="<?php echo URLROOT; ?>customers/complete" class="active">
-                    <span class="material-icons-sharp">event_available</span>
-                    <h3>Completed Events</h3>
+                    <h3>Events</h3>
                 </a>
                 <a href="<?php echo URLROOT; ?>customers/payments">
                     <span class="material-icons-sharp">payments</span>
@@ -55,6 +51,7 @@
                     <span class="material-icons-sharp">logout</span>
                     <h3>Logout</h3>
                 </a>
+            </div>
 
 
         </aside>

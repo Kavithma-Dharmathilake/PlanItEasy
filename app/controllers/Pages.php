@@ -222,7 +222,7 @@ class Pages extends Controller
 
                 if($this->userModel->userReq($userData))
                 {
-                   echo '<script> prompt("Your request sent successfully")</prompt>';
+                  
                    $this->view('pages/joinreg', $data);
 
                   

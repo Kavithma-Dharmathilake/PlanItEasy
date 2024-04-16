@@ -7,10 +7,12 @@ class Eventplanners extends Controller
     {
 
         $this->userModel = $this->model('Package');
+        $this->customerModel = $this->model('Customer');
     }
 
     public function index()
     {
+        
 
         $this->view('eventplanners/index');
 
@@ -118,8 +120,14 @@ class Eventplanners extends Controller
 
     public function eventRequest()
     {
+        $quote = $this->customerModel->getEventQuote();
 
-        $this->view('eventplanners/eventRequest');
+
+        $data = [
+            'quote' => $quote
+        ];
+
+        $this->view('eventplanners/eventRequest', $data);
 
     }
 
