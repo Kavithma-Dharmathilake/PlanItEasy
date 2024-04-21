@@ -93,17 +93,17 @@
 
 
             <div class="event-request" style="margin-top:60px">
-            <div style="display:flex;">
-                <form action="<?php echo URLROOT ?>customers/budget/<?php echo $data['eventid']?>" method="POST" >
-                    <input  style="padding:1rem; margin:1rem; background-color:#7380ec;color:white; border-radius:0.4rem" type="submit" value="Budget by Price" >
-                </form>
-                <form action="<?php echo URLROOT ?>customers/budget/<?php echo $data['eventid']?>" method="POST" >
-                    <input style="padding:1rem; margin:1rem; background-color:#7380ec;color:white; border-radius:0.4rem"  type="submit" value="Budget by Ratings" >
-                </form>
-                <form action="<?php echo URLROOT ?>customers/budget/<?php echo $data['eventid']?>" method="POST" >
-                    <input  style="padding:1rem; margin:1rem; background-color:#7380ec;color:white; border-radius:0.4rem" type="submit" value="Budget from Scratch" >
-                </form>
-                
+                <div style="display:flex;">
+                    <form action="<?php echo URLROOT ?>customers/budget/<?php echo $data['eventid'] ?>" method="POST">
+                        <input style="padding:1rem; margin:1rem; background-color:#7380ec;color:white; border-radius:0.4rem" type="submit" value="Budget by Price">
+                    </form>
+                    <form action="<?php echo URLROOT ?>customers/budget/<?php echo $data['eventid'] ?>" method="POST">
+                        <input style="padding:1rem; margin:1rem; background-color:#7380ec;color:white; border-radius:0.4rem" type="submit" value="Budget by Ratings">
+                    </form>
+                    <form action="<?php echo URLROOT ?>customers/budget/<?php echo $data['eventid'] ?>" method="POST">
+                        <input style="padding:1rem; margin:1rem; background-color:#7380ec;color:white; border-radius:0.4rem" type="submit" value="Budget from Scratch">
+                    </form>
+
                 </div>
                 <table style="width:1000px">
                     <thead>
@@ -117,14 +117,16 @@
                     </thead>
                     <tbody>
                         <?php foreach ($data['budget'] as $q) : ?>
-                            
+
                             <tr>
 
                                 <td><?php echo $q->id; ?></td>
                                 <td> <?php echo $q->status; ?>
                                 <td>LKR. <?php echo $q->price; ?></td>
-                                <td>Pay</td>
-                              
+                                <td>
+                                    <a href="<?php echo URLROOT ?>customers/payement/<?php echo $q->rid; ?>/<?php echo $q->id; ?>/<?php echo $q->price?>">Checkout</a>
+                                </td>
+
 
                             </tr>
                         <?php endforeach; ?>

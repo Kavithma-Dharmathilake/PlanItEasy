@@ -164,7 +164,7 @@
                         <textarea name="theme" id="theme" cols="90" rows="5"></textarea>
 
                     </div>
-                    <input  style="padding:1rem; margin:1rem; background-color:#7380ec;color:white; border-radius:0.4rem" type="submit">
+                    <input style="padding:1rem; margin:1rem; background-color:#7380ec;color:white; border-radius:0.4rem" type="submit">
                 </form>
             </div>
 

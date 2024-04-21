@@ -18,7 +18,7 @@
 
 <body>
     <div class="dash-container">
-        <aside>
+    <aside>
             <div class="top">
                 <div class="logo">
                     <img src="<?php echo URLROOT; ?>/public/images/logo.jpg">
@@ -29,77 +29,36 @@
                 </div>
             </div>
             <div class="sidebar">
-                <a href="<?php echo URLROOT; ?>eventplanners">
-                    <span class="material-icons-sharp">grid_view</span>
+                <a href="<?php echo URLROOT; ?>customers">
+                    <span class="material-icons-sharp" class="active">grid_view</span>
                     <h3>Dashboard</h3>
                 </a>
-
-                <a href="<?php echo URLROOT ?>eventplanners/packages">
-                    <span class="material-icons-sharp">
-                        inventory
-                    </span>
-                    <h3>Packages</h3>
+                <a href="<?php echo URLROOT; ?>customers/events">
+                    <span class="material-icons-sharp">man</span>
+                    <h3>Events</h3>
                 </a>
-
-                <a href="<?php echo URLROOT ?>eventplanners/eventRequest">
-                    <span class="material-icons-sharp">
-                        festival
-                    </span>
-                    <h3>Event Requests</h3>
+                <a href="<?php echo URLROOT; ?>customers/payments">
+                    <span class="material-icons-sharp">payments</span>
+                    <h3>Payments</h3>
                 </a>
-
-                <a href="<?php echo URLROOT ?>eventplanners/quoteReq">
-                    <span class="material-icons-sharp">
-                        note_add
-                    </span>
-                    <h3>Quoatation Requests</h3>
-                </a>
-                <a href="<?php echo URLROOT ?>eventplanners/supplierReq">
-                    <span class="material-icons-sharp">
-                        request_quote
-                    </span>
-                    <h3>Supplier Quotations</h3>
-                </a>
-                <a href="<?php echo URLROOT ?>eventplanners/budget" class="active">
-                    <span class="material-icons-sharp">
-                        paid
-                    </span>
-                    <h3>Budget Plans</h3>
-                </a>
-
-                <a href="<?php echo URLROOT ?>eventplanners/calendar">
-                    <span class="material-icons-sharp">
-                        calendar_month
-                    </span>
-                    <h3>Calender</h3>
-                </a>
-
-                <a href="<?php echo URLROOT ?>eventplanners/profile">
-                    <span class="material-icons-sharp">
-                        account_box
-                    </span>
-                    <h3>Profile</h3>
-                </a>
-
-                <a href="<?php echo URLROOT ?>eventplanners/messages">
-                    <span class="material-icons-sharp">mail</span>
+                <a href="<?php echo URLROOT; ?>customers/message">
+                    <span class="material-icons-sharp">message</span>
                     <h3>Messages</h3>
-                    <span class="message-count">26</span>
                 </a>
-
-                <a href="<?php echo URLROOT ?>eventplanners/inquiry">
-                    <span class="material-icons-sharp">
-                        info
-                    </span>
-                    <h3>Inquiry</h3>
+                <a href="<?php echo URLROOT; ?>customers/viewquote">
+                    <span class="material-icons-sharp"> note_add</span>
+                    <h3>supplier quotation</h3>
                 </a>
-                <a href="<?php echo URLROOT ?>users/logout">
+                <a href="<?php echo URLROOT; ?>customers/profile">
+                    <span class="material-icons-sharp">person</span>
+                    <h3>profile</h3>
+                </a>
+                <a href="<?php echo URLROOT; ?>user/logout">
                     <span class="material-icons-sharp">logout</span>
                     <h3>Logout</h3>
                 </a>
             </div>
         </aside>
-
         <main>
 
 
@@ -169,10 +128,11 @@
 
                                                 <div class="event-details" style="width:600px;height:350px;">
                                                     <p style="text-align:center"><?php echo $r->stype ?></p>
-                                                    <form action="<?php echo URLROOT ?>customers/budgetsheet/<?php echo $data['bid'] . '/' . $data['eventid'] ?>" method="POST">
-                                                        <input type="submit" name="delete" value="Delete">
-
-                                                    </form>
+                                                  
+                                                        <a href="<?php echo URLROOT ?>customers/deleteItem/<?php echo $data['bid'] . '/' . $data['eventid'] . '/' . $r->id ?>">
+                                                            <input style="padding:0.5rem;background-color:#7380ec;color:white; border-radius:0.4rem" type="submit" name="delete" value="Delete">
+                                                        </a>
+                                                
                                                     <div class="input-box">
                                                         <label>Supplier Name</label><br />
                                                         <input type="text" value="<?php echo $r->bname ?>" name="name" disabled>

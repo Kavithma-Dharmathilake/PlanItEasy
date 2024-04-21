@@ -125,6 +125,79 @@ class Supplier
         return $result;
     }
 
+    public function getCalander()
+    {
+        $id= $_SESSION['user_id'];
+        $this->db->query('SELECT * FROM calander where supplier = :id');
+        $this->db->bind(':id', $id );
+        $result = $this->db->fetchAllAssoc();
+        return $result;
+    }
+
+    public function getHoliday()
+    {
+        $id= $_SESSION['user_id'];
+        $this->db->query('SELECT * FROM calander where supplier = :id AND status != :status');
+        $this->db->bind(':id', $id );
+        $this->db->bind(':status', "Available" );
+        $result = $this->db->fetchAllAssoc();
+        return $result;
+    }
+
+    public function chekDate($date)
+    {
+
+        $id= $_SESSION['user_id'];
+        $this->db->query('SELECT * FROM calander where supplier = :id AND date = :date');
+        $this->db->bind(':date', $date);
+        $this->db->bind(':id', $id );
+        $result = $this->db->resultSet();
+        return $result;
+    }
+
+    
+    public function sendMessage($data)
+    {
+
+        $sid= $_SESSION['user_id'];
+        $date = date('Y-m-d');
+        $time = date('H:i:s');
+
+        $this->db->query('INSERT INTO message(qid, sid, cuid,content,date,time,sender) VALUES(:qid, :sid, :cuid,:content,:date,:time,:sender) ');
+        $this->db->bind(':qid',  $data['qid']);
+        $this->db->bind(':sid', $sid);
+        $this->db->bind(':cuid', $data['cuid']);
+        $this->db->bind(':content', $data['content']);
+        $this->db->bind(':date', $date);
+        $this->db->bind(':time', $time);
+        $this->db->bind(':sender', $sid);
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function getMessages($qid)
+    {
+
+        $this->db->query('SELECT * FROM message WHERE qid = :qid ORDER BY date ASC, time ASC');
+        $this->db->bind(':qid', $qid);
+        $result = $this->db->resultSet();
+
+        return $result;
+     
+    }
+
+
+    public function getAllPackages()
+    {
+        $id= $_SESSION['user_id'];
+        $this->db->query('SELECT * FROM packages where supplier = :id');
+        $this->db->bind(':id', $id );
+        $result = $this->db->resultSet();
+        return $result;
+    }
     public function getReqById($id)
     {
         $this->db->query('SELECT * FROM userreq WHERE id = :id');
@@ -232,6 +305,28 @@ class Supplier
             return false;
         }
     }
+
+    public function addNewPackage($data)
+    {
+
+        $date = date("Y-m-d");
+        $this->db->query('INSERT INTO packages(name, price, description, services, date) VALUES(:name, :price, :description, :services, :date)');
+      
+        $this->db->bind(':name', $data['name']);
+        $this->db->bind(':description', $data['description']);
+        $this->db->bind(':services', $data['services']);
+        $this->db->bind(':price', $data['price']);
+        $this->db->bind(':date', $date);
+
+
+        //Execute the query
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
     //calander functions
     public function fetchEvents($id)

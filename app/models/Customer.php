@@ -160,9 +160,10 @@ class Customer
     public function  PlannerDecoration($data)
     {
 
-        $this->db->query('INSERT INTO decoration(services,remark) VALUES(services,:remark) ');
+        $this->db->query('INSERT INTO decoration(flowers,services,remark) VALUES(:flowers,:services,:remark) ');
         $this->db->bind(':services', $data['services']);
         $this->db->bind(':remark', $data['remark']);
+        $this->db->bind(':flowers', $data['flowers']);
 
         //Execute the query
         if ($this->db->execute()) {
@@ -470,6 +471,97 @@ class Customer
         return $result;
     }
 
+    public function getAccepteServices($id)
+    {
+
+        $uid = $_SESSION['user_id'];
+        $status = 'Accepted';
+        $eventplanner = 'eventplanner';
+
+        $this->db->query('SELECT DISTINCT q.stype 
+                         FROM quoate q 
+                         WHERE q.eid = :id 
+                         AND q.uid = :uid 
+                         AND q.q_status = :status 
+                         AND q.stype != :except1
+                         ORDER BY q.stype ASC');
+
+        // Bind values
+        $this->db->bind(':id', $id);
+        $this->db->bind(':uid', $uid);
+        $this->db->bind(':status', $status);
+        $this->db->bind(':except1', $eventplanner);
+
+        $result = $this->db->resultSet();
+        return $result;
+    }
+
+    public function getLowestPricedQuotation($data)
+    {
+
+
+        $status = 'Accepted';
+        $eventplanner = 'eventplanner';
+
+        $this->db->query('SELECT q.r_price AS price, q.id AS qid, q.sid as supplier
+        FROM planiteasy.quoate q 
+        WHERE q.eid =:eid AND q.stype != :except1 AND q.stype = :stype AND q_status =:status
+        GROUP BY q.stype
+        ORDER BY q.stype ASC');
+
+        //bind values
+        $this->db->bind(':eid', $data['eid']);
+        $this->db->bind(':status', $status);
+        $this->db->bind(':except1', $eventplanner);
+        $this->db->bind(':stype', $data['service']);
+
+        $result = $this->db->resultSet();
+        return $result;
+    }
+
+
+    public function getQuoteByService($data)
+    {
+
+
+        $status = 'Accepted';
+        $eventplanner = 'eventplanner';
+
+        $this->db->query('SELECT *
+        FROM planiteasy.quoate q 
+        JOIN  planiteasy.user us ON q.sid = us.id
+        WHERE q.eid =:eid AND q.stype != :except1 AND q.stype = :stype AND q_status =:status');
+
+        //bind values
+        $this->db->bind(':eid', $data['eid']);
+        $this->db->bind(':status', $status);
+        $this->db->bind(':except1', $eventplanner);
+        $this->db->bind(':stype', $data['service']);
+
+        $result = $this->db->resultSet();
+        return $result;
+    }
+
+    public function getSupplier($id)
+    {
+
+
+        $status = 'Accepted';
+        $eventplanner = 'eventplanner';
+
+        $this->db->query('SELECT *
+        FROM planiteasy.user u 
+        WHERE id =:id');
+
+        //bind values
+        $this->db->bind(':id', $id);
+
+        $result = $this->db->single();
+        return $result;
+    }
+
+
+
     public function lowestbudget($id)
     {
 
@@ -477,7 +569,7 @@ class Customer
         $status = 'Accepted';
         $eventplanner = 'eventplanner';
 
-        $this->db->query('SELECT u.id AS user, u.bname, q.stype, q.id, q.r_price
+        $this->db->query('SELECT q.id as qid, u.id as sid, bname, r_price, q.stype as stype
         FROM planiteasy.quoate q 
         JOIN planiteasy.user u ON q.sid = u.id
         JOIN (
@@ -521,6 +613,23 @@ class Customer
         $result = $this->db->resultSet();
         return $result;
     }
+
+    public function deletBudgetItem($id)
+    {
+        $this->db->query('DELETE FROM budget_item WHERE id=:id');
+
+        //bind values
+        $this->db->bind(':id', $id);
+
+
+        //Execute the query
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
 
     public function createbudget($id)
@@ -586,7 +695,7 @@ class Customer
             $this->db->bind(':price', $data->r_price);
             $this->db->bind(':stype', $data->stype);
             $this->db->execute();
-        
+
             return true;
         }
     }
@@ -618,13 +727,13 @@ class Customer
     }
 
 
-    public function getOneQuote($id){
+    public function getOneQuote($id)
+    {
         $this->db->query('SELECT * FROM quoate q, user u WHERE q.id = :id AND q.sid = u.id');
         $this->db->bind(':id', $id);
         $data = $this->db->single();
-      
-        return $data;
 
+        return $data;
     }
 
     public function updateTotal($data)
@@ -644,4 +753,26 @@ class Customer
         }
     }
 
+    public function insertPayement($data)
+    {
+
+        $this->db->query('INSERT INTO payment(user, name, email, amount, bid, rid) 
+        VALUES(:user, :name, :email, :amount, :bid, :rid) ');
+
+        $this->db->bind(':user', $_SESSION['user_id']);
+        $name = $data['fname'] . " " . $data['lname'];
+        $this->db->bind(':name', $name);
+        $this->db->bind(':amount', $data['price']);
+        $this->db->bind(':email', $data['email']);
+        $this->db->bind(':bid', $data['bid']);
+        $this->db->bind(':rid', $data['rid']);
+
+        //Execute the query
+        if ($this->db->execute()) {
+            $id = $this->db->lastInsertedId();
+            return $id;
+        } else {
+            return false;
+        }
+    }
 }

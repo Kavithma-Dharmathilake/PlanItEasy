@@ -134,7 +134,7 @@
 
 
             <div class="event-request" style="margin-top:60px">
-                Done with quotations? 
+                Done with quotations?
                 <button style="padding:0.5rem;margin:0.5rem; background-color:#41f1b6;color:white; border-radius:0.7rem"><a href="<?php echo URLROOT ?>customers/budget/<?php echo $data['eventid']; ?>">Create Budget </a></button>
                 <table style="width:1000px">
                     <thead>
@@ -161,95 +161,95 @@
                                 <td>LKR. <?php echo $q->r_price; ?></td>
                                 <td>LKR. <?php echo $q->price; ?>
                                 <td> <?php echo $q->status; ?></td>
-                                <a href="">
-                                    <td id="myBtn"> View
+                                <td>
+                                    <button class="viewBtn" data-target="<?php echo $q->id; ?>">View</button>
 
-                                        <div id="myModal" class="modal">
+                                    <div id="myModal-<?php echo $q->id; ?>" class="modal">
 
-                                            <!-- Modal content -->
-                                            <div class="modal-content">
+                                        <!-- Modal content -->
+                                        <div class="modal-content">
 
-                                                <div class="search-quoate">
+                                            <div class="search-quoate">
 
-                                                    <div style="display:flex; flex-direction:row">
-                                                        <div class="event-details" style="width:700px;">
-                                                            <p style="text-align:center">Requested Quotation</p>
+                                                <div style="display:flex; flex-direction:row">
+                                                    <div class="event-details" style="width:700px;">
+                                                        <p style="text-align:center">Requested Quotation</p>
 
-                                                            <div style="display:flex; margin-top:20px; margin-left:30px; border-bottom:2px ridge;padding-bottom:5px; ">
-                                                                <div class="req-title" style="width:50%">Supplier</div>
-                                                                <div class="req-data" style="width:50%"><?php echo $q->bname  ?></div>
-                                                            </div>
-
-                                                            <div style="display:flex; margin-top:20px; margin-left:30px; border-bottom:2px ridge;padding-bottom:5px;">
-                                                                <div class="req-title" style="width:50%">Package</div>
-                                                                <div class="req-data" style="width:50%"><?php echo  $q->package  ?> - (LKR. <?php echo  $q->price ?>)</div>
-                                                            </div>
-                                                            <div style="display:flex; margin-top:20px; margin-left:30px; border-bottom:2px ridge;padding-bottom:5px;">
-                                                                <div class="req-title" style="width:50%">Sent date</div>
-                                                                <div class="req-data" style="width:50%"><?php echo  $q->send_date  ?> </div>
-                                                            </div>
-
-
-                                                            <div style="display:flex; margin-top:20px; margin-left:30px; border-bottom:2px ridge;padding-bottom:5px;">
-                                                                <div class="req-title" style="width:50%">Your Remarks</div>
-                                                                <div class="req-data" style="width:50%"><?php echo  $q->remarks  ?></div>
-                                                            </div>
-                                                            <div style="display:flex; margin-top:20px; margin-left:30px; border-bottom:2px ridge;padding-bottom:5px;">
-                                                                <div class="req-title" style="width:50%">Supplier Remarks</div>
-                                                                <div class="req-data" style="width:50%"><?php echo  $q->s_remark  ?></div>
-                                                            </div>
-                                                            <div style="display:flex; margin-top:20px; margin-left:30px; border-bottom:2px ridge;padding-bottom:5px;">
-                                                                <div class="req-title" style="width:50%">Service Duration</div>
-                                                                <div class="req-data" style="width:50%"><?php echo  $q->stime  ?> to <?php echo  $q->etime  ?> </div>
-                                                            </div>
-                                                            <div style="display:flex; margin-top:20px; margin-left:30px; border-bottom:2px ridge;padding-bottom:5px;">
-                                                                <div class="req-title" style="width:50%">Received date</div>
-                                                                <div class="req-data" style="width:50%"><?php echo  $q->received_date  ?> </div>
-                                                            </div>
-                                                            <div style="display:flex; margin-top:20px; margin-left:30px; border-bottom:2px ridge;padding-bottom:5px;">
-                                                                <div class="req-title" style="width:50%">Additional Services</div>
-                                                                <div class="req-data" style="width:50%"><?php echo  $q->additional_services ?> </div>
-                                                            </div>
-                                                            <?php if ($q->stype == 'decoration') : ?>
-                                                                <!-- Display types of flowers for decoration -->
-                                                                <div style="display:flex; margin-top:20px; margin-left:30px; border-bottom:2px ridge;padding-bottom:5px;">
-                                                                    <div class="req-title" style="width:50%">Types of Flowers</div>
-                                                                    <div class="req-data" style="width:50%"><?php echo $q->flowers; ?></div>
-                                                                </div>
-                                                            <?php endif; ?>
-
-                                                            <?php if ($q->stype == 'catering') : ?>
-
-                                                                <div style="display:flex; margin-top:20px; margin-left:30px; border-bottom:2px ridge;padding-bottom:5px;">
-                                                                    <div class="req-title" style="width:50%">Time </div>
-                                                                    <div class="req-data" style="width:50%"><?php echo $q->time; ?></div>
-                                                                </div>
-                                                            <?php endif; ?>
-                                                            <div style="display:flex; margin-top:20px; margin-left:30px; border-bottom:2px ridge;padding-bottom:5px;">
-                                                                <div class="req-title" style="width:50%">Quotation Status</div>
-                                                                <div class="req-data" style="width:50%"><?php echo  $q->q_status  ?></div>
-                                                            </div>
-
-                                                            <?php
-                                                            $disabled = ($q->q_status !== 'Pending') ? 'disabled' : '';
-
-                                                            ?>
-
+                                                        <div style="display:flex; margin-top:20px; margin-left:30px; border-bottom:2px ridge;padding-bottom:5px; ">
+                                                            <div class="req-title" style="width:50%">Supplier</div>
+                                                            <div class="req-data" style="width:50%"><?php echo $q->bname  ?></div>
                                                         </div>
+
+                                                        <div style="display:flex; margin-top:20px; margin-left:30px; border-bottom:2px ridge;padding-bottom:5px;">
+                                                            <div class="req-title" style="width:50%">Package</div>
+                                                            <div class="req-data" style="width:50%"><?php echo  $q->package  ?> - (LKR. <?php echo  $q->price ?>)</div>
+                                                        </div>
+                                                        <div style="display:flex; margin-top:20px; margin-left:30px; border-bottom:2px ridge;padding-bottom:5px;">
+                                                            <div class="req-title" style="width:50%">Sent date</div>
+                                                            <div class="req-data" style="width:50%"><?php echo  $q->send_date  ?> </div>
+                                                        </div>
+
+
+                                                        <div style="display:flex; margin-top:20px; margin-left:30px; border-bottom:2px ridge;padding-bottom:5px;">
+                                                            <div class="req-title" style="width:50%">Your Remarks</div>
+                                                            <div class="req-data" style="width:50%"><?php echo  $q->remarks  ?></div>
+                                                        </div>
+                                                        <div style="display:flex; margin-top:20px; margin-left:30px; border-bottom:2px ridge;padding-bottom:5px;">
+                                                            <div class="req-title" style="width:50%">Supplier Remarks</div>
+                                                            <div class="req-data" style="width:50%"><?php echo  $q->s_remark  ?></div>
+                                                        </div>
+                                                        <div style="display:flex; margin-top:20px; margin-left:30px; border-bottom:2px ridge;padding-bottom:5px;">
+                                                            <div class="req-title" style="width:50%">Service Duration</div>
+                                                            <div class="req-data" style="width:50%"><?php echo  $q->stime  ?> to <?php echo  $q->etime  ?> </div>
+                                                        </div>
+                                                        <div style="display:flex; margin-top:20px; margin-left:30px; border-bottom:2px ridge;padding-bottom:5px;">
+                                                            <div class="req-title" style="width:50%">Received date</div>
+                                                            <div class="req-data" style="width:50%"><?php echo  $q->received_date  ?> </div>
+                                                        </div>
+                                                        <div style="display:flex; margin-top:20px; margin-left:30px; border-bottom:2px ridge;padding-bottom:5px;">
+                                                            <div class="req-title" style="width:50%">Additional Services</div>
+                                                            <div class="req-data" style="width:50%"><?php echo  $q->additional_services ?> </div>
+                                                        </div>
+                                                        <?php if ($q->stype == 'decoration') : ?>
+                                                            <!-- Display types of flowers for decoration -->
+                                                            <div style="display:flex; margin-top:20px; margin-left:30px; border-bottom:2px ridge;padding-bottom:5px;">
+                                                                <div class="req-title" style="width:50%">Types of Flowers</div>
+                                                                <div class="req-data" style="width:50%"><?php echo $q->flowers; ?></div>
+                                                            </div>
+                                                        <?php endif; ?>
+
+                                                        <?php if ($q->stype == 'catering') : ?>
+
+                                                            <div style="display:flex; margin-top:20px; margin-left:30px; border-bottom:2px ridge;padding-bottom:5px;">
+                                                                <div class="req-title" style="width:50%">Time </div>
+                                                                <div class="req-data" style="width:50%"><?php echo $q->time; ?></div>
+                                                            </div>
+                                                        <?php endif; ?>
+                                                        <div style="display:flex; margin-top:20px; margin-left:30px; border-bottom:2px ridge;padding-bottom:5px;">
+                                                            <div class="req-title" style="width:50%">Quotation Status</div>
+                                                            <div class="req-data" style="width:50%"><?php echo  $q->q_status  ?></div>
+                                                        </div>
+
+                                                        <?php
+                                                        $disabled = ($q->q_status !== 'Pending') ? 'disabled' : '';
+
+                                                        ?>
 
                                                     </div>
 
-
-
                                                 </div>
-                                            </div>
 
+
+
+                                            </div>
                                         </div>
-                                    </td>
-                                </a>
+
+                                    </div>
+
+                                </td>
 
                                 <td> Message</td>
-                              
+
 
                             </tr>
                         <?php endforeach; ?>
@@ -266,31 +266,19 @@
 </body>
 
 <script>
-    // Get the modal
-    var modal = document.getElementById("myModal");
+ $(document).ready(function() {
+    $('.viewBtn').click(function() {
+        var targetId = $(this).data('target');
+        $('#myModal-' + targetId).show();
+    });
 
-    // Get the button that opens the modal
-    var btn = document.getElementById("myBtn");
-
-    // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("close")[0];
-
-    // When the user clicks on the button, open the modal
-    btn.onclick = function() {
-        modal.style.display = "block";
-    }
-
-    // When the user clicks on <span> (x), close the modal
-    span.onclick = function() {
-        modal.style.display = "none";
-    }
-
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
+    // Close modal when clicking outside
+    $(window).click(function(event) {
+        if ($(event.target).hasClass('modal')) {
+            $('.modal').hide();
         }
-    }
+    });
+});
 </script>
 
 

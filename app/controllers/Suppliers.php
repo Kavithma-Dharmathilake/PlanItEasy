@@ -31,28 +31,14 @@ class Suppliers extends Controller
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-            if ($_FILES['img']['error'] === UPLOAD_ERR_OK) {
-                $file_name = $_FILES['img']['name'];
-                $file_tmp = $_FILES['img']['tmp_name'];
 
-                $upload_dir = "uploads/events/"; // Create an 'uploads' directory in your project folder
-
-                // Move the uploaded file to the desired location
-                $destination = $upload_dir . $file_name;
-
-                if (move_uploaded_file($file_tmp, $destination)) {
-                    $file_path = $destination;
-                } else {
-                    $data['file_err'] = 'File upload failed';
-                }
-            }
-
-            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            $_POST = filter_input_array(INPUT_POST);
 
             $data = [
                 'name' => trim($_POST['name']),
                 'price' => trim($_POST['price']),
-                'description' => trim($_POST['description'])
+                'description' => trim($_POST['description']),
+                'services' => trim($_POST['services'])
             ];
 
 
@@ -63,11 +49,11 @@ class Suppliers extends Controller
                     'name' => $data['name'],
                     'price' => $data['price'],
                     'description' => $data['description'],
-                    'img' => $file_path
+                    'services' => $data['services'],
                 ];
 
 
-                if ($this->userModel->eventnew($package)) {
+                if ($this->supplierModel->addNewPackage($package)) {
                     echo '<script> prompt("Package Added Succfully")</script>';
                     redirect('suppliers/products');
                 } else {
@@ -143,48 +129,29 @@ class Suppliers extends Controller
         }
     }
 
-    public function deleteuser($id)
+    public function portfolio()
     {
 
-
-        if ($this->userModel->deleteUser($id)) {
-            redirect('suppliers/products');
-        } else {
-            die("something went wrong");
-        }
+        $data = [];
+        $this->view('suppliers/portfolio', $data);
     }
-    public function newProjectReq()
+
+    public function packages()
+    {
+
+        $data =  $this->supplierModel->getAllPackages();
+        $this->view('suppliers/packages', $data);
+    }
+
+
+    public function supplierCalendar()
     {
 
         $data = [
             'title' => 'Welcome'
         ];
-        $this->view('suppliers/newProjectReq', $data);
-    }
 
-    public function completedProjects()
-    {
-
-        $data = [
-            'title' => 'Welcome'
-        ];
-        $this->view('suppliers/completedProjects', $data);
-    }
-
-    public function more()
-    {
-
-        $data = [
-            'title' => 'Welcome'
-        ];
-        $this->view('suppliers/more', $data);
-    }
-
-    public function products()
-    {
-
-        $data = $this->userModel->getAllEvents();
-        $this->view('suppliers/products', $data);
+        $this->view('suppliers/supplierCalender', $data);
     }
 
     public function quotationRequest()
@@ -196,9 +163,9 @@ class Suppliers extends Controller
 
         ];
 
-        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-         
+
             $data = [
                 'request' => $result,
                 'name' => trim($_POST['name']),
@@ -206,68 +173,63 @@ class Suppliers extends Controller
                 'description' => trim($_POST['description'])
             ];
 
-            if($this->supplierModel->eventnew($data)){
-                echo '<script> prompt("Quotation Sent  Successfully") </script>'; 
+            if ($this->supplierModel->eventnew($data)) {
+                echo '<script> prompt("Quotation Sent  Successfully") </script>';
                 redirect('suppliers/quotations');
             }
-
-        }
-        else{
+        } else {
             $this->view('suppliers/quotationRequest', $data);
-    }
-       
+        }
     }
 
     public function oneRequest($id)
     {
         $result = $this->supplierModel->getOneReq($id);
-   
-        if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
-           
-            $sid =$result->id;
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+
+            $sid = $result->id;
             $accept = isset($_POST['accept']) ? 'Accept' : null;
             $decline = isset($_POST['decline']) ? 'Decline' : null;
-           
-         
+
+
             $data2 = [
-                'id' =>$sid,
+                'id' => $sid,
                 'price' => trim($_POST['r_price']),
                 'remark' => trim($_POST['remark'])
             ];
 
-            if($accept != null){
+            if ($accept != null) {
 
-                if($this->supplierModel->acceptQuote($data2)){
-                    echo '<script> prompt("Quotation Sent  Successfully") </script>'; 
+                if ($this->supplierModel->acceptQuote($data2)) {
+                    echo '<script> prompt("Quotation Sent  Successfully") </script>';
                     redirect('suppliers/quotationRequest');
-                }else{
-                    echo '<script> prompt("Something Went Wrong") </script>'; 
+                } else {
+                    echo '<script> prompt("Something Went Wrong") </script>';
                     redirect('suppliers/quotationRequest');
                 }
-
-            }else{
-                if($this->supplierModel->declineQuote($data2)){
-                    echo '<script> prompt("Quotation Declined") </script>'; 
+            } else {
+                if ($this->supplierModel->declineQuote($data2)) {
+                    echo '<script> prompt("Quotation Declined") </script>';
                     redirect('suppliers/quotationRequest');
-                }else{
-                    echo '<script> prompt("Something Went Wrong") </script>'; 
+                } else {
+                    echo '<script> prompt("Something Went Wrong") </script>';
                     redirect('suppliers/quotationRequest');
                 }
-                
             }
-            
-        }
-        else{
+        } else {
             $result = $this->supplierModel->getOneReq($id);
             $event = $this->supplierModel->getEvent($result->eid);
             $customer = $this->supplierModel->getCustomer($event->idcustomer);
-    
+            $available = $this->supplierModel->chekDate($event->date);
+
             $data = [
                 'request' => $result,
                 'customer' => $customer,
-                'event' => $event
-    
+                'event' => $event,
+                'available' => $available
+
             ];
             $this->view('suppliers/oneRequest', $data);
         }
@@ -282,25 +244,63 @@ class Suppliers extends Controller
         $this->view('suppliers/sentRequests', $data);
     }
 
-    public function Calendar() {
-       $this->view('suppliers/calendar');
-    }
+    public function Calendar()
+    {
 
-    public function fetchEvents() {
-        $events = $this->SupplierModel->fetchEvents();
-        header('Content-Type: application/json');
-        echo json_encode($events);
-    }
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-    public function addEvent() {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $eventName = $_POST['eventName'];
-            $eventDate = $_POST['eventDate'];
-
-            $result = $this->SupplierModel->addEvent($eventName, $eventDate);
-            header('Content-Type: application/json');
-            echo json_encode(['status' => $result ? 'success' : 'error']);
+            $title = $_POST['title'];
+            $date = $_POST['date'];
+            $status = $_POST['status'];
         }
+        $this->view('suppliers/calendar');
     }
 
+    public function getCalendarEvents()
+    {
+
+        $result = $this->supplierModel->getCalander();
+        echo json_encode($result);
+    }
+
+    public function getHoliday()
+    {
+
+        $result = $this->supplierModel->getHoliday();
+        echo json_encode($result);
+    }
+
+    public function message($qid)
+    {
+
+        $result = $this->supplierModel->getOneReq($qid);
+        $event = $this->supplierModel->getEvent($result->eid);
+        $customer = $this->supplierModel->getCustomer($event->idcustomer);
+        $messages = $this->supplierModel->getMessages($qid);
+        
+        $data = [
+            'request' => $result,
+            'customer' => $customer,
+            'event' => $event,
+            'messages' => $messages
+
+        ];
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+
+            $content = $_POST['content'];
+            $data = [
+                'content' => $content,
+                'qid' => $qid,
+                'cuid' => $event->id,
+            ];
+
+            $this->supplierModel->sendMessage($data);
+            header('location: ' . URLROOT . '/suppliers/message/' . $qid);
+        }
+
+
+        $this->view('suppliers/message', $data);
+    }
 }
