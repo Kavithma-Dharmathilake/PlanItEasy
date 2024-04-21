@@ -5,15 +5,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PlanItEasy</title>
+    <title>AdminDash</title>
     <!-- MATERIAL CDN -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- STYLESHEET -->
     <link rel="stylesheet" href="<?php echo URLROOT; ?>public/css/admindash.css">
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>public/css/requests.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>public/css/eventplannerdash.css">
-
 </head>
 
 <body>
@@ -82,7 +80,7 @@
                     <h3>Messages</h3>
                     <span class="message-count">5</span>
                 </a>
-                <a href="<?php echo URLROOT; ?>user/logout">
+                <a href="">
                     <span class="material-icons-sharp">logout</span>
                     <h3>Logout</h3>
                 </a>
@@ -90,72 +88,45 @@
         </aside>
 
 
+      
+
         <main>
+            <h1>Complete Your Portfolio</h1>
 
+         
 
-            <!-- Content start here -->
-            <div>
-           
-
-
-                <!-- Heading and search bar -->
-                <div style="display:flex">
-
-                    <div class="planner-title">
-                        <h1>Quotation Requests</h1>
-
-
-                    </div>
-                    <div class="planner-search">
-                        <form action="#" method="post">
-
-                            <input type="search" id="query" name="q" placeholder="       Search Requests" class="planner-textbox">
-
-                            <button>
-                                <i class="fa fa-search" style="font-size: 18px;">
-                                </i>
-                            </button>
-                        </form>
-                    </div>
-
-                </div>
-
-                <!-- Event Request Table -->
-                <div class="event-request" style="margin-top:60px">
-
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Request ID</th>
-                                <th>Package</th>
-                                <th>Received Date</th>
-                                <th>Request Status</th>
-                                <th>More</th>
-
-                            </tr>
-                        </thead>
-                        <tbody>
-
-                            <tr>
-                                <?php foreach ($data['request'] as $req) : ?>
-                                    <td><?php echo $req->id ?></td>
-                                    <td><?php echo $req->package ?></td>
-                                    <td><?php echo $req->send_date ?></td>
-                                    <td><?php echo $req->q_status ?></td>
-                                    <td><a href="<?php echo URLROOT; ?>suppliers/oneRequest/<?php echo $req->id ?>"><i class="fa-solid fa-angles-right"></i></a></td>
-                            </tr>
-                        <?php endforeach; ?>
-
-
-
-                        </tbody>
-                    </table>
-                </div>
-
-
-
-            </div>
+    </div>
+    </main>
+    </div>
 
 </body>
+<script>
+    function confirmDelete(requestId) {
+        var confirmation = confirm("Are you sure you want to Delete?");
+        if (confirmation) {
+            deleteReq(requestId);
+        } else {
+
+        }
+    }
+
+    function deleteReq(requestId) {
+        alert('User #' + requestId + ' has been deleted.');
+
+    }
+
+    function confirmReject(requestId) {
+        var confirmation = confirm("Are you sure you want to reject this request?");
+        if (confirmation) {
+            rejectRequest(requestId);
+        } else {
+
+        }
+    }
+
+    function rejectRequest(requestId) {
+        alert('Request #' + requestId + ' has been reject.');
+    }
+</script>
 
 </html>

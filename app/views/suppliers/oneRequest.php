@@ -15,6 +15,31 @@
     <link rel="stylesheet" href="<?php echo URLROOT; ?>public/css/eventplannerdash.css">
 
 
+    <style>
+        .alert {
+            padding: 20px;
+            background-color: #7380ec;
+            color: white;
+            margin: 30px;
+            margin-right: 70px;
+        }
+
+        .closebtn {
+            margin-left: 15px;
+            color: white;
+            font-weight: bold;
+            float: right;
+            font-size: 22px;
+            line-height: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .closebtn:hover {
+            color: black;
+        }
+    </style>
+
 </head>
 
 <body>
@@ -22,7 +47,7 @@
         <aside>
             <div class="top">
                 <div class="logo">
-                    <img src="<?php echo URLROOT; ?>/public/images/logo.jpg">
+                    <img src="<?php echo URLROOT; ?>public/images/logo.jpg">
                     <h2>PlanItEasy</h2>
                 </div>
                 <div class="close" id="close-btn">
@@ -30,71 +55,60 @@
                 </div>
             </div>
             <div class="sidebar">
-                <a href="<?php echo URLROOT; ?>eventplanners">
+                <a href="<?php echo URLROOT; ?>suppliers/index" class="active">
                     <span class="material-icons-sharp">grid_view</span>
                     <h3>Dashboard</h3>
                 </a>
 
-                <a href="<?php echo URLROOT ?>eventplanners/packages">
+                <a href="<?php echo URLROOT; ?>suppliers/portfolio">
                     <span class="material-icons-sharp">
                         inventory
+                    </span>
+                    <h3>Portfolio</h3>
+                </a>
+
+                <a href="<?php echo URLROOT; ?>suppliers/quotationRequest">
+                    <span class="material-icons-sharp">
+                        note_add
+                    </span>
+                    <h3>Quotation Requests</h3>
+                </a>
+
+                <a href="<?php echo URLROOT; ?>suppliers/sentRequests">
+                    <span class="material-icons-sharp">
+                        festival
+                    </span>
+                    <h3>Sent Quotations</h3>
+                </a>
+
+                <a href="<?php echo URLROOT; ?>suppliers/packages">
+                    <span class="material-icons-sharp">
+                        request_quote
                     </span>
                     <h3>Packages</h3>
                 </a>
 
-                <a href="<?php echo URLROOT ?>eventplanners/eventRequest" class="active">
-                    <span class="material-icons-sharp">
-                        festival
-                    </span>
-                    <h3>Event Requests</h3>
-                </a>
 
-                <a href="<?php echo URLROOT ?>eventplanners/quoteReq">
-                    <span class="material-icons-sharp">
-                        note_add
-                    </span>
-                    <h3>Quoatation Requests</h3>
-                </a>
-                <a href="<?php echo URLROOT ?>eventplanners/supplierReq">
-                    <span class="material-icons-sharp">
-                        request_quote
-                    </span>
-                    <h3>Supplier Quotations</h3>
-                </a>
-                <a href="<?php echo URLROOT ?>eventplanners/budget">
-                    <span class="material-icons-sharp">
-                        paid
-                    </span>
-                    <h3>Budget Plans</h3>
-                </a>
-
-                <a href="<?php echo URLROOT ?>eventplanners/calendar">
+                <a href="<?php echo URLROOT; ?>suppliers/calendar">
                     <span class="material-icons-sharp">
                         calendar_month
                     </span>
                     <h3>Calender</h3>
                 </a>
 
-                <a href="<?php echo URLROOT ?>eventplanners/profile">
+                <a href="profile.php">
                     <span class="material-icons-sharp">
                         account_box
                     </span>
                     <h3>Profile</h3>
                 </a>
 
-                <a href="<?php echo URLROOT ?>eventplanners/messages">
+                <a href="<?php echo URLROOT; ?>suppliers/messages">
                     <span class="material-icons-sharp">mail</span>
                     <h3>Messages</h3>
-                    <span class="message-count">26</span>
+                    <span class="message-count">5</span>
                 </a>
-
-                <a href="<?php echo URLROOT ?>eventplanners/inquiry">
-                    <span class="material-icons-sharp">
-                        info
-                    </span>
-                    <h3>Inquiry</h3>
-                </a>
-                <a href="<?php echo URLROOT ?>">
+                <a href="<?php echo URLROOT; ?>user/login">
                     <span class="material-icons-sharp">logout</span>
                     <h3>Logout</h3>
                 </a>
@@ -104,15 +118,7 @@
 
         <!-- Content start here -->
         <div>
-            <div class="profile end">
-                <div class="info" style="padding-right:25px;">
-                    <p>Hey, <b>Sunimal</b></p>
-                    <small class="text-muted">Eventplanner</small>
-                </div>
-                <div class="profile-photo">
-                    <img src="<?php echo URLROOT ?>public/images/photo2.jpg">
-                </div>
-            </div>
+
 
 
 
@@ -120,7 +126,7 @@
             <div style="display:flex">
 
                 <div class="planner-title">
-                    <h1>Event Request ID #RQ<?php echo $data['request']->id ?> Quotations Request</h1>
+                    <h1> Quotations Request - <?php echo  $data['event']->date  ?></h1>
                 </div>
 
 
@@ -168,12 +174,26 @@
                             <div class="req-title" style="width:50%">Telephone </div>
                             <div class="req-data" style="width:50%"><?php echo  $data['customer']->contact  ?></div>
                         </div>
-                        <Button style="margin-left:70px;margin-top:25px;padding:10px; background-color:cornflowerblue;border-radius:15px;">Message With Customer</Button>
-
+                        <a href="<?php echo URLROOT ?>suppliers/message/<?php echo $data['request']->id ?>">
+                            <Button style="margin-left:70px;margin-top:25px;padding:10px; background-color:cornflowerblue;border-radius:15px;">Message With Customer</Button>
+                        </a>
+                        </d>
                     </div>
                 </div>
                 <div class="search-quoate">
                     <h2 style="text-align:center; margin-top:50px; margin-left:-330px;">Service Details</h2>
+                    <?php if ($data['available'] != null) {
+                        $str = "You have an Event on this Day";
+                    } else {
+                        $str = "You don't have any Event on this Day";
+                    }
+                    ?>
+
+
+                    <div class="alert">
+                        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                        <strong>Alert! <?php echo $str ?></strong>
+                    </div>
                     <div style="display:flex; flex-direction:row">
                         <div class="event-details" style="width:700px;">
                             <p style="text-align:center">Requested Quotation</p>
@@ -244,6 +264,8 @@
                         </div>
 
                     </div>
+
+
 
 
 

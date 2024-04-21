@@ -1,19 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
-
+    <?php
+var_dump($data);
+?>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <title>Packages</title>
     <!-- MATERIAL CDN -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
     <!-- STYLESHEET -->
-    <link rel="stylesheet" href="<?php echo URLROOT; ?>/public/css/admindash.css">
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>public/css/admindash.css">
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>public/css/eventplannerdash.css">
+    <style>
+        .calendar1 {
+            max-width: 100%;
+            padding: 20px;
+            background-color: #f9f9f9;
+            padding: var(--card-padding);
+            border-radius: var(--card-border-radius);
+            box-shadow: var(--box-shadow);
+            transition: all 300ms ease;
+
+        }
+
+
+        .calendar1:hover {
+            box-shadow: none;
+        }
+
+        .calendar1-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            font-size:30px;
+        }
+
+        #prev-month,
+        #next-month {
+            background-color: var(--color-primary);
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        #prev-month:hover,
+        #next-month:hover {
+            background-color: #0056b3;
+        }
+
+        #current-month-year {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        /* Calendar Table */
+        .calendar-table1 {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .calendar-table1 th,
+        .calendar-table1 td {
+            text-align: center;
+            width: 50px;
+            height: 50px;
+            padding: 50px;
+            color: var(--color-primary-variant);
+            font-size: 20px;
+        }
+
+        /* Highlight Current Date */
+        .calendar-table1 td {
+            background-color: #fff;
+            font-size: 30px;
+        }
+
+        .calendar-table1 td:hover {
+            background-color: var(--color-primary);
+            color:var(--color-primary-variant);
+        }
+
+        /* Add styles for specific dates with events here */
+
+        /* Empty Cells */
+        .calendar-table1 td:empty {
+            visibility: hidden;
+        }
+    </style>
+
+
+
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            const calendarBody = document.getElementById('calendar-body');
+            const calendarBody = document.getElementById('calendar-body1');
             const currentMonthYear = document.getElementById('current-month-year');
             const prevMonthButton = document.getElementById('prev-month');
             const nextMonthButton = document.getElementById('next-month');
@@ -78,35 +169,15 @@
 
             for (let i = 0; i < 12; i++) {
                 data.push(Math.floor(Math.random() * 15)); // Generate random data values between 0 and 100
-               
+
             }
 
-            // Create a bar chart
-            const ctx = document.getElementById('barChart').getContext('2d');
-            const barChart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: labels,
-                    datasets: [{
-                        label: 'Quotation Requests sent per month',
-                        data: data,
-                        backgroundColor: '#011f4b',
-                        borderWidth: 1,
-                    }]
-                },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
-                }
-            });
         });
 
 
 
     </script>
+
 </head>
 
 <body>
@@ -114,7 +185,7 @@
         <aside>
             <div class="top">
                 <div class="logo">
-                    <img src="<?php echo URLROOT; ?>public/images/logo.jpg">
+                    <img src="<?php echo URLROOT; ?>/public/images/logo.jpg">
                     <h2>PlanItEasy</h2>
                 </div>
                 <div class="close" id="close-btn">
@@ -122,60 +193,71 @@
                 </div>
             </div>
             <div class="sidebar">
-                <a href="<?php echo URLROOT; ?>suppliers/index" class="active">
+                <a href="<?php echo URLROOT; ?>eventplanners">
                     <span class="material-icons-sharp">grid_view</span>
                     <h3>Dashboard</h3>
                 </a>
 
-                <a href="<?php echo URLROOT; ?>suppliers/portfolio">
+                <a href="<?php echo URLROOT ?>eventplanners/packages">
                     <span class="material-icons-sharp">
                         inventory
                     </span>
-                    <h3>Portfolio</h3>
+                    <h3>Packages</h3>
                 </a>
 
-                <a href="<?php echo URLROOT; ?>suppliers/quotationRequest">
-                    <span class="material-icons-sharp">
-                        note_add
-                    </span>
-                    <h3>Quotation Requests</h3>
-                </a>
-
-                <a href="<?php echo URLROOT; ?>suppliers/sentRequests">
+                <a href="<?php echo URLROOT ?>eventplanners/eventRequest">
                     <span class="material-icons-sharp">
                         festival
                     </span>
-                    <h3>Sent Quotations</h3>
+                    <h3>Event Requests</h3>
                 </a>
 
-                <a href="<?php echo URLROOT; ?>suppliers/packages">
+                <a href="<?php echo URLROOT ?>eventplanners/quoteReq">
+                    <span class="material-icons-sharp">
+                        note_add
+                    </span>
+                    <h3>Quoatation Requests</h3>
+                </a>
+                <a href="<?php echo URLROOT ?>eventplanners/supplierReq">
                     <span class="material-icons-sharp">
                         request_quote
                     </span>
-                    <h3>Packages</h3>
+                    <h3>Supplier Quotations</h3>
                 </a>
-          
+                <a href="<?php echo URLROOT ?>eventplanners/budget">
+                    <span class="material-icons-sharp">
+                        paid
+                    </span>
+                    <h3>Budget Plans</h3>
+                </a>
 
-                <a href="<?php echo URLROOT; ?>suppliers/calendar">
+                <a href="<?php echo URLROOT ?>eventplanners/calendar" class="active">
                     <span class="material-icons-sharp">
                         calendar_month
                     </span>
                     <h3>Calender</h3>
                 </a>
 
-                <a href="profile.php">
+                <a href="<?php echo URLROOT ?>eventplanners/profile">
                     <span class="material-icons-sharp">
                         account_box
                     </span>
                     <h3>Profile</h3>
                 </a>
 
-                <a href="<?php echo URLROOT; ?>suppliers/messages">
+                <a href="<?php echo URLROOT ?>eventplanners/messages">
                     <span class="material-icons-sharp">mail</span>
                     <h3>Messages</h3>
-                    <span class="message-count">5</span>
+                    <span class="message-count">26</span>
                 </a>
-                <a href="<?php echo URLROOT; ?>user/logout">
+
+                <a href="<?php echo URLROOT ?>eventplanners/inquiry">
+                    <span class="material-icons-sharp">
+                        info
+                    </span>
+                    <h3>Inquiry</h3>
+                </a>
+                <a href="<?php echo URLROOT ?>">
                     <span class="material-icons-sharp">logout</span>
                     <h3>Logout</h3>
                 </a>
@@ -183,113 +265,38 @@
         </aside>
 
         <main>
-            <h1>Dashboard</h1>
-            <div class="insights">
-                <div class="users">
-                    <span class="material-icons-sharp">festival</span>
-                    <div class="middle">
-                        <div class="left">
-                            <h3>New Quotation Requests</h3>
-                            <h1>3</h1>
-                        </div>
 
-                    </div>
-                </div>
 
-<!-- <i class="fa-solid fa-file-invoice"></i> -->
-                <div class="eventplanners">
-                    <span class="material-icons-sharp">inventory</span>
-                    <div class="middle">
-                        <div class="left">
-                            <h3>New Project Requests</h3>
-                            <h1>5</h1>
-                        </div>
-
-                    </div>
-                </div>
-
-                <div class="suppliers">
-                    <span class="material-icons-sharp">groups</span>
-                    <div class="middle">
-                        <div class="left">
-                            <h3>Products Listed</h3>
-                            <h1>51</h1>
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-            <div class="recent-trans">
-                <h2>Event Completed</h2>
-                <canvas id="barChart"></canvas>
-
-            </div>
-            <!------------End of insights------------>
-
-        </main>
-        <!--------------END OF MAIN-------------->
-
-        <div class="right">
-            <div class="top">
-                <button id="menu-btn">
-                    <span class="material-icons-sharp">menu</span>
-                </button>
-                <div class="profile">
-                    <div class="info">
-                        <p>Hey, <b>Abhi</b></p>
-                        <small class="text-muted">Supplier</small>
+            <!-- Content start here -->
+            <div>
+                <div class="profile end">
+                    <div class="info" style="padding-right:25px;">
+                        <p>Hey, <b>Sunimal</b></p>
+                        <small class="text-muted">Eventplanner</small>
                     </div>
                     <div class="profile-photo">
-                        <img src="images/photo1.jpg">
+                        <img src="<?php echo URLROOT ?>public/images/photo2.jpg">
                     </div>
                 </div>
-            </div>
-            <!-- End of top-->
-            <div class="recent-updates">
-                <h2>Recent Updates</h2>
-                <div class="updates">
-                    <div class="update">
-                        <div class="profile-photo">
-                            <img src="images/photo2.jpg">
-                        </div>
-                        <div class="message">
-                            <p><b>Chamod Deshan</b> Sent a quotation Request</p>
-                            <small class="text-muted">10 Minutes Ago</small>
-                        </div>
-                    </div>
-                    <div class="update">
-                        <div class="profile-photo">
-                            <img src="images/photo2.jpg">
-                        </div>
-                        <div class="message">
-                            <p><b>Nisal Abeyweera</b> Sent a quotation request</p>
-                            <small class="text-muted">1 Day Ago</small>
-                        </div>
-                    </div>
-                    <div class="update">
-                        <div class="profile-photo">
-                            <img src="images/photo2.jpg">
-                        </div>
-                        <div class="message">
-                            <p><b>Hasith Perera</b> Sent a quotation</p>
-                            <small class="text-muted">2 Days Ago</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-            <!------------ END OF RECENT UPDTAES ------------>
-            <div class="analytics">
-                <h2>Calander</h2>
-                <div class="calendar">
-                    <div class="calendar-header">
+
+
+                <!-- Heading and search bar -->
+
+
+                <div class="planner-title">
+                    <h1>Calendar</h1>
+
+                </div>
+
+
+                <div class="calendar1" style="margin:50px">
+                    <div class="calendar1-header">
                         <button id="prev-month">Previous</button>
                         <h2 id="current-month-year">Month Year</h2>
                         <button id="next-month">Next</button>
                     </div>
-                    <table class="calendar-table">
+                    <table class="calendar-table1">
                         <thead>
                             <tr>
                                 <th>Sun</th>
@@ -301,15 +308,18 @@
                                 <th>Sat</th>
                             </tr>
                         </thead>
-                        <tbody id="calendar-body">
-                            <!-- Calendar cells will be dynamically generated here -->
+                        <tbody id="calendar-body1" style="border-color:white">
+
                         </tbody>
                     </table>
+
+
                 </div>
 
+
+
+
             </div>
-        </div>
-    </div>
 
 </body>
 

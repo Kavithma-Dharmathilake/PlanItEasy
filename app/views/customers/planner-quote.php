@@ -128,13 +128,13 @@
                                     <div>
                                         <p class="form-text" style="margin-top:1.5rem">Start Time</p><br />
                                         <div class="input-field2">
-                                            <input type="time" name="recept-start">
+                                            <input type="time" name="recept-start" value="<?php echo $data['request']->starttime ?>">
                                         </div>
                                     </div>
                                     <div>
                                         <p class="form-text" style="margin-top:1.5rem">End Time</p><br />
                                         <div class="input-field2">
-                                            <input type="time" name="recept-end">
+                                            <input type="time" name="recept-end" value="<?php echo $data['request']->endtime ?>">
                                         </div>
                                     </div>
                                 </div>
@@ -163,11 +163,11 @@
                                     <div>
                                         <p class="form-text" style="margin-top:1.5rem">Start Time</p><br />
                                         <div class="input-field2">
-                                            <input type="time" name="cater-start">
+                                            <input type="time" name="cater-start" value="<?php echo $data['request']->starttime ?>">
                                         </div>
                                     </div>
                                     <div>
-                                        <p class="form-text" style="margin-top:1.5rem">End Time</p><br />
+                                        <p class="form-text" style="margin-top:1.5rem" value="<?php echo $data['request']->endtime ?>">End Time</p><br />
                                         <div class="input-field2">
                                             <input type="time" name="cater-end">
                                         </div>
@@ -205,15 +205,15 @@
                                 </div>
                                 <div style="display:flex;">
                                     <div>
-                                        <p class="form-text" style="margin-top:1.5rem">Start Time</p><br />
+                                        <p class="form-text" style="margin-top:1.5rem" >Start Time</p><br />
                                         <div class="input-field2">
-                                            <input type="time" name="photo-start">
+                                            <input type="time" name="photo-start" value="<?php echo $data['request']->starttime ?>">
                                         </div>
                                     </div>
                                     <div>
                                         <p class="form-text" style="margin-top:1.5rem">End Time</p><br />
                                         <div class="input-field2">
-                                            <input type="time" name="photo-end">
+                                            <input type="time" name="photo-end" value="<?php echo $data['request']->endtime ?>">
                                         </div>
                                     </div>
                                 </div>
@@ -294,11 +294,11 @@
                                     <div>
                                         <p class="form-text" style="margin-top:1.5rem">Start Time</p><br />
                                         <div class="input-field2">
-                                            <input type="time" name="dance-start">
+                                            <input type="time" name="dance-start" value="<?php echo $data['request']->starttime ?>" >
                                         </div>
                                     </div>
                                     <div>
-                                        <p class="form-text" style="margin-top:1.5rem">End Time</p><br />
+                                        <p class="form-text" style="margin-top:1.5rem" value="<?php echo $data['request']->endtime ?>">End Time</p><br />
                                         <div class="input-field2">
                                             <input type="time" name="dance-end">
                                         </div>

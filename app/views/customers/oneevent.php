@@ -86,15 +86,18 @@
             </div>
 
             <div style="display: flex; margin-left:6rem">
-                <a href="<?php echo URLROOT ?>customers/checklist/<?php echo $data['request']->id ?>">
-                    <div class="event-tabs"> <span class="material-icons-sharp">
-                            fact_check
-                        </span> <br />Checklist</div>
-                </a>
+              
                 <a href="<?php echo URLROOT ?>customers/supplier/<?php echo $data['request']->id ?>">
                     <div class="event-tabs"><span class="material-icons-sharp">
                             storefront
                         </span> <br />Suppliers</div>
+                </a>
+                <a href="<?php echo URLROOT ?>customers/quotations/<?php echo $data['request']->id ?>">
+                    <div class="event-tabs">
+                        <span class="material-icons-sharp">
+                            request_quote
+                        </span><br />Quotations
+                    </div>
                 </a>
                 <a href="<?php echo URLROOT ?>customers/budget/<?php echo $data['request']->id ?>">
                     <div class="event-tabs">
@@ -110,13 +113,12 @@
                         </span><br />Guest List
                     </div>
                 </a>
-                <a href="<?php echo URLROOT ?>customers/quotations/<?php echo $data['request']->id ?>">
-                    <div class="event-tabs">
-                        <span class="material-icons-sharp">
-                            request_quote
-                        </span><br />Quotations
-                    </div>
+                <a href="<?php echo URLROOT ?>customers/checklist/<?php echo $data['request']->id ?>">
+                    <div class="event-tabs"> <span class="material-icons-sharp">
+                            fact_check
+                        </span> <br />Checklist</div>
                 </a>
+              
 
             </div>
 
