@@ -124,7 +124,15 @@
                                 <td> <?php echo $q->status; ?>
                                 <td>LKR. <?php echo $q->price; ?></td>
                                 <td>
-                                    <a href="<?php echo URLROOT ?>customers/payement/<?php echo $q->rid; ?>/<?php echo $q->id; ?>/<?php echo $q->price?>">Checkout</a>
+                                    <a href="<?php echo URLROOT ?>customers/payement/<?php echo $q->rid; ?>/<?php echo $q->id; ?>/<?php echo $q->price ?>">
+                                        <?php
+                                        if ( $q->status == 'Payment Complete') { 
+                                            echo '';
+                                         } else{
+                                            echo 'Checkout';
+                                         }
+                                            ?>
+                                        </a>
                                 </td>
 
 

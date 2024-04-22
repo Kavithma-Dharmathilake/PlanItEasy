@@ -114,7 +114,7 @@ class Customers extends Controller
     {
         $request = $this->customerModel->getEventById($id);
 
-        $photo = $this->supplierModel->getPhotographers('Photographer');
+        $photo = $this->customerModel->getPhotographers('Photographer');
         $data1 = [
             'request' => $request,
             'supplier' => $photo,
@@ -127,7 +127,7 @@ class Customers extends Controller
     public function caterings($id)
     {
         $request = $this->customerModel->getEventById($id);
-        $cater = $this->supplierModel->getPhotographers('Catering Service');
+        $cater = $this->customerModel->getPhotographers('Catering Service');
 
         $data2 = [
             'request' => $request,
@@ -141,7 +141,7 @@ class Customers extends Controller
     public function reception($id)
     {
         $request = $this->customerModel->getEventById($id);
-        $reception = $this->supplierModel->getPhotographers('Reception hall');
+        $reception = $this->customerModel->getPhotographers('Reception hall');
 
         $data3 = [
             'request' => $request,
@@ -154,7 +154,7 @@ class Customers extends Controller
     public function eventplanner($id)
     {
         $request = $this->customerModel->getEventById($id);
-        $reception = $this->supplierModel->getPhotographers('Event Planner');
+        $reception = $this->customerModel->getPhotographers('Event Planner');
 
         $data = [
             'request' => $request,
@@ -181,7 +181,7 @@ class Customers extends Controller
     public function catering($id)
     {
         $request = $this->customerModel->getEventById($id);
-        $supplier = $this->supplierModel->getPhotographers('Catering Service');
+        $supplier = $this->customerModel->getPhotographers('Catering Service');
 
         $data = [
             'request' => $request,
@@ -200,7 +200,7 @@ class Customers extends Controller
     public function decorations($id)
     {
         $request = $this->customerModel->getEventById($id);
-        $supplier = $this->supplierModel->getPhotographers('Decorations');
+        $supplier = $this->customerModel->getPhotographers('Decorations');
 
         $data = [
             'request' => $request,
@@ -219,7 +219,7 @@ class Customers extends Controller
         $this->view('customers/payments', $data);
     }
 
-    public function message()
+    public function messageAll()
     {
 
         $data = [
@@ -232,7 +232,7 @@ class Customers extends Controller
     public function sendquote($sid, $eid)
     {
         $request = $this->customerModel->getEventById($eid);
-        $supplier = $this->supplierModel->getOneSupplier($sid);
+        $supplier = $this->customerModel->getOneSupplier($sid);
 
         $type = $supplier->stype;
 
@@ -778,8 +778,8 @@ class Customers extends Controller
 
     public function budget($id)
     {
-        $quote = $this->customerModel->getAllQuote($id);
 
+        $quote = $this->customerModel->getAllQuote($id);
         $budget = $this->customerModel->getAllBudget($id);
 
         $data = [
@@ -792,22 +792,8 @@ class Customers extends Controller
 
 
             $budgetid = $this->customerModel->createbudget($id);
-            $result = $this->customerModel->lowestbudget($id);
-
-            foreach ($result as $r) {
-
-                $item = [
-                    'bid' => $budgetid,
-                    'qid' => $r->qid,
-                    'bname' => $r->bname,
-                    'price' => $r->r_price,
-                    'stype' => $r->stype
-                ];
-                $this->customerModel->insertBudgetItem($item);
-            }
-
             echo '<script> alert("New Budget Created")</script>';
-            header('location: ' . URLROOT . 'customers/pricebudgetsheet/' . $budgetid . '/' . $id);
+            header('location: ' . URLROOT . 'customers/budgetsheet/' . $budgetid . '/' . $id);
             exit();
         }
 
@@ -816,32 +802,17 @@ class Customers extends Controller
         $this->view('customers/budget', $data);
     }
 
-    public function pricebudgetsheet($bid, $id)
+    public function budgetsheet($bid, $id)
     {
         $quote = $this->customerModel->getAcceptedQuote($id);
-        $services = $this->customerModel->getAccepteServices($id);
         $request = $this->customerModel->getEventById($id);
         $items = $this->customerModel->getBudgetItems($bid);
-        $result = $this->customerModel->lowestbudget($id);
-
-
-        $lowestPrices = [];
-        $Quotes = [];
-        foreach ($services as $service) {
-            $data1 = [
-                'eid' => $id,
-                'service' => $service->stype
-            ];
-            $lowestPrice = $this->customerModel->getLowestPricedQuotation($data1);
-            $allquote = $this->customerModel->getQuoteByService($data1);
-            $lowestPrices[$service->stype] = $lowestPrice;
-            $Quotes[$service->stype] =  $allquote;
-        }
-
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-            $price = $_POST['total'];
+            $price = 0.00;
+            foreach ($items as $i) {
+                $price = $price + $i->r_price;
+            }
 
             $data1 = [
                 'price' => $price,
@@ -849,20 +820,16 @@ class Customers extends Controller
             ];
 
             if ($this->customerModel->updateTotal($data1)) {
-                redirect('customers/budget', $id);
+                header('location: ' . URLROOT . 'customers/budget/' . $id);
             }
         } else {
 
             $data = [
                 'quote' => $quote,
                 'eventid' => $id,
-                'result' => $items,
                 'request' => $request,
                 'bid' => $bid,
-                'services' => $services,
-                'lowestPrices' => $lowestPrices,
-                'lowest' => $result,
-                'Quotes' => $Quotes
+                'budget' => $items
 
             ];
 
@@ -870,54 +837,75 @@ class Customers extends Controller
         }
     }
 
-    public function deleteItem($bid, $eid, $qid)
-    {
-        die('here');
-
-        $this->customerModel->deletBudgetItem($qid);
-        header('location: ' . URLROOT . 'customers/pricebudgetsheet/' . $bid . '/' . $eid);
-    }
-
-    public function updateBudget($bid, $eid,  $price)
+    public function pricebudget($bid, $id)
     {
 
+        $result = $this->customerModel->lowestbudget($id);
 
 
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
+            $data = [
+                'eventid' => $id,
+                'bid' => $bid,
+                'lowest' => $result,
+            ];
 
-        $data1 = [
-            'price' => $price,
-            'id' => $bid
+            //if items added previously is added first need to delete those
+            $this->customerModel->emptyItems($bid);
 
-        ];
+            foreach ($result as $r) {
 
-        if ($this->customerModel->updateTotal($data1)) {
-            header('location: ' . URLROOT . 'customers/budget/' . $eid);
+                $item = [
+                    'bid' => $bid,
+                    'qid' => $r->qid,
+                    'bname' => $r->bname,
+                    'price' => $r->r_price,
+                    'stype' => $r->stype
+                ];
+
+                $this->customerModel->insertBudgetItem($item);
+            }
+            header('location: ' . URLROOT . 'customers/budgetsheet/' . $bid . '/' . $id);
         }
     }
 
-
-    public function addItem($rid, $bid, $qid)
+    public function deleteItem($bid, $eid, $bi)
     {
 
-        $r = $this->customerModel->getOneQuote($qid);
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $this->customerModel->deletBudgetItem($bi);
+            header('location: ' . URLROOT . 'customers/budgetsheet/' . $bid . '/' . $eid);
+        }
+    }
+
+    public function addItem($bid, $eid, $qid)
+    {
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
-        $data = [
-            'bid' => $bid,
-            'qid' => $r->id,
-            'bname' => $r->bname,
-            'price' => $r->r_price,
-            'stype' => $r->stype
-        ];
+            $r = $this->customerModel->getOneQuote($qid);
 
-        if ($this->customerModel->insertBudgetItem($data)) {
-            echo '<script> prompt("New Budget Item Added")</script>';
-            echo '<script> alert("New Budget Created")</script>';
-            header('location: ' . URLROOT . 'customers/pricebudgetsheet/' . $bid . '/' . $rid);
-        } else {
-            echo '<script>  prompt("New Budget Created")</script>';
-            redirect('customers/budgetsheet', $rid, $bid);
+
+            $data = [
+                'bid' => $bid,
+                'qid' => $qid,
+                'bname' => $r->bname,
+                'price' => $r->r_price,
+                'stype' => $r->stype
+            ];
+
+
+            if ($this->customerModel->insertBudgetItem($data)) {
+
+                echo '<script> prompt("New Budget Item Added")</script>';
+                echo '<script> alert("New Budget Created")</script>';
+                header('location: ' . URLROOT . 'customers/budgetsheet/' . $bid . '/' . $eid);
+            } else {
+                echo '<script> prompt("Item is already added")</script>';
+            }
         }
     }
 
@@ -946,6 +934,8 @@ class Customers extends Controller
                 'bid' => trim($_POST['budget'])
             ];
 
+            $s_amount = (int) $_POST['amount'];
+
             \Stripe\Stripe::setApiKey('sk_test_51Nx6nOC3Jv8Pj3OfF2GaslmsUK83qAzZHAGXKtFDn9kBgnSx9ZurZNWnGdcqOS9VsYw3cwb90yboeUjmPQiLk5MZ00W1OfFi8E');
 
 
@@ -957,7 +947,7 @@ class Customers extends Controller
 
             // Charge Customer
             $charge = \Stripe\Charge::create(array(
-                "amount" => $_POST['amount'],
+                "amount" => $s_amount,
                 "currency" => "lkr",
                 "description" => "Payment of Event ID: " . $_POST['event'],
                 "customer" => $customer->id
@@ -965,7 +955,10 @@ class Customers extends Controller
 
             $tid = $this->customerModel->insertPayement($data);
             if ($tid != null) {
+                $this->customerModel->updateBudgetQuotations($id);
+
                 echo '<script> alert("Payment Successful")</script>';
+                header('location: ' . URLROOT . 'customers/budget/' . $rid);
             } else {
                 echo '<script>  prompt("Payment Unsuccesful")</script>';
             }
@@ -973,7 +966,37 @@ class Customers extends Controller
         $this->view('customers/payement', $data);
     }
 
-    public function checkout()
+    public function message($qid)
     {
+
+        $result = $this->customerModel->getOneReq($qid);
+        $event = $this->customerModel->getEventById($result->eid);
+        // $customer = $this->customerModel->getCustomer($event->idcustomer);
+        $messages = $this->customerModel->getMessages($qid);
+
+        $data = [
+            'request' => $result,
+            'customer' => $_SESSION['user_name'],
+            'event' => $event,
+            'messages' => $messages
+
+        ];
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+
+            $content = $_POST['content'];
+            $data = [
+                'content' => $content,
+                'qid' => $qid,
+                'cuid' => $event->id,
+            ];
+
+            $this->customerModel->sendMessage($data);
+            header('location: ' . URLROOT . '/customers/message/' . $qid);
+        }
+
+
+        $this->view('customers/message', $data);
     }
 }

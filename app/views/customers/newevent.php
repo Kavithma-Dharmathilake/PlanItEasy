@@ -58,7 +58,7 @@
                     <span class="material-icons-sharp">person</span>
                     <h3>profile</h3>
                 </a>
-                <a href="<?php echo URLROOT; ?>user/logout">
+                <a href="<?php echo URLROOT; ?>users/logout">
                     <span class="material-icons-sharp">logout</span>
                     <h3>Logout</h3>
                 </a>
@@ -68,15 +68,7 @@
 
         <!-- Content start here -->
         <div>
-            <div class="profile end">
-                <div class="info" style="padding-right:25px;">
-                    <p>Hey, <b>Sunimal</b></p>
-                    <small class="text-muted"></small>
-                </div>
-                <div class="profile-photo">
-                    <img src="<?php echo URLROOT ?>public/images/photo2.jpg">
-                </div>
-            </div>
+          
 
             <!-- The General Detail Form -->
 

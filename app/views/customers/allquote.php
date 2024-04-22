@@ -155,16 +155,16 @@
                         <?php foreach ($data['quote'] as $q) : ?>
                             <tr>
 
-                                <td><?php echo $q->id; ?></td>
+                                <td><?php echo $q->qid; ?></td>
                                 <td><?php echo  $q->bname ?></td>
                                 <td> <?php echo $q->send_date; ?>
                                 <td>LKR. <?php echo $q->r_price; ?></td>
                                 <td>LKR. <?php echo $q->price; ?>
                                 <td> <?php echo $q->status; ?></td>
                                 <td>
-                                    <button class="viewBtn" data-target="<?php echo $q->id; ?>">View</button>
+                                    <button class="viewBtn" data-target="<?php echo $q->qid; ?>">View</button>
 
-                                    <div id="myModal-<?php echo $q->id; ?>" class="modal">
+                                    <div id="myModal-<?php echo $q->qid; ?>" class="modal">
 
                                         <!-- Modal content -->
                                         <div class="modal-content">
@@ -248,7 +248,7 @@
 
                                 </td>
 
-                                <td> Message</td>
+                                <td><a href="<?php echo URLROOT; ?>customers/message/<?php echo  $q->qid; ?> ">Message</a> </td>
 
 
                             </tr>
