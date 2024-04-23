@@ -21,15 +21,7 @@
 <body>
     <div class="dash-container">
         <aside>
-            <div class="top">
-                <div class="logo">
-                    <img src="<?php echo URLROOT; ?>/public/images/logo.jpg">
-                    <h2>PlanItEasy</h2>
-                </div>
-                <div class="close" id="close-btn">
-                    <span class="material-icons-sharp">close</span>
-                </div>
-            </div>
+
             <div class="sidebar">
                 <a href="<?php echo URLROOT; ?>customers">
                     <span class="material-icons-sharp" class="active">grid_view</span>
@@ -47,10 +39,6 @@
                     <span class="material-icons-sharp">message</span>
                     <h3>Messages</h3>
                 </a>
-                <a href="<?php echo URLROOT; ?>customers/viewquote">
-                    <span class="material-icons-sharp"> note_add</span>
-                    <h3>supplier quotation</h3>
-                </a>
                 <a href="<?php echo URLROOT; ?>customers/profile">
                     <span class="material-icons-sharp">person</span>
                     <h3>profile</h3>
@@ -60,6 +48,8 @@
                     <h3>Logout</h3>
                 </a>
             </div>
+
+
         </aside>
 
         <div class="budgetplan_container">
@@ -119,7 +109,7 @@
                                     <form action="<?php echo URLROOT ?>customers/budgetsheet/<?php echo $data['bid'] ?>/<?php echo $data['eventid'] ?>" method="POST">
                                         <input name="accept" type="submit" class="accept" value="Accept the Budget">
                                     </form>
-                                   
+
                                 </td>
                             </tr>
                         <?php } ?>
