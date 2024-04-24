@@ -11,11 +11,16 @@ class Suppliers extends Controller
 
     public function index()
     {
-        $data = $this->supplierModel->countAllProducts();
-        $this->view('suppliers/index', $data);
 
-        // $data = $this->supplierModel->countQuotations()();
-        // $this->view('suppliers/index', $data);
+        $countProduct = $this->supplierModel->countAllProducts();
+        $countQuote = $this->supplierModel->countQuotations();
+        
+
+        $data = [
+            'countProduct' => $countProduct,
+            'countQuote' => $countQuote
+        ];
+        $this->view('suppliers/index', $data);
     }
 
     public function profile()
@@ -238,9 +243,7 @@ class Suppliers extends Controller
     public function sentRequests()
     {
 
-        $data = [
-            'title' => 'Welcome'
-        ];
+        $data = $this->supplierModel->getSentReq();
         $this->view('suppliers/sentRequests', $data);
     }
 
