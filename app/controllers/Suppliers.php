@@ -11,11 +11,11 @@ class Suppliers extends Controller
 
     public function index()
     {
-
-        $data = [
-            'title' => 'Welcome'
-        ];
+        $data = $this->supplierModel->countAllProducts();
         $this->view('suppliers/index', $data);
+
+        // $data = $this->supplierModel->countQuotations()();
+        // $this->view('suppliers/index', $data);
     }
 
     public function profile()

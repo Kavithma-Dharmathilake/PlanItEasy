@@ -190,7 +190,9 @@
                     <div class="middle">
                         <div class="left">
                             <h3>New Quotation Requests</h3>
-                            <h1>3</h1>
+                            <h1><?php foreach ($data as $item): ?>
+                                    <?php echo $item ?><br>
+                                <?php endforeach; ?></h1>
                         </div>
 
                     </div>
@@ -208,12 +210,14 @@
                     </div>
                 </div>
 
-                <div class="suppliers">
+                <div class="suppliers" style="cursor: pointer;">
                     <span class="material-icons-sharp">groups</span>
                     <div class="middle">
                         <div class="left">
                             <h3>Products Listed</h3>
-                            <h1>51</h1>
+                            <h1> <?php foreach ($data as $i): ?>
+                                    <?php echo $i ?><br>
+                                <?php endforeach; ?></h1>
                         </div>
 
                     </div>

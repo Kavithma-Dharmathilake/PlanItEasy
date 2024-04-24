@@ -370,4 +370,16 @@ class Supplier
             return false;
         }
     }
+
+    public function countAllProducts(){
+        $this->db->query('SELECT COUNT(*) FROM supply');
+        $result = $this->db->single();
+        return $result;
+    }
+
+    public function countQuotations(){
+        $this->db->query('SELECT COUNT(*) FROM quoate');
+        $result = $this->db->single();
+        return $result;
+    }
 }
