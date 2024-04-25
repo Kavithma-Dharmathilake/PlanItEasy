@@ -6,6 +6,10 @@ class Suppliers extends Controller
 
     public function __construct()
     {
+
+        if (!isLoggedIn()) {
+            redirect('users/login');
+        }
         $this->supplierModel = $this->model('Supplier');
     }
 
@@ -136,9 +140,94 @@ class Suppliers extends Controller
 
     public function portfolio()
     {
+        $user = $this->supplierModel->getUserById($_SESSION['user_id']);
+        $portfolio = $this->supplierModel->getPortfolio($_SESSION['user_id']);
+        $data = [
+            'user' => $user,
+            'portfolio' => $portfolio
+        ];
 
-        $data = [];
+
         $this->view('suppliers/portfolio', $data);
+    }
+
+    public function updatePortfolio()
+    {
+        $user = $this->supplierModel->getUserById($_SESSION['user_id']);
+        $portfolio = $this->supplierModel->getPortfolio($_SESSION['user_id']);
+        $data = [
+            'user' => $user,
+            'portfolio' => $portfolio
+        ];
+
+        $uploadDir = 'images/uploads/';
+        $pdfUploadDir = 'uploads/';
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $bio = $_POST['bio'];
+            $description = $_POST['description'];
+
+            $caption = $_FILES['caption'];
+            $filePaths = [];
+
+            if ($caption['error'] === UPLOAD_ERR_OK) {
+                // Get the file name
+                $CaptionName = basename($caption['name']);
+
+                // Define the target file path
+                $captionFilePath = $uploadDir . $CaptionName;
+
+                // Move the uploaded file to the specified directory
+                if (move_uploaded_file($caption['tmp_name'], $captionFilePath)) {
+                } else {
+                    echo "Error moving the uploaded file.";
+                }
+            }
+
+            foreach ($_FILES['images']['tmp_name'] as $index => $tmp_name) {
+
+                if (is_uploaded_file($tmp_name)) {
+                    $fileName = basename($_FILES['images']['name'][$index]);
+                    $targetFilePath = $uploadDir . $fileName;
+
+
+                    if (move_uploaded_file($tmp_name, $targetFilePath)) {
+
+                        $filePaths[] = $targetFilePath;
+                    } else {
+                        echo "Error moving the uploaded file: {$fileName}\n";
+                    }
+                } else {
+                    echo "Error uploading file: " . $_FILES['images']['name'][$index];
+                }
+            }
+
+            $uploadedFile = $_FILES['document'];
+            if ($uploadedFile['error'] === UPLOAD_ERR_OK) {
+                $pdfName = basename($uploadedFile['name']);
+                $targetFilePath = $pdfUploadDir . $pdfName;
+                if (move_uploaded_file($uploadedFile['tmp_name'], $targetFilePath)) {
+                } else {
+                    echo "Error moving the uploaded file.";
+                }
+            }
+
+            $data = [
+                'bio' => $bio,
+                'description' => $description,
+                'caption' => $captionFilePath,
+                'images' => $filePaths,
+                'document' =>$targetFilePath
+            ];
+            
+
+            $this->supplierModel->updatePortfolio($data);
+
+            header('location:' . URLROOT . '/suppliers/portfolio');
+        }
+
+
+        $this->view('suppliers/updatePortfolio', $data);
     }
 
     public function packages()
@@ -280,7 +369,7 @@ class Suppliers extends Controller
         $event = $this->supplierModel->getEvent($result->eid);
         $customer = $this->supplierModel->getCustomer($event->idcustomer);
         $messages = $this->supplierModel->getMessages($qid);
-        
+
         $data = [
             'request' => $result,
             'customer' => $customer,

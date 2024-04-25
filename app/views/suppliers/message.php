@@ -106,13 +106,6 @@
                     <h3>Quotation Requests</h3>
                 </a>
 
-                <a href="<?php echo URLROOT; ?>suppliers/sentRequests">
-                    <span class="material-icons-sharp">
-                        festival
-                    </span>
-                    <h3>Sent Quotations</h3>
-                </a>
-
                 <a href="<?php echo URLROOT; ?>suppliers/packages">
                     <span class="material-icons-sharp">
                         request_quote
@@ -128,7 +121,7 @@
                     <h3>Calender</h3>
                 </a>
 
-                <a href="profile.php">
+                <a href="<?php echo URLROOT; ?>suppliers/profile">
                     <span class="material-icons-sharp">
                         account_box
                     </span>
@@ -140,7 +133,7 @@
                     <h3>Messages</h3>
                     <span class="message-count">5</span>
                 </a>
-                <a href="<?php echo URLROOT; ?>user/logout">
+                <a href="<?php echo URLROOT; ?>users/logout">
                     <span class="material-icons-sharp">logout</span>
                     <h3>Logout</h3>
                 </a>
@@ -157,28 +150,28 @@
             <?php foreach ($data['messages'] as $i) : ?>
 
 
-            <?php if($i->sender == $_SESSION['user_id']) {?> 
-                <div class="container-darker">
-                <strong class="user">You</strong><br /><br />
+                <?php if ($i->sender == $_SESSION['user_id']) { ?>
+                    <div class="container-darker">
+                        <strong class="user">You</strong><br /><br />
 
-                <p><?php echo $i->content ?></p>
+                        <p><?php echo $i->content ?></p>
 
-                <span class="time-right"><?php echo $i->time ?> | <?php echo $i->date ?></span>
-            </div>
-            <?php }else{ ?>
-
-          
+                        <span class="time-right"><?php echo $i->time ?> | <?php echo $i->date ?></span>
+                    </div>
+                <?php } else { ?>
 
 
-            <div class="container">
-                <strong class="user">Customer</strong><br /><br />
-                <p><?php echo $i->content ?></p>
-                <span class="time-right"><?php echo $i->time ?> | <?php echo $i->date ?></span>
-            </div>
 
-            <?php }?>
 
-            
+                    <div class="container">
+                        <strong class="user">Customer</strong><br /><br />
+                        <p><?php echo $i->content ?></p>
+                        <span class="time-right"><?php echo $i->time ?> | <?php echo $i->date ?></span>
+                    </div>
+
+                <?php } ?>
+
+
 
             <?php endforeach ?>
 

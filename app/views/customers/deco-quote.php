@@ -20,15 +20,7 @@
 <body>
     <div class="dash-container">
         <aside>
-            <div class="top">
-                <div class="logo">
-                    <img src="<?php echo URLROOT; ?>/public/images/logo.jpg">
-                    <h2>PlanItEasy</h2>
-                </div>
-                <div class="close" id="close-btn">
-                    <span class="material-icons-sharp">close</span>
-                </div>
-            </div>
+
             <div class="sidebar">
                 <a href="<?php echo URLROOT; ?>customers">
                     <span class="material-icons-sharp" class="active">grid_view</span>
@@ -46,19 +38,17 @@
                     <span class="material-icons-sharp">message</span>
                     <h3>Messages</h3>
                 </a>
-                <a href="<?php echo URLROOT; ?>customers/viewquote">
-                    <span class="material-icons-sharp"> note_add</span>
-                    <h3>supplier quotation</h3>
-                </a>
                 <a href="<?php echo URLROOT; ?>customers/profile">
                     <span class="material-icons-sharp">person</span>
                     <h3>profile</h3>
                 </a>
-                <a href="<?php echo URLROOT; ?>user/logout">
+                <a href="<?php echo URLROOT; ?>users/logout">
                     <span class="material-icons-sharp">logout</span>
                     <h3>Logout</h3>
                 </a>
             </div>
+
+
         </aside>
 
 
@@ -137,7 +127,7 @@
                                     </div>
                                 </div>
                             </div>
-                        
+
 
                             <p class="form-text" style="margin-top:2rem; margin-left:1rem;  margin-right:2rem">Flowers</p>
                             <input type="checkbox" id="Natural" name="Natural">
