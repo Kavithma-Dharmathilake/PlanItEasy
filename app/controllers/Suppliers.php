@@ -16,8 +16,13 @@ class Suppliers extends Controller
     public function index()
     {
 
+        $countProduct = $this->supplierModel->countAllProducts();
+        $countQuote = $this->supplierModel->countQuotations();
+        
+
         $data = [
-            'title' => 'Welcome'
+            'countProduct' => $countProduct,
+            'countQuote' => $countQuote
         ];
         $this->view('suppliers/index', $data);
     }
@@ -327,9 +332,7 @@ class Suppliers extends Controller
     public function sentRequests()
     {
 
-        $data = [
-            'title' => 'Welcome'
-        ];
+        $data = $this->supplierModel->getSentReq();
         $this->view('suppliers/sentRequests', $data);
     }
 

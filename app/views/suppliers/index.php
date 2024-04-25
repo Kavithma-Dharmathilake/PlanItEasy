@@ -163,7 +163,7 @@
                     <h3>Profile</h3>
                 </a>
 
-                <a href="<?php echo URLROOT; ?>suppliers/messages">
+                <a href="<?php echo URLROOT; ?>suppliers/message">
                     <span class="material-icons-sharp">mail</span>
                     <h3>Messages</h3>
                     <span class="message-count">5</span>
@@ -183,7 +183,9 @@
                     <div class="middle">
                         <div class="left">
                             <h3>New Quotation Requests</h3>
-                            <h1>3</h1>
+                            <h1>
+                                    <?php echo $data['countQuote']->Count ?><br>
+                            </h1>
                         </div>
 
                     </div>
@@ -201,16 +203,19 @@
                     </div>
                 </div>
 
-                <div class="suppliers">
+                <div class="suppliers" style="cursor: pointer;">
+                <a href = "<?php echo URLROOT; ?>suppliers/packages"> 
                     <span class="material-icons-sharp">groups</span>
                     <div class="middle">
                         <div class="left">
-                            <h3>Products Listed</h3>
-                            <h1>51</h1>
+                            <h3>Packages Listed</h3>
+                            <h1>
+                                    <?php echo $data['countProduct']->Count ?><br>
+                            </h1>
                         </div>
 
                     </div>
-
+                </a>
                 </div>
 
             </div>
@@ -282,7 +287,8 @@
                         <h2 id="current-month-year">Month Year</h2>
                         <button id="next-month">Next</button>
                     </div>
-                    <table class="calendar-table">
+                    <a href="<?php echo URLROOT; ?>suppliers/calendar"> 
+                    <table class="calendar-table" style="cursor: pointer;">
                         <thead>
                             <tr>
                                 <th>Sun</th>
@@ -298,6 +304,7 @@
                             <!-- Calendar cells will be dynamically generated here -->
                         </tbody>
                     </table>
+                    </a>
                 </div>
 
             </div>

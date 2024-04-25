@@ -230,9 +230,10 @@ class Supplier
 
     public function getAllPackages()
     {
-        $id= $_SESSION['user_id'];
-        $this->db->query('SELECT * FROM packages where supplier = :id');
-        $this->db->bind(':id', $id );
+        // $id= $_SESSION['user_id'];
+        $this->db->query('SELECT * FROM packages');
+        // $this->db->bind(':id', $id );
+        //where supplier = :id
         $result = $this->db->resultSet();
         return $result;
     }
@@ -408,4 +409,32 @@ class Supplier
             return false;
         }
     }
+
+    public function countAllProducts(){
+        $this->db->query('SELECT COUNT(*) AS Count FROM packages');
+        $result = $this->db->single();
+        return $result;
+    }
+
+    public function countQuotations(){
+        $this->db->query('SELECT COUNT(*) AS Count FROM quoate');
+        $result = $this->db->single();
+        return $result;
+    }
+
+    public function getSentReq(){
+        
+        $this->db->query('SELECT id, package, eid, sid, uid, stime FROM quoate');
+        $result = $this->db->resultSet();
+        return $result;
+        
+        // $sid = $_SESSION['user_id'];
+        // $this->db->query('SELECT * FROM quoate WHERE sid = :sid');
+        // $this->db->bind(':sid', $sid);
+        // $result = $this->db->resultSet();
+        // return $result;
+    }
+
+
+
 }
