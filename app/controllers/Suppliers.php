@@ -149,15 +149,7 @@ class Suppliers extends Controller
     }
 
 
-    public function supplierCalendar()
-    {
 
-        $data = [
-            'title' => 'Welcome'
-        ];
-
-        $this->view('suppliers/supplierCalender', $data);
-    }
 
     public function quotationRequest()
     {
@@ -252,11 +244,32 @@ class Suppliers extends Controller
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-            $title = $_POST['title'];
-            $date = $_POST['date'];
-            $status = $_POST['status'];
-        }
+            $_POST = filter_input_array(INPUT_POST);
+
+            $data = [
+                'event' => trim($_POST['event']),
+                'date' => trim($_POST['date']),
+            ];
+
+            if (!empty($data['event'])) {
+
+                $available = [
+                    'event' => $data['event'],
+                    'date' => $data['date'],
+                ];
+
+                if ($this->supplierModel->addAvailability($available)) {
+                    echo '<script> prompt("Added Succfully")</script>';
+                    redirect('suppliers/calendar');
+                } else {
+                    $this->view('suppliers/calendar', $data);
+                }
+            } else {
+                $this->view('suppliers/calendar', $data);
+            }
+        }else{
         $this->view('suppliers/calendar');
+        }
     }
 
     public function getCalendarEvents()

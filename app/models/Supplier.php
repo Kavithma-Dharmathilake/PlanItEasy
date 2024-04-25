@@ -328,6 +328,19 @@ class Supplier
         }
     }
 
+    public function addAvailability($available)
+    {
+        $this->db->query('INSERT INTO calander(supplier,title, date, status) VALUES(:supplier, :title, :date, "Not Available")');
+        $this->db->bind(':supplier', $_SESSION['user_id']);
+        $this->db->bind(':title', $available['event']);
+        $this->db->bind(':date', $available['date']); 
+
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     //calander functions
     public function fetchEvents($id)
