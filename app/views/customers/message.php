@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="<?php echo URLROOT; ?>public/css/eventplannerdash.css">
 
     <style>
-        /* Chat containers */
+      
         .container {
             border: 2px solid #dedede;
             background-color: #f1f1f1;
@@ -24,7 +24,7 @@
             margin-right: 30px;
         }
 
-        /* Darker chat container */
+       
         .container-darker {
             border: 2px solid #dedede;
             border-radius: 5px;
@@ -36,20 +36,20 @@
             padding-bottom: 25px;
         }
 
-        /* Clear floats */
+       
         .container::after {
             content: "";
             clear: both;
             display: table;
         }
 
-        /* Style time text */
+       
         .time-right {
             float: right;
             color: #aaa;
         }
 
-        /* Style time text */
+       
         .time-left {
             float: left;
             color: #999;
@@ -75,39 +75,86 @@
 </head>
 
 <body>
-    <aside>
+    <div class="dash-container">
+        <aside>
 
-        <div class="sidebar">
-            <a href="<?php echo URLROOT; ?>customers">
-                <span class="material-icons-sharp" class="active">grid_view</span>
-                <h3>Dashboard</h3>
-            </a>
-            <a href="<?php echo URLROOT; ?>customers/events">
-                <span class="material-icons-sharp">man</span>
-                <h3>Events</h3>
-            </a>
-            <a href="<?php echo URLROOT; ?>customers/payments">
-                <span class="material-icons-sharp">payments</span>
-                <h3>Payments</h3>
-            </a>
-            <a href="<?php echo URLROOT; ?>customers/message">
-                <span class="material-icons-sharp">message</span>
-                <h3>Messages</h3>
-            </a>
-            <a href="<?php echo URLROOT; ?>customers/profile">
-                <span class="material-icons-sharp">person</span>
-                <h3>profile</h3>
-            </a>
-            <a href="<?php echo URLROOT; ?>users/logout">
-                <span class="material-icons-sharp">logout</span>
-                <h3>Logout</h3>
-            </a>
-        </div>
+            <div class="sidebar">
+                <a href="<?php echo URLROOT; ?>customers">
+                    <span class="material-icons-sharp" class="active">grid_view</span>
+                    <h3>Dashboard</h3>
+                </a>
+                <a href="<?php echo URLROOT; ?>customers/events">
+                    <span class="material-icons-sharp">man</span>
+                    <h3>Events</h3>
+                </a>
+                <a href="<?php echo URLROOT; ?>customers/payments">
+                    <span class="material-icons-sharp">payments</span>
+                    <h3>Payments</h3>
+                </a>
+                <a href="<?php echo URLROOT; ?>customers/message">
+                    <span class="material-icons-sharp">message</span>
+                    <h3>Messages</h3>
+                </a>
+                <a href="<?php echo URLROOT; ?>customers/profile">
+                    <span class="material-icons-sharp">person</span>
+                    <h3>profile</h3>
+                </a>
+                <a href="<?php echo URLROOT; ?>users/logout">
+                    <span class="material-icons-sharp">logout</span>
+                    <h3>Logout</h3>
+                </a>
+            </div>
 
 
-    </aside>
+        </aside>
+
+        <main>
+            <h1>Messages on Quotation Request - <?php echo $data['request']->id ?></h1>
+
+
+            <?php foreach ($data['messages'] as $i) : ?>
+
+
+                <?php if ($i->sender == $_SESSION['user_id']) { ?>
+                    <div class="container-darker">
+                        <strong class="user">You</strong><br /><br />
+
+                        <p><?php echo $i->content ?></p>
+
+                        <span class="time-right"><?php echo $i->time ?> | <?php echo $i->date ?></span>
+                    </div>
+                <?php } else { ?>
+
+
+
+
+                    <div class="container">
+                        <strong class="user">Customer</strong><br /><br />
+                        <p><?php echo $i->content ?></p>
+                        <span class="time-right"><?php echo $i->time ?> | <?php echo $i->date ?></span>
+                    </div>
+
+                <?php } ?>
+
+
+
+            <?php endforeach ?>
+
+
+            <form action="<?php echo URLROOT ?>customers/message/<?php echo  $data['request']->id ?>" method="POST">
+                <textarea name="content"> </textarea>
+                <input style="  background-color: #7380ec;border: none;color: white;padding: 10px 32px;margin: 4px 2px;border-radius:3rem" type="Submit" value="Send">
+            </form>
+
+
+
+
+
+    </div>
     </main>
     </div>
+
+
 
 </body>
 

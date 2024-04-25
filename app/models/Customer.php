@@ -452,6 +452,16 @@ class Customer
         return $result;
     }
 
+    public function getSuppliers($stype)
+    {
+        $this->db->query('SELECT * FROM user WHERE stype =:stype');
+
+        //bind values
+        $this->db->bind(':stype', $stype);
+        $result = $this->db->resultSet();
+        return $result;
+    }
+
     public function getAcceptedQuote($id)
     {
 
@@ -545,9 +555,6 @@ class Customer
     public function getSupplier($id)
     {
 
-
-        $status = 'Accepted';
-        $eventplanner = 'eventplanner';
 
         $this->db->query('SELECT *
         FROM planiteasy.user u 
@@ -674,27 +681,18 @@ class Customer
 
     public function insertBudgetItem($data)
     {
-        $this->db->query('SELECT  * FROM budget_item WHERE qid = :qid');
+        $this->db->query('INSERT INTO budget_item(bid,qid,bname,r_price,stype) VALUES(:bid,:qid,:bname,:price,:stype)');
+
+        $this->db->bind(':bid', $data['bid']);
         $this->db->bind(':qid', $data['qid']);
-        $result = $this->db->single();
-
-        if ($result != null) {
-            return -1;
-        } else {
-
-
-            $this->db->query('INSERT INTO budget_item(bid,qid,bname,r_price,stype) VALUES(:bid,:qid,:bname,:price,:stype)');
-
-            $this->db->bind(':bid', $data['bid']);
-            $this->db->bind(':qid', $data['qid']);
-            $this->db->bind(':bname', $data['bname']);
-            $this->db->bind(':price', $data['price']);
-            $this->db->bind(':stype', $data['stype']);
-            $this->db->execute();
-            $id = $this->db->lastInsertedId();
-            return $id;
-        }
+        $this->db->bind(':bname', $data['bname']);
+        $this->db->bind(':price', $data['price']);
+        $this->db->bind(':stype', $data['stype']);
+        $this->db->execute();
+        $id = $this->db->lastInsertedId();
+        return $id;
     }
+
 
     public function addBudgetItem($bid, $qid)
     {
@@ -718,6 +716,8 @@ class Customer
             return true;
         }
     }
+
+    
 
     public function getBudgetItems($id)
     {
@@ -745,6 +745,13 @@ class Customer
         return $result;
     }
 
+    public function getOneSupplier($id)
+    {
+        $this->db->query('SELECT * FROM user  WHERE id = :id ');
+        $this->db->bind(':id', $id);
+        $data = $this->db->single();
+        return $data;
+    }
 
     public function getOneQuote($id)
     {
@@ -779,7 +786,7 @@ class Customer
         VALUES(:user, :name, :email, :amount, :bid, :rid) ');
 
         $this->db->bind(':user', $_SESSION['user_id']);
-        $name = $data['fname'] . " " . $data['lname'];
+        $name = $data['fname'];
         $this->db->bind(':name', $name);
         $this->db->bind(':amount', $data['price']);
         $this->db->bind(':email', $data['email']);
@@ -804,7 +811,7 @@ class Customer
     public function updateBudgetQuotations($id)
     {
 
-        
+
         $this->db->query('SELECT * from budget_item WHERE bid = :id');
         $this->db->bind(':id', $id);
         $quotes = $this->db->resultSet();

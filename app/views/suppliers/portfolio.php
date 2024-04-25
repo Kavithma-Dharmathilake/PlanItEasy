@@ -12,121 +12,132 @@
     <link rel="stylesheet" href="<?php echo URLROOT; ?>public/css/admindash.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>public/css/requests.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>public/css/eventplannerdash.css">
+    <link rel="stylesheet" href="<?php echo URLROOT ?>/public/css/supplierPortfolio.css">
 </head>
 
 <body>
-    <div class="dash-container">
-    <aside>
-            <div class="top">
-                <div class="logo">
-                    <img src="<?php echo URLROOT; ?>public/images/logo.jpg">
-                    <h2>PlanItEasy</h2>
-                </div>
-                <div class="close" id="close-btn">
-                    <span class="material-icons-sharp">close</span>
-                </div>
+
+
+
+    <div class="container">
+        <div class="profile-header">
+            <div class="profile-img">
+                <img src="<?php echo URLROOT ?>/public/<?php echo $data['portfolio']->caption ?>">
             </div>
-            <div class="sidebar">
-                <a href="<?php echo URLROOT; ?>suppliers/index" class="active">
-                    <span class="material-icons-sharp">grid_view</span>
-                    <h3>Dashboard</h3>
-                </a>
-
-                <a href="<?php echo URLROOT; ?>suppliers/portfolio">
-                    <span class="material-icons-sharp">
-                        inventory
-                    </span>
-                    <h3>Portfolio</h3>
-                </a>
-
-                <a href="<?php echo URLROOT; ?>suppliers/quotationRequest">
-                    <span class="material-icons-sharp">
-                        note_add
-                    </span>
-                    <h3>Quotation Requests</h3>
-                </a>
-
-                <a href="<?php echo URLROOT; ?>suppliers/sentRequests">
-                    <span class="material-icons-sharp">
-                        festival
-                    </span>
-                    <h3>Sent Quotations</h3>
-                </a>
-
-                <a href="<?php echo URLROOT; ?>suppliers/packages">
-                    <span class="material-icons-sharp">
-                        request_quote
-                    </span>
-                    <h3>Packages</h3>
-                </a>
-          
-
-                <a href="<?php echo URLROOT; ?>suppliers/calendar">
-                    <span class="material-icons-sharp">
-                        calendar_month
-                    </span>
-                    <h3>Calender</h3>
-                </a>
-
-                <a href="profile.php">
-                    <span class="material-icons-sharp">
-                        account_box
-                    </span>
-                    <h3>Profile</h3>
-                </a>
-
-                <a href="<?php echo URLROOT; ?>suppliers/messages">
-                    <span class="material-icons-sharp">mail</span>
-                    <h3>Messages</h3>
-                    <span class="message-count">5</span>
-                </a>
-                <a href="">
-                    <span class="material-icons-sharp">logout</span>
-                    <h3>Logout</h3>
-                </a>
+            <div class="profile-nav-info">
+                <h3 class="user-name"><?php echo $data['user']->bname ?></h3>
             </div>
-        </aside>
+
+        </div>
+
+        <div class="main-bd">
+            <div class="left-side">
+                <div class="profile-side">
+                    <p class="mobile-no"><i class="fa fa-phone"></i> <?php echo $data['user']->contact ?></p>
+                    <p class="user-mail"><i class="fa fa-envelope"></i> <?php echo $data['user']->email ?></p>
+                    <div class="user-bio">
+                        <h3>Bio</h3>
+                        <p class="bio">
+                            <?php echo $data['portfolio']->bio ?> </p>
+                    </div>
+                    <div class="profile-btn">
+                        <button class="chatbtn" id="chatBtn"><a href="<?php echo URLROOT; ?>suppliers">Back to Dashboard</button>
+                        <button class="createbtn" id="Create-post"><a href="<?php echo URLROOT; ?>suppliers/updatePortfolio">Edit</a></button><br />
+                      
+
+                    </div>
+                    <div class="user-rating">
+                        <h3 class="rating"><?php echo $data['portfolio']->rating ?></h3>
+                        <div class="rate">
+                            <span class="no-of-user-rate"><span><?php echo $data['portfolio']->count ?></span>&nbsp;&nbsp;reviews</span>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="right-side">
+                <ul class="gallery">
+                    <li class="result">
+                        <a href="#">
+                            <img src="<?php echo URLROOT ?>/public/<?php echo $data['portfolio']->img1 ?>" width="500" height="500" alt="">
+                        </a>
+                    </li>
+                    <li class="result">
+                        <a href="#">
+                            <img src="<?php echo URLROOT ?>/public/<?php echo $data['portfolio']->img2 ?>" width="500" height="500" alt="">
+                        </a>
+                    </li>
+                    <li class="result">
+                        <a href="#">
+                            <img src="<?php echo URLROOT ?>/public/<?php echo $data['portfolio']->img3 ?>" width="500" height="500" alt="">
+                        </a>
+                    </li>
+                    <li class="result">
+                        <a href="#">
+                            <img src="<?php echo URLROOT ?>/public/<?php echo $data['portfolio']->img4 ?>" width="500" height="500" alt="">
+                        </a>
+                    </li>
+                    <li class="result">
+                        <a href="#">
+                            <img src="<?php echo URLROOT ?>/public/<?php echo $data['portfolio']->img5 ?>" width="500" height="500" alt="">
+                        </a>
+                    </li>
+                    <li class="result">
+                        <a href="#">
+                            <img src="<?php echo URLROOT ?>/public/<?php echo $data['portfolio']->img6 ?>" width="500" height="500" alt="">
+                        </a>
+                    </li>
+                    <li class="result">
+                        <a href="#">
+                            <img src="<?php echo URLROOT ?>/public/<?php echo $data['portfolio']->img7 ?>" width="500" height="500" alt="">
+                        </a>
+                    </li>
+                    <li class="result">
+                        <a href="#">
+                            <img src="<?php echo URLROOT ?>/public/<?php echo $data['portfolio']->img8 ?>" width="500" height="500" alt="">
+                        </a>
+                    </li>
+                    <li class="result">
+                        <a href="#">
+                            <img src="<?php echo URLROOT ?>/public/<?php echo $data['portfolio']->img9 ?>" width="500" height="500" alt="">
+                        </a>
+                    </li>
+                    <li class="result">
+                        <a href="#">
+                            <img src="<?php echo URLROOT ?>/public/<?php echo $data['portfolio']->img10 ?>" width="500" height="500" alt="">
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="package-container">
+        <div class="package-header">
+            <p>About <?php echo $data['user']->bname ?></p>
+        </div>
+        <div style="display:flex; margin:2rem;padding:2rem;">
+            <div style="width:800px;padding:2rem">
+                <?php echo $data['portfolio']->description ?>
+            </div>
 
 
-      
+        </div>
 
-        <main>
-            <h1>Complete Your Portfolio</h1>
-
-         
 
     </div>
-    </main>
-    </div>
+
+
+
+    <!-- *********FOOTER******** -->
+
+    <script src="supplierPortfolio.js"></script>
+
 
 </body>
-<script>
-    function confirmDelete(requestId) {
-        var confirmation = confirm("Are you sure you want to Delete?");
-        if (confirmation) {
-            deleteReq(requestId);
-        } else {
 
-        }
-    }
 
-    function deleteReq(requestId) {
-        alert('User #' + requestId + ' has been deleted.');
-
-    }
-
-    function confirmReject(requestId) {
-        var confirmation = confirm("Are you sure you want to reject this request?");
-        if (confirmation) {
-            rejectRequest(requestId);
-        } else {
-
-        }
-    }
-
-    function rejectRequest(requestId) {
-        alert('Request #' + requestId + ' has been reject.');
-    }
-</script>
 
 </html>

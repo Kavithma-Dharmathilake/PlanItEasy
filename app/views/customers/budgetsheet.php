@@ -57,9 +57,10 @@
 
             <div class="plan_info_container">
                 <div style="display:flex">
-                    <form action="<?php echo URLROOT ?>customers/pricebudget/<?php echo $data['bid'] ?>/<?php echo $data['eventid'] ?>" method="POST">
+                    <!-- <form action="<?php echo URLROOT ?>customers/pricebudget/<?php echo $data['bid'] ?>/<?php echo $data['eventid'] ?>">
                         <input id="pricebtn" name="price" type="submit" class="view" value="Budget By Price">
-                    </form>
+                    </form> -->
+                    <a href="<?php echo URLROOT ?>customers/pricebudget/<?php echo $data['bid'] ?>/<?php echo $data['eventid'] ?>" class="view">Budget By Price</a>
                     <form action="<?php echo URLROOT ?>customers/ratingbudget/<?php echo $data['bid'] ?>/<?php echo $data['eventid'] ?>" method="POST">
                         <input id="pricebtn" name="rate" type="submit" class="view" value="Budget By Rating">
                     </form>
@@ -109,6 +110,7 @@
                                     <form action="<?php echo URLROOT ?>customers/budgetsheet/<?php echo $data['bid'] ?>/<?php echo $data['eventid'] ?>" method="POST">
                                         <input name="accept" type="submit" class="accept" value="Accept the Budget">
                                     </form>
+                                    
 
                                 </td>
                             </tr>
@@ -149,6 +151,7 @@
 
                                                                                 ?>>
                             </form>
+
 
                         </div>
                     </div>

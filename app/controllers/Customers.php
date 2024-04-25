@@ -114,7 +114,7 @@ class Customers extends Controller
     {
         $request = $this->customerModel->getEventById($id);
 
-        $photo = $this->customerModel->getPhotographers('Photographer');
+        $photo = $this->customerModel->getSuppliers('Photographer');
         $data1 = [
             'request' => $request,
             'supplier' => $photo,
@@ -127,12 +127,12 @@ class Customers extends Controller
     public function caterings($id)
     {
         $request = $this->customerModel->getEventById($id);
-        $cater = $this->customerModel->getPhotographers('Catering Service');
+        $cater = $this->customerModel->getSuppliers('Catering Service');
 
         $data2 = [
             'request' => $request,
             'supplier' => $cater,
-            'type' => "catering"
+            'type' => "Catering"
         ];
         $this->view('customers/gallery', $data2);
     }
@@ -141,7 +141,7 @@ class Customers extends Controller
     public function reception($id)
     {
         $request = $this->customerModel->getEventById($id);
-        $reception = $this->customerModel->getPhotographers('Reception hall');
+        $reception = $this->customerModel->getSuppliers('Reception hall');
 
         $data3 = [
             'request' => $request,
@@ -154,7 +154,7 @@ class Customers extends Controller
     public function eventplanner($id)
     {
         $request = $this->customerModel->getEventById($id);
-        $reception = $this->customerModel->getPhotographers('Event Planner');
+        $reception = $this->customerModel->getSuppliers('Event Planner');
 
         $data = [
             'request' => $request,
@@ -181,7 +181,7 @@ class Customers extends Controller
     public function catering($id)
     {
         $request = $this->customerModel->getEventById($id);
-        $supplier = $this->customerModel->getPhotographers('Catering Service');
+        $supplier = $this->customerModel->getSuppliers('Catering Service');
 
         $data = [
             'request' => $request,
@@ -200,7 +200,7 @@ class Customers extends Controller
     public function decorations($id)
     {
         $request = $this->customerModel->getEventById($id);
-        $supplier = $this->customerModel->getPhotographers('Decorations');
+        $supplier = $this->customerModel->getSuppliers('Decorations');
 
         $data = [
             'request' => $request,
@@ -793,6 +793,7 @@ class Customers extends Controller
 
             $budgetid = $this->customerModel->createbudget($id);
             echo '<script> alert("New Budget Created")</script>';
+            // $this->view1('customers/budgetsheet',$budgetid, $id);
             header('location: ' . URLROOT . 'customers/budgetsheet/' . $budgetid . '/' . $id);
             exit();
         }
@@ -843,29 +844,29 @@ class Customers extends Controller
         $result = $this->customerModel->lowestbudget($id);
 
 
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        // if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-            $data = [
-                'eventid' => $id,
+        $data = [
+            'eventid' => $id,
+            'bid' => $bid,
+            'lowest' => $result,
+        ];
+
+        //if items added previously is added first need to delete those
+        $this->customerModel->emptyItems($bid);
+
+        foreach ($result as $r) {
+
+            $item = [
                 'bid' => $bid,
-                'lowest' => $result,
+                'qid' => $r->qid,
+                'bname' => $r->bname,
+                'price' => $r->r_price,
+                'stype' => $r->stype
             ];
 
-            //if items added previously is added first need to delete those
-            $this->customerModel->emptyItems($bid);
-
-            foreach ($result as $r) {
-
-                $item = [
-                    'bid' => $bid,
-                    'qid' => $r->qid,
-                    'bname' => $r->bname,
-                    'price' => $r->r_price,
-                    'stype' => $r->stype
-                ];
-
-                $this->customerModel->insertBudgetItem($item);
-            }
+            $this->customerModel->insertBudgetItem($item);
+            // }
             header('location: ' . URLROOT . 'customers/budgetsheet/' . $bid . '/' . $id);
         }
     }
@@ -927,14 +928,13 @@ class Customers extends Controller
 
             $data = [
                 'fname' => trim($_POST['fname']),
-                'lname' => trim($_POST['lname']),
                 'email' => trim($_POST['email']),
                 'price' => trim($_POST['amount']),
                 'rid' => trim($_POST['event']),
                 'bid' => trim($_POST['budget'])
             ];
 
-            $s_amount = (int) $_POST['amount'];
+            $s_amount = (int) $_POST['amount'] * 100;
 
             \Stripe\Stripe::setApiKey('sk_test_51Nx6nOC3Jv8Pj3OfF2GaslmsUK83qAzZHAGXKtFDn9kBgnSx9ZurZNWnGdcqOS9VsYw3cwb90yboeUjmPQiLk5MZ00W1OfFi8E');
 
@@ -969,11 +969,12 @@ class Customers extends Controller
     public function message($qid)
     {
 
+
         $result = $this->customerModel->getOneReq($qid);
         $event = $this->customerModel->getEventById($result->eid);
         // $customer = $this->customerModel->getCustomer($event->idcustomer);
         $messages = $this->customerModel->getMessages($qid);
-
+      
         $data = [
             'request' => $result,
             'customer' => $_SESSION['user_name'],

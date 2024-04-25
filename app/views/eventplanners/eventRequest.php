@@ -136,25 +136,26 @@
                     <thead>
                         <tr>
                             <th>Event ID</th>
-                            <th>Event type</th>
-                            <th>Number of Guests</th>
-                            <th>Budget</th>
-                            <th>Tentative Date</th>
-                            <th>Event Status</th>
-                            <th>More</th>
+                            <th>Package - Price</th>
+                            <th>Event Date</th>
+                            <th>Type</th>
+                            <th>Send Date</th>
+                            <th>View More</th>
+                            <th>Start Planning</th>
                           
                         </tr>
                     </thead>
                     <tbody>
                       <?php foreach($data['quote'] as $b){ ?>
                         <tr>
-                            <td><?php echo $b->id ?></td>
-                            <td><?php echo $b->event_type ?></td>
-                            <td><?php echo $b->guest_count ?></td>
-                            <td><?php echo $b->maxbudget ?></td>
+                            <td><?php echo $b->gid ?></td>
+                            <td><?php echo $b->package ?></td>
                             <td><?php echo $b->date ?></td>
-                            <td>Pending</td>
-                            <td><a href="<?php echo URLROOT ?>eventplanners/onerequest">:</a></td>
+                            <td><?php echo $b->event_type ?></td>
+                            <td><?php echo $b->s_date ?></td>
+                            <td><a href="<?php echo URLROOT ?>eventplanners/onerequest/<?php echo $b->eqid?>">View More</a></td>
+                            <td><a href="<?php echo URLROOT ?>eventplanners/onerequest">Lalala</a></td>
+                            
                         </tr>
                         <?php  }?>
                       
