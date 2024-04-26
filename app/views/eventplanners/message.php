@@ -5,23 +5,78 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Packages</title>
+    <title>AdminDash</title>
     <!-- MATERIAL CDN -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- STYLESHEET -->
     <link rel="stylesheet" href="<?php echo URLROOT; ?>public/css/admindash.css">
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>public/css/requests.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>public/css/eventplannerdash.css">
 
+    <style>
+      
+        .container {
+            border: 2px solid #dedede;
+            background-color: #f1f1f1;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 10px 0;
+            margin-right: 30px;
+        }
 
+       
+        .container-darker {
+            border: 2px solid #dedede;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 10px 0;
+            margin-left: 30px;
+            border-color: #ccc;
+            background-color: #ddd;
+            padding-bottom: 25px;
+        }
+
+       
+        .container::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+       
+        .time-right {
+            float: right;
+            color: #aaa;
+        }
+
+       
+        .time-left {
+            float: left;
+            color: #999;
+        }
+
+        .user {
+            float: left;
+        }
+
+        textarea {
+            width: 100%;
+            height: 150px;
+            padding: 12px 20px;
+            box-sizing: border-box;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+            background-color: #f8f8f8;
+            font-size: 16px;
+            resize: none;
+        }
+    </style>
+    </style>
 </head>
 
 <body>
     <div class="dash-container">
-        <aside>
+    <aside>
             <div class="top">
                 <div class="logo">
                     <img src="<?php echo URLROOT; ?>/public/images/logo.jpg">
@@ -104,68 +159,52 @@
         </aside>
 
 
-        <!-- Content start here -->
-        <div>
-            <!-- Heading and search bar -->
-            <div style="display:flex">
-
-                <div class="planner-title">
-                    <h1>Event Requests</h1>
+        <main>
+            <h1>Messages on Quotation Request - <?php echo $data['request']->id ?></h1>
 
 
-                </div>
-                <div class="planner-search">
-                    <form action="#" method="post">
+            <?php foreach ($data['messages'] as $i) : ?>
 
-                        <input type="search" id="query" name="q" placeholder="       Search Requests"
-                            class="planner-textbox">
 
-                        <button>
-                            <i class="fa fa-search" style="font-size: 18px;">
-                            </i>
-                        </button>
-                    </form>
-                </div>
+                <?php if ($i->sender == $_SESSION['user_id']) { ?>
+                    <div class="container-darker">
+                        <strong class="user">You</strong><br /><br />
 
-            </div>
+                        <p><?php echo $i->content ?></p>
 
-            <!-- Event Request Table -->
-            <div class="event-request" style="margin-top:60px">
-           
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Event ID</th>
-                            <th>Package - Price</th>
-                            <th>Event Date</th>
-                            <th>Type</th>
-                            <th>Send Date</th>
-                            <th>View More</th>
-                           
-                          
-                        </tr>
-                    </thead>
-                    <tbody>
-                      <?php foreach($data['quote'] as $b){ ?>
-                        <tr>
-                            <td><?php echo $b->gid ?></td>
-                            <td><?php echo $b->package ?></td>
-                            <td><?php echo $b->date ?></td>
-                            <td><?php echo $b->event_type ?></td>
-                            <td><?php echo $b->s_date ?></td>
-                            <td><a href="<?php echo URLROOT ?>eventplanners/onerequest/<?php echo $b->gid?>">View More</a></td>
-                           
-                            
-                        </tr>
-                        <?php  }?>
-                      
-                    </tbody>
-                </table>
-            </div>
+                        <span class="time-right"><?php echo $i->time ?> | <?php echo $i->date ?></span>
+                    </div>
+                <?php } else { ?>
 
 
 
-        </div>
+
+                    <div class="container">
+                        <strong class="user">Customer</strong><br /><br />
+                        <p><?php echo $i->content ?></p>
+                        <span class="time-right"><?php echo $i->time ?> | <?php echo $i->date ?></span>
+                    </div>
+
+                <?php } ?>
+
+
+
+            <?php endforeach ?>
+
+
+            <form action="<?php echo URLROOT ?>eventplanners/message/<?php echo  $data['request']->id ?>" method="POST">
+                <textarea name="content"> </textarea>
+                <input style="  background-color: #7380ec;border: none;color: white;padding: 10px 32px;margin: 4px 2px;border-radius:3rem" type="Submit" value="Send">
+            </form>
+
+
+
+
+
+    </div>
+    </main>
+    </div>
+
 
 
 </body>

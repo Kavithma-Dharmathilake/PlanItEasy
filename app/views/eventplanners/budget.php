@@ -5,22 +5,21 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Packages</title>
+    <title>PlanItEasy</title>
     <!-- MATERIAL CDN -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- STYLESHEET -->
     <link rel="stylesheet" href="<?php echo URLROOT; ?>public/css/admindash.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>public/css/eventplannerdash.css">
 
+
 </head>
 
 <body>
     <div class="dash-container">
-        <aside>
+    <aside>
             <div class="top">
                 <div class="logo">
                     <img src="<?php echo URLROOT; ?>/public/images/logo.jpg">
@@ -62,14 +61,14 @@
                     </span>
                     <h3>Supplier Quotations</h3>
                 </a>
-                <a href="<?php echo URLROOT ?>eventplanners/budget" class="active">
+                <a href="<?php echo URLROOT ?>eventplanners/budget">
                     <span class="material-icons-sharp">
                         paid
                     </span>
                     <h3>Budget Plans</h3>
                 </a>
 
-                <a href="<?php echo URLROOT ?>eventplanners/calendar">
+                <a href="<?php echo URLROOT ?>eventplanners/calendar" class="active">
                     <span class="material-icons-sharp">
                         calendar_month
                     </span>
@@ -95,115 +94,81 @@
                     </span>
                     <h3>Inquiry</h3>
                 </a>
-                <a href="<?php echo URLROOT ?>users/logout">
+                <a href="<?php echo URLROOT ?>">
                     <span class="material-icons-sharp">logout</span>
                     <h3>Logout</h3>
                 </a>
             </div>
         </aside>
 
-        <main>
 
-
-            <!-- Content start here -->
-            <div>
-                <div class="profile end">
-                    <div class="info" style="padding-right:25px;">
-                        <p>Hey, <b>Sunimal</b></p>
-                        <small class="text-muted">Eventplanner</small>
-                    </div>
-                    <div class="profile-photo">
-                        <img src="<?php echo URLROOT ?>public/images/photo2.jpg">
-                    </div>
-                </div>
+        <!-- Content start here -->
+        <div>
+          
 
 
 
-                <!-- Heading and search bar -->
-                <div style="display:flex">
+            <!-- Heading and search bar -->
+            <div style="display:flex">
 
-                    <div class="planner-title">
-                        <h1>Budget Plans</h1>
+                <div class="planner-title">
+                    <h1>Your Budgets</h1>
 
-
-                    </div>
-                    <div class="planner-search">
-                        <form action="#" method="post">
-
-                            <input type="search" id="query" name="q" placeholder="       Search Requests"
-                                class="planner-textbox">
-
-                            <button>
-                                <i class="fa fa-search" style="font-size: 18px;">
-                                </i>
-                            </button>
-                        </form>
-                    </div>
 
                 </div>
-
-                <!-- Event Request Table -->
-                <div class="event-request" style="margin-top:60px">
-
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Event ID</th>
-                                <th>Customer</th>
-                                <th>Event Type</th>
-                                <th>Total Budget</th>
-                                <th>Sent Date</th>
-                                <th>Status</th>
-                                <th>More</th>
-
-                            </tr>
-                        </thead>
-                        <tbody>
-
-                            <tr>
-                                <td>#R0001</td>
-                                <td>Sriyana Wijesekara</td>
-                                <td>Wedding</td>
-                                <td>1,000,000 LKR</td>
-                                <td>21/10/2023</td>
-                                <td>Pending</td>
-                                <td><a href="<?php echo URLROOT ?>eventplanners/createbudget">></a></td>
-                            </tr>
-                            <tr>
-                                <td>#R0003</td>
-                                <td>Kumari</td>
-                                <td>Birthday</td>
-                                <td>1,000,000 LKR</td>
-                                <td>21/10/2023</td>
-                                <td>Accepted</td>
-                                <td><a href="<?php echo URLROOT ?>eventplanners/createbudget">></a></td>
-                            </tr>
-                            <tr>
-                                <td>#R0010</td>
-                                <td>Kasun Wijesekara</td>
-                                <td>Wedding</td>
-                                <td>1,000,000 LKR</td>
-                                <td>21/10/2023</td>
-                                <td>Rejected</td>
-                                <td><a href="<?php echo URLROOT ?>eventplanners/createbudget">></a></td>
-                            </tr>
-                            <tr>
-                                <td>#R0008</td>
-                                <td>Wimal Wijesekara</td>
-                                <td>Wedding</td>
-                                <td>1,000,000 LKR</td>
-                                <td>21/10/2023</td>
-                                <td>Pending</td>
-                                <td><a href="<?php echo URLROOT ?>eventplanners/createbudget">></a></td>
-                            </tr>
-
-                        </tbody>
-                    </table>
-                </div>
-
 
 
             </div>
+
+            <!-- Event Request Table -->
+
+
+
+            <div class="event-request" style="margin-top:60px">
+                <div style="display:flex;">
+                    <form action="<?php echo URLROOT ?>eventplanners/budget/<?php echo $data['eventid'] ?>" method="POST">
+                        <input style="padding:1rem; margin:1rem; background-color:#7380ec;color:white; border-radius:0.4rem" type="submit" value="Create Budget">
+                    </form>
+                 
+
+                </div>
+                <table style="width:1000px">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Payment Status</th>
+                            <th>Final Price</th>
+                            <th>Actions</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($data['budget'] as $q) : ?>
+
+                            <tr>
+
+                                <td><?php echo $q->id; ?></td>
+                                <td> <?php echo $q->status; ?>
+                                <td>LKR. <?php echo $q->price; ?></td>
+                                <td>
+                                    <a href="<?php echo URLROOT ?>eventplanners/budgetsheet/<?php echo $q->id ?>/<?php echo $data['eventid'] ?> ">
+                                        View
+                                    </a>
+                                  
+                                </td>
+
+
+                            </tr>
+                        <?php endforeach; ?>
+
+                    </tbody>
+                </table>
+            </div>
+
+
+
+        </div>
+
 
 </body>
 

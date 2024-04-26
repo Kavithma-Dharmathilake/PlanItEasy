@@ -357,8 +357,9 @@ class Supplier
     {
 
         $date = date("Y-m-d");
-        $this->db->query('INSERT INTO packages(name, price, description, services, date) VALUES(:name, :price, :description, :services, :date)');
+        $this->db->query('INSERT INTO packages(supplier,name, price, description, services, date) VALUES(:supplier,:name, :price, :description, :services, :date)');
       
+        $this->db->bind(':supplier', $_SESSION['user_id']);
         $this->db->bind(':name', $data['name']);
         $this->db->bind(':description', $data['description']);
         $this->db->bind(':services', $data['services']);

@@ -5,7 +5,7 @@ class Eventplanners extends Controller
 
     public function __construct()
     {
-        
+
         if (!isLoggedIn()) {
             redirect('users/login');
         }
@@ -47,8 +47,6 @@ class Eventplanners extends Controller
 
                 if (move_uploaded_file($file_tmp, $destination)) {
                     $file_path = $destination;
-
-
                 } else {
                     $data['file_err'] = 'File upload failed';
                 }
@@ -74,10 +72,7 @@ class Eventplanners extends Controller
                 } else {
                     die('Something went wrong');
                 }
-
             }
-
-
         } else {
             $result = $this->userModel->getUserById($id);
             $data = [
@@ -103,7 +98,6 @@ class Eventplanners extends Controller
         } else {
             die("something went wrong");
         }
-
     }
 
     public function createbudget()
@@ -112,8 +106,6 @@ class Eventplanners extends Controller
 
 
         $this->view('eventplanners/createbudget');
-        
-
     }
 
 
@@ -125,7 +117,6 @@ class Eventplanners extends Controller
         ];
 
         $this->view('eventplanners/eventRequest', $data);
-
     }
 
     public function quoteReq()
@@ -133,49 +124,205 @@ class Eventplanners extends Controller
 
 
         $this->view('eventplanners/quoteReq');
-
     }
 
     public function supplierReq()
     {
 
         $this->view('eventplanners/supplierReq');
-
     }
 
-    public function budget()
+    public function budget($id)
     {
 
-        $this->view('eventplanners/budget');
+       
+        $budget = $this->plannerModel->getAllBudgets($id);
+
+        $data = [
+            'eventid' => $id,
+            'budget' => $budget
+        ];
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+
+            $budgetid = $this->plannerModel->createbudget($id);
+            echo '<script> alert("New Budget Created")</script>';
+            header('location: ' . URLROOT . 'eventplanners/budgetsheet/' . $budgetid . '/' . $id);
+            exit();
+        }
+
+        $this->view('eventplanners/budget', $data);
+    }
+
+    public function budgetsheet($bid, $id)
+    {
+
+        $request = $this->plannerModel->getRequestEvent($id);
+        $quote = $this->plannerModel->getAcceptedQuote($id);
+        $items = $this->plannerModel->getBudgetItems($bid);
+        $user = $this->plannerModel->getPlannerDetail();
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $price = 0.00;
+            foreach ($items as $i) {
+                $price = $price + $i->r_price;
+            }
+
+            $data1 = [
+                'price' => $price,
+                'id' => $bid
+            ];
+
+            if ($this->plannerModel->updateTotal($data1)) {
+                header('location: ' . URLROOT . 'eventplanners/budget/' . $id);
+            }
+        } else {
+
+            $data = [
+                'quote' => $quote,
+                'eventid' => $id,
+                'request' => $request,
+                'bid' => $bid,
+                'budget' => $items,
+                'user'=>$user
+
+            ];
+
+            $this->view('eventplanners/budgetsheet', $data);
+        }
+    }
+
+
+    public function pricebudget($bid, $id)
+    {
+
+        $result = $this->plannerModel->lowestbudget($id);
+        
+        $data = [
+            'eventid' => $id,
+            'bid' => $bid,
+            'lowest' => $result,
+        ];
+        $this->plannerModel->emptyItems($bid);
+
+        foreach ($result as $r) {
+
+            $item = [
+                'bid' => $bid,
+                'qid' => $r->qid,
+                'bname' => $r->bname,
+                'price' => $r->r_price,
+                'stype' => $r->stype
+            ];
+
+            $this->plannerModel->insertBudgetItem($item);
+            // }
+            header('location: ' . URLROOT . 'eventplanners/budgetsheet/' . $bid . '/' . $id);
+        }
+    }
+
+    public function deleteItem($bid, $eid, $bi)
+    {
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $this->plannerModel->deletBudgetItem($bi);
+            header('location: ' . URLROOT . 'eventplanners/budgetsheet/' . $bid . '/' . $eid);
+        }
+    }
+
+    public function addItem($bid, $eid, $qid)
+    {
+     
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+
+            $r = $this->plannerModel->getOneQuote($qid);
+
+
+            $data = [
+                'bid' => $bid,
+                'qid' => $qid,
+                'bname' => $r->bname,
+                'price' => $r->r_price,
+                'stype' => $r->stype
+            ];
+
+
+            if ($this->plannerModel->insertBudgetItem($data)) {
+
+                echo '<script> prompt("New Budget Item Added")</script>';
+                echo '<script> alert("New Budget Created")</script>';
+                header('location: ' . URLROOT . 'eventplanners/budgetsheet/' . $bid . '/' . $eid);
+            } else {
+                echo '<script> prompt("Item is already added")</script>';
+            }
+        }
+    }
+
+    public function addPlannerCharge($bid, $eid, $qid)
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+
+            $user = $this->plannerModel->getPlannerDetail();
+
+
+
+            $data = [
+                'bid' => $bid,
+                'qid' => $qid,
+                'bname' => $user->bname,
+                'price' => $_POST['price'],
+                'stype' => 'Eventplanner'
+            ];
+
+
+            if ($this->plannerModel->insertBudgetItem($data)) {
+
+                echo '<script> prompt("New Budget Item Added")</script>';
+                echo '<script> alert("New Budget Created")</script>';
+                header('location: ' . URLROOT . 'eventplanners/budgetsheet/' . $bid . '/' . $eid);
+            } else {
+                echo '<script> prompt("Item is already added")</script>';
+            }
+        }
+    }
+
+
+    public function downloadbudget($bid, $id){
+
+        
+        $budgetData = $this->plannerModel->getBudgetData($bid, $id);
+        echo json_encode($budgetData);
 
     }
+
 
     public function calendar()
     {
 
         $this->view('eventplanners/calendar');
-
     }
 
     public function profile()
     {
 
         $this->view('eventplanners/profile');
-
     }
 
     public function messages()
     {
 
         $this->view('eventplanners/messages');
-
     }
 
     public function inquiry()
     {
 
         $this->view('eventplanners/inquiry');
-
     }
 
 
@@ -196,7 +343,6 @@ class Eventplanners extends Controller
 
                 if (move_uploaded_file($file_tmp, $destination)) {
                     $file_path = $destination;
-
                 } else {
                     $data['file_err'] = 'File upload failed';
                 }
@@ -248,11 +394,9 @@ class Eventplanners extends Controller
                 } else {
                     $this->view('eventplanners/addNewpackage', $data);
                 }
-
             } else {
                 $this->view('eventplanners/addNewpackage', $data);
             }
-
         } else {
             $data = [
                 'name' => '',
@@ -265,9 +409,6 @@ class Eventplanners extends Controller
                 'description_err' => '',
             ];
             $this->view('eventplanners/addNewpackage', $data);
-
-
-
         }
     }
 
@@ -275,8 +416,9 @@ class Eventplanners extends Controller
     public function onerequest($id)
     {
 
+        $request = $this->plannerModel->getRequestEvent($id);
         $quote = $this->plannerModel->getOnePlannerQuote($id);
-        $customer = $this->plannerModel->getCustomerById($quote->idcustomer);
+        $customer = $this->plannerModel->getCustomerById($request->idcustomer);
         $reception = null;
         $photography = null;
         $cake = null;
@@ -287,64 +429,64 @@ class Eventplanners extends Controller
         $decoration = null;
 
 
-        if($quote->reception != -1){
+        if ($quote->reception != -1) {
             $reception = $this->plannerModel->getOneReceptionQuote($quote->reception);
         }
 
-        if($quote->photography != -1){
+        if ($quote->photography != -1) {
             $photography = $this->plannerModel->getOnePhotographyQuote($quote->photography);
         }
 
-        if($quote->cake != -1){
+        if ($quote->cake != -1) {
             $cake = $this->plannerModel->getOneCakeQuote($quote->cake);
         }
 
-        if($quote->decoration != -1){
+        if ($quote->decoration != -1) {
             $decoration = $this->plannerModel->getOneDecorationQuote($quote->decoration);
         }
 
-        if($quote->music != -1){
+        if ($quote->music != -1) {
             $music = $this->plannerModel->getOneMusicQuote($quote->music);
         }
 
-        if($quote->catering != -1){
+        if ($quote->catering != -1) {
             $catering = $this->plannerModel->getOneCateringQuote($quote->catering);
         }
-        if($quote->dancing != -1){
+        if ($quote->dancing != -1) {
             $dancing = $this->plannerModel->getOneDancingQuote($quote->dancing);
         }
-        if($quote->dj != -1){
+        if ($quote->dj != -1) {
             $dj = $this->plannerModel->getOneDjQuote($quote->dj);
         }
 
 
-        $data =[
+        $data = [
             'quote' => $quote,
-            'photography'=>$photography,
-            'catering'=>$catering,
-            'decoration'=>$decoration,
-            'cake'=>$cake,
-            'dj'=>$dj,
-            'dancing'=>$dancing,
-            'music'=>$music,
-            'reception'=>$reception,
-            'customer'=>$customer
+            'photography' => $photography,
+            'catering' => $catering,
+            'decoration' => $decoration,
+            'cake' => $cake,
+            'dj' => $dj,
+            'dancing' => $dancing,
+            'music' => $music,
+            'reception' => $reception,
+            'customer' => $customer,
+            'request' => $request
         ];
 
         $this->view('eventplanners/onerequest', $data);
-
     }
 
     public function suppliers($type, $id)
     {
-        $quote = $this->plannerModel->getOnePlannerQuote($id);
-        $request = $this->plannerModel->getEvent($quote->rid);
+        $request = $this->plannerModel->getRequestEvent($id);
         $supplier = $this->plannerModel->getSupplier($type);
-    
+
+
         $data = [
             'type' => $type,
-            'request' =>$request,
-            'supplier' =>$supplier
+            'request' => $request,
+            'supplier' => $supplier
         ];
         $this->view('eventplanners/supplier', $data);
     }
@@ -353,18 +495,268 @@ class Eventplanners extends Controller
     {
 
         $this->view('eventplanners/recivedquote');
+    }
+    public function portfolio($sid, $eid)
+    {
 
+        $request = $this->CustomerModel->getEventById($eid);
+        $user = $this->plannerModel->getUserById($sid);
+
+        $data = [
+            'request' => $request,
+            'user' => $user,
+
+
+        ];
+
+        $this->view('eventplanners/portfolio', $data);
     }
 
+    public function sendquote($sid, $eid)
+    {
+        $request = $this->CustomerModel->getEventById($eid);
+        $supplier = $this->CustomerModel->getOneSupplier($sid);
+
+
+        $type = $supplier->stype;
+
+        $data = [
+            'request' => $request,
+            'supplier' => $supplier,
+        ];
+
+        if ($type == "none") {
+            $this->view('eventplanners/index', $data);
+        } else if ($type == "Photographer") {
+
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+
+                $album = isset($_POST['album']) ? 'Album' : null;
+                $additional = isset($_POST['additional']) ? 'Additional Photographer' : null;
+                $booth = isset($_POST['photobooth']) ? 'Photobooth' : null;
+                $photoservices = implode(', ', array_filter([$album, $additional, $booth]));
+
+
+                $package = $_POST['type'];
+                $stime = $_POST['start'];
+                $etime = $_POST['end'];
+                $remark = $_POST['remark'];
+
+
+                $quote = [
+                    'package' => $package,
+                    'stime' => $stime,
+                    'etime' => $etime,
+                    'remark' => $remark,
+                    'rid' => $request->id,
+                    'sid' => $supplier->id,
+                    'uid' => $_SESSION['user_id'],
+                    'stype' => 'photography',
+                    'services' => $photoservices
+                ];
 
 
 
+                if ($this->CustomerModel->RequestPhotoQuote($quote)) {
+                    echo '<script>alert("Request Quotation sent successfully")</script>';
+                    echo '<script>window.location.href = "' . URLROOT . 'eventplanners/suppliers/Photographer/' . $request->id . '";</script>';
+                } else {
+
+                    $this->view('customers/gallery', $data);
+                }
+            } else {
+
+                $this->view('eventplanners/photo-quote', $data);
+            }
+        } else if ($type == "Reception hall") {
+
+
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
 
+                $package = $_POST['type'];
+                $stime = $_POST['start'];
+                $etime = $_POST['end'];
+                $remark = $_POST['remark'];
 
 
+                $quote = [
+                    'package' => $package,
+                    'stime' => $stime,
+                    'etime' => $etime,
+                    'remark' => $remark,
+                    'rid' => $request->id,
+                    'sid' => $supplier->id,
+                    'uid' => $_SESSION['user_id'],
+                    'stype' => 'reception'
+                ];
+
+
+
+                if ($this->CustomerModel->RequestReceptQuote($quote)) {
+                    echo '<script> alert("Quotation Added Succfully")</script>';
+                    header('location: ' . URLROOT . 'eventplanners/suppliers/reception/' . $request->id);
+                } else {
+
+                    $this->view('customers/gallery', $data);
+                }
+            } else {
+
+                $this->view('eventplanners/reception-quote', $data);
+            }
+        } else if ($type == "Decorations") {
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+
+
+                $package = $_POST['type'];
+                $stime = $_POST['start'];
+                $etime = $_POST['end'];
+                $remark = $_POST['remark'];
+
+                $poruwa = isset($_POST['poruwa']) ? 'Poruwa ' : null;
+                $seteeBack = isset($_POST['Setee-Back']) ? 'Setee Back ' : null;
+                $tabledeco = isset($_POST['Table-Deco']) ? 'Table Arrangements ' : null;
+                $bouquet = isset($_POST['Bouquets']) ? 'Bouquets ' : null;
+                $entrance = isset($_POST['Entrance-deco']) ? 'Entrance Deco ' : null;
+                $seating = isset($_POST['Seating-deco']) ? 'Seating Arrangements' : null;
+                $lighting = isset($_POST['Lighting-deco'])  ? 'Lighting Deco' : null;
+                $ceiling = isset($_POST['Ceiling-deco']) ? 'Ceiling Deco' : null;
+                $decoservices = implode(', ', array_filter([$poruwa, $seteeBack, $tabledeco, $bouquet, $entrance, $seating, $lighting, $ceiling]));
+
+                $natural = isset($_POST['Natural']) ? 'Natural ' : null;
+                $artificial = isset($_POST['Artificial']) ? 'Artificial ' : null;
+                $flowers = implode(', ', array_filter([$natural, $artificial]));
+
+
+
+                $quote = [
+                    'package' => $package,
+                    'stime' => $stime,
+                    'etime' => $etime,
+                    'remark' => $remark,
+                    'rid' => $request->id,
+                    'sid' => $supplier->id,
+                    'services' => $decoservices,
+                    'flowers' => $flowers,
+                    'uid' => $_SESSION['user_id'],
+                    'stype' => 'decoration'
+                ];
+
+
+
+                if ($this->CustomerModel->RequestDecoQuote($quote)) {
+                    echo '<script> alert("Quotation Added Succfully")</script>';
+                    echo '<script>window.location.href = "' . URLROOT . 'eventplanners/suppliers/Decorations/' . $request->id . '";</script>';
+                } else {
+
+                    $this->view('customers/gallery', $data);
+                }
+            } else {
+                $this->view('eventplanners/deco-quote', $data);
+            }
+        } else if ($type == "cake") {
+            $this->view('customers/gallery', $data);
+        } else if ($type == "dj") {
+            $this->view('customers/gallery', $data);
+        } else if ($type == "music") {
+            $this->view('customers/gallery', $data);
+        } else if ($type == "dancing") {
+            $this->view('customers/gallery', $data);
+        } else if ($type == "Catering Service") {
+
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+                $package = $_POST['type'];
+                $stime = $_POST['start'];
+                $etime = $_POST['end'];
+                $remark = $_POST['remark'];
+
+                $lunch = isset($_POST['Lunch']) ? 'Lunch ' : null;
+                $dinner = isset($_POST['Dinner']) ? 'Dinner ' : null;
+                $breakfast = isset($_POST['Breakfast']) ? 'Breakfast ' : null;
+
+                $time = implode(', ', array_filter([$lunch, $dinner, $breakfast]));
+
+                $packets = isset($_POST['Packets']) ? 'Packets ' : null;
+                $servers = isset($_POST['Servers']) ? 'Servers ' : null;
+                $delivery = isset($_POST['Delivery']) ? 'Delivery ' : null;
+                $caterservices = implode(', ', array_filter([$packets, $servers, $delivery]));
+
+                $quote = [
+                    'package' => $package,
+                    'stime' => $stime,
+                    'etime' => $etime,
+                    'remark' => $remark,
+                    'time' => $time,
+                    'services' => $caterservices,
+                    'rid' => $request->id,
+                    'sid' => $supplier->id,
+                    'uid' => $_SESSION['user_id'],
+                    'stype' => 'catering'
+                ];
+
+
+
+                if ($this->CustomerModel->RequestCaterQuote($quote)) {
+                    echo '<script> alert("Quotation Added Succfully")</script>';
+                    echo '<script>window.location.href = "' . URLROOT . 'eventplanners/suppliers/catering/' . $request->id . '";</script>';
+                } else {
+                    $this->view('customers/gallery', $data);
+                }
+            } else {
+                $this->view('eventplanners/catering-quote', $data);
+            }
+        }
+    }
+
+    public function message($id)
+    {
+
+        $messages = $this->plannerModel->getMessages($id);
+        $quote = $this->plannerModel->getOnePlannerQuote2($id);
+        $customer = $this->plannerModel->getUserById($quote->uid);
+
+        $data = [
+
+            'messages' => $messages,
+            'customer' => $customer->name,
+            'request' => $quote
+
+        ];
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+
+            $content = $_POST['content'];
+            $data = [
+                'content' => $content,
+                'qid' => $id,
+                'cuid' => $quote->uid,
+            ];
+
+            $this->plannerModel->sendMessage($data);
+            header('location: ' . URLROOT . '/eventplanners/message/' . $id);
+        }
+
+
+        $this->view('eventplanners/message', $data);
+    }
+
+    public function quotations($type, $id)
+    {
+
+        $request = $this->plannerModel->getRequestEvent($id);
+        $quote = $this->plannerModel->getQuotations($type, $id);
+
+
+        $data = [
+            'type' => $type,
+            'request' => $request,
+            'quote' => $quote
+        ];
+        $this->view('eventplanners/quotations', $data);
+    }
 }
-
-
-?>

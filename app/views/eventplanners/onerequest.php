@@ -8,8 +8,7 @@
     <title>Event request</title>
     <!-- MATERIAL CDN -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <!-- STYLESHEET -->
     <link rel="stylesheet" href="<?php echo URLROOT; ?>public/css/admindash.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>public/css/eventplannerdash.css">
@@ -172,12 +171,14 @@
                             <div class="req-title" style="width:50%">Telephone </div>
                             <div class="req-data" style="width:50%"><?php echo $data['customer']->contact ?></div>
                         </div>
+                        <a href="<?php echo URLROOT ?>eventplanners/message/<?php echo $data['quote']->eqid ?>"><button style="margin-left:15px;margin-top:50px; padding:20px; background-color:#7380ec; color:white; border-radius:15px;">Message With Customer</button></a>
+
 
                     </div>
 
                     <div>
 
-                        <a href="<?php echo URLROOT ?>eventplanners/createbudget"><button style=" margin:20px; padding:20px; background-color:#7380ec; color:white; border-radius:15px;">Create Budget</button></a>
+                        <a href="<?php echo URLROOT ?>eventplanners/budget/<?php echo $data['quote']->gid ?>"><button style=" margin:20px; padding:20px; background-color:#7380ec; color:white; border-radius:15px;">Create Budget</button></a>
                     </div>
                 </div>
                 <div class="search-quoate">
@@ -206,9 +207,9 @@
                        
                         <div>
                             <p style="margin:20px; padding:20px; margin-top:100px;">
-                                <a href=""> Requested</a> | <a href="<?php echo URLROOT  ?>eventplanners/recivedquote/">Receieved</a>
+                               <a href="<?php echo URLROOT  ?>eventplanners/quotations/reception/<?php echo $data['quote']->gid ?>"><button style="margin-top:-100px; margin-left:15px;padding:20px">Quotations</button></a>
                             </p>
-                            <a href="<?php echo URLROOT ?>eventplanners/suppliers/reception/<?php echo $data['quote']->eqid ?>"><button style="margin-top:-100px; margin-left:60px;padding:20px">Search Suppliers</button></a>
+                            <a href="<?php echo URLROOT ?>eventplanners/suppliers/reception/<?php echo $data['quote']->gid ?>"><button style="margin-top:-100px; margin-left:60px;padding:20px">Search Suppliers</button></a>
                         </div>
                         <?php } ?>
                     </div>
@@ -244,9 +245,9 @@
                        
                         <div>
                             <p style="margin:20px; padding:20px; margin-top:100px;">
-                                <a href=""> Requested - 3</a> | <a href="<?php echo URLROOT ?>eventplanners/recivedquote">Receieved -2</a>
+                            <a href="<?php echo URLROOT  ?>eventplanners/quotations/catering/<?php echo $data['quote']->gid ?>"><button style="margin-top:-100px; margin-left:15px;padding:20px">Quotations</button></a>
                             </p>
-                            <a href="<?php echo URLROOT ?>eventplanners/findsupplier"><button style="margin-top:-100px; margin-left:60px;padding:20px">Search Suppliers</button></a>
+                            <a href="<?php echo URLROOT ?>eventplanners/suppliers/catering/<?php echo $data['quote']->gid ?>"><button style="margin-top:-100px; margin-left:60px;padding:20px">Search Suppliers</button></a>
                         </div>
                         <?php } ?>
                     </div>
@@ -279,9 +280,9 @@
                        
                         <div>
                             <p style="margin:20px; padding:20px; margin-top:100px;">
-                                <a href=""> Requested - 3</a> | <a href="<?php echo URLROOT ?>eventplanners/recivedquote">Receieved -2</a>
+                            <a href="<?php echo URLROOT  ?>eventplanners/quotations/photography/<?php echo $data['quote']->gid ?>"><button style="margin-top:-100px; margin-left:15px;padding:20px">Quotations</button></a>
                             </p>
-                            <a href="<?php echo URLROOT ?>eventplanners/findsupplier"><button style="margin-top:-100px; margin-left:60px;padding:20px">Search Suppliers</button></a>
+                            <a href="<?php echo URLROOT ?>eventplanners/suppliers/Photographer/<?php echo $data['quote']->gid ?>"><button style="margin-top:-100px; margin-left:60px;padding:20px">Search Suppliers</button></a>
                         </div>
                         <?php } ?>
                     </div>
@@ -308,9 +309,9 @@
                        
                         <div>
                             <p style="margin:20px; padding:20px; margin-top:100px;">
-                                <a href=""> Requested - 3</a> | <a href="<?php echo URLROOT ?>eventplanners/recivedquote">Receieved -2</a>
+                            <a href="<?php echo URLROOT  ?>eventplanners/quotations/decoration/<?php echo $data['quote']->gid ?>"><button style="margin-top:-100px; margin-left:15px;padding:20px">Quotations</button></a>
                             </p>
-                            <a href="<?php echo URLROOT ?>eventplanners/findsupplier"><button style="margin-top:-100px; margin-left:60px;padding:20px">Search Suppliers</button></a>
+                            <a href="<?php echo URLROOT ?>eventplanners/suppliers/Decorations/<?php echo $data['quote']->gid ?>"><button style="margin-top:-100px; margin-left:60px;padding:20px">Search Suppliers</button></a>
                         </div>
                         <?php } ?>
                     </div>
@@ -329,9 +330,9 @@
                        
                         <div>
                             <p style="margin:20px; padding:20px; margin-top:100px;">
-                                <a href=""> Requested - 3</a> | <a href="<?php echo URLROOT ?>eventplanners/recivedquote">Receieved -2</a>
+                                <a href="<?php echo URLROOT ?>eventplanners/quotations/Cake/<?php echo $data['quote']->eqid ?>"> <button style="margin-top:-100px; margin-left:15px;padding:20px">Quotations</button> </a> 
                             </p>
-                            <a href="<?php echo URLROOT ?>eventplanners/findsupplier"><button style="margin-top:-100px; margin-left:60px;padding:20px">Search Suppliers</button></a>
+                            <a href="<?php echo URLROOT ?>eventplanners/suppliers/Cake/<?php echo $data['quote']->gid ?>"><button style="margin-top:-100px; margin-left:60px;padding:20px">Search Suppliers</button></a>
                         </div>
                         <?php } ?>
                     </div>
@@ -356,7 +357,7 @@
                             <p style="margin:20px; padding:20px; margin-top:100px;">
                                 <a href=""> Requested - 3</a> | <a href="<?php echo URLROOT ?>eventplanners/recivedquote">Receieved -2</a>
                             </p>
-                            <a href="<?php echo URLROOT ?>eventplanners/findsupplier"><button style="margin-top:-100px; margin-left:60px;padding:20px">Search Suppliers</button></a>
+                            <a href="<?php echo URLROOT ?>eventplanners/suppliers/dancing/<?php echo $data['quote']->gid ?>"><button style="margin-top:-100px; margin-left:60px;padding:20px">Search Suppliers</button></a>
                         </div>
                         <?php } ?>
                     </div>
@@ -382,7 +383,7 @@
                             <p style="margin:20px; padding:20px; margin-top:100px;">
                                 <a href=""> Requested - 3</a> | <a href="<?php echo URLROOT ?>eventplanners/recivedquote">Receieved -2</a>
                             </p>
-                            <a href="<?php echo URLROOT ?>eventplanners/findsupplier"><button style="margin-top:-100px; margin-left:60px;padding:20px">Search Suppliers</button></a>
+                            <a href="<?php echo URLROOT ?>eventplanners/suppliers/music/<?php echo $data['quote']->gid ?>"><button style="margin-top:-100px; margin-left:60px;padding:20px">Search Suppliers</button></a>
                         </div>
                         <?php } ?>
                     </div>
@@ -416,7 +417,7 @@
                             <p style="margin:20px; padding:20px; margin-top:100px;">
                                 <a href=""> Requested - 3</a> | <a href="<?php echo URLROOT ?>eventplanners/recivedquote">Receieved -2</a>
                             </p>
-                            <a href="<?php echo URLROOT ?>eventplanners/findsupplier"><button style="margin-top:-100px; margin-left:60px;padding:20px">Search Suppliers</button></a>
+                            <a href="<?php echo URLROOT ?>eventplanners/suppliers/dj/<?php echo $data['quote']->gid ?>"><button style="margin-top:-100px; margin-left:60px;padding:20px">Search Suppliers</button></a>
                         </div>
                         <?php } ?>
                     </div>

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>planiteasy</title>
+    <title>Events</title>
     <!-- MATERIAL CDN -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -19,39 +19,87 @@
 
 <body>
     <div class="dash-container">
-        <aside>
-
+    <aside>
+            <div class="top">
+                <div class="logo">
+                    <img src="<?php echo URLROOT; ?>/public/images/logo.jpg">
+                    <h2>PlanItEasy</h2>
+                </div>
+                <div class="close" id="close-btn">
+                    <span class="material-icons-sharp">close</span>
+                </div>
+            </div>
             <div class="sidebar">
-                <a href="<?php echo URLROOT; ?>customers">
-                    <span class="material-icons-sharp" class="active">grid_view</span>
+                <a href="<?php echo URLROOT; ?>eventplanners">
+                    <span class="material-icons-sharp">grid_view</span>
                     <h3>Dashboard</h3>
                 </a>
-                <a href="<?php echo URLROOT; ?>customers/events">
-                    <span class="material-icons-sharp">man</span>
-                    <h3>Events</h3>
+
+                <a href="<?php echo URLROOT ?>eventplanners/packages">
+                    <span class="material-icons-sharp">
+                        inventory
+                    </span>
+                    <h3>Packages</h3>
                 </a>
-                <a href="<?php echo URLROOT; ?>customers/payments">
-                    <span class="material-icons-sharp">payments</span>
-                    <h3>Payments</h3>
+
+                <a href="<?php echo URLROOT ?>eventplanners/eventRequest" class="active">
+                    <span class="material-icons-sharp">
+                        festival
+                    </span>
+                    <h3>Event Requests</h3>
                 </a>
-                <a href="<?php echo URLROOT; ?>customers/message">
-                    <span class="material-icons-sharp">message</span>
+
+                <a href="<?php echo URLROOT ?>eventplanners/quoteReq">
+                    <span class="material-icons-sharp">
+                        note_add
+                    </span>
+                    <h3>Quoatation Requests</h3>
+                </a>
+                <a href="<?php echo URLROOT ?>eventplanners/supplierReq">
+                    <span class="material-icons-sharp">
+                        request_quote
+                    </span>
+                    <h3>Supplier Quotations</h3>
+                </a>
+                <a href="<?php echo URLROOT ?>eventplanners/budget">
+                    <span class="material-icons-sharp">
+                        paid
+                    </span>
+                    <h3>Budget Plans</h3>
+                </a>
+
+                <a href="<?php echo URLROOT ?>eventplanners/calendar">
+                    <span class="material-icons-sharp">
+                        calendar_month
+                    </span>
+                    <h3>Calender</h3>
+                </a>
+
+                <a href="<?php echo URLROOT ?>eventplanners/profile">
+                    <span class="material-icons-sharp">
+                        account_box
+                    </span>
+                    <h3>Profile</h3>
+                </a>
+
+                <a href="<?php echo URLROOT ?>eventplanners/messages">
+                    <span class="material-icons-sharp">mail</span>
                     <h3>Messages</h3>
+                    <span class="message-count">26</span>
                 </a>
-                <a href="<?php echo URLROOT; ?>customers/profile">
-                    <span class="material-icons-sharp">person</span>
-                    <h3>profile</h3>
+
+                <a href="<?php echo URLROOT ?>eventplanners/inquiry">
+                    <span class="material-icons-sharp">
+                        info
+                    </span>
+                    <h3>Inquiry</h3>
                 </a>
-                <a href="<?php echo URLROOT; ?>users/logout">
+                <a href="<?php echo URLROOT ?>">
                     <span class="material-icons-sharp">logout</span>
                     <h3>Logout</h3>
                 </a>
             </div>
-
-
         </aside>
-
-
         <!-- Content start here -->
         <div>
 
@@ -72,7 +120,7 @@
 
                             <p class="form-text">Supplier Name</p>
                             <div class="input-field">
-                                <input type="text" name="count" value="Sri Malee GrandMeridian" readonly>
+                                <input type="text" name="count" value="<?php echo $data['supplier']->bname ?>" readonly>
                             </div>
                             <p class="form-text" style="margin-top:3rem;">Package Type</p>
                             <div class="input-field">
@@ -85,50 +133,32 @@
                                 </select>
                             </div>
 
-
-                            <p class="form-text" style="margin-top:1rem;margin-right:2rem">Time</p>
-                            <input type="checkbox" id="smokescreen" name="Lunch">
-                            <label for="Lunch" style="font-size: 15px;">Lunch</label><br />
-                            <input type="checkbox" id="Dinner" name="Dinner">
-                            <label for="Dinner" style="font-size: 15px;">Dinner</label><br />
-                            <input type="checkbox" id="Breakfast" name="Breakfast">
-                            <label for="Breakfast" style="font-size: 15px;">Breakfast</label><br />
-
-
-
-
                         </div>
                         <div style="width:20rem; margin-left:2rem">
                             <p class="form-text">Event Date</p>
                             <div class="input-field">
-                                <input type="date" name="date" value="2024-03-24" readonly>
+                                <input type="date" name="date" value="<?php echo $data['request']->date ?>" readonly>
 
                             </div>
                             <p class="form-text" style="margin-top:2rem;">Service Duration</p>
                             <div style="display:flex;">
                                 <div>Start Time<br />
                                     <div class="input-field2">
-                                        <input type="time" name="start">
+                                        <input type="time" name="start" value="<?php echo $data['request']->starttime ?>">
                                     </div>
                                 </div>
                                 <div>End Time
                                     <div class="input-field2">
-                                        <input type="time" name="end">
+                                        <input type="time" name="end" value="<?php echo $data['request']->endtime ?>">
                                     </div>
                                 </div>
                             </div>
-                            <p class="form-text" style="margin-top:1rem; margin-right:2rem">Additional Services</p>
-                            <input type="checkbox" id="smokescreen" name="Severs">
-                            <label for="Servers" style="font-size: 15px;">Servers</label><br />
-                            <input type="checkbox" id="Packets" name="Packets">
-                            <label for="Packets" style="font-size: 15px;">Packets</label><br />
-                            <input type="checkbox" id="Delivery" name="Delivery">
-                            <label for="Delivery" style="font-size: 15px;">Delivery</label><br />
+
 
 
                         </div>
                     </div>
-                    <p class="form-text" style="margin-top:2rem; margin-left:2rem;  margin-right:2rem">Additional Remarks for the Sri Malee GrandMeridian</p>
+                    <p class="form-text" style="margin-top:2rem; margin-left:2rem;  margin-right:2rem">Additional Remarks for <?php echo $data['supplier']->bname ?></p>
                     <div class="input-field" style="margin-left:2rem;">
                         <textarea name="remark" id="theme" cols="80" rows="5"></textarea>
 
