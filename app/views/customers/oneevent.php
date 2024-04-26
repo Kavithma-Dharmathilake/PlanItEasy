@@ -9,7 +9,13 @@
     <!-- MATERIAL CDN -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flipdown@1.1.0/dist/flipdown.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/countdown@2.7.0/dist/countdown.min.js"></script>
+
+    <!-- Add flipdown.js JavaScript -->
+   
+    
     <!-- STYLESHEET -->
     <link rel="stylesheet" href="<?php echo URLROOT; ?>public/css/admindash.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>public/css/eventplannerdash.css">
@@ -60,6 +66,7 @@
             <!-- The Title -->
 
             <div class="heading-card">
+          
                 <span style="font-size:1.5rem;font-style:bold"><?php echo getRemainingDays($data['request']->date) ?></span> days remaining!<br />
                 <span style="font-size:3rem;font-style:bold; "><?php echo $data['request']->event_type ?></span><br />
 
@@ -116,6 +123,8 @@
 
 
         </div>
+        <div id="flipdown"></div>
+        <div id="timer"></div>
 
 
 </body>
@@ -126,18 +135,11 @@
 
 function getRemainingDays($targetDate)
 {
-    // Convert the target date to a DateTime object
+  
     $targetDateTime = new DateTime($targetDate);
-
-    // Get the current date as a DateTime object
     $currentDateTime = new DateTime();
-
-    // Calculate the difference between the target date and the current date
     $interval = $currentDateTime->diff($targetDateTime);
-
-    // Extract the remaining days from the interval
     $remainingDays = $interval->days;
-
     return $remainingDays;
 }
 
@@ -145,4 +147,20 @@ function getRemainingDays($targetDate)
 
 
 
+
 ?>
+
+  <script src="https://cdn.jsdelivr.net/npm/countdown@2.7.0/dist/countdown.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/flipdown@1.1.0/dist/flipdown.min.js"></script>
+
+
+
+<script>
+const targetDate = new Date('2024-04-27 10:00:00');
+const countdownTimer = countdown(targetDate, (timeLeft) => {
+    document.getElementById('timer').innerText = `${timeLeft.days}d ${timeLeft.hours}h ${timeLeft.minutes}m ${timeLeft.seconds}s`;
+    if (timeLeft.value <= 0) {
+        console.log('Countdown has ended!');
+    }
+});
+</script>

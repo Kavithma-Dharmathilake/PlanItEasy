@@ -40,6 +40,8 @@ class Customers extends Controller
             'events' => $events
         ];
 
+        
+
         $this->view('customers/events', $data);
     }
 
@@ -51,7 +53,7 @@ class Customers extends Controller
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-            $_EVENT = filter_input_array(INPUT_POST);
+
 
             $data = [
 
@@ -68,16 +70,134 @@ class Customers extends Controller
                 'estatus' => 'ongoing',
                 'pstatus' => 'pending',
                 'cusid' => $_SESSION['user_id'],
+                'budget_err' => null,
+                'time_err' => null,
+
             ];
 
+            $time1 =$data['start'];
+            $time2 = $data['end'];
 
-            $eid = $this->customerModel->newevent($data);
-            echo '<script>alert("New Event Created Successfully");';
-            echo 'window.location.href = "' . URLROOT . 'customers/oneevent/' . $eid . '";</script>';
+         
+            $timestamp1 = strtotime($time1);
+            $timestamp2 = strtotime($time2);
+
+            if ($data['min'] > $data['max'])
+                $data['budget_err'] = 'Maximum Budget is less than Minimum';
+
+            if ($timestamp2 < $timestamp1)
+                $data['time_err'] = 'Starting and Ending Time Mismatch';
+
+            if (!isset($data['budget_err']) && !isset($data['time_err'])) {
+                $eid = $this->customerModel->newevent($data);
+                echo '<script>alert("New Event Created Successfully");';
+                echo 'window.location.href = "' . URLROOT . 'customers/oneevent/' . $eid . '";</script>';
+            } else {
+
+                $data = [
+
+                    'type' => trim($_POST['type']),
+                    'min' => trim($_POST['minbudget']),
+                    'max' => trim($_POST['maxbudget']),
+                    'date' => trim($_POST['date']),
+                    'start' => trim($_POST['start']),
+                    'end' => trim($_POST['end']),
+                    'loc' => trim($_POST['location']),
+                    'date' => trim($_POST['date']),
+                    'count' => trim($_POST['count']),
+                    'theme' => trim($_POST['theme']),
+                    'estatus' => 'ongoing',
+                    'pstatus' => 'pending',
+                    'cusid' => $_SESSION['user_id'],
+                    'budget_err' => $data['budget_err'],
+                    'time_err' => $data['time_err'],
+
+                ];
+
+                $this->view('customers/newevent', $data);
+            }
         } else {
             $this->view('customers/newevent', $data);
         }
     }
+
+    public function editevent()
+    {
+
+  
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+
+
+            $data = [
+
+                'type' => trim($_POST['type']),
+                'min' => trim($_POST['minbudget']),
+                'max' => trim($_POST['maxbudget']),
+                'date' => trim($_POST['date']),
+                'start' => trim($_POST['start']),
+                'end' => trim($_POST['end']),
+                'loc' => trim($_POST['location']),
+                'date' => trim($_POST['date']),
+                'count' => trim($_POST['count']),
+                'theme' => trim($_POST['theme']),
+                'estatus' => 'ongoing',
+                'pstatus' => 'pending',
+                'cusid' => $_SESSION['user_id'],
+                'budget_err' => null,
+                'time_err' => null,
+
+            ];
+
+            $time1 =$data['start'];
+            $time2 = $data['end'];
+
+            // Convert time strings to timestamps using strtotime()
+            $timestamp1 = strtotime($time1);
+            $timestamp2 = strtotime($time2);
+
+            if ($data['min'] > $data['max'])
+                $data['budget_err'] = 'Maximum Budget is less than Minimum';
+
+            if ($timestamp2 < $timestamp1)
+                $data['time_err'] = 'Starting and Ending Time Mismatch';
+
+            if (!isset($data['budget_err']) && !isset($data['time_err'])) {
+                $eid = $this->customerModel->newevent($data);
+                echo '<script>alert("New Event Created Successfully");';
+                echo 'window.location.href = "' . URLROOT . 'customers/oneevent/' . $eid . '";</script>';
+            } else {
+
+                $data = [
+
+                    'type' => trim($_POST['type']),
+                    'min' => trim($_POST['minbudget']),
+                    'max' => trim($_POST['maxbudget']),
+                    'date' => trim($_POST['date']),
+                    'start' => trim($_POST['start']),
+                    'end' => trim($_POST['end']),
+                    'loc' => trim($_POST['location']),
+                    'date' => trim($_POST['date']),
+                    'count' => trim($_POST['count']),
+                    'theme' => trim($_POST['theme']),
+                    'estatus' => 'ongoing',
+                    'pstatus' => 'pending',
+                    'cusid' => $_SESSION['user_id'],
+                    'budget_err' => $data['budget_err'],
+                    'time_err' => $data['time_err'],
+
+                ];
+
+                $this->view('customers/newevent', $data);
+            }
+        } else {
+            $this->view('customers/newevent', $data);
+        }
+    
+    }
+
+
 
     //viewing one event
     public function oneevent($id)
@@ -974,7 +1094,7 @@ class Customers extends Controller
         $event = $this->customerModel->getEventById($result->eid);
         // $customer = $this->customerModel->getCustomer($event->idcustomer);
         $messages = $this->customerModel->getMessages($qid);
-      
+
         $data = [
             'request' => $result,
             'customer' => $_SESSION['user_name'],

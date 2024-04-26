@@ -152,7 +152,7 @@
         <div>
             <div class="profile end">
                 <div class="info" style="padding-right:25px;">
-                    <p>Hey, <b>Sapuni</b></p>
+                    <p>Hey, <b><?php echo $_SESSION['user_name'] ?></b></p>
                     <small class="text-muted">Customer</small>
                 </div>
                 <div class="profile-photo">

@@ -57,8 +57,8 @@
         <div>
             <div class="profile end">
                 <div class="info" style="padding-right:25px;">
-                    <p>Hey, <b>Sunimal</b></p>
-                    <small class="text-muted">Eventplanner</small>
+                    <p>Hey, <b><?php echo $_SESSION['user_name'] ?></b></p>
+                    <small class="text-muted"><?php echo $_SESSION['user_role'] ?></small>
                 </div>
                 <div class="profile-photo">
                     <img src="<?php echo URLROOT ?>public/images/photo2.jpg">
