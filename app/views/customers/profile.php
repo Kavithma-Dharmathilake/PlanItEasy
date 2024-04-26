@@ -8,9 +8,7 @@
     <title>Profile</title>
     <!-- MATERIAL CDN -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- STYLESHEET -->
     <link rel="stylesheet" href="<?php echo URLROOT; ?>public/css/admindash.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>public/css/eventplannerdash.css">
@@ -21,21 +19,18 @@
 
 <body>
     <div class="dash-container">
-    <aside>
+        <aside>
+
             <div class="sidebar">
                 <a href="<?php echo URLROOT; ?>customers">
+                    <span class="material-icons-sharp" class="active">grid_view</span>
+                    <h3>Dashboard</h3>
+                </a>
+                <a href="<?php echo URLROOT; ?>customers/events">
                     <span class="material-icons-sharp">man</span>
-                    <h3>Create New Event</h3>
+                    <h3>Events</h3>
                 </a>
-                <a href="<?php echo URLROOT; ?>customers/ongoing">
-                    <span class="material-icons-sharp">calendar_today</span>
-                    <h3>Ongoing Events</h3>
-                </a>
-                <a href="<?php echo URLROOT; ?>customers/complete">
-                    <span class="material-icons-sharp">event_available</span>
-                    <h3>Completed Events</h3>
-                </a>
-                <a href="<?php echo URLROOT; ?>customers/payments" >
+                <a href="<?php echo URLROOT; ?>customers/payments">
                     <span class="material-icons-sharp">payments</span>
                     <h3>Payments</h3>
                 </a>
@@ -43,18 +38,15 @@
                     <span class="material-icons-sharp">message</span>
                     <h3>Messages</h3>
                 </a>
-                <a href="<?php echo URLROOT; ?>customers/viewquote">
-                    <span class="material-icons-sharp"> note_add</span>
-                    <h3>supplier quotation</h3>
-                </a>
-                <a href="<?php echo URLROOT; ?>customers/profile" class="active">
+                <a href="<?php echo URLROOT; ?>customers/profile">
                     <span class="material-icons-sharp">person</span>
                     <h3>profile</h3>
                 </a>
-                <a href="<?php echo URLROOT; ?>user/logout">
+                <a href="<?php echo URLROOT; ?>users/logout">
                     <span class="material-icons-sharp">logout</span>
                     <h3>Logout</h3>
                 </a>
+            </div>
 
 
         </aside>
@@ -77,8 +69,7 @@
             <div class="profile-icon" style="display:flex; width:500px">
                 <div>
                     <img src="<?php echo URLROOT ?>public/images/photo2.jpg">
-                    <i class="fa fa-plus-circle" aria-hidden="true"><input type="file" accept=".jpg, .jpeg, .png"
-                            style="display: none;" /></i>
+                    <i class="fa fa-plus-circle" aria-hidden="true"><input type="file" accept=".jpg, .jpeg, .png" style="display: none;" /></i>
                 </div>
                 <div>
 
@@ -88,12 +79,12 @@
                 </div>
             </div>
             <div class="profile-content">
-                <h2>Personal Information  <a href='#'><i class="fa fa-edit" aria-hidden="true"></i></a></h2>
+                <h2>Personal Information <a href='#'><i class="fa fa-edit" aria-hidden="true"></i></a></h2>
                 <br /><br />
-               
+
 
                 <div style="display:flex">
-                    <div  >
+                    <div>
 
                         <label style="display:flex">Name</label>
                         <input style="display:flex" type="text" placeholder="Pawani" required />
@@ -114,7 +105,7 @@
                     </div>
                 </div>
 
-             
+
 
 
             </div>

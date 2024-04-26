@@ -22,48 +22,7 @@
 
 <body>
 
-    <!-- <div class="dash-container"> -->
-    <!-- <aside>
-            <div class="top">
-                <div class="logo">
-                    <img src="<?php echo URLROOT; ?>/public/images/logo.jpg">
-                    <h2>PlanItEasy</h2>
-                </div>
-                <div class="close" id="close-btn">
-                    <span class="material-icons-sharp">close</span>
-                </div>
-            </div>
-            <div class="sidebar">
-                <a href="<?php echo URLROOT; ?>customers">
-                    <span class="material-icons-sharp" class="active">grid_view</span>
-                    <h3>Dashboard</h3>
-                </a>
-                <a href="<?php echo URLROOT; ?>customers/events">
-                    <span class="material-icons-sharp">man</span>
-                    <h3>Events</h3>
-                </a>
-                <a href="<?php echo URLROOT; ?>customers/payments">
-                    <span class="material-icons-sharp">payments</span>
-                    <h3>Payments</h3>
-                </a>
-                <a href="<?php echo URLROOT; ?>customers/message">
-                    <span class="material-icons-sharp">message</span>
-                    <h3>Messages</h3>
-                </a>
-                <a href="<?php echo URLROOT; ?>customers/viewquote">
-                    <span class="material-icons-sharp"> note_add</span>
-                    <h3>supplier quotation</h3>
-                </a>
-                <a href="<?php echo URLROOT; ?>customers/profile">
-                    <span class="material-icons-sharp">person</span>
-                    <h3>profile</h3>
-                </a>
-                <a href="<?php echo URLROOT; ?>user/logout">
-                    <span class="material-icons-sharp">logout</span>
-                    <h3>Logout</h3>
-                </a>
-            </div>
-        </aside> -->
+   
     
     <a href="<?php echo URLROOT ?>customers/supplier/<?php echo $data['request']->id?>">  <button style="padding:1rem; margin:1rem; background-color:#7380ec;color:white; border-radius:0.4rem">All Vendors</button></a>  
     <a href="<?php echo URLROOT ?>customers/quotations/<?php echo $data['request']->id?>"> <button style="padding:1rem; margin:1rem; background-color:#7380ec;color:white; border-radius:0.4rem">My Quotations</button></a>

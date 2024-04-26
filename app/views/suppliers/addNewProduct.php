@@ -51,13 +51,6 @@
                     <h3>Quotation Requests</h3>
                 </a>
 
-                <a href="<?php echo URLROOT; ?>suppliers/sentRequests">
-                    <span class="material-icons-sharp">
-                        festival
-                    </span>
-                    <h3>Sent Quotations</h3>
-                </a>
-
                 <a href="<?php echo URLROOT; ?>suppliers/packages">
                     <span class="material-icons-sharp">
                         request_quote
@@ -73,7 +66,7 @@
                     <h3>Calender</h3>
                 </a>
 
-                <a href="profile.php">
+                <a href="<?php echo URLROOT; ?>suppliers/profile">
                     <span class="material-icons-sharp">
                         account_box
                     </span>
@@ -101,7 +94,7 @@
 
 
             <div class="planner-title" style="padding-bottom:50px;">
-                <h1>Add Products</h1>
+                <h1>Add Packages</h1>
             </div>
             <form action="<?php echo URLROOT; ?>suppliers/addNewProduct" method="post">
                 <div class="form-add-package">

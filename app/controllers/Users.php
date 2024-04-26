@@ -213,24 +213,24 @@ class Users extends Controller
             $userType = $_SESSION['user_role'];
 
             if ($userType === 'customer') {
-                // Redirect customer to the customer dashboard
+               
                 redirect('customers');
             } elseif ($userType === 'eventplanner') {
-                // Redirect admin to the admin dashboard
+              
                 redirect('eventplanners');
             } elseif ($userType === 'admin') {
-                // Redirect admin to the admin dashboard
+               
                 redirect('admin');
 
             } elseif ($userType === 'supplier') {
-                // Redirect admin to the admin dashboard
+              
                 redirect('suppliers');
             } else {
-                // Handle other user types or show an error message
+               
                 echo "Invalid user type";
             }
         } else {
-            // Handle the case when the user type is not set in the session
+           
             echo "User type not set in session";
         }
 

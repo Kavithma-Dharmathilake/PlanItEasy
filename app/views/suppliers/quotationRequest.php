@@ -143,12 +143,14 @@
 
 
     </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.0/jspdf.umd.min.js"></script>
 
 </head>
 
 <body>
     <div class="dash-container">
-    <aside>
+        <aside>
             <div class="top">
                 <div class="logo">
                     <img src="<?php echo URLROOT; ?>public/images/logo.jpg">
@@ -178,20 +180,13 @@
                     <h3>Quotation Requests</h3>
                 </a>
 
-                <a href="<?php echo URLROOT; ?>suppliers/sentRequests">
-                    <span class="material-icons-sharp">
-                        festival
-                    </span>
-                    <h3>Sent Quotations</h3>
-                </a>
-
                 <a href="<?php echo URLROOT; ?>suppliers/packages">
                     <span class="material-icons-sharp">
                         request_quote
                     </span>
                     <h3>Packages</h3>
                 </a>
-          
+
 
                 <a href="<?php echo URLROOT; ?>suppliers/calendar">
                     <span class="material-icons-sharp">
@@ -200,7 +195,7 @@
                     <h3>Calender</h3>
                 </a>
 
-                <a href="profile.php">
+                <a href="<?php echo URLROOT; ?>suppliers/profile">
                     <span class="material-icons-sharp">
                         account_box
                     </span>
@@ -212,7 +207,7 @@
                     <h3>Messages</h3>
                     <span class="message-count">5</span>
                 </a>
-                <a href="<?php echo URLROOT; ?>user/logout">
+                <a href="<?php echo URLROOT; ?>users/logout">
                     <span class="material-icons-sharp">logout</span>
                     <h3>Logout</h3>
                 </a>
@@ -225,7 +220,7 @@
 
             <!-- Content start here -->
             <div>
-           
+
 
 
                 <!-- Heading and search bar -->
@@ -264,6 +259,8 @@
                 <!-- Event Request Table -->
                 <div class="event-request" style="margin-top:60px">
                     <table>
+                    <button class="downloadButton" id="downloadButton">Download</button>
+                    <table id="myTable">
                         <thead>
                             <tr>
                                 <th>Request ID</th>
@@ -297,5 +294,33 @@
             </div>
 
 </body>
+
+<script>
+    async function captureAndDownloadPDF() {
+        // Capture screenshot using html2canvas
+        const tableElement = document.getElementById('myTable');
+
+        // Capture the table element using html2canvas
+        const canvas = await html2canvas(tableElement);
+        // Get the image data from the canvas
+        const imgData = canvas.toDataURL('image/png');
+
+        // Create a new instance of jsPDF
+        const {
+            jsPDF
+        } = window.jspdf;
+        const doc = new jsPDF();
+
+        // Add the image to the PDF (x, y, width, height)
+        doc.addImage(imgData, 'PNG', 10, 10, 200, 100);
+
+        // Save the PDF and prompt the user to download it
+        doc.save('screenshot.pdf');
+    }
+
+    // Call the function when needed (e.g., on button click)
+    document.getElementById('downloadButton').addEventListener('click', captureAndDownloadPDF);
+</script>
+
 
 </html>

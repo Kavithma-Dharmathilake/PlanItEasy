@@ -13,21 +13,15 @@
     <!-- STYLESHEET -->
     <link rel="stylesheet" href="<?php echo URLROOT; ?>public/css/admindash.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>public/css/eventplannerdash.css">
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>public/css/budgetplan.css">
+
 
 </head>
 
 <body>
     <div class="dash-container">
-    <aside>
-            <div class="top">
-                <div class="logo">
-                    <img src="<?php echo URLROOT; ?>/public/images/logo.jpg">
-                    <h2>PlanItEasy</h2>
-                </div>
-                <div class="close" id="close-btn">
-                    <span class="material-icons-sharp">close</span>
-                </div>
-            </div>
+        <aside>
+
             <div class="sidebar">
                 <a href="<?php echo URLROOT; ?>customers">
                     <span class="material-icons-sharp" class="active">grid_view</span>
@@ -45,177 +39,130 @@
                     <span class="material-icons-sharp">message</span>
                     <h3>Messages</h3>
                 </a>
-                <a href="<?php echo URLROOT; ?>customers/viewquote">
-                    <span class="material-icons-sharp"> note_add</span>
-                    <h3>supplier quotation</h3>
-                </a>
                 <a href="<?php echo URLROOT; ?>customers/profile">
                     <span class="material-icons-sharp">person</span>
                     <h3>profile</h3>
                 </a>
-                <a href="<?php echo URLROOT; ?>user/logout">
+                <a href="<?php echo URLROOT; ?>users/logout">
                     <span class="material-icons-sharp">logout</span>
                     <h3>Logout</h3>
                 </a>
             </div>
+
+
         </aside>
-        <main>
 
+        <div class="budgetplan_container">
+            <h1>Budget Plan - #BID<?php echo $data['bid'] ?></h1>
 
-            <!-- Content start here -->
-            <div>
-
-
-
-                <!-- Heading and search bar -->
+            <div class="plan_info_container">
                 <div style="display:flex">
-
-                    <div class="planner-title">
-                        <!-- <h1>Create Budget</h1> -->
-
-
-                    </div>
-
-
+                    <!-- <form action="<?php echo URLROOT ?>customers/pricebudget/<?php echo $data['bid'] ?>/<?php echo $data['eventid'] ?>">
+                        <input id="pricebtn" name="price" type="submit" class="view" value="Budget By Price">
+                    </form> -->
+                    <a href="<?php echo URLROOT ?>customers/pricebudget/<?php echo $data['bid'] ?>/<?php echo $data['eventid'] ?>" class="view">Budget By Price</a>
+                    <form action="<?php echo URLROOT ?>customers/ratingbudget/<?php echo $data['bid'] ?>/<?php echo $data['eventid'] ?>" method="POST">
+                        <input id="pricebtn" name="rate" type="submit" class="view" value="Budget By Rating">
+                    </form>
                 </div>
+                <table>
+                    <caption>Requested Services</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">Service</th>
+                            <th scope="col">Vendor Name</th>
+                            <th scope="col">Amount(LKR)</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php $total = 0.00 ?>
+                        <?php
 
-                <!-- Event Request Table -->
-                <div style="display:flex; flex-direction:row">
-                    <div style="width:600px;margin:20px;">
+                        if ($data['budget'] != null) {
+                            foreach ($data['budget'] as $l) : ?>
+                                <tr>
+                                    <td data-label="Service"><?php echo ucwords($l->stype); ?></td>
+                                    <td data-label="Vendor"><?php echo $l->bname; ?></td>
+                                    <td data-label="Amount"><?php echo $l->r_price; ?></td>
+                                    <td data-label="">
+                                        <form action="<?php echo URLROOT ?>customers/deleteItem/<?php echo $data['bid'] ?>/<?php echo $data['eventid'] ?>/<?php echo $l->id ?>" method="POST">
+                                            <input name="remove" type="submit" class="rmv" value="Remove">
+                                        </form>
+                                    </td>
+                                    <?php $total = $total +  $l->r_price; ?>
+                                </tr>
+                            <?php endforeach;
+                            ?>
+                            <tr>
+                                <td data-label="Service">
+                                    <p style="font-weight: 600;">Total Amount </p>
 
-                        <form action="#" method="post">
-                            <div class="form-add-package">
-                                <div class="form-wrapper">
-                                    <div class="form-heading">
-                                        <h2 style="padding: 20px;">Budget Plan</h2>
-                                    </div>
+                                    <?php if ($total > $data['request']->maxbudget) { ?>
+                                        <p style="color:red">Maximum Budget Reached <br />(LKR <?php echo $data['request']->maxbudget ?>)</p>
+                                    <?php } else if ($total < $data['request']->minbudget) { ?>
+                                        <p style="color:red">Less than the Minimum Budget <br />(LKR <?php echo $data['request']->maxbudget ?>)</p>
+                                    <?php } ?>
+                                </td>
+                                <td data-label="Vendor"></td>
+                                <td data-label="Amount"><?php echo $total; ?></td>
+                                <td data-label="">
+                                    <form action="<?php echo URLROOT ?>customers/budgetsheet/<?php echo $data['bid'] ?>/<?php echo $data['eventid'] ?>" method="POST">
+                                        <input name="accept" type="submit" class="accept" value="Accept the Budget">
+                                    </form>
+                                    
 
-                                    <div class="form-content">
-
-                                        <div class="event-details" style="width:600px;">
-                                            <p style="text-align:center">General details</p>
-
-                                            <div style="display:flex; margin-top:20px; margin-left:30px;">
-                                                <div class="req-title" style="width:50%">Event Type </div>
-                                                <div class="req-data" style="width:50%"><?php echo $data['request']->event_type ?></div>
-                                            </div>
-                                            <div style="display:flex; margin-top:20px; margin-left:30px;">
-                                                <div class="req-title" style="width:50%">Event Theme </div>
-                                                <div class="req-data" style="width:50%"><?php echo $data['request']->theme ?></div>
-                                            </div>
-                                            <div style="display:flex; margin-top:20px; margin-left:30px;">
-                                                <div class="req-title" style="width:50%">Tenative date </div>
-                                                <div class="req-data" style="width:50%"><?php echo $data['request']->date ?></div>
-                                            </div>
-                                            <div style="display:flex; margin-top:20px; margin-left:30px;">
-                                                <div class="req-title" style="width:50%">Budget </div>
-                                                <div class="req-data" style="width:50%">LKR. <?php echo $data['request']->minbudget ?> - LKR. <?php echo $data['request']->maxbudget ?></div>
-                                            </div>
-                                            <div style="display:flex; margin-top:20px; margin-left:30px;">
-                                                <div class="req-title" style="width:50%">Guest Count </div>
-                                                <div class="req-data" style="width:50%"><?php echo $data['request']->guest_count ?></div>
-                                            </div>
-                                            <div style="display:flex; margin-top:20px; margin-left:30px;">
-                                                <div class="req-title" style="width:50%">Time</div>
-                                                <div class="req-data" style="width:50%"><?php echo $data['request']->starttime ?> - <?php echo $data['request']->endtime ?></div>
-                                            </div>
-                                        </div>
-                                        <?php $count = 0 ?>
-                                        <?php if (isset($data['result'])) { ?>
-                                            <?php foreach ($data['result'] as $r) : ?>
-
-
-
-                                                <div class="event-details" style="width:600px;height:350px;">
-                                                    <p style="text-align:center"><?php echo $r->stype ?></p>
-                                                  
-                                                        <a href="<?php echo URLROOT ?>customers/deleteItem/<?php echo $data['bid'] . '/' . $data['eventid'] . '/' . $r->id ?>">
-                                                            <input style="padding:0.5rem;background-color:#7380ec;color:white; border-radius:0.4rem" type="submit" name="delete" value="Delete">
-                                                        </a>
-                                                
-                                                    <div class="input-box">
-                                                        <label>Supplier Name</label><br />
-                                                        <input type="text" value="<?php echo $r->bname ?>" name="name" disabled>
-                                                        <label>Charges</label><br />
-                                                        <input type="text" value="<?php echo $r->r_price ?>" name="name" disabled>
-                                                        <?php $count = $count + $r->r_price ?>
-
-                                                    </div>
-
-
-                                                </div>
-
-
-                                            <?php endforeach; ?>
-                                        <?php } ?>
-
-                                        <div class="input-box">
-
-                                            <label>Total Charges</label><br />
-                                            <input type="number" value="<?php echo $count ?>" name="total" disabled>
-
-                                            <!-- warning message -->
-                                            <?php
-                                            if ($count > $data['request']->maxbudget) { ?>
-                                                <span style="color:red;">Budget Exceeded</span>
-                                            <?php } ?>
-                                        </div>
-
-                                        <div class="input-box">
-                                            <!-- <input type="Submit" value="Create Budget" class="input-submit"> -->
-
-                                            <a href="<?php echo URLROOT ?>customers/updateBudget/<?php echo $data['bid'] . '/' . $data['eventid'] . '/' . $count ?>">Create budget</a>
-
-                                        </div>
-
-
-
-
-
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-
-
-                    </div>
-
-                    <div style="margin:30px;width:400px; margin-left:110px;">
-                        <div class="event-request" style="margin-top:60px">
-
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Type</th>
-                                        <th>Name</th>
-                                        <th>Price</th>
-                                        <th>Action</th>
-
-
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php foreach ($data['quote'] as $q) : ?>
-                                        <tr>
-                                            <td><?php echo $q->stype ?></td>
-                                            <td><?php echo $q->bname ?></td>
-                                            <td><?php echo $q->r_price ?>
-                                            <td>
-                                            <td><a href="<?php echo URLROOT ?>customers/addItem/<?php echo $q->eid . '/' . $data['bid'] . '/' . $q->id ?>/"><button style="background-color:#7380ec; color:white; border-radius:15px; padding:10px;">ADD</button></a></td>
-                                        </tr>
-                                    <?php endforeach; ?>
-
-                                </tbody>
-                            </table>
-                        </div>
-
-                    </div>
-                </div>
-
+                                </td>
+                            </tr>
+                        <?php } ?>
+                    </tbody>
+                </table>
 
 
             </div>
+        </div>
+
+        <div class="recieved_quotations">
+            <h2>Recieved Quotations</h2>
+            <div class="recieved_quotations_container">
+                <?php foreach ($data['quote'] as $q) : ?>
+                    <?php $status = 0; ?>
+                    <div class="recieved_subcontainer">
+                        <h3><?php echo $q->bname; ?> - LKR.<?php echo $q->r_price; ?> </h3>
+                        <p><?php echo $q->stype; ?></p>
+                        <div class="btn_action">
+                            <button class="view">View</button>
+
+                            <?php
+                            foreach ($data['budget'] as $b) :
+                                if ($b->qid == $q->id) {
+                                    $status = 1;
+                                    break;
+                                }
+                            endforeach ?>
+
+                            <form action="<?php echo URLROOT ?>customers/addItem/<?php echo $data['bid'] ?>/<?php echo $data['eventid'] ?>/<?php echo $q->id ?>" method="POST">
+                                <input name="add" type="submit" class="accept" <?php
+                                                                                if ($status == 1) {
+                                                                                    echo 'value="Added"';
+                                                                                    echo 'disabled';
+                                                                                } else
+                                                                                    echo 'value="Add"';
+
+                                                                                ?>>
+                            </form>
+
+
+                        </div>
+                    </div>
+                <?php endforeach ?>
+            </div>
+        </div>
+    </div>
 
 </body>
+
+
+
 
 </html>
