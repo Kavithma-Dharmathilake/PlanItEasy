@@ -158,14 +158,11 @@
 
 
         </div>
-                    </br>
-                    </br>
-                    </br>
-        <div>
+        <!-- <div>
         <button onclick="captureAndDownloadPDF()">Generate Report</button>
         </div>
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.0/jspdf.umd.min.js"></script>
 
 <script>
@@ -191,7 +188,7 @@
 
     // Call the function when needed (e.g., on button click)
     document.getElementById('downloadButton').addEventListener('click', captureAndDownloadPDF);
-</script>
+</script> -->
 
 </body>
 

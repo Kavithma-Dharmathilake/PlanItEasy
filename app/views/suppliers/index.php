@@ -149,7 +149,7 @@
                 </a>
 
 
-                <a href="<?php echo URLROOT; ?>suppliers/calendar">
+                <a href="<?php echo URLROOT; ?>/eventplanners/calendar">
                     <span class="material-icons-sharp">
                         calendar_month
                     </span>
