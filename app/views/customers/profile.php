@@ -34,11 +34,7 @@
                     <span class="material-icons-sharp">payments</span>
                     <h3>Payments</h3>
                 </a>
-                <a href="<?php echo URLROOT; ?>customers/message">
-                    <span class="material-icons-sharp">message</span>
-                    <h3>Messages</h3>
-                </a>
-                <a href="<?php echo URLROOT; ?>customers/profile">
+                <a href="<?php echo URLROOT; ?>customers/profile" class="active">
                     <span class="material-icons-sharp">person</span>
                     <h3>profile</h3>
                 </a>
@@ -55,15 +51,15 @@
 
         <!-- Content start here -->
         <div>
-            <div class="profile end">
+            <!-- <div class="profile end">
                 <div class="info" style="padding-right:25px;">
-                    <p>Hey, <b><?php echo $_SESSION['user_name'] ?></b></p>
+                    <p>Hey, <b><?php echo $_SESSION['user_name']?></b></p>
                     <small class="text-muted"><?php echo $_SESSION['user_role'] ?></small>
                 </div>
                 <div class="profile-photo">
                     <img src="<?php echo URLROOT ?>public/images/photo2.jpg">
                 </div>
-            </div>
+            </div> -->
 
 
             <div class="profile-icon" style="display:flex; width:500px">
@@ -73,8 +69,8 @@
                 </div>
                 <div>
 
-                    <p>Pawani thennakoon</p>
-                    <h3>Havlock, Colombo</h3>
+                    <p><?php echo $_SESSION['user_name']?></p>
+                    <h3><?php echo $_SESSION['user_address']?></h3>
 
                 </div>
             </div>
@@ -87,19 +83,19 @@
                     <div>
 
                         <label style="display:flex">Name</label>
-                        <input style="display:flex" type="text" placeholder="Pawani" required />
+                        <input style="display:flex" type="text" placeholder="<?php echo $_SESSION['user_name']?>" required />
                         <label style="display:flex">Email Address</label>
-                        <input style="display:flex" type="email" placeholder="pawani@gmail.com" required />
+                        <input style="display:flex" type="email" placeholder="<?php echo $_SESSION['user_email']?>" required />
                         <label style="display:flex">Address</label>
-                        <input style="display:flex" type="text" placeholder="Pwani winu thennakoon" required />
+                        <input style="display:flex" type="text" placeholder="<?php echo $_SESSION['user_address']?>" required />
 
 
                     </div>
                     <div style="margin-left:50px">
                         <label style="display:flex">Username</label>
-                        <input style="display:flex" type="text" placeholder="Pawani" required />
+                        <input style="display:flex" type="text" placeholder="<?php echo $_SESSION['user_name']?>" required />
                         <label style="display:flex">Phone Number</label>
-                        <input style="display:flex" type="phone" placeholder="070123654" required />
+                        <input style="display:flex" type="phone" placeholder="<?php echo $_SESSION['user_contact']?>" required />
                         <label style="display:flex">password</label>
                         <input style="display:flex" type="password" placeholder="********" required />
                     </div>
