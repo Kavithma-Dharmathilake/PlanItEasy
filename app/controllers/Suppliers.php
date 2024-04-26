@@ -11,12 +11,14 @@ class Suppliers extends Controller
 
     public function index()
     {
-
+        // $userName = $_SESSION['user_name'];
         $countProduct = $this->supplierModel->countAllProducts();
         $countQuote = $this->supplierModel->countQuotations();
+        // $quotePerMonth = $this->supplierModel->countQuotationsPerMonth();
         
 
         $data = [
+            // 'userName' => $userName,
             'countProduct' => $countProduct,
             'countQuote' => $countQuote
         ];
@@ -148,9 +150,6 @@ class Suppliers extends Controller
         $this->view('suppliers/packages', $data);
     }
 
-
-
-
     public function quotationRequest()
     {
         $result = $this->supplierModel->getAllReq();
@@ -159,24 +158,8 @@ class Suppliers extends Controller
             'request' => $result
 
         ];
-
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-
-            $data = [
-                'request' => $result,
-                'name' => trim($_POST['name']),
-                'price' => trim($_POST['price']),
-                'description' => trim($_POST['description'])
-            ];
-
-            if ($this->supplierModel->eventnew($data)) {
-                echo '<script> prompt("Quotation Sent  Successfully") </script>';
-                redirect('suppliers/quotations');
-            }
-        } else {
-            $this->view('suppliers/quotationRequest', $data);
-        }
+        $this->view('suppliers/quotationRequest', $data);
+        
     }
 
     public function oneRequest($id)
@@ -259,8 +242,10 @@ class Suppliers extends Controller
                 ];
 
                 if ($this->supplierModel->addAvailability($available)) {
-                    echo '<script> prompt("Added Succfully")</script>';
-                    redirect('suppliers/calendar');
+                    echo '<script> alert("Clicked!");
+                    window.location = window.suppliers/calendar;
+                    </script>';
+                    // redirect('suppliers/calendar');
                 } else {
                     $this->view('suppliers/calendar', $data);
                 }
@@ -319,4 +304,41 @@ class Suppliers extends Controller
 
         $this->view('suppliers/message', $data);
     }
+
+    public function acceptedQuotes()
+    {
+        $result = $this->supplierModel->getAcceptedQuotations();
+        $data = [
+            'request' => $result
+        ];
+        $this->view('suppliers/quotationRequest', $data);
+    }
+
+    public function pendingQuotes()
+    {
+        $result = $this->supplierModel->getPendingQuotations();
+        $data = [
+            'request' => $result
+        ];
+        $this->view('suppliers/quotationRequest', $data);
+    }
+
+    public function declinedQuotes()
+    {
+        $result = $this->supplierModel->getDeclinedQuotations();
+        $data = [
+            'request' => $result
+        ];
+        $this->view('suppliers/quotationRequest', $data);
+    }
+
+    public function paidQuotes()
+    {
+        $result = $this->supplierModel->getPaidQuotations();
+        $data = [
+            'request' => $result
+        ];
+        $this->view('suppliers/quotationRequest', $data);
+    }
+
 }

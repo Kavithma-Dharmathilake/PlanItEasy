@@ -11,6 +11,14 @@ class Supplier
         $this->db = new Database;
     }
 
+    // public function loadUsername(){
+    //     $id = $_SESSION['user_id'];
+    //     $this->db->query('SELECT name FROM user WHERE id = :id');
+    //     $this->db->bind(':id', $id);
+    //     $result = $this->db->single();
+    //     return $result;
+    // }
+
     public function findUserByEmail($email)
     {
         $this->db->query('SELECT * FROM user WHERE email = :email');
@@ -410,6 +418,50 @@ class Supplier
         // return $result;
     }
 
+    public function countQuotationsPerMonth()
+    {
+        $this->db->query('SELECT COUNT(*) AS jcount FROM your_table_name WHERE MONTH(date_column) = 1;');
+        $result = $this->db->single();
+        return $result;
+    }
 
+    public function getAcceptedQuotations()
+    {
+        $id= $_SESSION['user_id'];
+        $this->db->query('SELECT * FROM quoate WHERE sid = :id AND q_status = :status');
+        $this->db->bind(':id', $id);
+        $this->db->bind(':status', 'Accepted');
+        $result = $this->db->resultSet();
+        return $result;
+    }
 
+    public function getPendingQuotations()
+    {
+        $id= $_SESSION['user_id'];
+        $this->db->query('SELECT * FROM quoate WHERE sid = :id AND q_status = :status');
+        $this->db->bind(':id', $id);
+        $this->db->bind(':status', 'Pending');
+        $result = $this->db->resultSet();
+        return $result;
+    }
+
+    public function getDeclinedQuotations()
+    {
+        $id= $_SESSION['user_id'];
+        $this->db->query('SELECT * FROM quoate WHERE sid = :id AND q_status = :status');
+        $this->db->bind(':id', $id);
+        $this->db->bind(':status', 'Declined');
+        $result = $this->db->resultSet();
+        return $result;
+    }
+
+    public function getPaidQuotations()
+    {
+        $id= $_SESSION['user_id'];
+        $this->db->query('SELECT * FROM quoate WHERE sid = :id AND q_status = :status');
+        $this->db->bind(':id', $id);
+        $this->db->bind(':status', 'Payment Complete');
+        $result = $this->db->resultSet();
+        return $result;
+    }
 }
