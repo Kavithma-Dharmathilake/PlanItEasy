@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Packages</title>
@@ -15,7 +15,7 @@
     <!-- STYLESHEET -->
     <link rel="stylesheet" href="<?php echo URLROOT; ?>public/css/admindash.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>public/css/eventplannerdash.css">
-    
+
 </head>
 
 <body>
@@ -31,7 +31,7 @@
                 </div>
             </div>
             <div class="sidebar">
-                <a href="<?php echo URLROOT; ?>eventplanners" >
+                <a href="<?php echo URLROOT; ?>eventplanners">
                     <span class="material-icons-sharp">grid_view</span>
                     <h3>Dashboard</h3>
                 </a>
@@ -95,7 +95,7 @@
                     </span>
                     <h3>Inquiry</h3>
                 </a>
-                <a href="<?php echo URLROOT ?>">
+                <a href="<?php echo URLROOT ?>users/logout">
                     <span class="material-icons-sharp">logout</span>
                     <h3>Logout</h3>
                 </a>
@@ -103,107 +103,107 @@
         </aside>
 
         <main>
-           
 
-             <!-- Content start here -->
-        <div>
-            <div class="profile end">
-                <div class="info" style="padding-right:25px;">
-                    <p>Hey, <b>Sunimal</b></p>
-                    <small class="text-muted">Eventplanner</small>
+
+            <!-- Content start here -->
+            <div>
+                <div class="profile end">
+                    <div class="info" style="padding-right:25px;">
+                        <p>Hey, <b>Sunimal</b></p>
+                        <small class="text-muted">Eventplanner</small>
+                    </div>
+                    <div class="profile-photo">
+                        <img src="<?php echo URLROOT ?>public/images/photo2.jpg">
+                    </div>
                 </div>
-                <div class="profile-photo">
-                    <img src="<?php echo URLROOT ?>public/images/photo2.jpg">
+
+
+
+                <!-- Heading and search bar -->
+                <div style="display:flex">
+
+                    <div class="planner-title">
+                        <h1>Budget Plans</h1>
+
+
+                    </div>
+                    <div class="planner-search">
+                        <form action="#" method="post">
+
+                            <input type="search" id="query" name="q" placeholder="       Search Requests"
+                                class="planner-textbox">
+
+                            <button>
+                                <i class="fa fa-search" style="font-size: 18px;">
+                                </i>
+                            </button>
+                        </form>
+                    </div>
+
                 </div>
+
+                <!-- Event Request Table -->
+                <div class="event-request" style="margin-top:60px">
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Event ID</th>
+                                <th>Customer</th>
+                                <th>Event Type</th>
+                                <th>Total Budget</th>
+                                <th>Sent Date</th>
+                                <th>Status</th>
+                                <th>More</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr>
+                                <td>#R0001</td>
+                                <td>Sriyana Wijesekara</td>
+                                <td>Wedding</td>
+                                <td>1,000,000 LKR</td>
+                                <td>21/10/2023</td>
+                                <td>Pending</td>
+                                <td><a href="<?php echo URLROOT ?>eventplanners/createbudget">></a></td>
+                            </tr>
+                            <tr>
+                                <td>#R0003</td>
+                                <td>Kumari</td>
+                                <td>Birthday</td>
+                                <td>1,000,000 LKR</td>
+                                <td>21/10/2023</td>
+                                <td>Accepted</td>
+                                <td><a href="<?php echo URLROOT ?>eventplanners/createbudget">></a></td>
+                            </tr>
+                            <tr>
+                                <td>#R0010</td>
+                                <td>Kasun Wijesekara</td>
+                                <td>Wedding</td>
+                                <td>1,000,000 LKR</td>
+                                <td>21/10/2023</td>
+                                <td>Rejected</td>
+                                <td><a href="<?php echo URLROOT ?>eventplanners/createbudget">></a></td>
+                            </tr>
+                            <tr>
+                                <td>#R0008</td>
+                                <td>Wimal Wijesekara</td>
+                                <td>Wedding</td>
+                                <td>1,000,000 LKR</td>
+                                <td>21/10/2023</td>
+                                <td>Pending</td>
+                                <td><a href="<?php echo URLROOT ?>eventplanners/createbudget">></a></td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+
+
+
             </div>
-
-
-
-            <!-- Heading and search bar -->
-            <div style="display:flex">
-
-                <div class="planner-title">
-                    <h1>Event Requests</h1>
-
-
-                </div>
-                <div class="planner-search">
-                    <form action="#" method="post">
-
-                        <input type="search" id="query" name="q" placeholder="       Search Requests"
-                            class="planner-textbox">
-
-                        <button>
-                            <i class="fa fa-search" style="font-size: 18px;">
-                            </i>
-                        </button>
-                    </form>
-                </div>
-
-            </div>
-
-            <!-- Event Request Table -->
-            <div class="event-request" style="margin-top:60px">
-           
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Event ID</th>
-                            <th>Event type</th>
-                            <th>Number of Guests</th>
-                            <th>Budget</th>
-                            <th>Tentative Date</th>
-                            <th>Event Status</th>
-                            <th>More</th>
-                          
-                        </tr>
-                    </thead>
-                    <tbody>
-                      
-                        <tr>
-                            <td>0001</td>
-                            <td>Wedding</td>
-                            <td>250</td>
-                            <td>1,000,000 LKR</td>
-                            <td>21/10/2023</td>
-                            <td>Pending</td>
-                            <td><a href="<?php echo URLROOT ?>eventplanners/onerequest">:</a></td>
-                        </tr>
-                        <tr>
-                            <td>0001</td>
-                            <td>Wedding</td>
-                            <td>250</td>
-                            <td>1,000,000 LKR</td>
-                            <td>21/10/2023</td>
-                            <td>Pending</td>
-                            <td><a href="">:</a></td>
-                        </tr>
-                        <tr>
-                            <td>0001</td>
-                            <td>Wedding</td>
-                            <td>250</td>
-                            <td>1,000,000 LKR</td>
-                            <td>21/10/2023</td>
-                            <td>Pending</td>
-                            <td><a href="">:</a></td>
-                        </tr>
-                         <tr>
-                            <td>0001</td>
-                            <td>Wedding</td>
-                            <td>250</td>
-                            <td>1,000,000 LKR</td>
-                            <td>21/10/2023</td>
-                            <td>Pending</td>
-                            <td><a href="">:</a></td>
-                        </tr>
-                       
-                    </tbody>
-                </table>
-            </div>
-
-
-
-        </div>
 
 </body>
 

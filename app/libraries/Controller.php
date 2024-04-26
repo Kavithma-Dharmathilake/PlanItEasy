@@ -33,6 +33,21 @@ class Controller {
 
     }
 
+    public function view1($view, $id1, $id2){
+       
+        //check for the view file
+        if(file_exists('../app/views/'.$view.'.php')){
+         require_once('../app/views/'.$view.'.php');
+        }
+        else{
+         die('view does not exist');
+        }
+         
+         //instantiate the view
+        // return new $view();
+ 
+     }
+
     
 
 

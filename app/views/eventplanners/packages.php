@@ -154,27 +154,28 @@
             <!-- List of packages -->
             <!--  2 packages at one side-->
             <div class="planner-packages">
-
+            <?php foreach ($data as $i): ?>
                 <a href="">
                     <div class="planner-package">
                         <div class="package-title">
-                            <h3>Wedding package</h3>
+                            <h3> <?php echo $i->name ?> -  <?php echo $i->type ?></h3>
                         </div>
+                     
                         <div class="package-content">
-                            <img src="<?php echo URLROOT ?>public/images/photo2.jpg" alt="package-image">
+                            <img src="<?php echo URLROOT ?>public/<?php echo $i->img ?>" alt="package-image">
                             <p>
-                                package description
+                            <?php echo $i->description ?>
                             </p>
                         </div>
                         <div class="package-action">
-                            <strong>RS.XXXX.XX</strong>
+                            <strong>RS. <?php echo $i->price ?></strong>
 
                             <div class="button-left">
-                                <a href=""><button class="package-edit">
+                                <a href="<?php echo URLROOT ?>eventplanners/updatepackage/<?php echo $i->id ?>"><button class="package-edit">
                                         <i class="fa fa-edit" style="font-size: 18px; padding-right:15px;">
                                         </i>
                                         Edit</button></a>
-                                <a href=""><button class="package-delete">
+                                <a href="<?php echo URLROOT ?>eventplanners/deleteuser/<?php echo $i->id ?>"><button class="package-delete"  onclick="confirmDelete(<?php echo $i->id ?>)">
                                         <i class="fa fa-trash" style="font-size: 18px; padding-right:15px;">
                                         </i>
 
@@ -185,99 +186,41 @@
 
                     </div>
                 </a>
-                <a href="">
-                    <div class="planner-package">
-                        <div class="package-title">
-                            <h3>Wedding package</h3>
-                        </div>
-                        <div class="package-content">
-                            <img src="<?php echo URLROOT ?>public/images/photo2.jpg" alt="package-image">
-                            <p>
-                                package description
-                            </p>
-                        </div>
-                        <div class="package-action">
-                            <strong>RS.XXXX.XX</strong>
-
-                            <div class="button-left">
-                                <a href=""><button class="package-edit">
-                                        <i class="fa fa-edit" style="font-size: 18px; padding-right:15px;">
-                                        </i>
-                                        Edit</button></a>
-                                <a href=""><button class="package-delete">
-                                        <i class="fa fa-trash" style="font-size: 18px; padding-right:15px;">
-                                        </i>
-
-                                        Delete</button></a>
-                            </div>
+                <?php endforeach ?>
 
                         </div>
-                    </div>
-                </a>
-            </div>
-            <div class="planner-packages">
-                <div class="planner-package">
-                    <div class="package-title">
-                        <h3>Wedding package</h3>
-                    </div>
-                    <div class="package-content">
-                        <img src="<?php echo URLROOT ?>public/images/photo2.jpg" alt="package-image">
-                        <p>
-                            package description
-                        </p>
-                    </div>
-                    <div class="package-action">
-                        <strong>RS.XXXX.XX</strong>
-
-                        <div class="button-left">
-                            <a href=""><button class="package-edit">
-                                    <i class="fa fa-edit" style="font-size: 18px; padding-right:15px;">
-                                    </i>
-                                    Edit</button></a>
-                            <a href=""><button class="package-delete">
-                                    <i class="fa fa-trash" style="font-size: 18px; padding-right:15px;">
-                                    </i>
-
-                                    Delete</button></a>
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div class="planner-package">
-                    <div class="package-title">
-                        <h3>Wedding package</h3>
-                    </div>
-                    <div class="package-content">
-                        <img src="<?php echo URLROOT ?>public/images/photo2.jpg" alt="package-image">
-                        <p>
-                            package description
-                        </p>
-                    </div>
-                    <div class="package-action">
-                        <strong>RS.XXXX.XX</strong>
-
-                        <div class="button-left">
-                            <a href=""><button class="package-edit">
-                                    <i class="fa fa-edit" style="font-size: 18px; padding-right:15px;">
-                                    </i>
-                                    Edit</button></a>
-                            <a href=""><button class="package-delete">
-                                    <i class="fa fa-trash" style="font-size: 18px; padding-right:15px;">
-                                    </i>
-
-                                    Delete</button></a>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
-
         </div>
+      
 
 
 </body>
+<script>
+    function confirmDelete(requestId) {
+        var confirmation = confirm("Are you sure you want to Delete?");
+        if (confirmation) {
+            deleteReq(requestId);
+        } else {
+
+        }
+    }
+
+    function deleteReq(requestId) {
+        alert('User #' + requestId + ' has been deleted.');
+
+    }
+
+    function confirmReject(requestId) {
+        var confirmation = confirm("Are you sure you want to reject this request?");
+        if (confirmation) {
+            rejectRequest(requestId);
+        } else {
+
+        }
+    }
+
+    function rejectRequest(requestId) {
+        alert('Request #' + requestId + ' has been reject.');
+    }
+</script>
 
 </html>

@@ -8,9 +8,7 @@
     <title>Event request</title>
     <!-- MATERIAL CDN -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- STYLESHEET -->
     <link rel="stylesheet" href="<?php echo URLROOT; ?>public/css/admindash.css">
@@ -96,7 +94,7 @@
                     </span>
                     <h3>Inquiry</h3>
                 </a>
-                <a href="<?php echo URLROOT ?>">
+                <a href="<?php echo URLROOT ?>users/logout">
                     <span class="material-icons-sharp">logout</span>
                     <h3>Logout</h3>
                 </a>
@@ -122,149 +120,306 @@
             <div style="display:flex">
 
                 <div class="planner-title">
-                    <h1>Event Request ID - #R123</h1>
+                    <h1>Event Request ID - <?php echo $data['quote']->eqid ?></h1>
                 </div>
 
 
             </div>
             <div style="display:flex; margin-top:40px">
                 <div>
-                <h2 style="text-align:center; margin-top:50px">General details</h2>
+                    <h2 style="text-align:center; margin-top:50px">General details</h2>
                     <div class="event-details">
-                        <p  style="text-align:center">Event details</p>
+                        <p style="text-align:center">Event details</p>
 
                         <div style="display:flex; margin-top:20px; margin-left:30px;">
                             <div class="req-title" style="width:50%">Event Type </div>
-                            <div class="req-data" style="width:50%">Wedding</div>
+                            <div class="req-data" style="width:50%"><?php echo $data['quote']->event_type ?></div>
                         </div>
                         <div style="display:flex; margin-top:20px; margin-left:30px;">
                             <div class="req-title" style="width:50%">Event Theme </div>
-                            <div class="req-data" style="width:50%">Ocean</div>
+                            <div class="req-data" style="width:50%"><?php echo $data['quote']->theme ?></div>
                         </div>
                         <div style="display:flex; margin-top:20px; margin-left:30px;">
                             <div class="req-title" style="width:50%">Tenative date </div>
-                            <div class="req-data" style="width:50%">2023/10/12</div>
+                            <div class="req-data" style="width:50%"><?php echo $data['quote']->date ?></div>
                         </div>
                         <div style="display:flex; margin-top:20px; margin-left:30px;">
                             <div class="req-title" style="width:50%">Budget </div>
-                            <div class="req-data" style="width:50%">100,000.00 LKR</div>
+                            <div class="req-data" style="width:50%">LKR. <?php echo $data['quote']->minbudget ?> - LKR. <?php echo $data['quote']->maxbudget ?></div>
                         </div>
                         <div style="display:flex; margin-top:20px; margin-left:30px;">
                             <div class="req-title" style="width:50%">Guest Count </div>
-                            <div class="req-data" style="width:50%">250</div>
+                            <div class="req-data" style="width:50%"><?php echo $data['quote']->guest_count ?></div>
                         </div>
                         <div style="display:flex; margin-top:20px; margin-left:30px;">
                             <div class="req-title" style="width:50%">Time</div>
-                            <div class="req-data" style="width:50%">8.00 A.M. - 4.30 P.M.</div>
+                            <div class="req-data" style="width:50%"><?php echo $data['quote']->starttime ?> - <?php echo $data['quote']->endtime ?></div>
                         </div>
                     </div>
                     <div class="event-details">
-                        
+
                         <p style="text-align:center;">Customer details</p>
 
                         <div style="display:flex; margin-top:20px; margin-left:30px;">
                             <div class="req-title" style="width:50%">Name </div>
-                            <div class="req-data" style="width:50%">Inoka Kumari</div>
+                            <div class="req-data" style="width:50%"><?php echo $data['customer']->name ?></div>
                         </div>
                         <div style="display:flex; margin-top:20px; margin-left:30px;">
                             <div class="req-title" style="width:50%">Email </div>
-                            <div class="req-data" style="width:50%">inoka@gmail.com</div>
+                            <div class="req-data" style="width:50%"><?php echo $data['customer']->email ?></div>
                         </div>
                         <div style="display:flex; margin-top:20px; margin-left:30px;">
                             <div class="req-title" style="width:50%">Telephone </div>
-                            <div class="req-data" style="width:50%">074444444</div>
+                            <div class="req-data" style="width:50%"><?php echo $data['customer']->contact ?></div>
                         </div>
 
+                    </div>
+
+                    <div>
+
+                        <a href="<?php echo URLROOT ?>eventplanners/createbudget"><button style=" margin:20px; padding:20px; background-color:#7380ec; color:white; border-radius:15px;">Create Budget</button></a>
                     </div>
                 </div>
                 <div class="search-quoate">
-                <h2 style="text-align:center; margin-top:50px; margin-left:-330px;">Service Details</h2>
-                  <div style="display:flex; flex-direction:row">
-                  <div class="event-details">
-                        <p style="text-align:center">Reception Request</p>
+                    <h2 style="text-align:center; margin-top:50px; margin-left:-330px;">Service Details</h2>
+                    
+                    <!-- reception -->
+                    <div style="display:flex; flex-direction:row">
+                        <?php if ($data['reception'] != null) { ?>
+                            <div class="event-details">
+                                <p style="text-align:center">Reception Request</p>
 
-                        <div style="display:flex; margin-top:20px; margin-left:30px;">
-                            <div class="req-title" style="width:50%">Indoor/Outdoor</div>
-                            <div class="req-data" style="width:50%">Indoor</div>
-                        </div>
-                        <div style="display:flex; margin-top:20px; margin-left:30px;">
-                            <div class="req-title" style="width:50%">Type</div>
-                            <div class="req-data" style="width:50%">Banquet</div>
-                        </div>
-                        <div style="display:flex; margin-top:20px; margin-left:30px;">
-                            <div class="req-title" style="width:50%">Guest No</div>
-                            <div class="req-data" style="width:50%">225</div>
-                        </div>
-                        <div style="display:flex; margin-top:20px; margin-left:30px;">
-                            <div class="req-title" style="width:50%">Date</div>
-                            <div class="req-data" style="width:50%">Remarks</div>
-                        </div>
+                                <div style="display:flex; margin-top:20px; margin-left:30px;">
+                                    <div class="req-title" style="width:50%">Indoor/Outdoor</div>
+                                    <div class="req-data" style="width:50%"><?php echo $data['reception']->type ?></div>
+                                </div>
+                                <div style="display:flex; margin-top:20px; margin-left:30px;">
+                                    <div class="req-title" style="width:50%">Remark</div>
+                                    <div class="req-data" style="width:50%"><?php echo $data['reception']->remark ?></div>
+                                </div>
+                                <div style="display:flex; margin-top:20px; margin-left:30px;">
+                                    <div class="req-title" style="width:50%">Time</div>
+                                    <div class="req-data" style="width:50%"><?php echo $data['reception']->start  ?>- <?php echo $data['reception']->end ?></div>
+                                </div>
 
+                            </div>
+                       
+                        <div>
+                            <p style="margin:20px; padding:20px; margin-top:100px;">
+                                <a href=""> Requested</a> | <a href="<?php echo URLROOT  ?>eventplanners/recivedquote/">Receieved</a>
+                            </p>
+                            <a href="<?php echo URLROOT ?>eventplanners/suppliers/reception/<?php echo $data['quote']->eqid ?>"><button style="margin-top:-100px; margin-left:60px;padding:20px">Search Suppliers</button></a>
+                        </div>
+                        <?php } ?>
                     </div>
-                    <div>
-                        <p style="margin:20px; padding:20px; margin-top:100px;">   
-                        <a href=""> Requested - 3</a>   |    <a href="<?php echo URLROOT ?>eventplanners/recivedquote">Receieved -2</a></p>
-                        <a href="<?php echo URLROOT ?>eventplanners/findsupplier"><button style="margin-top:-100px; margin-left:60px;padding:20px">Search Suppliers</button></a>
+                
+                    <!-- catering -->
+                    <div style="display:flex; flex-direction:row">
+                        <?php if ($data['catering'] != null) { ?>
+                            <div class="event-details">
+                                <p style="text-align:center">Catering Request</p>
+
+                                <div style="display:flex; margin-top:20px; margin-left:30px;">
+                                    <div class="req-title" style="width:50%">Meals</div>
+                                    <div class="req-data" style="width:50%"><?php echo $data['catering']->time ?></div>
+                                </div>
+                                <div style="display:flex; margin-top:20px; margin-left:30px;">
+                                    <div class="req-title" style="width:50%">Services</div>
+                                    <div class="req-data" style="width:50%"><?php echo $data['catering']->services ?></div>
+                                </div>
+                                <div style="display:flex; margin-top:20px; margin-left:30px;">
+                                    <div class="req-title" style="width:50%">Price Per Plate</div>
+                                    <div class="req-data" style="width:50%"><?php echo $data['catering']->price ?></div>
+                                </div>
+                                <div style="display:flex; margin-top:20px; margin-left:30px;">
+                                    <div class="req-title" style="width:50%">Time</div>
+                                    <div class="req-data" style="width:50%"><?php echo $data['catering']->start ?> - <?php echo $data['catering']->end ?></div>
+                                </div>
+                                <div style="display:flex; margin-top:20px; margin-left:30px;">
+                                    <div class="req-title" style="width:50%">Remarks</div>
+                                    <div class="req-data" style="width:50%"><?php echo $data['catering']->remark  ?></div>
+                                </div>
+
+                            </div>
+                       
+                        <div>
+                            <p style="margin:20px; padding:20px; margin-top:100px;">
+                                <a href=""> Requested - 3</a> | <a href="<?php echo URLROOT ?>eventplanners/recivedquote">Receieved -2</a>
+                            </p>
+                            <a href="<?php echo URLROOT ?>eventplanners/findsupplier"><button style="margin-top:-100px; margin-left:60px;padding:20px">Search Suppliers</button></a>
+                        </div>
+                        <?php } ?>
                     </div>
-                  </div>
-                  <div style="display:flex; flex-direction:row">
-                    <div> <div class="event-details">
-                        <p style="text-align:center">Catering Request</p>
 
-                        <div style="display:flex; margin-top:20px; margin-left:30px;">
-                            <div class="req-title" style="width:50%">Cusine Type </div>
-                            <div class="req-data" style="width:50%">Western</div>
-                        </div>
-                        <div style="display:flex; margin-top:20px; margin-left:30px;">
-                            <div class="req-title" style="width:50%">Time </div>
-                            <div class="req-data" style="width:50%">Breakfast/Lunch</div>
-                        </div>
-                        <div style="display:flex; margin-top:20px; margin-left:30px;">
-                            <div class="req-title" style="width:50%">Event Services </div>
-                            <div class="req-data" style="width:50%">Sever</div>
-                        </div>
-                        <div style="display:flex; margin-top:20px; margin-left:30px;">
-                            <div class="req-title" style="width:50%">Veg/Non Veg</div>
-                            <div class="req-data" style="width:50%">Veg</div>
-                        </div>
-                        <div style="display:flex; margin-top:20px; margin-left:30px;">
-                            <div class="req-title" style="width:50%">Remarks</div>
-                            <div class="req-data" style="width:50%">none</div>
-                        </div>
+                    <!-- Photography -->
+                    <div style="display:flex; flex-direction:row">
+                        <?php if ($data['photography'] != null) { ?>
+                            <div class="event-details">
+                                <p style="text-align:center">Photography Request</p>
 
-                    </div></div>
-                    <div style="margin:20px; padding:20px; margin-top:100px;">   
-                        <p>   <a href=""> Requested - 3</a>   |    <a href="<?php echo URLROOT ?>eventplanners/recivedquote">Receieved -2</a></p>
-                        <a href="<?php echo URLROOT ?>eventplanners/findsupplier"> <button style="padding:20px">Search Suppliers</button></a></div>
-                  </div>
-                  <div style="display:flex; flex-direction:row">
-                  <div class="event-details">
-                        <p style="text-align:center">Reception Request</p>
+                                <div style="display:flex; margin-top:20px; margin-left:30px;">
+                                    <div class="req-title" style="width:50%">Coverage</div>
+                                    <div class="req-data" style="width:50%"><?php echo $data['photography']->coverage ?></div>
+                                </div>
+                                <div style="display:flex; margin-top:20px; margin-left:30px;">
+                                    <div class="req-title" style="width:50%">Services</div>
+                                    <div class="req-data" style="width:50%"><?php echo $data['photography']->services ?></div>
+                                </div>
+                                <div style="display:flex; margin-top:20px; margin-left:30px;">
+                                    <div class="req-title" style="width:50%">Price Per Plate</div>
+                                    <div class="req-data" style="width:50%"><?php echo $data['photography']->remark ?></div>
+                                </div>
+                                <div style="display:flex; margin-top:20px; margin-left:30px;">
+                                    <div class="req-title" style="width:50%">Time</div>
+                                    <div class="req-data" style="width:50%"><?php echo $data['photography']->start ?> - <?php echo $data['photography']->end ?></div>
+                                </div>
+                            
 
-                        <div style="display:flex; margin-top:20px; margin-left:30px;">
-                            <div class="req-title" style="width:50%">Indoor/Outdoor</div>
-                            <div class="req-data" style="width:50%">Indoor</div>
+                            </div>
+                       
+                        <div>
+                            <p style="margin:20px; padding:20px; margin-top:100px;">
+                                <a href=""> Requested - 3</a> | <a href="<?php echo URLROOT ?>eventplanners/recivedquote">Receieved -2</a>
+                            </p>
+                            <a href="<?php echo URLROOT ?>eventplanners/findsupplier"><button style="margin-top:-100px; margin-left:60px;padding:20px">Search Suppliers</button></a>
                         </div>
-                        <div style="display:flex; margin-top:20px; margin-left:30px;">
-                            <div class="req-title" style="width:50%">Type</div>
-                            <div class="req-data" style="width:50%">Banquet</div>
-                        </div>
-                        <div style="display:flex; margin-top:20px; margin-left:30px;">
-                            <div class="req-title" style="width:50%">Guest No</div>
-                            <div class="req-data" style="width:50%">225</div>
-                        </div>
-                        <div style="display:flex; margin-top:20px; margin-left:30px;">
-                            <div class="req-title" style="width:50%">Date</div>
-                            <div class="req-data" style="width:50%">Remarks</div>
-                        </div>
-
+                        <?php } ?>
                     </div>
-                    <div>
-                        <p style="margin:20px; padding:20px; margin-top:100px;">   
-                        <a href=""> Requested - 3</a>   |    <a href="<?php echo URLROOT ?>eventplanners/recivedquote">Receieved -2</a></p>
-                        <a href="<?php echo URLROOT ?>eventplanners/findsupplier"><button style="margin-top:-100px; margin-left:60px; padding:20px;">Search Suppliers</button></a>
+                    <!-- Decoration -->
+                    <div style="display:flex; flex-direction:row">
+                        <?php if ($data['decoration'] != null) { ?>
+                            <div class="event-details">
+                                <p style="text-align:center">Decoration Request</p>
+
+                                <div style="display:flex; margin-top:20px; margin-left:30px;">
+                                    <div class="req-title" style="width:50%">Services</div>
+                                    <div class="req-data" style="width:50%"><?php echo $data['decoration']->services ?></div>
+                                </div>
+                                <div style="display:flex; margin-top:20px; margin-left:30px;">
+                                    <div class="req-title" style="width:50%">Flowers</div>
+                                    <div class="req-data" style="width:50%"><?php echo $data['decoration']->flowers ?></div>
+                                </div>
+                                <div style="display:flex; margin-top:20px; margin-left:30px;">
+                                    <div class="req-title" style="width:50%">Remarks</div>
+                                    <div class="req-data" style="width:50%"><?php echo $data['decoration']->remark  ?></div>
+                                </div>
+
+                            </div>
+                       
+                        <div>
+                            <p style="margin:20px; padding:20px; margin-top:100px;">
+                                <a href=""> Requested - 3</a> | <a href="<?php echo URLROOT ?>eventplanners/recivedquote">Receieved -2</a>
+                            </p>
+                            <a href="<?php echo URLROOT ?>eventplanners/findsupplier"><button style="margin-top:-100px; margin-left:60px;padding:20px">Search Suppliers</button></a>
+                        </div>
+                        <?php } ?>
                     </div>
-                  </div>
+                    <!-- Cake -->
+                    <div style="display:flex; flex-direction:row">
+                        <?php if ($data['cake'] != null) { ?>
+                            <div class="event-details">
+                                <p style="text-align:center">Cake Request</p>
+
+                                <div style="display:flex; margin-top:20px; margin-left:30px;">
+                                    <div class="req-title" style="width:50%">Remarks</div>
+                                    <div class="req-data" style="width:50%"><?php echo $data['cake']->remark  ?></div>
+                                </div>
+
+                            </div>
+                       
+                        <div>
+                            <p style="margin:20px; padding:20px; margin-top:100px;">
+                                <a href=""> Requested - 3</a> | <a href="<?php echo URLROOT ?>eventplanners/recivedquote">Receieved -2</a>
+                            </p>
+                            <a href="<?php echo URLROOT ?>eventplanners/findsupplier"><button style="margin-top:-100px; margin-left:60px;padding:20px">Search Suppliers</button></a>
+                        </div>
+                        <?php } ?>
+                    </div>
+                    <!-- Dancing -->
+                    <div style="display:flex; flex-direction:row">
+                        <?php if ($data['dancing'] != null) { ?>
+                            <div class="event-details">
+                                <p style="text-align:center">Dancing Request</p>
+
+                                <div style="display:flex; margin-top:20px; margin-left:30px;">
+                                    <div class="req-title" style="width:50%">Time</div>
+                                    <div class="req-data" style="width:50%"><?php echo $data['dancing']->start ?> - <?php echo $data['dancing']->end ?></div>
+                                </div>
+                                <div style="display:flex; margin-top:20px; margin-left:30px;">
+                                    <div class="req-title" style="width:50%">Remarks</div>
+                                    <div class="req-data" style="width:50%"><?php echo $data['dancing']->remark  ?></div>
+                                </div>
+
+                            </div>
+                       
+                        <div>
+                            <p style="margin:20px; padding:20px; margin-top:100px;">
+                                <a href=""> Requested - 3</a> | <a href="<?php echo URLROOT ?>eventplanners/recivedquote">Receieved -2</a>
+                            </p>
+                            <a href="<?php echo URLROOT ?>eventplanners/findsupplier"><button style="margin-top:-100px; margin-left:60px;padding:20px">Search Suppliers</button></a>
+                        </div>
+                        <?php } ?>
+                    </div>
+                    <!-- Music -->
+                    <div style="display:flex; flex-direction:row">
+                        <?php if ($data['music'] != null) { ?>
+                            <div class="event-details">
+                                <p style="text-align:center">Music Request</p>
+
+                               
+                                <div style="display:flex; margin-top:20px; margin-left:30px;">
+                                    <div class="req-title" style="width:50%">Time</div>
+                                    <div class="req-data" style="width:50%"><?php echo $data['music']->start ?> - <?php echo $data['music']->end ?></div>
+                                </div>
+                                <div style="display:flex; margin-top:20px; margin-left:30px;">
+                                    <div class="req-title" style="width:50%">Remarks</div>
+                                    <div class="req-data" style="width:50%"><?php echo $data['music']->remark  ?></div>
+                                </div>
+
+                            </div>
+                       
+                        <div>
+                            <p style="margin:20px; padding:20px; margin-top:100px;">
+                                <a href=""> Requested - 3</a> | <a href="<?php echo URLROOT ?>eventplanners/recivedquote">Receieved -2</a>
+                            </p>
+                            <a href="<?php echo URLROOT ?>eventplanners/findsupplier"><button style="margin-top:-100px; margin-left:60px;padding:20px">Search Suppliers</button></a>
+                        </div>
+                        <?php } ?>
+                    </div>
+                    <!-- DJ -->
+                    <div style="display:flex; flex-direction:row">
+                        <?php if ($data['dj'] != null) { ?>
+                            <div class="event-details">
+                                <p style="text-align:center">DJ Request</p>
+
+                            
+                                <div style="display:flex; margin-top:20px; margin-left:30px;">
+                                    <div class="req-title" style="width:50%">Services</div>
+                                    <div class="req-data" style="width:50%"><?php echo $data['dj']->services ?></div>
+                                </div>
+                                <div style="display:flex; margin-top:20px; margin-left:30px;">
+                                    <div class="req-title" style="width:50%">Coverage</div>
+                                    <div class="req-data" style="width:50%"><?php echo $data['dj']->coverage ?></div>
+                                </div>
+                                <div style="display:flex; margin-top:20px; margin-left:30px;">
+                                    <div class="req-title" style="width:50%">Time</div>
+                                    <div class="req-data" style="width:50%"><?php echo $data['dj']->start ?> - <?php echo $data['dj']->end ?></div>
+                                </div>
+                                <div style="display:flex; margin-top:20px; margin-left:30px;">
+                                    <div class="req-title" style="width:50%">Remarks</div>
+                                    <div class="req-data" style="width:50%"><?php echo $data['dj']->remark  ?></div>
+                                </div>
+
+                            </div>
+                       
+                        <div>
+                            <p style="margin:20px; padding:20px; margin-top:100px;">
+                                <a href=""> Requested - 3</a> | <a href="<?php echo URLROOT ?>eventplanners/recivedquote">Receieved -2</a>
+                            </p>
+                            <a href="<?php echo URLROOT ?>eventplanners/findsupplier"><button style="margin-top:-100px; margin-left:60px;padding:20px">Search Suppliers</button></a>
+                        </div>
+                        <?php } ?>
+                    </div>
                 </div>
             </div>
 

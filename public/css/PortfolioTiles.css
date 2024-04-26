@@ -1,0 +1,110 @@
+.hp-heaven-20-categories {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.hp-heaven-20-row-1,
+.hp-heaven-20-row-2,
+.hp-heaven-20-row-3,
+.hp-heaven-20-row-4 {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.category {
+    margin-bottom: 10px;
+    position: relative;
+    overflow: hidden;
+    background: #b3aba0;
+}
+
+.hp-heaven-20-row-1 img,
+.hp-heaven-20-row-3 img {
+    height: 320px;
+}
+
+.category img {
+    width: 100%;
+    max-height: 260px;
+    object-fit: cover;
+    transition: 0.3s;
+    opacity: 1;
+}
+
+.category-content {
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    width: 75%;
+    padding: 40px 0;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    transition: 0.3s;
+}
+
+.category-title {
+    font-family: inherit;
+    margin: 0 0 10px;
+    font-size: 1.6em;
+    font-weight: 400;
+    color: #ffffff;
+}
+
+.cat-button {
+    padding: 6px 25px;
+    bottom: 2%;
+    border: 1px solid #ffffff;
+    box-sizing: border-box;
+    background: none;
+    transition: 0.3s;
+    color: #ffffff;
+    text-decoration: none;
+    display: initial;
+    font-size: 0.875em;
+    border-radius: 5px;
+}
+
+.category .category-image {
+    transition: filter 0.35s ease-in-out;
+    -moz-transition: filter 0.35s ease-in-out;
+    -webkit-transition: filter 0.35s ease-in-out;
+    -o-transition: filter 0.35s ease-in-out;
+    -ms-transition: filter 0.35s ease-in-out;
+    -webkit-transition: transform 2s ease-in-out;
+    -moz-transition: transform 2s ease-in-out;
+    transition: transform 2s ease-in-out;
+}
+
+.category:hover .category-image:hover {
+    filter: blur(2px);
+    -moz-filter: blur(2px);
+    -webkit-filter: blur(2px);
+    -moz-transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    -o-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+}
+
+.category:hover .category-content {
+    top: 50%;
+}
+
+.cat-button:hover {
+    background: #b99945;
+    text-decoration: none;
+    border: 1px solid #b99945;
+}
+
+.single-block {
+    flex-basis: 32.8%;
+}
+
+.double-block {
+    flex-basis: 66.35%;
+}

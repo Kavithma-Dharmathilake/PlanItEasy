@@ -1,0 +1,196 @@
+.budgetplan_container {
+    margin-top: 3rem;
+    width: 100%;
+}
+
+.budgetplan_container h1 {
+    color: var(--color-dark-variant);
+    font-weight: 600;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+}
+
+.budgetplan_container {
+    width: 100;
+}
+
+.plan_service_type {
+    margin-top: 2rem;
+    width: 100%;
+}
+
+.plan_service_type select {
+    margin: 0.5rem;
+    padding: 1rem;
+    border-radius: var(--border-radius-2);
+}
+
+.plan_details_container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    text-align: center;
+    padding: 1rem;
+}
+
+.budgetplan_container h2 {
+    font-weight: 600px;
+}
+
+.view_quote {
+    align-items: center;
+    justify-content: center;
+}
+
+.view_quote button {
+    padding: 1rem;
+    border-radius: var(--border-radius-2);
+    background-color: rgb(208, 208, 208);
+}
+
+.sub_total {
+    align-items: center;
+    justify-content: center;
+}
+
+table {
+    border: 1px solid #ccc;
+    border-radius: var(--border-radius-3);
+    border-collapse: collapse;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    table-layout: fixed;
+}
+
+table caption {
+    font-size: 1.5em;
+    margin: .5em 0 .75em;
+}
+
+table tr {
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    padding: .35em;
+}
+
+table th,
+table td {
+    padding: .625em;
+    text-align: center;
+}
+
+table th {
+    font-size: .85em;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+}
+
+@media screen and (max-width: 600px) {
+    table {
+        border: 0;
+    }
+
+    table caption {
+        font-weight: 600;
+        font-size: 1.3em;
+    }
+
+    table thead {
+        border: none;
+        clip: rect(0 0 0 0);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
+    }
+
+    table tr {
+        border-bottom: 3px solid #ddd;
+        display: block;
+        margin-bottom: .625em;
+    }
+
+    table td {
+        border-bottom: 1px solid #ddd;
+        display: block;
+        font-size: .8em;
+        text-align: right;
+    }
+
+    table td::before {
+        /*
+      * aria-label has no advantage, it won't be read inside a table
+      content: attr(aria-label);
+      */
+        content: attr(data-label);
+        float: left;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+    table td:last-child {
+        border-bottom: 0;
+    }
+}
+
+.rmv {
+    border-radius: var(--border-radius-2);
+    background-color: var(--color-danger);
+    padding: .5rem;
+}
+
+.accept {
+    border-radius: var(--border-radius-2);
+    background-color: var(--color-success);
+    padding: .5rem;
+}
+
+.view {
+    border-radius: var(--border-radius-2);
+    background-color: var(--color-warning);
+    padding: .5rem;
+}
+
+
+.recieved_quotations h2 {
+    margin-top: 2rem;
+}
+
+.recieved_quotations_container {
+    margin-top: 1rem;
+    padding-top: 1.5rem;
+    padding-left: 0.5rem;
+}
+
+.recieved_subcontainer {
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: #ebe9e9;
+    border-radius: var(--border-radius-2);
+}
+
+.recieved_subcontainer p {
+    margin-top: 0.3rem;
+}
+
+.recieved_subcontainer .btn_action {
+    display: inline-flex;
+    margin-top: 0.4rem;
+}
+
+.btn_action .rmv {
+    width: 5rem;
+    margin-right: 1rem;
+}
+
+.btn_action .accept {
+    width: 5rem;
+    margin-right: 1rem;
+}
+
+.btn_action .view {
+    width: 5rem;
+    margin-right: 1rem;
+}
