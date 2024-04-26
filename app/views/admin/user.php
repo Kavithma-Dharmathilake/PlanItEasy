@@ -58,7 +58,7 @@
                     <span class="material-icons-sharp">settings</span>
                     <h3>Settings</h3>
                 </a>
-                <a href="#">
+                <a href="<?php echo URLROOT ?>">
                     <span class="material-icons-sharp">logout</span>
                     <h3>Logout</h3>
                 </a>

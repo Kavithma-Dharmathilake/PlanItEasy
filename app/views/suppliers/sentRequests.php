@@ -13,8 +13,8 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- STYLESHEET -->
-    <link rel="stylesheet" href="./css/admindash.css">
-    <link rel="stylesheet" href="./css/eventplannerdash.css">
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>public/css/admindash.css">
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>public/css/eventplannerdash.css">
     
 </head>
 
@@ -23,7 +23,7 @@
     <aside>
             <div class="top">
                 <div class="logo">
-                    <img src="images/logo.jpg">
+                    <img src="<?php echo URLROOT; ?>public/images/logo.jpg">
                     <h2>PlanItEasy</h2>
                 </div>
                 <div class="close" id="close-btn">
@@ -31,46 +31,46 @@
                 </div>
             </div>
             <div class="sidebar">
-                <a href="index.php">
+                <a href="<?php echo URLROOT; ?>suppliers/index" class="active">
                     <span class="material-icons-sharp">grid_view</span>
                     <h3>Dashboard</h3>
                 </a>
 
-                <a href="products.php">
+                <a href="<?php echo URLROOT; ?>suppliers/products">
                     <span class="material-icons-sharp">
                         inventory
                     </span>
                     <h3>Products</h3>
                 </a>
 
-                <a href="quotationRequest.php">
+                <a href="<?php echo URLROOT; ?>suppliers/quotationRequest">
                     <span class="material-icons-sharp">
                         note_add
                     </span>
                     <h3>Quotation Requests</h3>
                 </a>
 
-                <a href="sentRequests.php" class="active">
+                <a href="<?php echo URLROOT; ?>suppliers/sentRequests">
                     <span class="material-icons-sharp">
                         festival
                     </span>
                     <h3>Sent Quotations</h3>
                 </a>
 
-                <a href="newProjectReq.php">
+                <a href="<?php echo URLROOT; ?>suppliers/newProjectReq">
                     <span class="material-icons-sharp">
                         request_quote
                     </span>
                     <h3>New Project Requests</h3>
                 </a>
-                <a href="completedProjects.php">
+                <a href="<?php echo URLROOT; ?>suppliers/completedProjects">
                     <span class="material-icons-sharp">
                         paid
                     </span>
                     <h3>Completed Projects</h3>
                 </a>
 
-                <a href="eventplanners/calendar">
+                <a href="<?php echo URLROOT; ?>suppliers/eventplanners/calendar">
                     <span class="material-icons-sharp">
                         calendar_month
                     </span>
@@ -84,7 +84,7 @@
                     <h3>Profile</h3>
                 </a>
 
-                <a href="eventplanners/messages">
+                <a href="<?php echo URLROOT; ?>suppliers/eventplanners/messages">
                     <span class="material-icons-sharp">mail</span>
                     <h3>Messages</h3>
                     <span class="message-count">5</span>
@@ -160,35 +160,17 @@
                         </tr>
                     </thead>
                     <tbody>
-                      
+                    <?php foreach ($data as $i): ?>
                         <tr>
-                            <td>0001</td>
-                            <td>Wedding</td>
-                            <td>250</td>
-                            <td>1,000,000 LKR</td>
-                            <td>21/10/2023</td>
-                            <td>Pending</td>
+                            <td><?php echo $i->id ?></td>
+                            <td><?php echo $i->package ?></td>
+                            <td><?php echo $i->eid ?></td>
+                            <td><?php echo $i->sid ?></td>
+                            <td><?php echo $i->uid ?></td>
+                            <td><?php echo $i->stime ?></td>
                             <td><a href="eventplanners/onerequest"><i class="fa-solid fa-angles-right"></i></a></td>
                         </tr>
-                        <tr>
-                            <td>0002</td>
-                            <td>Birthday</td>
-                            <td>30</td>
-                            <td>25,000 LKR</td>
-                            <td>25/11/2023</td>
-                            <td>Pending</td>
-                            <td><a href=""><i class="fa-solid fa-angles-right"></i></a></td>
-                        </tr>
-                        <tr>
-                            <td>0003</td>
-                            <td>Birthday</td>
-                            <td>70</td>
-                            <td>40,000 LKR</td>
-                            <td>29/12/2023</td>
-                            <td>Pending</td>
-                            <td><a href=""><i class="fa-solid fa-angles-right"></i></a></td>
-                        </tr>
-                       
+                        <?php endforeach ?>
                     </tbody>
                 </table>
             </div>
@@ -196,7 +178,39 @@
 
 
         </div>
+        <!-- <div>
+        <button onclick="captureAndDownloadPDF()">Generate Report</button>
+        </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.0/jspdf.umd.min.js"></script>
+
+<script>
+    async function captureAndDownloadPDF() {
+        // Capture screenshot using html2canvas
+        const canvas = await html2canvas(document.body); // or a specific element
+
+        // Get the image data from the canvas
+        const imgData = canvas.toDataURL('image/png');
+
+        // Create a new instance of jsPDF
+        const {
+            jsPDF
+        } = window.jspdf;
+        const doc = new jsPDF();
+
+        // Add the image to the PDF (x, y, width, height)
+        doc.addImage(imgData, 'PNG', -5, 1, 190, 0);
+
+        // Save the PDF and prompt the user to download it
+        doc.save('screenshot.pdf');
+    }
+
+    // Call the function when needed (e.g., on button click)
+    document.getElementById('downloadButton').addEventListener('click', captureAndDownloadPDF);
+</script> -->
 
 </body>
 
 </html>
+

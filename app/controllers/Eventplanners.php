@@ -7,13 +7,13 @@ class Eventplanners extends Controller
     {
 
         $this->userModel = $this->model('Package');
+        $this->plannerModel = $this->model('EventPlanner');
+        $this->CustomerModel = $this->model('Customer');
     }
 
     public function index()
     {
-
         $this->view('eventplanners/index');
-
     }
 
     public function packages()
@@ -21,9 +21,6 @@ class Eventplanners extends Controller
 
         $data = $this->userModel->getAllEvents();
         $this->view('eventplanners/packages', $data);
-
-
-
     }
 
     public function updatepackage($id)
@@ -118,8 +115,13 @@ class Eventplanners extends Controller
 
     public function eventRequest()
     {
+        $quote = $this->plannerModel->getEventQuote();
+        $request =$this->CustomerModel->getEventById($id);
+        $data = [
+            'quote' => $quote
+        ];
 
-        $this->view('eventplanners/eventRequest');
+        $this->view('eventplanners/eventRequest', $data);
 
     }
 

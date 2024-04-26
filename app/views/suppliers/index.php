@@ -127,11 +127,11 @@
                     <h3>Dashboard</h3>
                 </a>
 
-                <a href="<?php echo URLROOT; ?>suppliers/products">
+                <a href="<?php echo URLROOT; ?>suppliers/portfolio">
                     <span class="material-icons-sharp">
                         inventory
                     </span>
-                    <h3>Products</h3>
+                    <h3>Portfolio</h3>
                 </a>
 
                 <a href="<?php echo URLROOT; ?>suppliers/quotationRequest">
@@ -148,18 +148,13 @@
                     <h3>Sent Quotations</h3>
                 </a>
 
-                <a href="<?php echo URLROOT; ?>suppliers/newProjectReq">
+                <a href="<?php echo URLROOT; ?>suppliers/packages">
                     <span class="material-icons-sharp">
                         request_quote
                     </span>
-                    <h3>New Project Requests</h3>
+                    <h3>Packages</h3>
                 </a>
-                <a href="<?php echo URLROOT; ?>suppliers/completedProjects">
-                    <span class="material-icons-sharp">
-                        paid
-                    </span>
-                    <h3>Completed Projects</h3>
-                </a>
+          
 
                 <a href="<?php echo URLROOT; ?>/eventplanners/calendar">
                     <span class="material-icons-sharp">
@@ -175,19 +170,12 @@
                     <h3>Profile</h3>
                 </a>
 
-                <a href="<?php echo URLROOT; ?>suppliers/eventplanners/messages">
+                <a href="<?php echo URLROOT; ?>suppliers/message">
                     <span class="material-icons-sharp">mail</span>
                     <h3>Messages</h3>
                     <span class="message-count">5</span>
                 </a>
-
-                <!-- <a href="eventplanners/inquiry">
-                    <span class="material-icons-sharp">
-                        info
-                    </span>
-                    <h3>Inquiry</h3>
-                </a> -->
-                <a href="">
+                <a href="<?php echo URLROOT; ?>user/logout">
                     <span class="material-icons-sharp">logout</span>
                     <h3>Logout</h3>
                 </a>
@@ -202,7 +190,9 @@
                     <div class="middle">
                         <div class="left">
                             <h3>New Quotation Requests</h3>
-                            <h1>3</h1>
+                            <h1>
+                                    <?php echo $data['countQuote']->Count ?><br>
+                            </h1>
                         </div>
 
                     </div>
@@ -220,16 +210,19 @@
                     </div>
                 </div>
 
-                <div class="suppliers">
+                <div class="suppliers" style="cursor: pointer;">
+                <a href = "<?php echo URLROOT; ?>suppliers/packages"> 
                     <span class="material-icons-sharp">groups</span>
                     <div class="middle">
                         <div class="left">
-                            <h3>Products Listed</h3>
-                            <h1>51</h1>
+                            <h3>Packages Listed</h3>
+                            <h1>
+                                    <?php echo $data['countProduct']->Count ?><br>
+                            </h1>
                         </div>
 
                     </div>
-
+                </a>
                 </div>
 
             </div>
@@ -301,7 +294,8 @@
                         <h2 id="current-month-year">Month Year</h2>
                         <button id="next-month">Next</button>
                     </div>
-                    <table class="calendar-table">
+                    <a href="<?php echo URLROOT; ?>suppliers/calendar"> 
+                    <table class="calendar-table" style="cursor: pointer;">
                         <thead>
                             <tr>
                                 <th>Sun</th>
@@ -317,6 +311,7 @@
                             <!-- Calendar cells will be dynamically generated here -->
                         </tbody>
                     </table>
+                    </a>
                 </div>
 
             </div>

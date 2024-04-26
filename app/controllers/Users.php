@@ -115,6 +115,8 @@ class Users extends Controller
                 if ($this->userModel->findUserByEmail($data['email'])) {
                     $data['email_err'] = 'Email is already taken';
                 }
+
+                // do the authorizations here
             }
 
             if (empty($data['name'])) {

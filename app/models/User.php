@@ -178,7 +178,7 @@ class User
 
     public function addUser($data)
     {
-        $this->db->query('INSERT INTO user(name, address, email, contact, password, role, bname, bno, nic, baddress) VALUES(:name, :address, :email, :contact, :password, :role, :bname, :bno, :nic, :baddress)');
+        $this->db->query('INSERT INTO user(name, address, email, contact, password, role,stype, bname, bno, nic, baddress) VALUES(:name, :address, :email, :contact, :password, :role, :stype,:bname, :bno, :nic, :baddress)');
         $this->db->bind(':email', $data['email']);
         $this->db->bind(':name', $data['name']);
         $this->db->bind(':address', $data['address']);
@@ -189,6 +189,20 @@ class User
         $this->db->bind(':nic', $data['nic']);
         $this->db->bind(':bno', $data['bno']);
         $this->db->bind(':baddress', $data['address']);
+        $this->db->bind(':stype', $data['stype']);
+
+        $this->db->query('INSERT INTO user(name, address, email, contact, password, role,stype, bname, bno, nic, baddress) VALUES(:name, :address, :email, :contact, :password, :role, :stype,:bname, :bno, :nic, :baddress)');
+        $this->db->bind(':email', $data['email']);
+        $this->db->bind(':name', $data['name']);
+        $this->db->bind(':address', $data['address']);
+        $this->db->bind(':contact', $data['contact']);
+        $this->db->bind(':password', $data['password']);
+        $this->db->bind(':role', $data['role']);
+        $this->db->bind(':bname', $data['bname']);
+        $this->db->bind(':nic', $data['nic']);
+        $this->db->bind(':bno', $data['bno']);
+        $this->db->bind(':baddress', $data['address']);
+        $this->db->bind(':stype', $data['stype']);
 
         //Execute the query
         if ($this->db->execute()) {
