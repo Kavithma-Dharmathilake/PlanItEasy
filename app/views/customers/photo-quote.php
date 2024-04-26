@@ -20,15 +20,7 @@
 <body>
     <div class="dash-container">
         <aside>
-            <div class="top">
-                <div class="logo">
-                    <img src="<?php echo URLROOT; ?>/public/images/logo.jpg">
-                    <h2>PlanItEasy</h2>
-                </div>
-                <div class="close" id="close-btn">
-                    <span class="material-icons-sharp">close</span>
-                </div>
-            </div>
+
             <div class="sidebar">
                 <a href="<?php echo URLROOT; ?>customers">
                     <span class="material-icons-sharp" class="active">grid_view</span>
@@ -46,19 +38,17 @@
                     <span class="material-icons-sharp">message</span>
                     <h3>Messages</h3>
                 </a>
-                <a href="<?php echo URLROOT; ?>customers/viewquote">
-                    <span class="material-icons-sharp"> note_add</span>
-                    <h3>supplier quotation</h3>
-                </a>
                 <a href="<?php echo URLROOT; ?>customers/profile">
                     <span class="material-icons-sharp">person</span>
                     <h3>profile</h3>
                 </a>
-                <a href="<?php echo URLROOT; ?>user/logout">
+                <a href="<?php echo URLROOT; ?>users/logout">
                     <span class="material-icons-sharp">logout</span>
                     <h3>Logout</h3>
                 </a>
             </div>
+
+
         </aside>
 
 
@@ -96,12 +86,12 @@
                             </div>
 
                             <p class="form-text" style="margin-top:2rem; margin-left:1rem;  margin-right:2rem">Additional Services</p>
-                                <input type="checkbox" id="album" name="album">
-                                <label for="album" style="font-size: 15px;">Non Digital Products(Albums,prints etc.)</label><br />
-                                <input type="checkbox" id="additonal" name="additonal">
-                                <label for="additional" style="font-size: 15px;">Additional Photographer</label><br />
-                                <input type="checkbox" id="photobooth" name="photobooth">
-                                <label for="photobooth" style="font-size: 15px;">Photobooth</label><br />
+                            <input type="checkbox" id="album" name="album">
+                            <label for="album" style="font-size: 15px;">Non Digital Products(Albums,prints etc.)</label><br />
+                            <input type="checkbox" id="additonal" name="additonal">
+                            <label for="additional" style="font-size: 15px;">Additional Photographer</label><br />
+                            <input type="checkbox" id="photobooth" name="photobooth">
+                            <label for="photobooth" style="font-size: 15px;">Photobooth</label><br />
 
                         </div>
                         <div style="width:20rem; margin-left:2rem">
@@ -119,7 +109,7 @@
                                 </div>
                                 <div>End Time
                                     <div class="input-field2">
-                                        <input type="time" name="end"  value="<?php echo $data['request']->endtime ?>">
+                                        <input type="time" name="end" value="<?php echo $data['request']->endtime ?>">
                                     </div>
                                 </div>
                             </div>

@@ -22,13 +22,17 @@ class User{
 
         //Execute the query
         if ($this->db->execute()) {
+            $id=$this->db->lastInsertedId();
+            $this->db->query('INSERT INTO portfolio(sid) VALUES(:id)');
+            $this->db->bind(':role', $id);
+
             return true;
         } else {
             return false;
         }
 
     }
-
+   
     
 }
 

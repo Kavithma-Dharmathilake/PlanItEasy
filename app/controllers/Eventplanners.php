@@ -5,6 +5,10 @@ class Eventplanners extends Controller
 
     public function __construct()
     {
+        
+        if (!isLoggedIn()) {
+            redirect('users/login');
+        }
 
         $this->userModel = $this->model('Package');
         $this->plannerModel = $this->model('EventPlanner');
@@ -116,7 +120,6 @@ class Eventplanners extends Controller
     public function eventRequest()
     {
         $quote = $this->plannerModel->getEventQuote();
-        $request =$this->CustomerModel->getEventById($id);
         $data = [
             'quote' => $quote
         ];
@@ -269,18 +272,81 @@ class Eventplanners extends Controller
     }
 
 
-    public function onerequest()
+    public function onerequest($id)
     {
 
-        $this->view('eventplanners/onerequest');
+        $quote = $this->plannerModel->getOnePlannerQuote($id);
+        $customer = $this->plannerModel->getCustomerById($quote->idcustomer);
+        $reception = null;
+        $photography = null;
+        $cake = null;
+        $catering = null;
+        $dj = null;
+        $music = null;
+        $dancing = null;
+        $decoration = null;
+
+
+        if($quote->reception != -1){
+            $reception = $this->plannerModel->getOneReceptionQuote($quote->reception);
+        }
+
+        if($quote->photography != -1){
+            $photography = $this->plannerModel->getOnePhotographyQuote($quote->photography);
+        }
+
+        if($quote->cake != -1){
+            $cake = $this->plannerModel->getOneCakeQuote($quote->cake);
+        }
+
+        if($quote->decoration != -1){
+            $decoration = $this->plannerModel->getOneDecorationQuote($quote->decoration);
+        }
+
+        if($quote->music != -1){
+            $music = $this->plannerModel->getOneMusicQuote($quote->music);
+        }
+
+        if($quote->catering != -1){
+            $catering = $this->plannerModel->getOneCateringQuote($quote->catering);
+        }
+        if($quote->dancing != -1){
+            $dancing = $this->plannerModel->getOneDancingQuote($quote->dancing);
+        }
+        if($quote->dj != -1){
+            $dj = $this->plannerModel->getOneDjQuote($quote->dj);
+        }
+
+
+        $data =[
+            'quote' => $quote,
+            'photography'=>$photography,
+            'catering'=>$catering,
+            'decoration'=>$decoration,
+            'cake'=>$cake,
+            'dj'=>$dj,
+            'dancing'=>$dancing,
+            'music'=>$music,
+            'reception'=>$reception,
+            'customer'=>$customer
+        ];
+
+        $this->view('eventplanners/onerequest', $data);
 
     }
 
-    public function findsupplier()
+    public function suppliers($type, $id)
     {
-
-        $this->view('eventplanners/findsupplier');
-
+        $quote = $this->plannerModel->getOnePlannerQuote($id);
+        $request = $this->plannerModel->getEvent($quote->rid);
+        $supplier = $this->plannerModel->getSupplier($type);
+    
+        $data = [
+            'type' => $type,
+            'request' =>$request,
+            'supplier' =>$supplier
+        ];
+        $this->view('eventplanners/supplier', $data);
     }
 
     public function recivedquote()

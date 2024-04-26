@@ -46,6 +46,44 @@ class Supplier
         return $row;
     }
 
+    public function getPortfolio($id)
+    {
+
+        $this->db->query('SELECT * FROM portfolios WHERE sid = :id');
+        $this->db->bind(':id', $id);
+
+        $row = $this->db->single();
+        return $row;
+    }
+
+    public function updatePortfolio($data)
+    {
+        $this->db->query('UPDATE portfolios SET 
+        bio=:bio, description =:description, caption=:caption,
+        img1=:img1,img2=:img2, img3=:img3, img4=:img4, img5=:img5, img6=:img6, img7=:img7, img8=:img8, img9=:img9, img10=:img10,
+        doc=:doc
+        WHERE sid=:id');
+        $this->db->bind(':id', $_SESSION['user_id']);
+        $this->db->bind(':bio', $data['bio']);
+        $this->db->bind(':description', $data['description']);
+        $this->db->bind(':caption', $data['caption']);
+        $this->db->bind(':doc',$data['document']);
+
+      
+        for ($i = 0; $i < 10; $i++) {
+            $img = $data['images'][$i];
+            $this->db->bind(":img" . ($i+1), $img);
+        }
+
+        //Execute the query
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
     public function getPhotographers($stype)
     {
         $this->db->query('SELECT * FROM user WHERE stype =  :stype');

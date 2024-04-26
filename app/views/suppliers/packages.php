@@ -16,7 +16,7 @@
 
 <body>
     <div class="dash-container">
-    <aside>
+        <aside>
             <div class="top">
                 <div class="logo">
                     <img src="<?php echo URLROOT; ?>public/images/logo.jpg">
@@ -46,20 +46,13 @@
                     <h3>Quotation Requests</h3>
                 </a>
 
-                <a href="<?php echo URLROOT; ?>suppliers/sentRequests">
-                    <span class="material-icons-sharp">
-                        festival
-                    </span>
-                    <h3>Sent Quotations</h3>
-                </a>
-
                 <a href="<?php echo URLROOT; ?>suppliers/packages">
                     <span class="material-icons-sharp">
                         request_quote
                     </span>
                     <h3>Packages</h3>
                 </a>
-          
+
 
                 <a href="<?php echo URLROOT; ?>suppliers/calendar">
                     <span class="material-icons-sharp">
@@ -68,7 +61,7 @@
                     <h3>Calender</h3>
                 </a>
 
-                <a href="profile.php">
+                <a href="<?php echo URLROOT; ?>suppliers/profile">
                     <span class="material-icons-sharp">
                         account_box
                     </span>
@@ -80,13 +73,12 @@
                     <h3>Messages</h3>
                     <span class="message-count">5</span>
                 </a>
-                <a href="">
+                <a href="<?php echo URLROOT; ?>users/logout">
                     <span class="material-icons-sharp">logout</span>
                     <h3>Logout</h3>
                 </a>
             </div>
         </aside>
-
 
         <div class="profile end">
             <div class="info" style="padding-right:25px;">
@@ -126,8 +118,8 @@
                     <tbody>
 
                         <?php foreach ($data as $i) : ?>
-                           
-                          
+
+
                             <tr>
                                 <td> #PO<?php echo $i->id ?></td>
                                 <td> <?php echo $i->name ?></td>
