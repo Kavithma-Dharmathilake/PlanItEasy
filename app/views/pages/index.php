@@ -41,8 +41,7 @@
             <div class="header__left">
                 <h1>Your Event, Your Way</h1>
                 <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur ex possimus deserunt pariatur
-                    impedit rem ea non expedita, in consequuntur.
+                Discover the magic of seamless event planning. From envisioning to executing, let us craft your moments into timeless memories. Explore endless possibilities and let your imagination soar with our expert guidance. Your journey to extraordinary events starts here.
                 </p>
                 <a href="login.html" class="btn btn-primary">Get Started</a>
             </div>
@@ -60,8 +59,7 @@
         <div class="container categories__container">
             <div class="categories__left">
                 <h1>Categories</h1>
-                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Natus, molestias, laborum molestiae
-                    reiciendis excepturi non expedita rem, dicta beatae rerum cupiditate nihil tenetur dignissimos eos!
+                <p>Explore a world of possibilities with our event planning platform. From weddings to corporate events, birthdays to conferences, we've got you covered. Let your imagination run wild, and we'll make it a reality
                 </p>
                 <a href="#" class="btn">Book Now</a>
             </div>
@@ -69,32 +67,32 @@
                 <article class="category">
                     <span class="category_img"><img src="images/home/wedding.svg"></span>
                     <h5>Weddings</h5>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus, ipsam?</p>
+                    <p>Crafting your perfect day, one detail at a time. Let love blossom with our wedding expertise.</p>
                 </article>
                 <article class="category">
                     <span class="category_img"><img src="images/home/birthday.svg"></span>
                     <h5>Birthdays</h5>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis, accusamus.</p>
+                    <p>From candles to cake, and every wish in between. Celebrate life's moments with unforgettable birthdays</p>
                 </article>
                 <article class="category">
                     <span class="category_img"><img src="images/home/party.svg"></span>
                     <h5>Parties</h5>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, omnis!</p>
+                    <p>Set the stage for unforgettable moments. Let's party like there's no tomorrow</p>
                 </article>
                 <article class="category">
                     <span class="category_img"><img src="images/home/party.svg"></span>
                     <h5>Get Togethers</h5>
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Incidunt, sint!</p>
+                    <p>Create lasting memories with your loved ones. It's time to come together.</p>
                 </article>
                 <article class="category">
                     <span class="category_img"><img src="images/home/party.svg"></span>
                     <h5>Annivesary Parties</h5>
-                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eveniet, est?</p>
+                    <p>Celebrate your journey together with an anniversary to remember.</p>
                 </article>
                 <article class="category">
                     <span class="category_img"><img src="images/home/party.svg"></span>
-                    <h5>Parties</h5>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit, eum?</p>
+                    <h5>Cooperate Events</h5>
+                    <p>Let's make your corporate event an experience to remember.</p>
                 </article>
             </div>
         </div>

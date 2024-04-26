@@ -23,10 +23,10 @@
 
             <div class="sidebar">
                 <a href="<?php echo URLROOT; ?>customers">
-                    <span class="material-icons-sharp" class="active">grid_view</span>
+                    <span class="material-icons-sharp">grid_view</span>
                     <h3>Dashboard</h3>
                 </a>
-                <a href="<?php echo URLROOT; ?>customers/events">
+                <a href="<?php echo URLROOT; ?>customers/events" class="active">
                     <span class="material-icons-sharp">man</span>
                     <h3>Events</h3>
                 </a>
@@ -56,7 +56,7 @@
         <div>
             <div class="profile end">
                 <div class="info" style="padding-right:25px;">
-                    <p>Hey, <b>Sunimal</b></p>
+                    <p>Hey, <b><?php echo $_SESSION['user_name']?></b></p>
                     <small class="text-muted"></small>
                 </div>
                 <div class="profile-photo">
@@ -70,7 +70,7 @@
             <div style="display:flex">
 
                 <div class="planner-title">
-                    <h1>Your Budgets</h1>
+                    <h1 style="margin-top:2rem">Your Budgets</h1>
 
 
                 </div>
@@ -85,13 +85,7 @@
             <div class="event-request" style="margin-top:60px">
                 <div style="display:flex;">
                     <form action="<?php echo URLROOT ?>customers/budget/<?php echo $data['eventid'] ?>" method="POST">
-                        <input style="padding:1rem; margin:1rem; background-color:#7380ec;color:white; border-radius:0.4rem" type="submit" value="Budget by Price">
-                    </form>
-                    <form action="<?php echo URLROOT ?>customers/budget/<?php echo $data['eventid'] ?>" method="POST">
-                        <input style="padding:1rem; margin:1rem; background-color:#7380ec;color:white; border-radius:0.4rem" type="submit" value="Budget by Ratings">
-                    </form>
-                    <form action="<?php echo URLROOT ?>customers/budget/<?php echo $data['eventid'] ?>" method="POST">
-                        <input style="padding:1rem; margin:1rem; background-color:#7380ec;color:white; border-radius:0.4rem" type="submit" value="Budget from Scratch">
+                        <input style="padding:1rem; margin:1rem; background-color:#7380ec;color:white; border-radius:0.4rem" type="submit" value="Create Budget">
                     </form>
 
                 </div>
