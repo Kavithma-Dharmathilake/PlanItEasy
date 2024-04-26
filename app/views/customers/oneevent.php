@@ -21,7 +21,15 @@
 <body>
     <div class="dash-container">
         <aside>
-
+            <div class="top">
+                <div class="logo">
+                    <img src="<?php echo URLROOT; ?>/public/images/logo.jpg">
+                    <h2>PlanItEasy</h2>
+                </div>
+                <div class="close" id="close-btn">
+                    <span class="material-icons-sharp">close</span>
+                </div>
+            </div>
             <div class="sidebar">
                 <a href="<?php echo URLROOT; ?>customers">
                     <span class="material-icons-sharp" class="active">grid_view</span>
@@ -39,44 +47,54 @@
                     <span class="material-icons-sharp">message</span>
                     <h3>Messages</h3>
                 </a>
+                <a href="<?php echo URLROOT; ?>customers/viewquote">
+                    <span class="material-icons-sharp"> note_add</span>
+                    <h3>supplier quotation</h3>
+                </a>
                 <a href="<?php echo URLROOT; ?>customers/profile">
                     <span class="material-icons-sharp">person</span>
                     <h3>profile</h3>
                 </a>
-                <a href="<?php echo URLROOT; ?>users/logout">
+                <a href="<?php echo URLROOT; ?>user/logout">
                     <span class="material-icons-sharp">logout</span>
                     <h3>Logout</h3>
                 </a>
             </div>
-
-
         </aside>
 
 
         <!-- Content start here -->
-        <div>
-
+        <div class="your-event-container">
+         
 
             <!-- The Title -->
 
             <div class="heading-card">
-                <span style="font-size:1.5rem;font-style:bold"><?php echo getRemainingDays($data['request']->date) ?></span> days remaining!<br />
-                <span style="font-size:3rem;font-style:bold; "><?php echo $data['request']->event_type ?></span><br />
+                <div class="heading-card-top"><p><?php echo $data['request']->event_type ?></p></div>
+                <div class="heading-card-remain"><p>Remaining Days : </p><?php echo getRemainingDays($data['request']->date) ?></div>
 
-                <span style="margin-top:1rem" class="material-icons-sharp">
-                    location_on
-                </span> &nbsp; <?php echo $data['request']->location ?>
-                <span style="margin-left:1rem" class="material-icons-sharp">
-                    watch_later
-                </span> &nbsp; <?php echo $data['request']->starttime ?> - <?php echo $data['request']->endtime ?>
-                <span style="margin-left:1rem" class="material-icons-sharp">
-                    attach_money
-                </span> &nbsp;Rs. <?php echo $data['request']->minbudget ?> /-
-
+                <div class="heading-card-subcontainer">
+                    <div class="span-container">
+                        <span style="margin-top:1rem" class="material-icons-sharp">
+                            location_on
+                        </span> &nbsp; <?php echo $data['request']->location ?>
+                    </div>
+                    <div class="span-container">
+                        <span style="margin-left:1rem" class="material-icons-sharp">
+                            watch_later
+                        </span> &nbsp; <?php echo $data['request']->starttime ?> - <?php echo $data['request']->endtime ?>
+                    </div>
+                    <div class="span-container">
+                        <span style="margin-left:1rem" class="material-icons-sharp">
+                            attach_money
+                        </span> &nbsp;Rs. <?php echo $data['request']->minbudget ?>
+                    </div>
+                </div>
+                    
             </div>
 
-            <div style="display: flex; margin-left:6rem">
-
+            <div class="option-container">
+              
                 <a href="<?php echo URLROOT ?>customers/supplier/<?php echo $data['request']->id ?>">
                     <div class="event-tabs"><span class="material-icons-sharp">
                             storefront
@@ -96,7 +114,7 @@
                         </span> <br />Budgeter
                     </div>
                 </a>
-                <a href="<?php echo URLROOT ?>customers/checklist/<?php echo $data['request']->id ?>">
+                <!-- <a href="<?php echo URLROOT ?>customers/checklist/<?php echo $data['request']->id ?>">
                     <div class="event-tabs">
                         <span class="material-icons-sharp">
                             groups
@@ -107,8 +125,8 @@
                     <div class="event-tabs"> <span class="material-icons-sharp">
                             fact_check
                         </span> <br />Checklist</div>
-                </a>
-
+                </a> -->
+              
 
             </div>
 

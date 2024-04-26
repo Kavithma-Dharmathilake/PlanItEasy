@@ -212,7 +212,6 @@ class Customers extends Controller
 
     public function payments()
     {
-
         $data = [
             'title' => 'Welcome'
         ];
