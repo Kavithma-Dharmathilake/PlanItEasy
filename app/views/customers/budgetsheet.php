@@ -144,6 +144,7 @@
                             <form action="<?php echo URLROOT ?>customers/addItem/<?php echo $data['bid'] ?>/<?php echo $data['eventid'] ?>/<?php echo $q->id ?>" method="POST">
                                 <input name="add" type="submit" class="accept" <?php
                                                                                 if ($status == 1) {
+                                                                                    echo 'style="background-color: 	#F0F0F0"';
                                                                                     echo 'value="Added"';
                                                                                     echo 'disabled';
                                                                                 } else

@@ -207,6 +207,8 @@ class Users extends Controller
         $_SESSION['user_name'] = $user->name;
         $_SESSION['user_email'] = $user->email;
         $_SESSION['user_role'] = $user->role;
+        $_SESSION['user_address'] = $user->address;
+        $_SESSION['user_contact'] = $user->contact;
 
 
         if (isset($_SESSION['user_role'])) {
@@ -242,6 +244,7 @@ class Users extends Controller
         unset($_SESSION['user_name']);
         unset($_SESSION['user_email']);
         unset($_SESSION['user_role']);
+        unset($_SESSION['user_address']);
         session_destroy();
         redirect('users/login');
     }
