@@ -61,7 +61,134 @@
             text-decoration: none;
             cursor: pointer;
         }
-    </style>
+
+
+        .allButton {
+        background-color: black;
+        color: white;
+        border: none; 
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        }
+
+        /* Hover state */
+        .allButton:hover {
+        background-color: darkyellow;
+        }
+
+        /* Active state (when clicked) */
+        .allButton:active {
+        background-color: grey;
+        color: black;
+        }
+
+
+        .pendingButton {
+        background-color: #e69500;
+        color: white;
+        border: none;
+        border-radius: 20px;   
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        }
+
+        /* Hover state */
+        .pendingButton:hover {
+        background-color: darkyellow;
+        }
+
+        /* Active state (when clicked) */
+        .pendingButton:active {
+        background-color: white;
+        color: #e69500;
+        }
+
+        .acceptedButton {
+        background-color: blue;
+        color: white;
+        border: none;
+        border-radius: 20px;   
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        }
+
+        /* Hover state */
+        .acceptedButton:hover {
+        background-color: darkblue;
+        }
+
+        /* Active state (when clicked) */
+        .acceptedButton:active {
+        background-color: white;
+        color: blue;
+        }
+
+        .declinedButton {
+        background-color: #CE2029;
+        color: white;
+        border: none;
+        border-radius: 20px;   
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        }
+
+        /* Hover state */
+        .declinedButton:hover {
+        background-color: darkred;
+        }
+
+        /* Active state (when clicked) */
+        .declinedButton:active {
+        background-color: white;
+        color: #CE2029;
+        }
+
+        .completedButton {
+        background-color: green;
+        color: white;
+        border: none;
+        border-radius: 20px;   
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        }
+
+        /* Hover state */
+        .completedButton:hover {
+        background-color: darkgreen;
+        }
+
+        /* Active state (when clicked) */
+        .completedButton:active {
+        background-color: white;
+        color: green;
+        }
+            
+        </style>
 
 
 </head>
@@ -112,17 +239,21 @@
 
                 <div class="planner-title">
                     <h1>Your Quotations</h1>
-
-
                 </div>
-
-
             </div>
 
+            <div style="margin-top:3rem;"> 
+                <a href="<?php echo URLROOT ?>customers/quotations/<?php echo $data['eventid']; ?>"><button type="submit" class="allButton">All</button></a>
+                <a href="<?php echo URLROOT ?>customers/requestSentQuotations/<?php echo $data['eventid']; ?>"><button type="submit" class="pendingButton">Request Sent</button></a>
+                <a href="<?php echo URLROOT ?>customers/requestAcceptedQuotations/<?php echo $data['eventid']; ?>"><button type="submit" class="acceptedButton">Request Accepted</button></a>
+                <a href="<?php echo URLROOT ?>customers/requestDeclinedQuotations/<?php echo $data['eventid']; ?>"><button type="submit" class="declinedButton">Request Declined</button></a>
+                <a href="<?php echo URLROOT ?>customers/bookedQuotations/<?php echo $data['eventid']; ?>"><button type="submit" class="acceptedButton">Booked</button></a>
+                <a href="<?php echo URLROOT ?>customers/paymentCompletedQuotations/<?php echo $data['eventid']; ?>"><button type="submit" class="completedButton">Payment Complete</button></a>
+                <a href="<?php echo URLROOT ?>customers/expiredQuotations/<?php echo $data['eventid']; ?>"><button type="submit" class="declinedButton">Expired</button></a>
+            </div>
+
+           
             <!-- Event Request Table -->
-
-
-
             <div class="event-request" style="margin-top:60px">
                 Done with quotations?
                 <button style="padding:0.5rem;margin:0.5rem; background-color:#41f1b6;color:white; border-radius:0.7rem"><a href="<?php echo URLROOT ?>customers/budget/<?php echo $data['eventid']; ?>">Create Budget </a></button>

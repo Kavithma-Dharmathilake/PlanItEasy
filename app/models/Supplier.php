@@ -19,6 +19,7 @@ class Supplier
     //     return $result;
     // }
 
+
     public function findUserByEmail($email)
     {
         $this->db->query('SELECT * FROM user WHERE email = :email');
@@ -238,10 +239,9 @@ class Supplier
 
     public function getAllPackages()
     {
-        // $id= $_SESSION['user_id'];
-        $this->db->query('SELECT * FROM packages');
-        // $this->db->bind(':id', $id );
-        //where supplier = :id
+        $id= $_SESSION['user_id'];
+        $this->db->query('SELECT * FROM packages where supplier = :id');
+        $this->db->bind(':id', $id );
         $result = $this->db->resultSet();
         return $result;
     }
@@ -459,8 +459,17 @@ class Supplier
 
     public function countQuotationsPerMonth()
     {
-        $this->db->query('SELECT COUNT(*) AS jcount FROM your_table_name WHERE MONTH(date_column) = 1;');
-        $result = $this->db->single();
+        $this->db->query('SELECT 
+    MONTH(received_date) AS month,
+    COUNT(*) AS month_count
+FROM 
+    quoate
+GROUP BY 
+    MONTH(received_date)
+ORDER BY 
+    month
+');
+        $result = $this->db->resultSet();
         return $result;
     }
 

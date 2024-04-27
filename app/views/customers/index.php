@@ -161,7 +161,7 @@
                     <small class="text-muted"><?php echo $_SESSION['user_role']?></small>
                 </div>
                 <div class="profile-photo">
-                    <img src="<?php echo URLROOT ?>public/images/photo2.jpg">
+                    <!-- <img src="<?php echo URLROOT ?>public/images/photo2.jpg"> -->
                 </div>
             </div>
 
@@ -272,7 +272,7 @@
                 <div class="updates">
                     <div class="update">
                         <div class="profile-photo">
-                            <img src="images/photo2.jpg">
+                            <!-- <img src="images/photo2.jpg"> -->
                         </div>
                         <div class="message">
                             <p><b>Chamod Deshan</b> Sent a quotation Request</p>
@@ -281,7 +281,7 @@
                     </div>
                     <div class="update">
                         <div class="profile-photo">
-                            <img src="images/photo2.jpg">
+                            <!-- <img src="images/photo2.jpg"> -->
                         </div>
                         <div class="message">
                             <p><b>Nisal Abeyweera</b> Sent a quotation request</p>
@@ -290,7 +290,7 @@
                     </div>
                     <div class="update">
                         <div class="profile-photo">
-                            <img src="images/photo2.jpg">
+                            <!-- <img src="images/photo2.jpg"> -->
                         </div>
                         <div class="message">
                             <p><b>Hasith Perera</b> Sent a quotation</p>

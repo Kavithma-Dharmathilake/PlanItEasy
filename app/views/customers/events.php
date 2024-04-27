@@ -14,7 +14,133 @@
     <link rel="stylesheet" href="<?php echo URLROOT; ?>public/css/admindash.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>public/css/eventplannerdash.css">
 
+    <style>
 
+.allButton {
+  background-color: black;
+  color: white;
+  border: none; 
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+/* Hover state */
+.allButton:hover {
+  background-color: darkyellow;
+}
+
+/* Active state (when clicked) */
+.allButton:active {
+  background-color: grey;
+  color: black;
+}
+
+
+.pendingButton {
+  background-color: #e69500;
+  color: white;
+  border: none;
+  border-radius: 20px;   
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+/* Hover state */
+.pendingButton:hover {
+  background-color: darkyellow;
+}
+
+/* Active state (when clicked) */
+.pendingButton:active {
+  background-color: white;
+  color: #e69500;
+}
+
+.acceptedButton {
+  background-color: blue;
+  color: white;
+  border: none;
+  border-radius: 20px;   
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+/* Hover state */
+.acceptedButton:hover {
+  background-color: darkblue;
+}
+
+/* Active state (when clicked) */
+.acceptedButton:active {
+  background-color: white;
+  color: blue;
+}
+
+.declinedButton {
+  background-color: #CE2029;
+  color: white;
+  border: none;
+  border-radius: 20px;   
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+/* Hover state */
+.declinedButton:hover {
+  background-color: darkred;
+}
+
+/* Active state (when clicked) */
+.declinedButton:active {
+  background-color: white;
+  color: #CE2029;
+}
+
+.completedButton {
+  background-color: green;
+  color: white;
+  border: none;
+  border-radius: 20px;   
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+/* Hover state */
+.completedButton:hover {
+  background-color: darkgreen;
+}
+
+/* Active state (when clicked) */
+.completedButton:active {
+  background-color: white;
+  color: green;
+}
+    </style>
 
 
 </head>
@@ -75,6 +201,17 @@
             <a href="<?php echo URLROOT; ?>customers/newevent">
                 <button style="padding:1rem; margin:1rem; background-color:#7380ec;color:white; border-radius:0.4rem">Add New Event</button>
             </a>
+
+            <div style="margin-top:3rem;"> 
+                <a href="<?php echo URLROOT ?>customers/events"><button type="submit" class="allButton">All</button></a>
+                <a href="<?php echo URLROOT ?>customers/bookedEvents"><button type="submit" class="pendingButton">Booked</button></a>
+                <a href="<?php echo URLROOT ?>customers/ongoingEvents"><button type="submit" class="acceptedButton">Ongoing</button></a>
+                <a href="<?php echo URLROOT ?>customers/canceledEvents"><button type="submit" class="declinedButton">Canceled</button></a>
+                <a href="<?php echo URLROOT ?>customers/completedEvents"><button type="submit" class="completedButton">Completed</button></a>
+            </div>
+
+                <?php var_dump($_SESSION['user_id']);?> 
+
             <div class="event-request" style="margin-top:20px">
 
                 <table>
@@ -98,10 +235,11 @@
                                 <td> <?php echo $event->event_type; ?> </td>
                                 <td><?php echo $event->date; ?> </td>
                                 <td><?php echo $event->event_status; ?> </td>
-                                <td><a href="#">
-                                        Edit | Delete
-                                    </a></td>
-                                <td><a href="<?php echo URLROOT ?>customers/oneevent/<?php echo $event->id; ?>">
+                                <td style="display:flex;padding-top:0.5rem">
+                                    <a id="editEvent" style="padding-left:3rem" href="<?php ?>">Edit</a>
+                                    <a id="deleteEvent" style="padding-right:3rem" href="#"> Delete</a>
+                                </td>
+                                <td><a  href="<?php echo URLROOT ?>customers/oneevent/<?php echo $event->id; ?>">
                                         <span class="material-icons-sharp">
 
                                             expand_circle_down
