@@ -22,9 +22,11 @@ class Customers extends Controller
 
 
         $events = $this->customerModel->getAllEvents($_SESSION['user_id']);
+        $userName = $_SESSION['user_name'];
 
         $data = [
             'title' => 'Welcome',
+            'name' => $userName,
             'events' => $events
         ];
 
@@ -35,6 +37,54 @@ class Customers extends Controller
     {
 
         $events = $this->customerModel->getAllEvents($_SESSION['user_id']);
+
+        $data = [
+            'events' => $events
+        ];
+
+        $this->view('customers/events', $data);
+    }
+
+    public function bookedEvents()
+    {
+
+        $events = $this->customerModel->getBookedEvents($_SESSION['user_id']);
+
+        $data = [
+            'events' => $events
+        ];
+
+        $this->view('customers/events', $data);
+    }
+
+    public function ongoingEvents()
+    {
+
+        $events = $this->customerModel->getOngoingEvents($_SESSION['user_id']);
+
+        $data = [
+            'events' => $events
+        ];
+
+        $this->view('customers/events', $data);
+    }
+
+    public function canceledEvents()
+    {
+
+        $events = $this->customerModel->getCanceledEvents($_SESSION['user_id']);
+
+        $data = [
+            'events' => $events
+        ];
+
+        $this->view('customers/events', $data);
+    }
+
+    public function completedEvents()
+    {
+
+        $events = $this->customerModel->getCompletedEvents($_SESSION['user_id']);
 
         $data = [
             'events' => $events
@@ -761,11 +811,73 @@ class Customers extends Controller
 
     public function quotations($id)
     {
-
-
         $quote = $this->customerModel->getAllQuote($id);
+        $data = [
+            'quote' => $quote,
+            'eventid' => $id
+        ];
 
+        $this->view('customers/allquote', $data);
+    }
 
+    public function requestSentQuotations($id)
+    {
+        $quote = $this->customerModel->getRequestSentQuotations($id);
+        $data = [
+            'quote' => $quote,
+            'eventid' => $id
+        ];
+
+        $this->view('customers/allquote', $data);
+    }
+
+    public function requestAcceptedQuotations($id)
+    {
+        $quote = $this->customerModel->getRequestAcceptedQuotations($id);
+        $data = [
+            'quote' => $quote,
+            'eventid' => $id
+        ];
+
+        $this->view('customers/allquote', $data);
+    }
+
+    public function requestDeclinedQuotations($id)
+    {
+        $quote = $this->customerModel->getRequestDeclinedQuotations($id);
+        $data = [
+            'quote' => $quote,
+            'eventid' => $id
+        ];
+
+        $this->view('customers/allquote', $data);
+    }
+
+    public function bookedQuotations($id)
+    {
+        $quote = $this->customerModel->getBookedQuotations($id);
+        $data = [
+            'quote' => $quote,
+            'eventid' => $id
+        ];
+
+        $this->view('customers/allquote', $data);
+    }
+
+    public function paymentCompletedQuotations($id)
+    {
+        $quote = $this->customerModel->getPaymentCompletedQuotations($id);
+        $data = [
+            'quote' => $quote,
+            'eventid' => $id
+        ];
+
+        $this->view('customers/allquote', $data);
+    }
+
+    public function expiredQuotations($id)
+    {
+        $quote = $this->customerModel->getExpiredQuotations($id);
         $data = [
             'quote' => $quote,
             'eventid' => $id
