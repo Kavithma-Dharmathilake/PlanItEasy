@@ -42,6 +42,8 @@ class Customers extends Controller
             'events' => $events
         ];
 
+        
+
         $this->view('customers/events', $data);
     }
 
@@ -101,7 +103,7 @@ class Customers extends Controller
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-            $_EVENT = filter_input_array(INPUT_POST);
+
 
             $data = [
 
@@ -118,16 +120,134 @@ class Customers extends Controller
                 'estatus' => 'ongoing',
                 'pstatus' => 'pending',
                 'cusid' => $_SESSION['user_id'],
+                'budget_err' => null,
+                'time_err' => null,
+
             ];
 
+            $time1 =$data['start'];
+            $time2 = $data['end'];
 
-            $eid = $this->customerModel->newevent($data);
-            echo '<script>alert("New Event Created Successfully");';
-            echo 'window.location.href = "' . URLROOT . 'customers/oneevent/' . $eid . '";</script>';
+         
+            $timestamp1 = strtotime($time1);
+            $timestamp2 = strtotime($time2);
+
+            if ($data['min'] > $data['max'])
+                $data['budget_err'] = 'Maximum Budget is less than Minimum';
+
+            if ($timestamp2 < $timestamp1)
+                $data['time_err'] = 'Starting and Ending Time Mismatch';
+
+            if (!isset($data['budget_err']) && !isset($data['time_err'])) {
+                $eid = $this->customerModel->newevent($data);
+                echo '<script>alert("New Event Created Successfully");';
+                echo 'window.location.href = "' . URLROOT . 'customers/oneevent/' . $eid . '";</script>';
+            } else {
+
+                $data = [
+
+                    'type' => trim($_POST['type']),
+                    'min' => trim($_POST['minbudget']),
+                    'max' => trim($_POST['maxbudget']),
+                    'date' => trim($_POST['date']),
+                    'start' => trim($_POST['start']),
+                    'end' => trim($_POST['end']),
+                    'loc' => trim($_POST['location']),
+                    'date' => trim($_POST['date']),
+                    'count' => trim($_POST['count']),
+                    'theme' => trim($_POST['theme']),
+                    'estatus' => 'ongoing',
+                    'pstatus' => 'pending',
+                    'cusid' => $_SESSION['user_id'],
+                    'budget_err' => $data['budget_err'],
+                    'time_err' => $data['time_err'],
+
+                ];
+
+                $this->view('customers/newevent', $data);
+            }
         } else {
             $this->view('customers/newevent', $data);
         }
     }
+
+    public function editevent()
+    {
+
+  
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+
+
+            $data = [
+
+                'type' => trim($_POST['type']),
+                'min' => trim($_POST['minbudget']),
+                'max' => trim($_POST['maxbudget']),
+                'date' => trim($_POST['date']),
+                'start' => trim($_POST['start']),
+                'end' => trim($_POST['end']),
+                'loc' => trim($_POST['location']),
+                'date' => trim($_POST['date']),
+                'count' => trim($_POST['count']),
+                'theme' => trim($_POST['theme']),
+                'estatus' => 'ongoing',
+                'pstatus' => 'pending',
+                'cusid' => $_SESSION['user_id'],
+                'budget_err' => null,
+                'time_err' => null,
+
+            ];
+
+            $time1 =$data['start'];
+            $time2 = $data['end'];
+
+            // Convert time strings to timestamps using strtotime()
+            $timestamp1 = strtotime($time1);
+            $timestamp2 = strtotime($time2);
+
+            if ($data['min'] > $data['max'])
+                $data['budget_err'] = 'Maximum Budget is less than Minimum';
+
+            if ($timestamp2 < $timestamp1)
+                $data['time_err'] = 'Starting and Ending Time Mismatch';
+
+            if (!isset($data['budget_err']) && !isset($data['time_err'])) {
+                $eid = $this->customerModel->newevent($data);
+                echo '<script>alert("New Event Created Successfully");';
+                echo 'window.location.href = "' . URLROOT . 'customers/oneevent/' . $eid . '";</script>';
+            } else {
+
+                $data = [
+
+                    'type' => trim($_POST['type']),
+                    'min' => trim($_POST['minbudget']),
+                    'max' => trim($_POST['maxbudget']),
+                    'date' => trim($_POST['date']),
+                    'start' => trim($_POST['start']),
+                    'end' => trim($_POST['end']),
+                    'loc' => trim($_POST['location']),
+                    'date' => trim($_POST['date']),
+                    'count' => trim($_POST['count']),
+                    'theme' => trim($_POST['theme']),
+                    'estatus' => 'ongoing',
+                    'pstatus' => 'pending',
+                    'cusid' => $_SESSION['user_id'],
+                    'budget_err' => $data['budget_err'],
+                    'time_err' => $data['time_err'],
+
+                ];
+
+                $this->view('customers/newevent', $data);
+            }
+        } else {
+            $this->view('customers/newevent', $data);
+        }
+    
+    }
+
+
 
     //viewing one event
     public function oneevent($id)
@@ -135,9 +255,12 @@ class Customers extends Controller
 
 
         $request = $this->customerModel->getEventById($id);
+        $quote = $this->customerModel->getAcceptedQuote($id);
+       
 
         $data = [
             'request' => $request,
+            'quote' =>$quote
         ];
 
 
@@ -165,6 +288,8 @@ class Customers extends Controller
         $request = $this->customerModel->getEventById($id);
 
         $photo = $this->customerModel->getSuppliers('Photographer');
+       
+        
         $data1 = [
             'request' => $request,
             'supplier' => $photo,
@@ -214,14 +339,72 @@ class Customers extends Controller
         $this->view('customers/gallery', $data);
     }
 
+    public function cake($id){
+
+        $request = $this->customerModel->getEventById($id);
+        $reception = $this->customerModel->getSuppliers('Cake Service');
+
+        $data = [
+            'request' => $request,
+            'supplier' => $reception,
+            'type' => "Cake Service"
+        ];
+        $this->view('customers/gallery', $data);
+    }
+
+    public function dancing($id){
+
+        $request = $this->customerModel->getEventById($id);
+        $reception = $this->customerModel->getSuppliers('Dancing');
+
+        $data = [
+            'request' => $request,
+            'supplier' => $reception,
+            'type' => "Dancing Crews"
+        ];
+        $this->view('customers/gallery', $data);
+    }
+
+    public function music($id){
+
+        $request = $this->customerModel->getEventById($id);
+        $reception = $this->customerModel->getSuppliers('Music');
+
+        $data = [
+            'request' => $request,
+            'supplier' => $reception,
+            'type' => "Music Crews"
+        ];
+        $this->view('customers/gallery', $data);
+    }
+
+    public function dj($id){
+
+        $request = $this->customerModel->getEventById($id);
+        $reception = $this->customerModel->getSuppliers('DJ');
+
+        $data = [
+            'request' => $request,
+            'supplier' => $reception,
+            'type' => "DJ"
+        ];
+        $this->view('customers/gallery', $data);
+    }
+
+    
+
     public function portfolio($sid, $eid)
     {
         $request = $this->customerModel->getEventById($eid);
         $user = $this->userModel->getUserById($sid);
+        $portfolio = $this->customerModel->getPortfolioById($sid);
+        $packages = $this->customerModel->getPackagesById($sid);
 
         $data = [
             'request' => $request,
             'user' => $user,
+            'portfolio' =>$portfolio,
+            'packages'=>$packages
 
         ];
         $this->view('customers/portfolio', $data);
@@ -231,12 +414,12 @@ class Customers extends Controller
     public function catering($id)
     {
         $request = $this->customerModel->getEventById($id);
-        $supplier = $this->customerModel->getSuppliers('Catering Service');
+        $supplier = $this->customerModel->getSuppliers('Catering');
 
         $data = [
             'request' => $request,
             'supplier' => $supplier,
-            'type' => "Catering"
+            'type' => "Catering Service"
         ];
         $this->view('customers/gallery', $data);
     }
@@ -619,14 +802,140 @@ class Customers extends Controller
             } else {
                 $this->view('customers/deco-quote', $data);
             }
-        } else if ($type == "cake") {
-            $this->view('customers/gallery', $data);
-        } else if ($type == "dj") {
-            $this->view('customers/gallery', $data);
-        } else if ($type == "music") {
-            $this->view('customers/gallery', $data);
-        } else if ($type == "dancing") {
-            $this->view('customers/gallery', $data);
+        } else if ($type == "Cake Service") {
+
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+                $package = $_POST['type'];
+                $stime = $_POST['start'];
+                $etime = $_POST['end'];
+                $remark = $_POST['remark'];
+
+                $lunch = isset($_POST['JarCake']) ? 'Jar Cake ' : null;
+                $dinner = isset($_POST['WeddingCake']) ? 'Wedding Cake ' : null;
+                $time = implode(', ', array_filter([$lunch, $dinner]));
+
+                $quote = [
+                    'package' => $package,
+                    'stime' => $stime,
+                    'etime' => $etime,
+                    'remark' => $remark,
+                    'services' => $time,
+                    'rid' => $request->id,
+                    'sid' => $supplier->id,
+                    'uid' => $_SESSION['user_id'],
+                    'stype' => 'Cake'
+                ];
+
+               
+                if ($this->customerModel->RequestCakeQuote($quote)) {
+                    echo '<script> alert("Quotation Added Succfully")</script>';
+                    header('location: ' . URLROOT . 'customers/catering/' . $request->id);
+                } else {
+                    $this->view('customers/cake-quote', $data);
+                }
+            } else {
+                $this->view('customers/cake-quote', $data);
+            }
+          
+        } else if ($type == "DJ") {
+
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+                $package = $_POST['type'];
+                $stime = $_POST['start'];
+                $etime = $_POST['end'];
+                $remark = $_POST['remark'];
+
+                $smoke = isset($_POST['Smoke']) ? 'Smokescreen' : null;
+                $lazer = isset($_POST['Lazer']) ? 'Lazer' : null;
+                $fire = isset($_POST['firemachines']) ? 'Firemachines' : null;
+                $djservices = implode(',', array_filter([$smoke, $fire, $lazer]));
+
+                $quote = [
+                    'package' => $package,
+                    'stime' => $stime,
+                    'etime' => $etime,
+                    'remark' => $remark,
+                    'services' => $djservices,
+                    'rid' => $request->id,
+                    'sid' => $supplier->id,
+                    'uid' => $_SESSION['user_id'],
+                    'stype' => 'DJ'
+                ];
+
+               
+                if ($this->customerModel->RequestDJQuote($quote)) {
+                    echo '<script> alert("Quotation Added Succfully")</script>';
+                    header('location: ' . URLROOT . 'customers/dj/' . $request->id);
+                } else {
+                    $this->view('customers/dj-quote', $data);
+                }
+            } else {
+                $this->view('customers/dj-quote', $data);
+            }
+        } else if ($type == "Music") {
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+                $package = $_POST['type'];
+                $stime = $_POST['start'];
+                $etime = $_POST['end'];
+                $remark = $_POST['remark'];
+
+
+                $quote = [
+                    'package' => $package,
+                    'stime' => $stime,
+                    'etime' => $etime,
+                    'remark' => $remark,
+                   
+                    'rid' => $request->id,
+                    'sid' => $supplier->id,
+                    'uid' => $_SESSION['user_id'],
+                    'stype' => 'Music'
+                ];
+
+               
+                if ($this->customerModel->RequestMusicQuote($quote)) {
+                    echo '<script> alert("Quotation Added Succfully")</script>';
+                    header('location: ' . URLROOT . 'customers/music/' . $request->id);
+                } else {
+                    $this->view('customers/music-quote', $data);
+                }
+            } else {
+                $this->view('customers/music-quote', $data);
+            }
+        } else if ($type == "Dancing") {
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+                $package = $_POST['type'];
+                $stime = $_POST['start'];
+                $etime = $_POST['end'];
+                $remark = $_POST['remark'];
+
+             
+                $quote = [
+                    'package' => $package,
+                    'stime' => $stime,
+                    'etime' => $etime,
+                    'remark' => $remark,
+                  
+                    'rid' => $request->id,
+                    'sid' => $supplier->id,
+                    'uid' => $_SESSION['user_id'],
+                    'stype' => 'Dancing'
+                ];
+
+               
+                if ($this->customerModel->RequestDanceQuote($quote)) {
+                    echo '<script> alert("Quotation Added Succfully")</script>';
+                    header('location: ' . URLROOT . 'customers/dancing/' . $request->id);
+                } else {
+                    $this->view('customers/dance-quote', $data);
+                }
+            } else {
+                $this->view('customers/dance-quote', $data);
+            }
         } else if ($type == "Catering Service") {
 
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -648,9 +957,6 @@ class Customers extends Controller
                 $caterservices = implode(', ', array_filter([$packets, $servers, $delivery]));
 
 
-
-
-
                 $quote = [
                     'package' => $package,
                     'stime' => $stime,
@@ -668,7 +974,7 @@ class Customers extends Controller
 
                 if ($this->customerModel->RequestCaterQuote($quote)) {
                     echo '<script> alert("Quotation Added Succfully")</script>';
-                    header('location: ' . URLROOT . 'customers/catering/' . $request->id);
+                    header('location: ' . URLROOT . 'customers/cake/' . $request->id);
                 } else {
                     $this->view('customers/gallery', $data);
                 }
@@ -687,9 +993,10 @@ class Customers extends Controller
         $this->view('customers/profile', $data);
     }
 
-    public function viewquote()
+    public function viewquote($id)
     {
-        $data = $this->userModel->getAllEvents();
+        $data = $this->customerModel->viewQuotation($id);
+
         $this->view('customers/viewquote', $data);
     }
 
@@ -1022,10 +1329,11 @@ class Customers extends Controller
     }
 
 
-    public function payement($rid, $id, $price)
+    public function Advpayement($rid, $id, $price)
     {
 
 
+        $price = $price / 2.0;
         $data = [
 
             'rid' => $rid,
@@ -1042,7 +1350,8 @@ class Customers extends Controller
                 'email' => trim($_POST['email']),
                 'price' => trim($_POST['amount']),
                 'rid' => trim($_POST['event']),
-                'bid' => trim($_POST['budget'])
+                'bid' => trim($_POST['budget']),
+                'desc' =>'Advance Payment Done'
             ];
 
             $s_amount = (int) $_POST['amount'] * 100;
@@ -1060,7 +1369,64 @@ class Customers extends Controller
             $charge = \Stripe\Charge::create(array(
                 "amount" => $s_amount,
                 "currency" => "lkr",
-                "description" => "Payment of Event ID: " . $_POST['event'],
+                "description" => "Advance Payment of Event ID: " . $_POST['event'],
+                "customer" => $customer->id
+            ));
+
+            $tid = $this->customerModel->insertAdvPayement($data);
+            if ($tid != null) {
+                $this->customerModel->updateBudgetQuotations($id);
+
+                echo '<script> alert("Full Payment Successful")</script>';
+                header('location: ' . URLROOT . 'customers/budget/' . $rid);
+            } else {
+                echo '<script>  prompt("Full Payment Unsuccesful")</script>';
+            }
+        }
+        $this->view('customers/advpayement', $data);
+    }
+
+    public function Fullpayement($rid, $id, $price)
+    {
+
+
+        $price = $price / 2.0;
+        $data = [
+
+            'rid' => $rid,
+            'bid' => $id,
+            'price' => $price
+
+        ];
+
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $data = [
+                'fname' => trim($_POST['fname']),
+                'email' => trim($_POST['email']),
+                'price' => trim($_POST['amount']),
+                'rid' => trim($_POST['event']),
+                'bid' => trim($_POST['budget']),
+                'desc' =>'Full Payment Done'
+            ];
+
+            $s_amount = (int) $_POST['amount'] * 100;
+
+            \Stripe\Stripe::setApiKey('sk_test_51Nx6nOC3Jv8Pj3OfF2GaslmsUK83qAzZHAGXKtFDn9kBgnSx9ZurZNWnGdcqOS9VsYw3cwb90yboeUjmPQiLk5MZ00W1OfFi8E');
+
+
+            // Create Customer In Stripe
+            $customer = \Stripe\Customer::create(array(
+                "email" => $_POST['email'],
+                "source" => $_POST['stripeToken'],
+            ));
+
+            // Charge Customer
+            $charge = \Stripe\Charge::create(array(
+                "amount" => $s_amount,
+                "currency" => "lkr",
+                "description" => "Full Payment of Event ID: " . $_POST['event'],
                 "customer" => $customer->id
             ));
 
@@ -1074,7 +1440,7 @@ class Customers extends Controller
                 echo '<script>  prompt("Payment Unsuccesful")</script>';
             }
         }
-        $this->view('customers/payement', $data);
+        $this->view('customers/fullpayement', $data);
     }
 
     public function message($qid)
@@ -1085,7 +1451,7 @@ class Customers extends Controller
         $event = $this->customerModel->getEventById($result->eid);
         // $customer = $this->customerModel->getCustomer($event->idcustomer);
         $messages = $this->customerModel->getMessages($qid);
-      
+
         $data = [
             'request' => $result,
             'customer' => $_SESSION['user_name'],
@@ -1110,5 +1476,45 @@ class Customers extends Controller
 
 
         $this->view('customers/message', $data);
+    }
+
+    public function downloadbudget($bid, $id){
+
+        
+        $budgetData = $this->customerModel->getBudgetData($bid, $id);
+        echo json_encode($budgetData);
+
+    }
+
+    public function chat($id,$eid)
+    {
+        $supplier = $this->userModel->getUserById($id);
+        $messages = $this->customerModel->getSupplierMessages($id);
+
+        $data = [
+            'supplier' => $supplier,
+            'customer' => $_SESSION['user_name'],
+            'messages' => $messages,
+            'eid'=>$eid
+
+        ];
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+
+            $content = $_POST['content'];
+            $data = [
+                'content' => $content,
+                'cuid'=>$id,
+                
+
+            ];
+
+            $this->customerModel->sendSupplierMessage($data);
+            header('location: ' . URLROOT . 'customers/chat/' . $id);
+        }
+
+
+        $this->view('customers/chat', $data);
     }
 }

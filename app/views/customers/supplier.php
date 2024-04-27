@@ -94,7 +94,7 @@
                     </a>
                 </div>
                 <div class="vendor-row">
-                    <a href="<?php echo URLROOT ?>customers/caterings/<?php echo $data['request']->id; ?>">
+                    <a href="<?php echo URLROOT ?>customers/catering/<?php echo $data['request']->id; ?>">
                         <div class="vendor-tab">
                             <img src="<?php echo URLROOT ?>public/images/catering1.jpg" alt="">
                             <p>Catering</p>
@@ -109,22 +109,13 @@
                     </a>
 
 
-                    <a href="<?php echo URLROOT ?>customers/supplier/<?php echo $data['request']->id; ?>/cake">
+                    <a href="<?php echo URLROOT ?>customers/cake/<?php echo $data['request']->id; ?>">
                         <div class="vendor-tab">
                             <img src="<?php echo URLROOT ?>public/images/cake1.jpg" alt="">
                             <p>Cake Services</p>
                         </div>
                     </a>
-                    <a href="#">
-                        <div class="vendor-tab">
-                            <img src="<?php echo URLROOT ?>public/images/band.webp" alt="">
-                            <p>Stationary</p>
-                        </div>
-                    </a>
-
-                </div>
-                <div class="vendor-row">
-                    <a href="<?php echo URLROOT ?>customers/supplier/<?php echo $data['request']->id; ?>/decoration">
+                    <a href="<?php echo URLROOT ?>customers/dancing/<?php echo $data['request']->id; ?>">
                         <div class="vendor-tab">
                             <img src="<?php echo URLROOT ?>public/images/deco3.jpg" alt="">
                             <p>Dancing Crew</p>
@@ -132,14 +123,18 @@
                         </div>
                     </a>
 
+                </div>
+                <div class="vendor-row">
+                  
 
-                    <a href="#">
+
+                    <a href="<?php echo URLROOT ?>customers/music/<?php echo $data['request']->id; ?>">
                         <div class="vendor-tab">
                             <img src="<?php echo URLROOT ?>public/images/band.webp" alt="">
                             <p>Music band</p>
                         </div>
                     </a>
-                    <a href="#">
+                    <a href="<?php echo URLROOT ?>customers/dj/<?php echo $data['request']->id; ?>">
                         <div class="vendor-tab">
                             <img src="<?php echo URLROOT ?>public/images/dj.jpeg" alt="">
                             <p>DJ</p>

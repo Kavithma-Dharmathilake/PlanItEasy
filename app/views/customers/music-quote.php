@@ -72,7 +72,7 @@
 
                             <p class="form-text">Supplier Name</p>
                             <div class="input-field">
-                                <input type="text" name="count" value="Sri Malee GrandMeridian" readonly>
+                                <input type="text" name="count" value="<?php echo $data['supplier']->bname ?>" readonly>
                             </div>
                             <p class="form-text" style="margin-top:3rem;">Package Type</p>
                             <div class="input-field">
@@ -85,18 +85,6 @@
                                 </select>
                             </div>
 
-
-                            <p class="form-text" style="margin-top:1rem;margin-right:2rem">Time</p>
-                            <input type="checkbox" id="smokescreen" name="Lunch">
-                            <label for="Lunch" style="font-size: 15px;">Lunch</label><br />
-                            <input type="checkbox" id="Dinner" name="Dinner">
-                            <label for="Dinner" style="font-size: 15px;">Dinner</label><br />
-                            <input type="checkbox" id="Breakfast" name="Breakfast">
-                            <label for="Breakfast" style="font-size: 15px;">Breakfast</label><br />
-
-
-
-
                         </div>
                         <div style="width:20rem; margin-left:2rem">
                             <p class="form-text">Event Date</p>
@@ -108,27 +96,21 @@
                             <div style="display:flex;">
                                 <div>Start Time<br />
                                     <div class="input-field2">
-                                        <input type="time" name="start">
+                                        <input type="time" name="start" value="<?php echo $data['request']->starttime ?>">
                                     </div>
                                 </div>
                                 <div>End Time
                                     <div class="input-field2">
-                                        <input type="time" name="end">
+                                        <input type="time" name="end" value="<?php echo $data['request']->endtime ?>">
                                     </div>
                                 </div>
                             </div>
-                            <p class="form-text" style="margin-top:1rem; margin-right:2rem">Additional Services</p>
-                            <input type="checkbox" id="smokescreen" name="Severs">
-                            <label for="Servers" style="font-size: 15px;">Servers</label><br />
-                            <input type="checkbox" id="Packets" name="Packets">
-                            <label for="Packets" style="font-size: 15px;">Packets</label><br />
-                            <input type="checkbox" id="Delivery" name="Delivery">
-                            <label for="Delivery" style="font-size: 15px;">Delivery</label><br />
+
 
 
                         </div>
                     </div>
-                    <p class="form-text" style="margin-top:2rem; margin-left:2rem;  margin-right:2rem">Additional Remarks for the Sri Malee GrandMeridian</p>
+                    <p class="form-text" style="margin-top:2rem; margin-left:2rem;  margin-right:2rem">Additional Remarks for the <?php echo $data['supplier']->bname ?>"</p>
                     <div class="input-field" style="margin-left:2rem;">
                         <textarea name="remark" id="theme" cols="80" rows="5"></textarea>
 
