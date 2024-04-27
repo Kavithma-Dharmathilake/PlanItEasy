@@ -11,8 +11,7 @@ define('DB_NAME', 'planiteasy');
 define('APPROOT',dirname(dirname(__FILE__)));
 
 //URL root
-define('URLROOT', 'http://localhost/planiteasy/PlanItEasy/');
-
+define('URLROOT', 'http://localhost/PlanItEasy/');
 //Site name
 define('SITENAME', 'PlanItEasy');
 
