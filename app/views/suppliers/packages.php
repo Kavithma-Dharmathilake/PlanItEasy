@@ -80,15 +80,7 @@
             </div>
         </aside>
 
-        <div class="profile end">
-            <div class="info" style="padding-right:25px;">
-                <p>Hey, <b>Abhi</b></p>
-                <small class="text-muted">Supplier</small>
-            </div>
-            <div class="profile-photo">
-                <img src="<?php echo URLROOT; ?>public/images/photo1.jpg">
-            </div>
-        </div>
+      
 
         <main>
             <h1>Your Packages</h1>
@@ -138,9 +130,9 @@
                 </table>
             </div>
 
-
+            </main>
     </div>
-    </main>
+   
     </div>
 
 </body>

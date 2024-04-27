@@ -11,11 +11,8 @@ define('DB_NAME', 'planiteasy');
 define('APPROOT',dirname(dirname(__FILE__)));
 
 //URL root
-<<<<<<< HEAD
-define('URLROOT', 'http://localhost/PlanItEasy/');
-=======
 define('URLROOT', 'http://localhost/planiteasy/PlanItEasy/');
->>>>>>> Branch-Kavithma
+
 //Site name
 define('SITENAME', 'PlanItEasy');
 

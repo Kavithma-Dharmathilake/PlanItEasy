@@ -252,8 +252,7 @@
                 <a href="<?php echo URLROOT ?>customers/expiredQuotations/<?php echo $data['eventid']; ?>"><button type="submit" class="declinedButton">Expired</button></a>
             </div>
 
-            <p>supplier id</p><?php var_dump($_SESSION['user_id']);?> </br>
-            <p>event id</p><?php var_dump($data['eventid']);?> 
+          
 
             <!-- Event Request Table -->
             <div class="event-request" style="margin-top:60px">
@@ -285,89 +284,7 @@
                                 <td>LKR. <?php echo $q->price; ?>
                                 <td> <?php echo $q->status; ?></td>
                                 <td>
-                                    <button class="viewBtn" data-target="<?php echo $q->qid; ?>">View</button>
-
-                                    <div id="myModal-<?php echo $q->qid; ?>" class="modal">
-
-                                        <!-- Modal content -->
-                                        <div class="modal-content">
-
-                                            <div class="search-quoate">
-
-                                                <div style="display:flex; flex-direction:row">
-                                                    <div class="event-details" style="width:700px;">
-                                                        <p style="text-align:center">Requested Quotation</p>
-
-                                                        <div style="display:flex; margin-top:20px; margin-left:30px; border-bottom:2px ridge;padding-bottom:5px; ">
-                                                            <div class="req-title" style="width:50%">Supplier</div>
-                                                            <div class="req-data" style="width:50%"><?php echo $q->bname  ?></div>
-                                                        </div>
-
-                                                        <div style="display:flex; margin-top:20px; margin-left:30px; border-bottom:2px ridge;padding-bottom:5px;">
-                                                            <div class="req-title" style="width:50%">Package</div>
-                                                            <div class="req-data" style="width:50%"><?php echo  $q->package  ?> - (LKR. <?php echo  $q->price ?>)</div>
-                                                        </div>
-                                                        <div style="display:flex; margin-top:20px; margin-left:30px; border-bottom:2px ridge;padding-bottom:5px;">
-                                                            <div class="req-title" style="width:50%">Sent date</div>
-                                                            <div class="req-data" style="width:50%"><?php echo  $q->send_date  ?> </div>
-                                                        </div>
-
-
-                                                        <div style="display:flex; margin-top:20px; margin-left:30px; border-bottom:2px ridge;padding-bottom:5px;">
-                                                            <div class="req-title" style="width:50%">Your Remarks</div>
-                                                            <div class="req-data" style="width:50%"><?php echo  $q->remarks  ?></div>
-                                                        </div>
-                                                        <div style="display:flex; margin-top:20px; margin-left:30px; border-bottom:2px ridge;padding-bottom:5px;">
-                                                            <div class="req-title" style="width:50%">Supplier Remarks</div>
-                                                            <div class="req-data" style="width:50%"><?php echo  $q->s_remark  ?></div>
-                                                        </div>
-                                                        <div style="display:flex; margin-top:20px; margin-left:30px; border-bottom:2px ridge;padding-bottom:5px;">
-                                                            <div class="req-title" style="width:50%">Service Duration</div>
-                                                            <div class="req-data" style="width:50%"><?php echo  $q->stime  ?> to <?php echo  $q->etime  ?> </div>
-                                                        </div>
-                                                        <div style="display:flex; margin-top:20px; margin-left:30px; border-bottom:2px ridge;padding-bottom:5px;">
-                                                            <div class="req-title" style="width:50%">Received date</div>
-                                                            <div class="req-data" style="width:50%"><?php echo  $q->received_date  ?> </div>
-                                                        </div>
-                                                        <div style="display:flex; margin-top:20px; margin-left:30px; border-bottom:2px ridge;padding-bottom:5px;">
-                                                            <div class="req-title" style="width:50%">Additional Services</div>
-                                                            <div class="req-data" style="width:50%"><?php echo  $q->additional_services ?> </div>
-                                                        </div>
-                                                        <?php if ($q->stype == 'decoration') : ?>
-                                                            <!-- Display types of flowers for decoration -->
-                                                            <div style="display:flex; margin-top:20px; margin-left:30px; border-bottom:2px ridge;padding-bottom:5px;">
-                                                                <div class="req-title" style="width:50%">Types of Flowers</div>
-                                                                <div class="req-data" style="width:50%"><?php echo $q->flowers; ?></div>
-                                                            </div>
-                                                        <?php endif; ?>
-
-                                                        <?php if ($q->stype == 'catering') : ?>
-
-                                                            <div style="display:flex; margin-top:20px; margin-left:30px; border-bottom:2px ridge;padding-bottom:5px;">
-                                                                <div class="req-title" style="width:50%">Time </div>
-                                                                <div class="req-data" style="width:50%"><?php echo $q->time; ?></div>
-                                                            </div>
-                                                        <?php endif; ?>
-                                                        <div style="display:flex; margin-top:20px; margin-left:30px; border-bottom:2px ridge;padding-bottom:5px;">
-                                                            <div class="req-title" style="width:50%">Quotation Status</div>
-                                                            <div class="req-data" style="width:50%"><?php echo  $q->q_status  ?></div>
-                                                        </div>
-
-                                                        <?php
-                                                        $disabled = ($q->q_status !== 'Pending') ? 'disabled' : '';
-
-                                                        ?>
-
-                                                    </div>
-
-                                                </div>
-
-
-
-                                            </div>
-                                        </div>
-
-                                    </div>
+                                  <a href="<?php echo URLROOT ?>customers/viewquote/<?php echo $q->qid; ?>">View Quote</a>
 
                                 </td>
 

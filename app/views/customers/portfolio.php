@@ -37,7 +37,7 @@
                         </p>
                     </div>
                     <div class="profile-btn">
-                        <button class="chatbtn" id="chatBtn"><i class="fa fa-comment"></i> Chat</button>
+                   <button class="chatbtn" id="chatBtn"><i class="fa fa-comment"></i>  <a href="<?php echo URLROOT; ?>customers/chat/<?php echo $data['user']->id ?>/<?php echo $data['request']->id ?>">Chat</a></button>
                         <button class="createbtn" id="Create-post"><a href="<?php echo URLROOT; ?>customers/sendquote/<?php echo $data['user']->id."/".$data['request']->id ?>"><i class="fa fa-plus"></i>Request Quote</a></button>
                     </div>
                     <div class="user-rating">
