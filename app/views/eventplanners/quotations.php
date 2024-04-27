@@ -5,22 +5,70 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Packages</title>
+    <title>PlanItEasy</title>
     <!-- MATERIAL CDN -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- STYLESHEET -->
     <link rel="stylesheet" href="<?php echo URLROOT; ?>public/css/admindash.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>public/css/eventplannerdash.css">
+    <style>
+        /* The Modal (background) */
+        .modal {
+            display: none;
+            /* Hidden by default */
+            position: fixed;
+            /* Stay in place */
+            z-index: 1;
+            /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%;
+            /* Full width */
+            height: 100%;
+            /* Full height */
+            overflow: auto;
+            /* Enable scroll if needed */
+            background-color: rgb(0, 0, 0);
+            /* Fallback color */
+            background-color: rgba(0, 0, 0, 0.4);
+            /* Black w/ opacity */
+        }
+
+        /* Modal Content/Box */
+        .modal-content {
+            /* margin: 15% auto;
+            15% from the top and centered */
+            margin-left: 25%;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            /* Could be more or less, depending on screen size */
+        }
+
+        /* The Close Button */
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
 
 
 </head>
 
 <body>
     <div class="dash-container">
+    
         <aside>
             <div class="top">
                 <div class="logo">
@@ -96,7 +144,7 @@
                     </span>
                     <h3>Inquiry</h3>
                 </a>
-                <a href="<?php echo URLROOT ?>">
+                <a href="<?php echo URLROOT ?>users/logout">
                     <span class="material-icons-sharp">logout</span>
                     <h3>Logout</h3>
                 </a>
@@ -104,61 +152,66 @@
         </aside>
 
 
+
         <!-- Content start here -->
         <div>
+
+
+
+
             <!-- Heading and search bar -->
             <div style="display:flex">
 
                 <div class="planner-title">
-                    <h1>Event Requests</h1>
+                    <h1></h1>
 
 
                 </div>
-                <div class="planner-search">
-                    <form action="#" method="post">
 
-                        <input type="search" id="query" name="q" placeholder="       Search Requests"
-                            class="planner-textbox">
-
-                        <button>
-                            <i class="fa fa-search" style="font-size: 18px;">
-                            </i>
-                        </button>
-                    </form>
-                </div>
 
             </div>
 
             <!-- Event Request Table -->
+
+
+            <a href="<?php echo URLROOT ?>eventplanners/onerequest/<?php echo $data['request']->id?>">  <button style="padding:1rem; margin:1rem; background-color:#7380ec;color:white; border-radius:0.4rem">Back to Request</button></a>  
+
             <div class="event-request" style="margin-top:60px">
-           
-                <table>
+                <table style="width:1000px">
                     <thead>
                         <tr>
-                            <th>Event ID</th>
-                            <th>Package - Price</th>
-                            <th>Event Date</th>
-                            <th>Type</th>
-                            <th>Send Date</th>
+                            <th>ID</th>
+                            <th>Supplier</th>
+                            <th>Package</th>
+                            <th>Sent Date</th>
+                            <th>Price</th>
+                            <th>Status</th>
                             <th>View More</th>
-                           
-                          
+                            <th>Message with Supplier</th>
+
+
                         </tr>
                     </thead>
                     <tbody>
-                      <?php foreach($data['quote'] as $b){ ?>
-                        <tr>
-                            <td><?php echo $b->gid ?></td>
-                            <td><?php echo $b->package ?></td>
-                            <td><?php echo $b->date ?></td>
-                            <td><?php echo $b->event_type ?></td>
-                            <td><?php echo $b->s_date ?></td>
-                            <td><a href="<?php echo URLROOT ?>eventplanners/onerequest/<?php echo $b->gid?>">View More</a></td>
-                           
-                            
-                        </tr>
-                        <?php  }?>
-                      
+                        <?php foreach ($data['quote'] as $q) : ?>
+                            <tr>
+
+                                <td><?php echo $q->qid; ?></td>
+                                <td><?php echo  $q->bname ?></td>
+                                <td><?php echo  $q->package ?></td>
+                                <td> <?php echo $q->send_date; ?>
+                                <td><?php echo $q->r_price; ?></td>
+                                <td> <?php echo $q->status; ?></td>
+                                <td>
+                                    <button class="viewBtn" data-target="<?php echo $q->qid; ?>">View</button>
+                                </td>
+
+                                <td><a href="<?php echo URLROOT; ?>eventplanners/message/<?php echo  $q->qid; ?> ">Message</a> </td>
+
+
+                            </tr>
+                        <?php endforeach; ?>
+
                     </tbody>
                 </table>
             </div>
@@ -169,5 +222,22 @@
 
 
 </body>
+
+<script>
+    $(document).ready(function() {
+        $('.viewBtn').click(function() {
+            var targetId = $(this).data('target');
+            $('#myModal-' + targetId).show();
+        });
+
+        // Close modal when clicking outside
+        $(window).click(function(event) {
+            if ($(event.target).hasClass('modal')) {
+                $('.modal').hide();
+            }
+        });
+    });
+</script>
+
 
 </html>

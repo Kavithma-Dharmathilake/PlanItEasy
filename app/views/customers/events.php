@@ -151,10 +151,10 @@
 
             <div class="sidebar">
                 <a href="<?php echo URLROOT; ?>customers">
-                    <span class="material-icons-sharp" class="active">grid_view</span>
+                    <span class="material-icons-sharp">grid_view</span>
                     <h3>Dashboard</h3>
                 </a>
-                <a href="<?php echo URLROOT; ?>customers/events">
+                <a href="<?php echo URLROOT; ?>customers/events" class="active">
                     <span class="material-icons-sharp">man</span>
                     <h3>Events</h3>
                 </a>
@@ -162,10 +162,10 @@
                     <span class="material-icons-sharp">payments</span>
                     <h3>Payments</h3>
                 </a>
-                <a href="<?php echo URLROOT; ?>customers/message">
+                <!-- <a href="<?php echo URLROOT; ?>customers/message">
                     <span class="material-icons-sharp">message</span>
                     <h3>Messages</h3>
-                </a>
+                </a> -->
                 <a href="<?php echo URLROOT; ?>customers/profile">
                     <span class="material-icons-sharp">person</span>
                     <h3>profile</h3>

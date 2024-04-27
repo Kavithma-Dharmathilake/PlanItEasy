@@ -1,0 +1,3 @@
+fix the message backend. there is an error with qid.
+fix the budget
+also messages with quotations supplier

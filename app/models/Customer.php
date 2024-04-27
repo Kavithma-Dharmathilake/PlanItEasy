@@ -308,8 +308,8 @@ class Customer
         $this->db->bind(':eid', $data['rid']);
         $this->db->bind(':sid', $data['sid']);
         $this->db->bind(':uid', $data['uid']);
-        $this->db->bind(':etime', $data['stime']);
-        $this->db->bind(':stime', $data['etime']);
+        $this->db->bind(':etime', $data['etime']);
+        $this->db->bind(':stime', $data['stime']);
         $this->db->bind(':time', $data['time']);
         $this->db->bind(':remarks', $data['remark']);
         $this->db->bind(':stype', $data['stype']);

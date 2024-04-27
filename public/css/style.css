@@ -55,8 +55,8 @@ ul {
 body{
     font-family: 'Roboto', sans-serif;
     line-height: 1.7;
-    color: var(--color-white);
-    background: var(--color-dark);
+    color: var(--color-black);
+    background: var(--color-info-light);
 }
 
 .container{
@@ -116,7 +116,7 @@ img{
 }
 
 .btn:hover{
-    background: transparent;
+    background-color: var(--color-dark);
     color: var(--color-white);
     border-color: var(--color-white);
 }
@@ -129,13 +129,13 @@ img{
 /* ========== NAVBAR ============*/
  
 nav{
-    background: transparent;
+    background: var(--color-dark);
     width: 100vw;
     height: 5rem;
     position: fixed;
     top: 0;
     z-index: 11;
-    color:white;
+    color:var(--color-dark);
 }
 
 .window-scroll{
@@ -187,6 +187,11 @@ header{
     height: 100%;
 }
 
+.header__left h1{
+    color: var(--color-dark-variant);
+}
+
+
 .header__left p{
     margin: 1rem 0 2.4rem;
 }
@@ -194,7 +199,7 @@ header{
 /* =========== CATEGORIES =============*/
 
 .categories{
-    background: var(--color-dark-variant);
+    background: var(--color-light);
     height: 35rem;
 }
 

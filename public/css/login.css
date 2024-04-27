@@ -53,12 +53,13 @@ ul {
     --transition: all 300ms ease;
 }
 
-body{
+/* body{
+    background: var(--color-info-light);
     font-family: 'Roboto', sans-serif;
     line-height: 1.7;
     color: var(--color-white);
-    background: var(--color-dark);
-}
+    
+} */
 
 
 .login{
@@ -68,7 +69,8 @@ body{
     min-height: 100vh;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     background-image: url('images\index_bg.jpg') no-repeat;
-    background-color: var(--color-primary-variant);
+    background: var(--color-info-light);
+    color: var(--color-black);
     
     
 
@@ -79,15 +81,15 @@ body{
 
 .wrapper{
     width: 480px;
-    background: transparent;
-    border: 2px solid;
+    background-color: var(--color-white);
     backdrop-filter: blur(20px);
-    color: whitesmoke;
+    color: var(--color-black);
     border-radius: 10px;
     padding: 30px 40px;
     box-shadow: 0 0 10px rgb(0,0,0,.2);
 }
 .wrapper h1{
+    color: var(--color-primary-variant);
     font-size: 36px;
     text-align: center;
 }
@@ -109,15 +111,15 @@ body{
     background: transparent;
     border: none;
     outline: none;
-    border: 2px solid black;
     border-radius: 40px;
+    box-shadow: 0 0 10px rgb(0,0,0,.2);
     font-size: 16px;
-    color: #f5f5f5;
+    color: var(--color-dark);
     padding: 20px 45px 20px 20px;
 }
 
 .input-box ::placeholder{
-    color: #f5f5f5;
+    color: var(--color-primary-variant);
 }
 
 .wrapper .remember-forgot{
@@ -134,7 +136,7 @@ body{
 }
 
 .remember-forgot a{
-    color: #fff;
+    color: var(--color-dark-variant);
 }
 
 .wrapper .btn{
@@ -143,11 +145,12 @@ body{
     border: none;
     outline: none;
     border-radius: 40px;
-    background-color: #fff;
+    background-color:var(--color-primary);
     box-shadow: 0 0 10px rgb(0,0,0,.1);
     cursor: pointer;
     font-size: 16px;
     font-weight: 600;
+    padding: 0.5rem;
 }
 
 .wrapper .sign-up{
@@ -157,7 +160,7 @@ body{
 }
 
 .sign-up p a{
-    color: #fff;
+    color:var(--color-dark-variant);
     text-decoration: none;
     font-weight: 600;
 }
