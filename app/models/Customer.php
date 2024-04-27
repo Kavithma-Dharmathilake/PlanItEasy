@@ -491,7 +491,7 @@ class Customer
     {
 
         $uid = $_SESSION['user_id'];
-        $this->db->query('SELECT * 
+        $this->db->query('SELECT *, q.id AS qid 
         FROM quoate q, user u
         WHERE q.eid=:id AND q.sid = u.id AND q.uid = :uid AND q.status = "Request Sent"');
         //bind values
@@ -505,7 +505,7 @@ class Customer
     {
 
         $uid = $_SESSION['user_id'];
-        $this->db->query('SELECT * 
+        $this->db->query('SELECT *, q.id AS qid 
         FROM quoate q, user u
         WHERE q.eid=:id AND q.sid = u.id AND q.uid = :uid AND q.status = "Request Accepted"');
         //bind values
@@ -519,7 +519,7 @@ class Customer
     {
 
         $uid = $_SESSION['user_id'];
-        $this->db->query('SELECT * 
+        $this->db->query('SELECT *, q.id AS qid 
         FROM quoate q, user u
         WHERE q.eid=:id AND q.sid = u.id AND q.uid = :uid AND q.status = "Request Declined"');
         //bind values
@@ -533,7 +533,7 @@ class Customer
     {
 
         $uid = $_SESSION['user_id'];
-        $this->db->query('SELECT * 
+        $this->db->query('SELECT *, q.id AS qid 
         FROM quoate q, user u
         WHERE q.eid=:id AND q.sid = u.id AND q.uid = :uid AND q.status = "Booked"');
         //bind values
@@ -547,7 +547,7 @@ class Customer
     {
 
         $uid = $_SESSION['user_id'];
-        $this->db->query('SELECT * 
+        $this->db->query('SELECT *, q.id AS qid 
         FROM quoate q, user u
         WHERE q.eid=:id AND q.sid = u.id AND q.uid = :uid AND q.status = "Payment Complete"');
         //bind values
@@ -561,7 +561,7 @@ class Customer
     {
 
         $uid = $_SESSION['user_id'];
-        $this->db->query('SELECT * 
+        $this->db->query('SELECT *, q.id AS qid 
         FROM quoate q, user u
         WHERE q.eid=:id AND q.sid = u.id AND q.uid = :uid AND q.status = "Expired"');
         //bind values
