@@ -11,16 +11,19 @@ class Suppliers extends Controller
 
     public function index()
     {
-        // $userName = $_SESSION['user_name'];
+        $userName = $_SESSION['user_name'];
         $countProduct = $this->supplierModel->countAllProducts();
         $countQuote = $this->supplierModel->countQuotations();
-        // $quotePerMonth = $this->supplierModel->countQuotationsPerMonth();
+        $quotePerMonth = $this->supplierModel->countQuotationsPerMonth();
         
+        // var_dump[$quotePerMonth];
+        //var_dump[$countQuote];
 
         $data = [
-            // 'userName' => $userName,
+            'userName' => $userName,
             'countProduct' => $countProduct,
-            'countQuote' => $countQuote
+            'countQuote' => $countQuote,
+            'quotePerMonth' => $quotePerMonth
         ];
         $this->view('suppliers/index', $data);
     }

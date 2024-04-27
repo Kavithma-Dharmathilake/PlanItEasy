@@ -261,6 +261,8 @@
                 <a href="<?php echo URLROOT ?>suppliers/paidQuotes"><button type="submit" class="completedButton">Payment Complete</button></a>
                 </div>
 
+                <!-- <?php var_dump($_SESSION['user_id']);?> -->
+
                 <!-- Event Request Table -->
                 <div class="event-request" style="margin-top:60px">
                     <table>
