@@ -386,4 +386,36 @@ class EventPlanner
 
         return $data;
     }
+    
+    public function getAllPackages()
+    {
+        $id= $_SESSION['user_id'];
+        $this->db->query('SELECT * FROM packages where supplier = :id');
+        $this->db->bind(':id', $id );
+        $result = $this->db->resultSet();
+        return $result;
+    }
+
+    public function addNewPackage($data)
+    {
+
+        $date = date("Y-m-d");
+        $this->db->query('INSERT INTO packages(supplier,name, price, description, services, date) VALUES(:supplier,:name, :price, :description, :services, :date)');
+      
+        $this->db->bind(':supplier', $_SESSION['user_id']);
+        $this->db->bind(':name', $data['name']);
+        $this->db->bind(':description', $data['description']);
+        $this->db->bind(':services', $data['services']);
+        $this->db->bind(':price', $data['price']);
+        $this->db->bind(':date', $date);
+
+
+        //Execute the query
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }

@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "24a6efc64cc2f39bf303f7fa1ca30d3f",
+    "content-hash": "c99d8b5f08b86b52f67e7d8a777ad8f7",
     "packages": [
         {
             "name": "stripe/stripe-php",
-            "version": "v14.3.0",
+            "version": "v14.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/stripe/stripe-php.git",
-                "reference": "4825e7f03f9f83e091928c8f08f96bc87fdd2c7d"
+                "reference": "044f9dd190967b8fb7e55fd0ea25f11c625c00a4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/stripe/stripe-php/zipball/4825e7f03f9f83e091928c8f08f96bc87fdd2c7d",
-                "reference": "4825e7f03f9f83e091928c8f08f96bc87fdd2c7d",
+                "url": "https://api.github.com/repos/stripe/stripe-php/zipball/044f9dd190967b8fb7e55fd0ea25f11c625c00a4",
+                "reference": "044f9dd190967b8fb7e55fd0ea25f11c625c00a4",
                 "shasum": ""
             },
             "require": {
@@ -61,9 +61,9 @@
             ],
             "support": {
                 "issues": "https://github.com/stripe/stripe-php/issues",
-                "source": "https://github.com/stripe/stripe-php/tree/v14.3.0"
+                "source": "https://github.com/stripe/stripe-php/tree/v14.4.0"
             },
-            "time": "2024-04-18T21:25:27+00:00"
+            "time": "2024-04-25T20:38:24+00:00"
         }
     ],
     "packages-dev": [],
@@ -74,5 +74,5 @@
     "prefer-lowest": false,
     "platform": [],
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.6.0"
 }

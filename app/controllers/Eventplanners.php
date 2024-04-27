@@ -23,7 +23,7 @@ class Eventplanners extends Controller
     public function packages()
     {
 
-        $data = $this->userModel->getAllEvents();
+        $data = $this->plannerModel->getAllPackages();
         $this->view('eventplanners/packages', $data);
     }
 
@@ -332,83 +332,44 @@ class Eventplanners extends Controller
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-            if ($_FILES['img']['error'] === UPLOAD_ERR_OK) {
-                $file_name = $_FILES['img']['name'];
-                $file_tmp = $_FILES['img']['tmp_name'];
 
-                $upload_dir = "uploads/events/"; // Create an 'uploads' directory in your project folder
-
-                // Move the uploaded file to the desired location
-                $destination = $upload_dir . $file_name;
-
-                if (move_uploaded_file($file_tmp, $destination)) {
-                    $file_path = $destination;
-                } else {
-                    $data['file_err'] = 'File upload failed';
-                }
-            }
-
-            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            $_POST = filter_input_array(INPUT_POST);
 
             $data = [
                 'name' => trim($_POST['name']),
-                'type' => trim($_POST['type']),
                 'price' => trim($_POST['price']),
                 'description' => trim($_POST['description']),
-                'name_err' => '',
-                'type_err' => '',
-                'price_err' => '',
-                'description_err' => '',
+                'services' => trim($_POST['services'])
             ];
 
-            if (empty($data['name'])) {
-                $data['name_err'] = 'Name is required';
-            }
-            if (empty($data['price'])) {
-                $data['price_err'] = 'Price is required';
-            } else if (!is_numeric($data['price'])) {
-                $data['price_err'] = 'Price must be a valid number';
-            } else if ($data['price'] < 0) {
-                $data['price_err'] = 'Price cannot be a negative number';
-            } else if ($data['price'] > 10000000) {
-                $data['price_err'] = 'Price cannot be more than 10,000,000';
-            }
-            if (empty($data['type'])) {
-                $data['type_err'] = 'Type is required';
-            }
-            if (empty($data['description'])) {
-                $data['description_err'] = 'Description is required';
-            }
-            if (empty($data['name_error']) && empty($data['price_err']) && empty($data['description_err']) && empty($data['type_err'])) {
+
+            if (!empty($data['name'])) {
+
 
                 $package = [
                     'name' => $data['name'],
-                    'type' => $data['type'],
                     'price' => $data['price'],
                     'description' => $data['description'],
-                    'img' => $file_path
+                    'services' => $data['services'],
                 ];
-                if ($this->userModel->eventnew($package)) {
+
+
+                if ($this->plannerModel->addNewPackage($package)) {
                     echo '<script> prompt("Package Added Succfully")</script>';
                     redirect('eventplanners/packages');
                 } else {
-                    $this->view('eventplanners/addNewpackage', $data);
+                    
                 }
             } else {
-                $this->view('eventplanners/addNewpackage', $data);
+                $this->view('eventplanners/addNewPackage', $data);
             }
         } else {
             $data = [
                 'name' => '',
-                'type' => '',
                 'price' => '',
-                'description' => '',
-                'name_err' => '',
-                'type_err' => '',
-                'price_err' => '',
-                'description_err' => '',
+                'description' => ''
             ];
-            $this->view('eventplanners/addNewpackage', $data);
+            $this->view('eventplanners/addNewPackage', $data);
         }
     }
 
