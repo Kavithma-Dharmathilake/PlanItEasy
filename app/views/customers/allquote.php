@@ -252,9 +252,7 @@
                 <a href="<?php echo URLROOT ?>customers/expiredQuotations/<?php echo $data['eventid']; ?>"><button type="submit" class="declinedButton">Expired</button></a>
             </div>
 
-            <p>supplier id</p><?php var_dump($_SESSION['user_id']);?> </br>
-            <p>event id</p><?php var_dump($data['eventid']);?> 
-
+           
             <!-- Event Request Table -->
             <div class="event-request" style="margin-top:60px">
                 Done with quotations?
