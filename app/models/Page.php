@@ -29,6 +29,20 @@ class Page{
 
     }
 
+    public function getSupplier($type){
+        $this->db->query('SELECT bname , stype FROM user WHERE stype =:type');
+        $this->db->bind(':type', $type);
+        $result = $this->db->resultSet();
+        return $result;
+    }
+
+    public function getEventPlanner($type){
+        $this->db->query('SELECT bname , stype FROM user WHERE stype =:type');
+        $this->db->bind(':type', $type);
+        $result = $this->db->resultSet();
+        return $result;
+    }
+
    
 }
 

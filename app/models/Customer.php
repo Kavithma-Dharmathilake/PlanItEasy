@@ -452,6 +452,107 @@ class Customer
         return $result;
     }
 
+    public function getRecentQuote($id)
+    {
+        $this->db->query("SELECT u.name
+        FROM quoate q
+        JOIN user u ON q.sid = u.id
+        WHERE q.q_status = 'Accepted'AND q.uid = :id
+        ORDER BY q.send_date DESC
+        LIMIT 3
+        ");
+
+        //bind values
+        $this->db->bind(':id', $id);
+        // $this->db->bind(':uid', $uid);
+        $result = $this->db->resultSet();
+
+        if($result){
+            return $result;
+        }else{
+            return false;
+            }
+        
+    }
+
+    public function countPendingEvents($id) {
+        $this->db->query("SELECT COUNT(*) AS pending_count
+                          FROM general_requests gr
+                          WHERE gr.event_status = 'ongoing' AND gr.idcustomer = :id");
+        
+        // Bind values
+        $this->db->bind(':id', $id);
+        
+        // Fetch single result
+        $result = $this->db->single();
+        
+        return $result->pending_count;
+
+    }
+
+    public function countBookedEvents($id) {
+        $this->db->query("SELECT COUNT(*) AS booked_count
+                          FROM general_requests gr
+                          WHERE gr.event_status = 'Booked' AND gr.idcustomer = :id");
+        
+        // Bind values
+        $this->db->bind(':id', $id);
+        
+        // Fetch single result
+        $result = $this->db->single();
+        
+        return $result->booked_count;
+
+    }
+
+    public function countCompletedEvents($id) {
+        $this->db->query("SELECT COUNT(*) AS completed_count
+                          FROM general_requests gr
+                          WHERE gr.event_status = 'Payment Complete' AND gr.idcustomer = :id");
+        
+        // Bind values
+        $this->db->bind(':id', $id);
+        
+        // Fetch single result
+        $result = $this->db->single();
+        
+        return $result->completed_count;
+
+    }
+
+
+
+    // public function countAcceptedQuote($id) {
+    //     $this->db->query("SELECT COUNT(*) AS total_count
+    //                       FROM quoate q
+    //                       WHERE q.q_status = 'Accepted' AND q.uid = :id");
+        
+    //     // Bind values
+    //     $this->db->bind(':id', $id);
+        
+    //     // Fetch single result
+    //     $result = $this->db->single();
+        
+    //     return $result->total_count;
+
+    // }
+
+    // public function countPendingQuote($id) {
+    //     $this->db->query("SELECT COUNT(*) AS total_count_pending
+    //                       FROM quoate q
+    //                       WHERE q.q_status = 'Pending' AND q.uid = :id");
+        
+    //     // Bind values
+    //     $this->db->bind(':id', $id);
+        
+    //     // Fetch single result
+    //     $result = $this->db->single();
+        
+    //     return $result->total_count_pending;
+
+    // }
+    
+
     public function getSuppliers($stype)
     {
         $this->db->query('SELECT * FROM user WHERE stype =:stype');
@@ -808,6 +909,30 @@ class Customer
         }
     }
 
+    public function showPayment($id)
+    {
+        // $this->db->query(
+        //     'SELECT p.amount,bi.bname,bi.stype
+        //     FROM payment p
+        //     JOIN budget_item bi ON p.bid = bi.bid
+        //     JOIN user u ON p.user = u.id
+        //     WHERE p.user = :id AND p.amount = bi.r_price');
+        // $this->db->bind(':id', $id);
+        // $results = $this->db->resultSet();
+        // // die(var_dump($results));
+        // return $results;
+
+        $this->db->query(
+            'SELECT p.amount , p.bid , p.rid
+            FROM payment p
+            WHERE p.user = :id'
+        );
+        $this->db->bind(':id', $id);
+        $results = $this->db->resultset();
+        return $results;
+    }
+    
+
     public function updateBudgetQuotations($id)
     {
 
@@ -837,7 +962,6 @@ class Customer
 
     public function sendMessage($data)
     {
-
         $sid = $_SESSION['user_id'];
         $date = date('Y-m-d');
         $time = date('H:i:s');
