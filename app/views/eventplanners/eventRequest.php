@@ -106,18 +106,6 @@
 
         <!-- Content start here -->
         <div>
-            <div class="profile end">
-                <div class="info" style="padding-right:25px;">
-                    <p>Hey, <b>Sunimal</b></p>
-                    <small class="text-muted">Eventplanner</small>
-                </div>
-                <div class="profile-photo">
-                    <img src="<?php echo URLROOT ?>public/images/photo2.jpg">
-                </div>
-            </div>
-
-
-
             <!-- Heading and search bar -->
             <div style="display:flex">
 
@@ -148,54 +136,29 @@
                     <thead>
                         <tr>
                             <th>Event ID</th>
-                            <th>Event type</th>
-                            <th>Number of Guests</th>
-                            <th>Budget</th>
-                            <th>Tentative Date</th>
-                            <th>Event Status</th>
-                            <th>More</th>
+                            <th>Package - Price</th>
+                            <th>Event Date</th>
+                            <th>Type</th>
+                            <th>Send Date</th>
+                            <th>View More</th>
+                           
                           
                         </tr>
                     </thead>
                     <tbody>
+                      <?php foreach($data['quote'] as $b){ ?>
+                        <tr>
+                            <td><?php echo $b->gid ?></td>
+                            <td><?php echo $b->package ?></td>
+                            <td><?php echo $b->date ?></td>
+                            <td><?php echo $b->event_type ?></td>
+                            <td><?php echo $b->s_date ?></td>
+                            <td><a href="<?php echo URLROOT ?>eventplanners/onerequest/<?php echo $b->gid?>">View More</a></td>
+                           
+                            
+                        </tr>
+                        <?php  }?>
                       
-                        <tr>
-                            <td>0001</td>
-                            <td>Wedding</td>
-                            <td>250</td>
-                            <td>1,000,000 LKR</td>
-                            <td>21/10/2023</td>
-                            <td>Pending</td>
-                            <td><a href="<?php echo URLROOT ?>eventplanners/onerequest">:</a></td>
-                        </tr>
-                        <tr>
-                            <td>0001</td>
-                            <td>Wedding</td>
-                            <td>250</td>
-                            <td>1,000,000 LKR</td>
-                            <td>21/10/2023</td>
-                            <td>Pending</td>
-                            <td><a href="">:</a></td>
-                        </tr>
-                        <tr>
-                            <td>0001</td>
-                            <td>Wedding</td>
-                            <td>250</td>
-                            <td>1,000,000 LKR</td>
-                            <td>21/10/2023</td>
-                            <td>Pending</td>
-                            <td><a href="">:</a></td>
-                        </tr>
-                         <tr>
-                            <td>0001</td>
-                            <td>Wedding</td>
-                            <td>250</td>
-                            <td>1,000,000 LKR</td>
-                            <td>21/10/2023</td>
-                            <td>Pending</td>
-                            <td><a href="">:</a></td>
-                        </tr>
-                       
                     </tbody>
                 </table>
             </div>

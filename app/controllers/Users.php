@@ -115,6 +115,8 @@ class Users extends Controller
                 if ($this->userModel->findUserByEmail($data['email'])) {
                     $data['email_err'] = 'Email is already taken';
                 }
+
+                // do the authorizations here
             }
 
             if (empty($data['name'])) {
@@ -205,30 +207,32 @@ class Users extends Controller
         $_SESSION['user_name'] = $user->name;
         $_SESSION['user_email'] = $user->email;
         $_SESSION['user_role'] = $user->role;
+        $_SESSION['user_address'] = $user->address;
+        $_SESSION['user_contact'] = $user->contact;
 
 
         if (isset($_SESSION['user_role'])) {
             $userType = $_SESSION['user_role'];
 
             if ($userType === 'customer') {
-                // Redirect customer to the customer dashboard
-                redirect('customer');
+               
+                redirect('customers');
             } elseif ($userType === 'eventplanner') {
-                // Redirect admin to the admin dashboard
+              
                 redirect('eventplanners');
             } elseif ($userType === 'admin') {
-                // Redirect admin to the admin dashboard
+               
                 redirect('admin');
 
             } elseif ($userType === 'supplier') {
-                // Redirect admin to the admin dashboard
-                redirect('supplier');
+              
+                redirect('suppliers');
             } else {
-                // Handle other user types or show an error message
+               
                 echo "Invalid user type";
             }
         } else {
-            // Handle the case when the user type is not set in the session
+           
             echo "User type not set in session";
         }
 
@@ -240,6 +244,7 @@ class Users extends Controller
         unset($_SESSION['user_name']);
         unset($_SESSION['user_email']);
         unset($_SESSION['user_role']);
+        unset($_SESSION['user_address']);
         session_destroy();
         redirect('users/login');
     }

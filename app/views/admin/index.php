@@ -45,7 +45,7 @@
                     <span class="material-icons-sharp">face_3</span>
                     <h3>Suppliers</h3>
                 </a>
-                <a href="#">
+                <a href="<?php echo URLROOT ?>admin/eventplanners">
                     <span class="material-icons-sharp">group</span>
                     <h3>Event Planners</h3>
                 </a>
@@ -53,11 +53,8 @@
                     <span class="material-icons-sharp">analytics</span>
                     <h3>User Requests</h3>
                 </a>
-                <a href="#">
-                    <span class="material-icons-sharp">settings</span>
-                    <h3>Settings</h3>
-                </a>
-                <a href="#">
+             
+                <a href="<?php echo URLROOT ?>">
                     <span class="material-icons-sharp">logout</span>
                     <h3>Logout</h3>
                 </a>

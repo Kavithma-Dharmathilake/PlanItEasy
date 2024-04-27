@@ -1,0 +1,40 @@
+
+.supplier_btns{
+  align-items: center;
+}
+
+.discounts__container{
+  margin-top: 5rem;
+  overflow-x: hidden;
+  position: relative;
+  margin-bottom: 5rem;
+}
+
+.header__container{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 5rem;
+  height: 100%;
+  background-color: var(--color-info-dark);
+  border-radius: var(--border-radius-2);
+  padding: 2rem 2rem;
+}
+
+.booknow_btn{
+  display: inline-block;
+  background:var(--color-warning);
+  color: var(--color-black);
+  padding: 1rem 2rem;
+  border: 1px solid transparent;
+  font-weight: 500;
+  transition: var(--transition);
+  border-radius: var(--border-radius-2);
+  margin-top: 3rem;
+}
+
+.booknow_btn:hover{
+  background: transparent;
+  color: var(--color-white);
+  border-color: var(--color-white);
+}

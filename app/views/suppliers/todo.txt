@@ -1,0 +1,10 @@
+
+########## IMPORTNAT ########
+
+--> accept and decline button styling
+--> packages tika danna oni
+--> package prices
+--> calander seen eka
+--> navbars tika (antimt krnna)
+
+

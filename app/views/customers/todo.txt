@@ -1,0 +1,53 @@
+--> in the photo-quotation requests need to know about checkboxes with albums and all
+
+--> dancing, event planner, dj, music crew, event planner photo, backens included.
+
+--> form validations
+
+--> add packages to suppliers
+
+--> manage portfolios
+
+--> filter according to calander
+
+--> manage calander
+
+--> supplier working area update
+
+--> event planner:once the event got it payement location and reception hall should be exhanged between vendors
+--> event editing  -> rules
+--> Editing quotation not after accepting
+
+--> once a quottaion sent cannot be displayed again.
+--> portfolio management
+--> delete quote
+--> budget view Page
+--->dont let checkout if the price is zero
+
+
+-->terms and conditions
+advance payment must be done with 3 days once supplier accepted the quotation. 
+advance payment is non refundable
+full payment must be done prior to the week of the event.
+
+
+status --> 
+event status-->booked, completed, 
+quotation -->  advance paid,  booking expired, payment complete, event complete
+
+
+
+
+
+
+done-->
+1.reception 
+2. decoration
+3. photography
+4. catering
+5.eventplanner
+
+not done-->
+1.dancing 2. music 3. dj 4. cake
+
+///in all quote view make sure to display everyting when customer click one table row

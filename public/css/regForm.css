@@ -128,3 +128,9 @@ body {
     color: var(--color-black);
     border-color: var(--color-black);
 }
+
+.invalid-feedback{
+  color:red;
+  font-size: 15px;
+  font-weight: bold;
+}
