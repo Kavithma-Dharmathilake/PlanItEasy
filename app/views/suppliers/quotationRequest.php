@@ -244,6 +244,18 @@
                                 </i>
                             </button>
                         </form>
+
+                        <!-- <div class="top">
+                        <div class="profile" style="margin-right: -">
+                            <div class="info">
+                                <p>Hey, <b><?php echo $_SESSION['user_name']?></b></p>
+                                <small class="text-muted">Supplier</small>
+                            </div>
+                            <div class="profile-photo">
+                           
+                            </div>  
+                        </div> -->
+            </div>
                     </div>
 
                 </div></br>
@@ -294,6 +306,11 @@
 
 
             </div>
+        </main>
+
+        <div class="right">
+            
+        </div>
 
 </body>
 

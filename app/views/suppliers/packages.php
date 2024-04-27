@@ -27,7 +27,7 @@
                 </div>
             </div>
             <div class="sidebar">
-                <a href="<?php echo URLROOT; ?>suppliers/index" class="active">
+                <a href="<?php echo URLROOT; ?>suppliers/index">
                     <span class="material-icons-sharp">grid_view</span>
                     <h3>Dashboard</h3>
                 </a>
@@ -46,7 +46,7 @@
                     <h3>Quotation Requests</h3>
                 </a>
 
-                <a href="<?php echo URLROOT; ?>suppliers/packages">
+                <a href="<?php echo URLROOT; ?>suppliers/packages" class="active">
                     <span class="material-icons-sharp">
                         request_quote
                     </span>
@@ -82,11 +82,11 @@
 
         <div class="profile end">
             <div class="info" style="padding-right:25px;">
-                <p>Hey, <b>Abhi</b></p>
+                <p>Hey, <b><?php echo $_SESSION['user_name']; ?></b></p>
                 <small class="text-muted">Supplier</small>
             </div>
             <div class="profile-photo">
-                <img src="<?php echo URLROOT; ?>public/images/photo1.jpg">
+                <!-- <img src="<?php echo URLROOT; ?>public/images/photo1.jpg"> -->
             </div>
         </div>
 
