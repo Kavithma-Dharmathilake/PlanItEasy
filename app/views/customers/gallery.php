@@ -38,10 +38,14 @@
     <!-- *******VENDOR-GRID************* -->
     <div class="vendor-grid">
 
-        <?php foreach ($data['supplier'] as $i) : ?>
+        <?php foreach ($data['supplier'] as $i) : 
+      
+            ?>
 
+            
             <div class="vendor-card">
-                <a href="<?php echo URLROOT; ?>customers/portfolio/<?php echo $i->uid . "/" . $data['request']->id ?>">
+          
+                <a href="<?php echo URLROOT; ?>customers/portfolio/<?php echo $i->uid?>/<?php echo $data['request']->id ?>">
                     <div class="vendor-image">
                         <img src="<?php echo URLROOT ?>public/<?php echo $i->caption ?>" alt="vendor image">
                     </div>

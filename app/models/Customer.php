@@ -330,7 +330,7 @@ class Customer
     public function  RequestCakeQuote($data)
     {
 
-        
+
         $sent = "Request Sent";
         $date = date("Y-m-d");
 
@@ -353,7 +353,6 @@ class Customer
         if ($this->db->execute()) {
             $id = $this->db->lastInsertedId();
             return $id;
-           
         } else {
             return false;
         }
@@ -362,7 +361,7 @@ class Customer
     public function  RequestDJQuote($data)
     {
 
-        
+
         $sent = "Request Sent";
         $date = date("Y-m-d");
 
@@ -385,7 +384,6 @@ class Customer
         if ($this->db->execute()) {
             $id = $this->db->lastInsertedId();
             return $id;
-           
         } else {
             return false;
         }
@@ -394,7 +392,7 @@ class Customer
     public function  RequestMusicQuote($data)
     {
 
-        
+
         $sent = "Request Sent";
         $date = date("Y-m-d");
 
@@ -409,7 +407,7 @@ class Customer
         $this->db->bind(':remarks', $data['remark']);
         $this->db->bind(':stype', $data['stype']);
         $this->db->bind(':status', $sent);
-     
+
         $this->db->bind(':send_date', $date);
 
 
@@ -417,7 +415,6 @@ class Customer
         if ($this->db->execute()) {
             $id = $this->db->lastInsertedId();
             return $id;
-           
         } else {
             return false;
         }
@@ -426,7 +423,7 @@ class Customer
     public function  RequestDanceQuote($data)
     {
 
-        
+
         $sent = "Request Sent";
         $date = date("Y-m-d");
 
@@ -448,7 +445,6 @@ class Customer
         if ($this->db->execute()) {
             $id = $this->db->lastInsertedId();
             return $id;
-           
         } else {
             return false;
         }
@@ -616,8 +612,8 @@ class Customer
 
     public function getRequestSentQuotations($id)
     {
-        if($stype=='Catering'){
-            $stype="Catering Service";
+        if ($stype == 'Catering') {
+            $stype = "Catering Service";
         }
         $this->db->query('SELECT *,u.id as uid FROM user u , portfolios p WHERE u.stype =:stype AND u.id = p.sid');
 
@@ -629,7 +625,7 @@ class Customer
         $this->db->bind(':id', $id);
         $this->db->bind(':uid', $uid);
         $this->db->bind(':stype', $stype);
-      
+
         $result = $this->db->resultSet();
         return $result;
     }
@@ -704,9 +700,8 @@ class Customer
         return $result;
     }
 
-    
-    
-        public function getPortfolioById($sid){
+    public function getPortfolioById($sid)
+    {
         $this->db->query('SELECT * FROM portfolios  WHERE sid =:sid');
 
         //bind values
@@ -715,7 +710,8 @@ class Customer
         return $result;
     }
 
-    public function getPackagesById($sid){
+    public function getPackagesById($sid)
+    {
         $this->db->query('SELECT * FROM packages  WHERE supplier =:sid');
 
         //bind values
@@ -826,6 +822,22 @@ class Customer
         $this->db->bind(':id', $id);
 
         $result = $this->db->single();
+        return $result;
+    }
+
+
+    public function getSuppliers($type)
+    {
+
+
+        $this->db->query('SELECT *, u.id AS uid, p.id AS pid
+        FROM user u , portfolios p
+        WHERE stype =:type AND u.id = p.sid');
+
+        //bind values
+        $this->db->bind(':type', $type);
+
+        $result = $this->db->resultSet();
         return $result;
     }
 
@@ -979,7 +991,7 @@ class Customer
         }
     }
 
-    
+
 
     public function getBudgetItems($id)
     {
@@ -994,6 +1006,17 @@ class Customer
         return $result;
     }
 
+    public function getBudgetData($bid, $id)
+    {
+
+        $this->db->query('SELECT * FROM budget pb, budget_item pbi
+         WHERE pb.id =:bid AND pb.rid =:id AND pb.id = pbi.bid ');
+        $this->db->bind(':bid', $bid);
+        $this->db->bind(':id', $id);
+        $data = $this->db->resultSet();
+
+        return $data;
+    }
     public function getAllBudget($id)
     {
 
@@ -1044,7 +1067,7 @@ class Customer
     public function insertAdvPayement($data)
     {
 
-     
+
         $this->db->query('INSERT INTO payment(user, name, email, amount, bid, rid, description) 
         VALUES(:user, :name, :email, :amount, :bid, :rid,:description) ');
 
@@ -1134,6 +1157,7 @@ class Customer
 
         $sid = $_SESSION['user_id'];
         $date = date('Y-m-d');
+        date_default_timezone_set('Asia/Kolkata');
         $time = date('H:i:s');
 
         $this->db->query('INSERT INTO message(qid, sid, cuid,content,date,time,sender) VALUES(:qid, :sid, :cuid,:content,:date,:time,:sender) ');
@@ -1143,7 +1167,29 @@ class Customer
         $this->db->bind(':content', $data['content']);
         $this->db->bind(':date', $date);
         $this->db->bind(':time', $time);
-        $this->db->bind(':sender', $sid);
+        $this->db->bind(':sender', $_SESSION['user_id']);
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function sendSupplierMessage($data)
+    {
+
+        $sid = $_SESSION['user_id'];
+        $date = date('Y-m-d');
+        date_default_timezone_set('Asia/Kolkata');
+        $time = date('H:i:s');
+        $this->db->query('INSERT INTO message(sid, cuid,content,date,time,sender) VALUES(:sid, :cuid,:content,:date,:time,:sender) ');
+       
+        $this->db->bind(':cuid', $sid);
+        $this->db->bind(':sid', $data['cuid']);
+        $this->db->bind(':content', $data['content']);
+        $this->db->bind(':date', $date);
+        $this->db->bind(':time', $time);
+        $this->db->bind(':sender', $_SESSION['user_id']);
         if ($this->db->execute()) {
             return true;
         } else {
@@ -1156,8 +1202,29 @@ class Customer
 
         $this->db->query('SELECT * FROM message WHERE qid = :qid ORDER BY date ASC, time ASC');
         $this->db->bind(':qid', $qid);
+        $this->db->bind(':sender', $_SESSION['user_id']);
         $result = $this->db->resultSet();
 
         return $result;
     }
+
+    public function getSupplierMessages($id)
+    {
+        $this->db->query('SELECT * FROM message WHERE sid = :qid AND sender =:sender ORDER BY date ASC, time ASC');
+        $this->db->bind(':qid', $id);
+        $this->db->bind(':sender', $_SESSION['user_id']);
+        $result = $this->db->resultSet();
+
+        return $result;
+    }
+
+    public function viewQuotation($id){
+        $this->db->query('SELECT *, q.id AS qid FROM quoate q, user u WHERE q.id = :id AND q.sid = u.id');
+        $this->db->bind(':id', $id);
+        $result = $this->db->single();
+
+        return $result;
+    }
+
+
 }

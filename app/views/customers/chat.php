@@ -109,7 +109,8 @@
         </aside>
 
         <main>
-            <h1>Messages on Quotation Request - <?php echo $data['request']->id ?></h1>
+            <a href="<?php echo URLROOT ?>customers/portfolio/<?php echo $data['supplier']->id ?>/<?php echo $data['eid'] ?>"><button>Go Back</button></a>
+            <h1>Messages with <?php echo $data['supplier']->bname ?></h1>
 
 
             <?php foreach ($data['messages'] as $i) : ?>
@@ -141,7 +142,7 @@
             <?php endforeach ?>
 
 
-            <form action="<?php echo URLROOT ?>customers/message/<?php echo  $data['request']->id ?>" method="POST">
+            <form action="<?php echo URLROOT ?>customers/chat/<?php echo  $data['supplier']->id ?>" method="POST">
                 <textarea name="content"> </textarea>
                 <input style="  background-color: #7380ec;border: none;color: white;padding: 10px 32px;margin: 4px 2px;border-radius:3rem" type="Submit" value="Send">
             </form>

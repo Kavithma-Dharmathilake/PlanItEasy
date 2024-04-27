@@ -993,9 +993,10 @@ class Customers extends Controller
         $this->view('customers/profile', $data);
     }
 
-    public function viewquote()
+    public function viewquote($id)
     {
-        $data = $this->userModel->getAllEvents();
+        $data = $this->customerModel->viewQuotation($id);
+
         $this->view('customers/viewquote', $data);
     }
 
@@ -1475,5 +1476,45 @@ class Customers extends Controller
 
 
         $this->view('customers/message', $data);
+    }
+
+    public function downloadbudget($bid, $id){
+
+        
+        $budgetData = $this->customerModel->getBudgetData($bid, $id);
+        echo json_encode($budgetData);
+
+    }
+
+    public function chat($id,$eid)
+    {
+        $supplier = $this->userModel->getUserById($id);
+        $messages = $this->customerModel->getSupplierMessages($id);
+
+        $data = [
+            'supplier' => $supplier,
+            'customer' => $_SESSION['user_name'],
+            'messages' => $messages,
+            'eid'=>$eid
+
+        ];
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+
+            $content = $_POST['content'];
+            $data = [
+                'content' => $content,
+                'cuid'=>$id,
+                
+
+            ];
+
+            $this->customerModel->sendSupplierMessage($data);
+            header('location: ' . URLROOT . 'customers/chat/' . $id);
+        }
+
+
+        $this->view('customers/chat', $data);
     }
 }
