@@ -76,13 +76,8 @@
 
 
             // Generate random data
-            const data = [];
+            var data = [];
             const labels = ["Januray", "February", "March", "April", "June", "July", "August", "September", "October", "November", "December"];
-
-            for (let i = 0; i < 12; i++) {
-                data.push(Math.floor(Math.random() * 15)); // Generate random data values between 0 and 100
-
-            }
 
             // Create a bar chart
             const ctx = document.getElementById('barChart').getContext('2d');
@@ -110,6 +105,7 @@
 </head>
 
 <body>
+    <?php var_dump($data['quotePerMonth']);?>
     <div class="dash-container">
         <aside>
             <div class="top">
@@ -236,12 +232,10 @@
                 </button>
                 <div class="profile">
                     <div class="info">
-                        <p>Hey, <b>Abhi</b></p>
+                        <p>Hey, <b><?php echo $data['userName']?></b></p>
                         <small class="text-muted">Supplier</small>
                     </div>
-                    <div class="profile-photo">
-                        <img src="images/photo1.jpg">
-                    </div>
+                    
                 </div>
             </div>
             <!-- End of top-->
@@ -250,7 +244,7 @@
                 <div class="updates">
                     <div class="update">
                         <div class="profile-photo">
-                            <img src="images/photo2.jpg">
+                            <!-- <img src="images/photo2.jpg"> -->
                         </div>
                         <div class="message">
                             <p><b>Chamod Deshan</b> Sent a quotation Request</p>
@@ -259,7 +253,7 @@
                     </div>
                     <div class="update">
                         <div class="profile-photo">
-                            <img src="images/photo2.jpg">
+                            <!-- <img src="images/photo2.jpg"> -->
                         </div>
                         <div class="message">
                             <p><b>Nisal Abeyweera</b> Sent a quotation request</p>
@@ -268,7 +262,7 @@
                     </div>
                     <div class="update">
                         <div class="profile-photo">
-                            <img src="images/photo2.jpg">
+                            <!-- <img src="images/photo2.jpg"> -->
                         </div>
                         <div class="message">
                             <p><b>Hasith Perera</b> Sent a quotation</p>

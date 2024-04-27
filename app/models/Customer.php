@@ -489,7 +489,42 @@ class Customer
     {
 
         $this->db->query('SELECT * FROM general_requests Where idcustomer =:id');
+        $this->db->bind(':id', $id);
+        $result = $this->db->resultSet();
+        return $result;
+    }
 
+    public function getBookedEvents($id)
+    {
+
+        $this->db->query('SELECT * FROM general_requests Where idcustomer =:id AND event_status = "Booked"');
+        $this->db->bind(':id', $id);
+        $result = $this->db->resultSet();
+        return $result;
+    }
+
+    public function getOngoingEvents($id)
+    {
+
+        $this->db->query('SELECT * FROM general_requests Where idcustomer =:id AND event_status = "ongoing"');
+        $this->db->bind(':id', $id);
+        $result = $this->db->resultSet();
+        return $result;
+    }
+
+    public function getCanceledEvents($id)
+    {
+
+        $this->db->query('SELECT * FROM general_requests Where idcustomer =:id AND event_status = "Canceled"');
+        $this->db->bind(':id', $id);
+        $result = $this->db->resultSet();
+        return $result;
+    }
+
+    public function getCompletedEvents($id)
+    {
+
+        $this->db->query('SELECT * FROM general_requests Where idcustomer =:id AND event_status = "Completed"');
         $this->db->bind(':id', $id);
         $result = $this->db->resultSet();
         return $result;
@@ -579,20 +614,92 @@ class Customer
         return $result;
     }
 
-    public function getSuppliers($stype)
+    public function getRequestSentQuotations($id)
     {
         if($stype=='Catering'){
             $stype="Catering Service";
         }
         $this->db->query('SELECT *,u.id as uid FROM user u , portfolios p WHERE u.stype =:stype AND u.id = p.sid');
 
+        $uid = $_SESSION['user_id'];
+        $this->db->query('SELECT * 
+        FROM quoate q, user u
+        WHERE q.eid=:id AND q.sid = u.id AND q.uid = :uid AND q.status = "Request Sent"');
         //bind values
+        $this->db->bind(':id', $id);
+        $this->db->bind(':uid', $uid);
         $this->db->bind(':stype', $stype);
       
         $result = $this->db->resultSet();
         return $result;
     }
 
+    public function getRequestAcceptedQuotations($id)
+    {
+
+        $uid = $_SESSION['user_id'];
+        $this->db->query('SELECT * 
+        FROM quoate q, user u
+        WHERE q.eid=:id AND q.sid = u.id AND q.uid = :uid AND q.status = "Request Accepted"');
+        //bind values
+        $this->db->bind(':id', $id);
+        $this->db->bind(':uid', $uid);
+        $result = $this->db->resultSet();
+        return $result;
+    }
+
+    public function getRequestDeclinedQuotations($id)
+    {
+
+        $uid = $_SESSION['user_id'];
+        $this->db->query('SELECT * 
+        FROM quoate q, user u
+        WHERE q.eid=:id AND q.sid = u.id AND q.uid = :uid AND q.status = "Request Declined"');
+        //bind values
+        $this->db->bind(':id', $id);
+        $this->db->bind(':uid', $uid);
+        $result = $this->db->resultSet();
+        return $result;
+    }
+
+    public function getBookedQuotations($id)
+    {
+
+        $uid = $_SESSION['user_id'];
+        $this->db->query('SELECT * 
+        FROM quoate q, user u
+        WHERE q.eid=:id AND q.sid = u.id AND q.uid = :uid AND q.status = "Booked"');
+        //bind values
+        $this->db->bind(':id', $id);
+        $this->db->bind(':uid', $uid);
+        $result = $this->db->resultSet();
+        return $result;
+    }
+
+    public function getPaymentCompletedQuotations($id)
+    {
+
+        $uid = $_SESSION['user_id'];
+        $this->db->query('SELECT * 
+        FROM quoate q, user u
+        WHERE q.eid=:id AND q.sid = u.id AND q.uid = :uid AND q.status = "Payment Complete"');
+        //bind values
+        $this->db->bind(':id', $id);
+        $this->db->bind(':uid', $uid);
+        $result = $this->db->resultSet();
+        return $result;
+    }
+
+    public function getExpiredQuotations($id)
+    {
+
+        $uid = $_SESSION['user_id'];
+        $this->db->query('SELECT * 
+        FROM quoate q, user u
+        WHERE q.eid=:id AND q.sid = u.id AND q.uid = :uid AND q.status = "Expired"');
+        //bind values
+        $this->db->bind(':id', $id);
+        $this->db->bind(':uid', $uid);
     public function getPortfolioById($sid){
         $this->db->query('SELECT * FROM portfolios  WHERE sid =:sid');
 
