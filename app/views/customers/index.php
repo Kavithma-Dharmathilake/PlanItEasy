@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="<?php echo URLROOT; ?>public/css/admindash.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>public/css/eventplannerdash.css">
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             const calendarBody = document.getElementById('calendar-body');
             const currentMonthYear = document.getElementById('current-month-year');
             const prevMonthButton = document.getElementById('prev-month');
@@ -35,7 +35,10 @@
                 calendarBody.innerHTML = '';
 
                 // Set the current month and year in the header
-                currentMonthYear.textContent = new Date(year, month).toLocaleDateString('en-US', { year: 'numeric', month: 'long' });
+                currentMonthYear.textContent = new Date(year, month).toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long'
+                });
 
                 // Generate calendar cells
                 let date = 1;
@@ -63,12 +66,12 @@
             generateCalendar();
 
             // Event listeners for changing months
-            prevMonthButton.addEventListener('click', function () {
+            prevMonthButton.addEventListener('click', function() {
                 currentDate.setMonth(currentDate.getMonth() - 1);
                 generateCalendar();
             });
 
-            nextMonthButton.addEventListener('click', function () {
+            nextMonthButton.addEventListener('click', function() {
                 currentDate.setMonth(currentDate.getMonth() + 1);
                 generateCalendar();
             });
@@ -80,7 +83,7 @@
 
             for (let i = 0; i < 12; i++) {
                 data.push(Math.floor(Math.random() * 15)); // Generate random data values between 0 and 100
-               
+
             }
 
             // Create a bar chart
@@ -105,9 +108,6 @@
                 }
             });
         });
-
-
-
     </script>
 
 
@@ -134,15 +134,11 @@
                     <span class="material-icons-sharp">message</span>
                     <h3>Messages</h3>
                 </a>
-                <a href="<?php echo URLROOT; ?>customers/viewquote">
-                    <span class="material-icons-sharp"> note_add</span>
-                    <h3>supplier quotation</h3>
-                </a>
                 <a href="<?php echo URLROOT; ?>customers/profile">
                     <span class="material-icons-sharp">person</span>
                     <h3>profile</h3>
                 </a>
-                <a href="<?php echo URLROOT; ?>user/logout">
+                <a href="<?php echo URLROOT; ?>users/logout">
                     <span class="material-icons-sharp">logout</span>
                     <h3>Logout</h3>
                 </a>
@@ -150,7 +146,6 @@
 
 
         </aside>
-
 
 
         <!-- Content start here -->
@@ -168,64 +163,64 @@
             <!-- Heading and search bar -->
 
             <main>
-            <h1>Dashboard</h1>
+                <h1>Dashboard</h1>
 
-            <div class="insights">
-                <div class="users">
-                    <span class="material-icons-sharp">festival</span>
-                    <div class="middle">
-                        <div class="left">
-                            <h3>Total Event Requests</h3>
-                            <h1>2</h1>
+                <div class="insights">
+                    <div class="users">
+                        <span class="material-icons-sharp">festival</span>
+                        <div class="middle">
+                            <div class="left">
+                                <h3>Total Event Requests</h3>
+                                <h1>2</h1>
+                            </div>
+
                         </div>
-
-                    </div>
-                </div>
-
-
-                <div class="eventplanners">
-                    <span class="material-icons-sharp">inventory</span>
-                    <div class="middle">
-                        <div class="left">
-                            <h3>Quotation</h3>
-                            <h1>15</h1>
-                        </div>
-
                     </div>
 
-                </div>
 
+                    <div class="eventplanners">
+                        <span class="material-icons-sharp">inventory</span>
+                        <div class="middle">
+                            <div class="left">
+                                <h3>Quotation</h3>
+                                <h1>15</h1>
+                            </div>
 
-                <div class="suppliers">
-                    <span class="material-icons-sharp">groups</span>
-                    <div class="middle">
-                        <div class="left">
-                            <h3>Budget Plans</h3>
-                            <h1>5</h1>
                         </div>
 
                     </div>
 
+
+                    <div class="suppliers">
+                        <span class="material-icons-sharp">groups</span>
+                        <div class="middle">
+                            <div class="left">
+                                <h3>Budget Plans</h3>
+                                <h1>5</h1>
+                            </div>
+
+                        </div>
+
+                    </div>
+
                 </div>
+                <div class="recent-trans">
+                    <h2>Event Completed</h2>
+                    <canvas id="barChart"></canvas>
 
-            </div>
-            <div class="recent-trans">
-                <h2>Event Completed</h2>
-                <canvas id="barChart"></canvas>
+                </div>
+                <!------------End of insights------------>
 
-            </div>
-            <!------------End of insights------------>
+            </main>
 
-        </main>
 
-        
-    </div>
-    <div class="right">
+        </div>
+        <div class="right">
             <div class="top">
                 <button id="menu-btn">
                     <span class="material-icons-sharp">menu</span>
                 </button>
-               
+
             </div>
             <!-- End of top-->
             <div class="recent-updates">

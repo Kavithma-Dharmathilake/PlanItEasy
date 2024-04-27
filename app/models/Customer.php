@@ -477,7 +477,7 @@ class Customer
     {
 
         $uid = $_SESSION['user_id'];
-        $this->db->query('SELECT * 
+        $this->db->query('SELECT *, q.id AS qid 
         FROM quoate q, user u
         WHERE q.eid=:id AND q.sid = u.id AND q.uid = :uid');
         //bind values
@@ -665,9 +665,6 @@ class Customer
     {
 
 
-        $status = 'Accepted';
-        $eventplanner = 'eventplanner';
-
         $this->db->query('SELECT *
         FROM planiteasy.user u 
         WHERE id =:id');
@@ -735,7 +732,25 @@ class Customer
 
     public function deletBudgetItem($id)
     {
+
         $this->db->query('DELETE FROM budget_item WHERE id=:id');
+
+        //bind values
+        $this->db->bind(':id', $id);
+
+
+        //Execute the query
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+    public function emptyItems($id)
+    {
+        $this->db->query('DELETE FROM budget_item WHERE bid=:id');
 
         //bind values
         $this->db->bind(':id', $id);
@@ -775,26 +790,18 @@ class Customer
 
     public function insertBudgetItem($data)
     {
-        $this->db->query('SELECT  * FROM budget_item WHERE qid = :qid');
+        $this->db->query('INSERT INTO budget_item(bid,qid,bname,r_price,stype) VALUES(:bid,:qid,:bname,:price,:stype)');
+
+        $this->db->bind(':bid', $data['bid']);
         $this->db->bind(':qid', $data['qid']);
-        $result = $this->db->single();
-
-        if ($result != null) {
-            return -1;
-        } else {
-
-            $this->db->query('INSERT INTO budget_item(bid,qid,bname,r_price,stype) VALUES(:bid,:qid,:bname,:price,:stype)');
-
-            $this->db->bind(':bid', $data['bid']);
-            $this->db->bind(':qid', $data['qid']);
-            $this->db->bind(':bname', $data['bname']);
-            $this->db->bind(':price', $data['price']);
-            $this->db->bind(':stype', $data['stype']);
-            $this->db->execute();
-            $id = $this->db->lastInsertedId();
-            return $id;
-        }
+        $this->db->bind(':bname', $data['bname']);
+        $this->db->bind(':price', $data['price']);
+        $this->db->bind(':stype', $data['stype']);
+        $this->db->execute();
+        $id = $this->db->lastInsertedId();
+        return $id;
     }
+
 
     public function addBudgetItem($bid, $qid)
     {
@@ -818,6 +825,8 @@ class Customer
             return true;
         }
     }
+
+    
 
     public function getBudgetItems($id)
     {
@@ -845,6 +854,13 @@ class Customer
         return $result;
     }
 
+    public function getOneSupplier($id)
+    {
+        $this->db->query('SELECT * FROM user  WHERE id = :id ');
+        $this->db->bind(':id', $id);
+        $data = $this->db->single();
+        return $data;
+    }
 
     public function getOneQuote($id)
     {
@@ -879,19 +895,84 @@ class Customer
         VALUES(:user, :name, :email, :amount, :bid, :rid) ');
 
         $this->db->bind(':user', $_SESSION['user_id']);
-        $name = $data['fname'] . " " . $data['lname'];
+        $name = $data['fname'];
         $this->db->bind(':name', $name);
         $this->db->bind(':amount', $data['price']);
         $this->db->bind(':email', $data['email']);
         $this->db->bind(':bid', $data['bid']);
         $this->db->bind(':rid', $data['rid']);
 
+
         //Execute the query
         if ($this->db->execute()) {
             $id = $this->db->lastInsertedId();
+
+            $this->db->query('UPDATE budget SET status =:status where id =:bid ');
+            $this->db->bind(':status', 'Payment Complete');
+            $this->db->bind(':bid', $data['bid']);
+            $this->db->execute();
             return $id;
         } else {
             return false;
         }
+    }
+
+    public function updateBudgetQuotations($id)
+    {
+
+
+        $this->db->query('SELECT * from budget_item WHERE bid = :id');
+        $this->db->bind(':id', $id);
+        $quotes = $this->db->resultSet();
+
+        foreach ($quotes as $q) {
+            $this->db->query('UPDATE quoate SET status=:status, q_status =:status WHERE id=:id');
+            $this->db->bind(':id', $q->qid);
+            $this->db->bind(':status', 'Payment Complete');
+            $this->db->execute();
+        }
+
+        return true;
+    }
+
+    public function getOneReq($id)
+    {
+        $this->db->query('SELECT * FROM quoate WHERE id = :id');
+        $this->db->bind(':id', $id);
+        $row = $this->db->single();
+        return $row;
+    }
+
+
+    public function sendMessage($data)
+    {
+
+        $sid = $_SESSION['user_id'];
+        $date = date('Y-m-d');
+        $time = date('H:i:s');
+
+        $this->db->query('INSERT INTO message(qid, sid, cuid,content,date,time,sender) VALUES(:qid, :sid, :cuid,:content,:date,:time,:sender) ');
+        $this->db->bind(':qid',  $data['qid']);
+        $this->db->bind(':sid', $sid);
+        $this->db->bind(':cuid', $data['cuid']);
+        $this->db->bind(':content', $data['content']);
+        $this->db->bind(':date', $date);
+        $this->db->bind(':time', $time);
+        $this->db->bind(':sender', $sid);
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function getMessages($qid)
+    {
+
+        $this->db->query('SELECT * FROM message WHERE qid = :qid ORDER BY date ASC, time ASC');
+        $this->db->bind(':qid', $qid);
+        $result = $this->db->resultSet();
+
+        return $result;
     }
 }

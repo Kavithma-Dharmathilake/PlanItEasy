@@ -53,7 +53,6 @@
                     </span>
                 </div>
                 <div class="remember-forgot">
-                    <label><input type="checkbox">Remeber Me</label>
                     <a href="">Forgot Password?</a>
                 </div>
 

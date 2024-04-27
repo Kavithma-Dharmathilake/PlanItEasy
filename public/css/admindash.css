@@ -64,7 +64,7 @@ img {
 }
 
 h1 {
-    font-weight: 800;
+    font-weight: 600;
     font-size: 1.8rem;
 }
 
@@ -528,15 +528,3 @@ main .recent-trans a {
 .calendar-table td:empty {
     visibility: hidden;
 }
-
-.supplierdashcolumn {
-    float: left;
-    width: 50%;
-  }
-  
-  /* Clear floats after the columns */
-  .supplierdashrow:after {
-    content: "";
-    display: table;
-    clear: both;
-  }

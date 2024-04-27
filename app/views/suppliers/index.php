@@ -10,9 +10,9 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- STYLESHEET -->
-    <link rel="stylesheet" href="<?php echo URLROOT; ?>/public/css/admindash.css">
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>public/css/admindash.css">
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             const calendarBody = document.getElementById('calendar-body');
             const currentMonthYear = document.getElementById('current-month-year');
             const prevMonthButton = document.getElementById('prev-month');
@@ -33,7 +33,10 @@
                 calendarBody.innerHTML = '';
 
                 // Set the current month and year in the header
-                currentMonthYear.textContent = new Date(year, month).toLocaleDateString('en-US', { year: 'numeric', month: 'long' });
+                currentMonthYear.textContent = new Date(year, month).toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long'
+                });
 
                 // Generate calendar cells
                 let date = 1;
@@ -61,12 +64,12 @@
             generateCalendar();
 
             // Event listeners for changing months
-            prevMonthButton.addEventListener('click', function () {
+            prevMonthButton.addEventListener('click', function() {
                 currentDate.setMonth(currentDate.getMonth() - 1);
                 generateCalendar();
             });
 
-            nextMonthButton.addEventListener('click', function () {
+            nextMonthButton.addEventListener('click', function() {
                 currentDate.setMonth(currentDate.getMonth() + 1);
                 generateCalendar();
             });
@@ -98,9 +101,6 @@
                 }
             });
         });
-
-
-
     </script>
 </head>
 
@@ -137,29 +137,22 @@
                     <h3>Quotation Requests</h3>
                 </a>
 
-                <a href="<?php echo URLROOT; ?>suppliers/sentRequests">
-                    <span class="material-icons-sharp">
-                        festival
-                    </span>
-                    <h3>Sent Quotations</h3>
-                </a>
-
                 <a href="<?php echo URLROOT; ?>suppliers/packages">
                     <span class="material-icons-sharp">
                         request_quote
                     </span>
                     <h3>Packages</h3>
                 </a>
-          
 
-                <a href="<?php echo URLROOT; ?>suppliers/calendar">
+
+                <a href="<?php echo URLROOT; ?>/eventplanners/calendar">
                     <span class="material-icons-sharp">
                         calendar_month
                     </span>
                     <h3>Calender</h3>
                 </a>
 
-                <a href="profile.php">
+                <a href="<?php echo URLROOT; ?>suppliers/profile">
                     <span class="material-icons-sharp">
                         account_box
                     </span>
@@ -171,7 +164,7 @@
                     <h3>Messages</h3>
                     <span class="message-count">5</span>
                 </a>
-                <a href="<?php echo URLROOT; ?>user/logout">
+                <a href="<?php echo URLROOT; ?>users/logout">
                     <span class="material-icons-sharp">logout</span>
                     <h3>Logout</h3>
                 </a>
@@ -194,7 +187,7 @@
                     </div>
                 </div>
 
-<!-- <i class="fa-solid fa-file-invoice"></i> -->
+                <!-- <i class="fa-solid fa-file-invoice"></i> -->
                 <div class="eventplanners">
                     <span class="material-icons-sharp">inventory</span>
                     <div class="middle">

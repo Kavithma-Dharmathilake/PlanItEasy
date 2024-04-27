@@ -17,7 +17,7 @@
 </head>
 
 <body>
-    <div class="dash-container">
+    <!-- <div class="dash-container">
         <aside>
             <div class="sidebar">
                 <a href="<?php echo URLROOT; ?>customers">
@@ -57,7 +57,7 @@
         </aside>
 
         <!-- Content start here -->
-        <div>
+        <!-- <div>
             <div class="profile end">
                 <div class="info" style="padding-right:25px;">
                     <p>Hey, <b>Pawani</b></p>
@@ -70,10 +70,10 @@
 
             <!-- Heading and search bar -->
 
-            <div class="planner-title" style="padding-bottom:50px;">
+            <!-- <div class="planner-title" style="padding-bottom:50px;">
                 <h1>Dashboard</h1>
-            </div>
-            <main>
+            </div> -->
+            <!-- <main>
                 <div class="quotation">
                     <form class="quote_form" method="POST">
                         <h4>GENERAL</h4>
@@ -327,9 +327,9 @@
                         </div>
                     </form>
                 </div>
-            </main>
-        </div>
-    </div>
+            </main> -->
+        </div> -->
+    </div> -->
 </body>
 
 </html>
