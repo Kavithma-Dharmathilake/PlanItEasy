@@ -700,7 +700,13 @@ class Customer
         //bind values
         $this->db->bind(':id', $id);
         $this->db->bind(':uid', $uid);
-    public function getPortfolioById($sid){
+        $result = $this->db->resultSet();
+        return $result;
+    }
+
+    
+    
+        public function getPortfolioById($sid){
         $this->db->query('SELECT * FROM portfolios  WHERE sid =:sid');
 
         //bind values
