@@ -145,7 +145,7 @@
                 </a>
 
 
-                <a href="<?php echo URLROOT; ?>/eventplanners/calendar">
+                <a href="<?php echo URLROOT; ?>suppliers/calendar">
                     <span class="material-icons-sharp">
                         calendar_month
                     </span>
@@ -235,7 +235,9 @@
                         <p>Hey, <b><?php echo $data['userName']?></b></p>
                         <small class="text-muted">Supplier</small>
                     </div>
-                    
+                    <div class="profile-photo">
+                    <!-- <img src="<?php echo URLROOT; ?>public/images/photo1.jpg"> -->
+                    </div>  
                 </div>
             </div>
             <!-- End of top-->
