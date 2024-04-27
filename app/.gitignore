@@ -1,3 +1,4 @@
 config.php
 .htaccess
 bootstrap.php
+vendor
