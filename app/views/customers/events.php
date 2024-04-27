@@ -148,7 +148,15 @@
 <body>
     <div class="dash-container">
         <aside>
-
+        <div class="top">
+                <div class="logo">
+                    <img src="<?php echo URLROOT; ?>public/images/logo.jpg">
+                    <h2>PlanItEasy</h2>
+                </div>
+                <div class="close" id="close-btn">
+                    <span class="material-icons-sharp">close</span>
+                </div>
+            </div>
             <div class="sidebar">
                 <a href="<?php echo URLROOT; ?>customers">
                     <span class="material-icons-sharp">grid_view</span>
