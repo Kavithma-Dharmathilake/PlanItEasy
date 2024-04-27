@@ -1,12 +1,10 @@
---> in the photo-quotation requests need to know about checkboxes with albums and all
 
---> dancing, event planner, dj, music crew, event planner photo, backens included.
 
---> form validations
+
 
 --> add packages to suppliers
 
---> manage portfolios
+
 
 --> filter according to calander
 
@@ -19,8 +17,8 @@
 --> Editing quotation not after accepting
 
 --> once a quottaion sent cannot be displayed again.
---> portfolio management
---> delete quote
+
+
 --> budget view Page
 --->dont let checkout if the price is zero
 
@@ -34,6 +32,8 @@ full payment must be done prior to the week of the event.
 status --> 
 event status-->booked, completed, 
 quotation -->  advance paid,  booking expired, payment complete, event complete
+
+change these statuses as triggers
 
 
 

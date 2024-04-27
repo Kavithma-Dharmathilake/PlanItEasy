@@ -235,10 +235,11 @@
                                 <td> <?php echo $event->event_type; ?> </td>
                                 <td><?php echo $event->date; ?> </td>
                                 <td><?php echo $event->event_status; ?> </td>
-                                <td><a href="#">
-                                        Edit | Delete
-                                    </a></td>
-                                <td><a href="<?php echo URLROOT ?>customers/oneevent/<?php echo $event->id; ?>">
+                                <td style="display:flex;padding-top:0.5rem">
+                                    <a id="editEvent" style="padding-left:3rem" href="<?php ?>">Edit</a>
+                                    <a id="deleteEvent" style="padding-right:3rem" href="#"> Delete</a>
+                                </td>
+                                <td><a  href="<?php echo URLROOT ?>customers/oneevent/<?php echo $event->id; ?>">
                                         <span class="material-icons-sharp">
 
                                             expand_circle_down
