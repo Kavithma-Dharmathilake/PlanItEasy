@@ -22,9 +22,11 @@ class Customers extends Controller
 
 
         $events = $this->customerModel->getAllEvents($_SESSION['user_id']);
+        $userName = $_SESSION['user_name'];
 
         $data = [
             'title' => 'Welcome',
+            'name' => $userName,
             'events' => $events
         ];
 
