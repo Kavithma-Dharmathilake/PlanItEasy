@@ -95,7 +95,9 @@
                             <th>ID</th>
                             <th>Payment Status</th>
                             <th>Final Price</th>
-                            <th>Actions</th>
+                            <th>View</th>
+                            <th>Advance</th>
+                            <th>Full Amount</th>
 
                         </tr>
                     </thead>
@@ -107,13 +109,25 @@
                                 <td><?php echo $q->id; ?></td>
                                 <td> <?php echo $q->status; ?>
                                 <td>LKR. <?php echo $q->price; ?></td>
+                                <td><a href="<?php echo URLROOT ?>customers/budgetsheet/<?php echo $q->id ?>/<?php echo $data['eventid']?>">View</a></td>
                                 <td>
-                                    <a href="<?php echo URLROOT ?>customers/payement/<?php echo $q->rid; ?>/<?php echo $q->id; ?>/<?php echo $q->price ?>">
+                                    <a href="<?php echo URLROOT ?>customers/Advpayement/<?php echo $q->rid; ?>/<?php echo $q->id; ?>/<?php echo $q->price ?>">
                                         <?php
-                                        if ($q->status == 'Payment Complete') {
-                                            echo '';
+                                        if ($q->status == 'Payment Complete' || $q->status == 'Advance Paid') {
+                                            echo '<input type="submit" value="Pay Advance" disabled >';
                                         } else {
-                                            echo 'Checkout';
+                                            echo '<input type="submit" value="Pay Advance">';
+                                        }
+                                        ?>
+                                    </a>
+                                </td>
+                                <td>
+                                <a href="<?php echo URLROOT ?>customers/Fullpayement/<?php echo $q->rid; ?>/<?php echo $q->id; ?>/<?php echo $q->price ?>">
+                                        <?php
+                                        if ($q->status == 'Payment Complete' || $q->status != 'Advance Paid') {
+                                            echo '<input type="submit" value="Pay Full Amount" disabled >';
+                                        } else {
+                                            echo '<input type="submit" value="Pay Full Amount">';
                                         }
                                         ?>
                                     </a>

@@ -20,7 +20,7 @@
 
 <body>
     <div class="dash-container">
-        <aside>
+    <aside>
             <div class="top">
                 <div class="logo">
                     <img src="<?php echo URLROOT; ?>/public/images/logo.jpg">
@@ -31,7 +31,7 @@
                 </div>
             </div>
             <div class="sidebar">
-                <a href="<?php echo URLROOT; ?>eventplanners" >
+                <a href="<?php echo URLROOT; ?>eventplanners" class="active">
                     <span class="material-icons-sharp">grid_view</span>
                     <h3>Dashboard</h3>
                 </a>
@@ -42,6 +42,12 @@
                     </span>
                     <h3>Packages</h3>
                 </a>
+                <a href="<?php echo URLROOT ?>eventplanners/portfolio">
+                    <span class="material-icons-sharp">
+                        note_add
+                    </span>
+                    <h3>Portfolio</h3>
+                </a>
 
                 <a href="<?php echo URLROOT ?>eventplanners/eventRequest">
                     <span class="material-icons-sharp">
@@ -50,25 +56,8 @@
                     <h3>Event Requests</h3>
                 </a>
 
-                <a href="<?php echo URLROOT ?>eventplanners/quoteReq">
-                    <span class="material-icons-sharp">
-                        note_add
-                    </span>
-                    <h3>Quoatation Requests</h3>
-                </a>
-                <a href="<?php echo URLROOT ?>eventplanners/supplierReq" >
-                    <span class="material-icons-sharp">
-                        request_quote
-                    </span>
-                    <h3>Supplier Quotations</h3>
-                </a>
-                <a href="<?php echo URLROOT ?>eventplanners/budget">
-                    <span class="material-icons-sharp">
-                        paid
-                    </span>
-                    <h3>Budget Plans</h3>
-                </a>
-
+               
+         
                 <a href="<?php echo URLROOT ?>eventplanners/calendar">
                     <span class="material-icons-sharp">
                         calendar_month
@@ -83,7 +72,7 @@
                     <h3>Profile</h3>
                 </a>
 
-                <a href="<?php echo URLROOT ?>eventplanners/messages"  class="active">
+                <a href="<?php echo URLROOT ?>eventplanners/messages">
                     <span class="material-icons-sharp">mail</span>
                     <h3>Messages</h3>
                     <span class="message-count">26</span>
@@ -101,7 +90,6 @@
                 </a>
             </div>
         </aside>
-
         <main>
            
 

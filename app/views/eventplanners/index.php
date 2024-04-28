@@ -133,6 +133,12 @@
                     </span>
                     <h3>Packages</h3>
                 </a>
+                <a href="<?php echo URLROOT ?>eventplanners/portfolio">
+                    <span class="material-icons-sharp">
+                        note_add
+                    </span>
+                    <h3>Portfolio</h3>
+                </a>
 
                 <a href="<?php echo URLROOT ?>eventplanners/eventRequest">
                     <span class="material-icons-sharp">
@@ -141,25 +147,8 @@
                     <h3>Event Requests</h3>
                 </a>
 
-                <a href="<?php echo URLROOT ?>eventplanners/quoteReq">
-                    <span class="material-icons-sharp">
-                        note_add
-                    </span>
-                    <h3>Quoatation Requests</h3>
-                </a>
-                <a href="<?php echo URLROOT ?>eventplanners/supplierReq">
-                    <span class="material-icons-sharp">
-                        request_quote
-                    </span>
-                    <h3>Supplier Quotations</h3>
-                </a>
-                <a href="<?php echo URLROOT ?>eventplanners/budget">
-                    <span class="material-icons-sharp">
-                        paid
-                    </span>
-                    <h3>Budget Plans</h3>
-                </a>
-
+               
+         
                 <a href="<?php echo URLROOT ?>eventplanners/calendar">
                     <span class="material-icons-sharp">
                         calendar_month
@@ -186,7 +175,7 @@
                     </span>
                     <h3>Inquiry</h3>
                 </a>
-                <a href="<?php echo URLROOT ?>">
+                <a href="<?php echo URLROOT ?>users/logout">
                     <span class="material-icons-sharp">logout</span>
                     <h3>Logout</h3>
                 </a>
