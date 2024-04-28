@@ -17,21 +17,33 @@ class Customers extends Controller
         $this->userModel = $this->model('User');
     }
 
-    public function index()
-    {
+    public function index(){
+    $id = $_SESSION['user_id'];
+
+    $events = $this->customerModel->getAllEvents($_SESSION['user_id']);
+    $recentquotes = $this->customerModel->getRecentQuote($id);
+    // $total_count = $this->customerModel->countAcceptedQuote($id);
+    // $total_count_pending = $this->customerModel->countPendingQuote($id);
+    $pending_count = $this->customerModel->countPendingEvents($id);
+    $booked_count = $this->customerModel->countBookedEvents($id);
+    $completed_count = $this->customerModel->countCompletedEvents($id);
 
 
-        $events = $this->customerModel->getAllEvents($_SESSION['user_id']);
-        $userName = $_SESSION['user_name'];
+    $data = [
+        'title' => 'Welcome',
+        'events' => $events,
+        'recent' => $recentquotes,
+        // 'total_count' => $total_count,
+        // 'total_count_pending' => $total_count_pending,
+        'pending_count' => $pending_count,
+        'booked_count' => $booked_count,
+        'completed_count' => $completed_count
+    ];
 
-        $data = [
-            'title' => 'Welcome',
-            'name' => $userName,
-            'events' => $events
-        ];
-
-        $this->view('customers/index', $data);
+    $this->view('customers/index', $data);
     }
+
+
 
     public function events()
     {
@@ -465,10 +477,17 @@ class Customers extends Controller
     }
 
     public function payments()
+
     {
+        $id=$_SESSION['user_id'];
+        $payments = $this->customerModel->showPayment($id);
+
+        // var_dump($payments);
+
         $data = [
-            'title' => 'Welcome'
+            'payments' => $payments,
         ];
+
         $this->view('customers/payments', $data);
     }
 

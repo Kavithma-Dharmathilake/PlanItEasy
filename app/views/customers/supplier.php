@@ -19,14 +19,21 @@
 
 <body>
     <div class="dash-container">
-        <aside>
-
+        <aside><div class="top">
+                <div class="logo">
+                    <img src="<?php echo URLROOT; ?>public/images/logo.jpg">
+                    <h2>PlanItEasy</h2>
+                </div>
+                <div class="close" id="close-btn">
+                    <span class="material-icons-sharp">close</span>
+                </div>
+            </div>
             <div class="sidebar">
                 <a href="<?php echo URLROOT; ?>customers">
                     <span class="material-icons-sharp" class="active">grid_view</span>
                     <h3>Dashboard</h3>
                 </a>
-                <a href="<?php echo URLROOT; ?>customers/events">
+                <a href="<?php echo URLROOT; ?>customers/events" class="active">
                     <span class="material-icons-sharp">man</span>
                     <h3>Events</h3>
                 </a>

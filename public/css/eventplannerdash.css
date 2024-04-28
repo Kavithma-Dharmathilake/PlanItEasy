@@ -1,4 +1,4 @@
-/* search box in packages */
+/* seaFch box in packages */
 
 :root {
     --color-primary: #7380ec;
@@ -13,17 +13,13 @@
     --color-primary-variant: #03396c;
     --color-dark-variant: #005b96;
     --color-background: #f6f6f9;
-
     --card-border-radius: 2rem;
     --border-radius-1: 0.4rem;
     --border-radius-2: 0.8rem;
     --border-radius-3: 1.2rem;
-
     --card-padding: 1.8rem;
     --padding-1: 1.2rem;
-
     --box-shadow: 0 2rem 3rem var(--color-info-light);
-
 }
 
 * {
@@ -48,11 +44,9 @@ body {
     color: rgb(83, 83, 83);
 }
 
-
 .planner-title {
     padding-top: 30px;
     width: 700px;
-
 }
 
 .planner-search {
@@ -65,7 +59,6 @@ body {
     align-items: center;
 }
 
-
 .planner-textbox {
     border-radius: var(--card-border-radius);
     background: #abb1ed;
@@ -76,8 +69,6 @@ body {
     font-weight: 30;
     font-size: medium;
     transition: all 300ms ease;
-
-
 }
 
 .planner-textbox :hover {
@@ -102,29 +93,22 @@ body {
     color: white;
     font-weight: 5px;
     font-size: medium;
-
 }
 
 .package-add:hover {
     background: var(--color-light);
     color: var(--color-primary);
-
 }
 
 .planner-packages {
-
     padding-top: 40px;
     width: 1400px;
     display: flex;
     flex-direction: inline;
-
 }
 
 .planner-package:hover {
-
     box-shadow: none;
-
-
 }
 
 .planner-package {
@@ -135,7 +119,6 @@ body {
     box-shadow: var(--box-shadow);
     background: white;
     margin-left: 50px;
-
 }
 
 .package-title {
@@ -144,7 +127,6 @@ body {
     padding-bottom: 10px;
     border-bottom: 1px solid var(--color-info-dark);
     padding: 10px;
-
 }
 
 .package-content {
@@ -162,18 +144,15 @@ body {
 
 .package-content p {
     padding-left: 10px;
-
 }
 
 .package-action {
     display: flex;
     padding: 10px;
-
 }
 
 .button-left {
     padding-left: 150px;
-
 }
 
 .button-left .package-edit {
@@ -202,6 +181,7 @@ body {
     background-color: var(--color-danger);
 }
 
+
 /* ADD new package styles ---> */
 
 .form-add-package {
@@ -211,7 +191,6 @@ body {
     padding-left: 100px;
 }
 
-
 .form-wrapper {
     width: 800px;
     border: 2px solid var(--color-primary);
@@ -219,7 +198,6 @@ body {
     padding: 30px 40px;
     box-shadow: 0 0 10px rgb(0, 0, 0, .2);
     background-color: var(--color-light);
-
 }
 
 .form-wrapper:hover {
@@ -257,14 +235,13 @@ body {
 }
 
 .select-box select {
-    width:300px;
+    width: 300px;
     height: 100%;
     background: transparent;
     border: 2px solid var(--color-primary);
     font-size: 15px;
     color: var(--color-dark);
     padding: 20px 45px 20px 20px;
-
 }
 
 .input-box label {
@@ -272,16 +249,13 @@ body {
 }
 
 .input-box input:focus {
-
     background: white;
-
 }
 
 .text-box {
     margin: 30px 0;
     padding: 30px;
     /* border-radius: var(--card-border-radius); */
-
 }
 
 .text-box textarea {
@@ -300,7 +274,6 @@ body {
     background: white;
 }
 
-
 .input-box ::placeholder {
     color: var(--color-primary);
 }
@@ -308,7 +281,6 @@ body {
 .package-imgs {
     display: flex;
     padding-left: 30px;
-
 }
 
 .package-img {
@@ -330,16 +302,16 @@ body {
     padding: 20px;
     height: 60px;
     font-size: medium;
-
 }
 
 input[type='submit']:hover {
     background-color: #011f4b;
     color: var(--color-light);
-
 }
 
+
 /* Event Request table ==> */
+
 .event-request {
     background: white;
     width: 100%;
@@ -373,7 +345,9 @@ input[type='submit']:hover {
     color: var(--color-primary-variant);
 }
 
+
 /* One event request page ==> */
+
 .event-details {
     width: 400px;
     margin: 30px;
@@ -383,7 +357,6 @@ input[type='submit']:hover {
     transition: all 300ms ease;
     padding-top: 40px;
     padding: 50px;
-
 }
 
 .event-details:hover {
@@ -398,24 +371,19 @@ input[type='submit']:hover {
     padding-bottom: 15px;
 }
 
-
 .search-quoate button:hover {
     background-color: #7380ec;
     color: white;
 }
 
-
-
 .event-details div {
     font-weight: 700;
 }
-
 
 .search-quoate {
     width: 800px;
     display: flex;
     flex-direction: column;
-
 }
 
 .search-quoate button {
@@ -423,13 +391,11 @@ input[type='submit']:hover {
     margin: 20px;
     border-radius: 15px;
     background-color: #41f1b6;
-
 }
 
 .sup-body {
     width: 1000px;
     padding-top: 20px;
-
 }
 
 .filter {
