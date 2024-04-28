@@ -133,7 +133,7 @@
                     </span>
                     <h3>Packages</h3>
                 </a>
-                <a href="<?php echo URLROOT ?>eventplanners/quoteReq">
+                <a href="<?php echo URLROOT ?>eventplanners/portfolio">
                     <span class="material-icons-sharp">
                         note_add
                     </span>
@@ -175,7 +175,7 @@
                     </span>
                     <h3>Inquiry</h3>
                 </a>
-                <a href="<?php echo URLROOT ?>">
+                <a href="<?php echo URLROOT ?>users/logout">
                     <span class="material-icons-sharp">logout</span>
                     <h3>Logout</h3>
                 </a>

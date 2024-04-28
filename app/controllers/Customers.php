@@ -286,14 +286,15 @@ class Customers extends Controller
     public function photography($id)
     {
         $request = $this->customerModel->getEventById($id);
-
-        $photo = $this->customerModel->getSuppliers('Photographer');
-       
+        $photo = $this->customerModel->getSuppliers('Photographer', $request->date);
+        $nosupplier = $this->customerModel->getUnavailableSuppliers('Photographer', $request->date);
+  
         
         $data1 = [
             'request' => $request,
             'supplier' => $photo,
             'type' => "Photographers",
+            'nosupplier'=>$nosupplier
         ];
         $this->view('customers/gallery', $data1);
     }
@@ -302,12 +303,14 @@ class Customers extends Controller
     public function caterings($id)
     {
         $request = $this->customerModel->getEventById($id);
-        $cater = $this->customerModel->getSuppliers('Catering Service');
+        $cater = $this->customerModel->getSuppliers('Catering Service', $request->date);
+        $nosupplier = $this->customerModel->getUnavailableSuppliers('Catering Service', $request->date);
 
         $data2 = [
             'request' => $request,
             'supplier' => $cater,
-            'type' => "Catering"
+            'type' => "Catering",
+            'nosupplier'=>$nosupplier
         ];
         $this->view('customers/gallery', $data2);
     }
@@ -316,12 +319,14 @@ class Customers extends Controller
     public function reception($id)
     {
         $request = $this->customerModel->getEventById($id);
-        $reception = $this->customerModel->getSuppliers('Reception hall');
+        $reception = $this->customerModel->getSuppliers('Reception hall', $request->date);
+        $nosupplier = $this->customerModel->getUnavailableSuppliers('Reception hall', $request->date);
 
         $data3 = [
             'request' => $request,
             'supplier' => $reception,
-            'type' => "Reception"
+            'type' => "Reception",
+            'nosupplier'=>$nosupplier
         ];
         $this->view('customers/gallery', $data3);
     }
@@ -329,12 +334,14 @@ class Customers extends Controller
     public function eventplanner($id)
     {
         $request = $this->customerModel->getEventById($id);
-        $reception = $this->customerModel->getSuppliers('Event Planner');
+        $reception = $this->customerModel->getSuppliers('Event Planner', $request->date);
+        $nosupplier = $this->customerModel->getUnavailableSuppliers('Event Planner', $request->date);
 
         $data = [
             'request' => $request,
             'supplier' => $reception,
-            'type' => "Event Planners"
+            'type' => "Event Planners",
+            'nosupplier'=>$nosupplier
         ];
         $this->view('customers/gallery', $data);
     }
@@ -342,12 +349,14 @@ class Customers extends Controller
     public function cake($id){
 
         $request = $this->customerModel->getEventById($id);
-        $reception = $this->customerModel->getSuppliers('Cake Service');
+        $reception = $this->customerModel->getSuppliers('Cake Service', $request->date);
+        $nosupplier = $this->customerModel->getUnavailableSuppliers('Cake Service', $request->date);
 
         $data = [
             'request' => $request,
             'supplier' => $reception,
-            'type' => "Cake Service"
+            'type' => "Cake Service",
+            'nosupplier'=>$nosupplier
         ];
         $this->view('customers/gallery', $data);
     }
@@ -355,12 +364,15 @@ class Customers extends Controller
     public function dancing($id){
 
         $request = $this->customerModel->getEventById($id);
-        $reception = $this->customerModel->getSuppliers('Dancing');
+        $reception = $this->customerModel->getSuppliers('Dancing', $request->date);
+        $nosupplier = $this->customerModel->getUnavailableSuppliers('Dancing', $request->date);
+
 
         $data = [
             'request' => $request,
             'supplier' => $reception,
-            'type' => "Dancing Crews"
+            'type' => "Dancing Crews",
+            'nosupplier'=>$nosupplier
         ];
         $this->view('customers/gallery', $data);
     }
@@ -368,12 +380,14 @@ class Customers extends Controller
     public function music($id){
 
         $request = $this->customerModel->getEventById($id);
-        $reception = $this->customerModel->getSuppliers('Music');
+        $reception = $this->customerModel->getSuppliers('Music', $request->date);
+        $nosupplier = $this->customerModel->getUnavailableSuppliers('Music', $request->date);
 
         $data = [
             'request' => $request,
             'supplier' => $reception,
-            'type' => "Music Crews"
+            'type' => "Music Crews",
+            'nosupplier'=>$nosupplier
         ];
         $this->view('customers/gallery', $data);
     }
@@ -381,12 +395,14 @@ class Customers extends Controller
     public function dj($id){
 
         $request = $this->customerModel->getEventById($id);
-        $reception = $this->customerModel->getSuppliers('DJ');
+        $reception = $this->customerModel->getSuppliers('DJ', $request->date);
+        $nosupplier = $this->customerModel->getUnavailableSuppliers('DJ', $request->date);
 
         $data = [
             'request' => $request,
             'supplier' => $reception,
-            'type' => "DJ"
+            'type' => "DJ",
+            'nosupplier'=>$nosupplier
         ];
         $this->view('customers/gallery', $data);
     }
@@ -414,12 +430,15 @@ class Customers extends Controller
     public function catering($id)
     {
         $request = $this->customerModel->getEventById($id);
-        $supplier = $this->customerModel->getSuppliers('Catering');
+        $supplier = $this->customerModel->getSuppliers('Catering Service', $request->date);
+        $nosupplier = $this->customerModel->getUnavailableSuppliers('Catering Service', $request->date);
+
 
         $data = [
             'request' => $request,
             'supplier' => $supplier,
-            'type' => "Catering Service"
+            'type' => "Catering Service",
+            'nosupplier'=>$nosupplier
         ];
         $this->view('customers/gallery', $data);
     }
@@ -433,12 +452,14 @@ class Customers extends Controller
     public function decorations($id)
     {
         $request = $this->customerModel->getEventById($id);
-        $supplier = $this->customerModel->getSuppliers('Decorations');
+        $supplier = $this->customerModel->getSuppliers('Decorations', $request->date);
+        $nosupplier = $this->customerModel->getUnavailableSuppliers('Decorations', $request->date);
 
         $data = [
             'request' => $request,
             'supplier' => $supplier,
-            'type' => "Decorations"
+            'type' => "Decorations",
+            'nosupplier'=>$nosupplier
         ];
         $this->view('customers/gallery', $data);
     }
@@ -465,12 +486,14 @@ class Customers extends Controller
     {
         $request = $this->customerModel->getEventById($eid);
         $supplier = $this->customerModel->getOneSupplier($sid);
+        $packages = $this->customerModel->getAllPackages($sid);
 
         $type = $supplier->stype;
 
         $data = [
             'request' => $request,
             'supplier' => $supplier,
+            'packages'=>$packages
         ];
 
         if ($type == "none") {
@@ -1115,6 +1138,12 @@ class Customers extends Controller
         }
     }
 
+    public function getCalendarEvents($id){
+
+        $result = $this->customerModel->getCalander($id);
+        
+        echo json_encode($result);
+    }
 
     public function quotations($id)
     {
@@ -1375,7 +1404,7 @@ class Customers extends Controller
 
             $tid = $this->customerModel->insertAdvPayement($data);
             if ($tid != null) {
-                $this->customerModel->updateBudgetQuotations($id);
+                $this->customerModel->updateAdvBudgetQuotations($id);
 
                 echo '<script> alert("Full Payment Successful")</script>';
                 header('location: ' . URLROOT . 'customers/budget/' . $rid);
@@ -1511,7 +1540,7 @@ class Customers extends Controller
             ];
 
             $this->customerModel->sendSupplierMessage($data);
-            header('location: ' . URLROOT . 'customers/chat/' . $id);
+            header('location: ' . URLROOT . 'customers/chat/' . $id."/".$eid);
         }
 
 

@@ -10,10 +10,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flipdown@1.1.0/dist/flipdown.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/countdown@2.7.0/dist/countdown.min.js"></script>
-
-    <!-- Add flipdown.js JavaScript -->
+  
 
 
     <!-- STYLESHEET -->
@@ -75,6 +72,7 @@
                 </div>
                 <div class="heading-card-remain">
                     <p>Remaining Days : </p><?php echo getRemainingDays($data['request']->date) ?>
+                   
                 </div>
 
                 <div class="heading-card-subcontainer">
@@ -214,17 +212,6 @@ function getRemainingDays($targetDate)
 
 ?>
 
-<script src="https://cdn.jsdelivr.net/npm/countdown@2.7.0/dist/countdown.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/flipdown@1.1.0/dist/flipdown.min.js"></script>
 
 
 
-<script>
-    const targetDate = new Date('2024-04-27 10:00:00');
-    const countdownTimer = countdown(targetDate, (timeLeft) => {
-        document.getElementById('timer').innerText = `${timeLeft.days}d ${timeLeft.hours}h ${timeLeft.minutes}m ${timeLeft.seconds}s`;
-        if (timeLeft.value <= 0) {
-            console.log('Countdown has ended!');
-        }
-    });
-</script>

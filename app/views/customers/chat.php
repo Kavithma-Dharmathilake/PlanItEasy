@@ -142,7 +142,7 @@
             <?php endforeach ?>
 
 
-            <form action="<?php echo URLROOT ?>customers/chat/<?php echo  $data['supplier']->id ?>" method="POST">
+            <form action="<?php echo URLROOT ?>customers/chat/<?php echo  $data['supplier']->id ?>/<?php echo  $data['eid'] ?>" method="POST">
                 <textarea name="content"> </textarea>
                 <input style="  background-color: #7380ec;border: none;color: white;padding: 10px 32px;margin: 4px 2px;border-radius:3rem" type="Submit" value="Send">
             </form>
