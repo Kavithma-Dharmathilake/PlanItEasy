@@ -1180,6 +1180,29 @@ class Customer
         }
     }
 
+    public function showPayment($id)
+    {
+        // $this->db->query(
+        //     'SELECT p.amount,bi.bname,bi.stype
+        //     FROM payment p
+        //     JOIN budget_item bi ON p.bid = bi.bid
+        //     JOIN user u ON p.user = u.id
+        //     WHERE p.user = :id AND p.amount = bi.r_price');
+        // $this->db->bind(':id', $id);
+        // $results = $this->db->resultSet();
+        // // die(var_dump($results));
+        // return $results;
+
+        $this->db->query(
+            'SELECT p.amount , p.bid , p.rid
+            FROM payment p
+            WHERE p.user = :id'
+        );
+        $this->db->bind(':id', $id);
+        $results = $this->db->resultset();
+        return $results;
+    }
+    
     public function updateAdvBudgetQuotations($id)
     {
 
@@ -1247,7 +1270,6 @@ class Customer
 
     public function sendMessage($data)
     {
-
         $sid = $_SESSION['user_id'];
         $date = date('Y-m-d');
         date_default_timezone_set('Asia/Kolkata');

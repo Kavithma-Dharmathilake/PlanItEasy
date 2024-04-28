@@ -54,86 +54,36 @@
         </div>
     </header>
 
-    <section class="section container discounts__container mySwiper">
-        <h2>EventPlanners</h2>
-        <button></button>
-        <div class="swiper-wrapper">
-            <article class="discount swiper-slide">
-                <div class="discount_img">
-                    <img src="<?php echo URLROOT; ?>public/images/home/disc_photo.jpg">
+    
+    <div class="suppliers-intro">
+            <p style="margin-top:5rem">Event Planers</p>
+    </div>
+    </div>
+    <div class="vendor-grid">
+        <?php foreach ($data['eventplanners'] as $eventplanner) : ?>
+            <div class="vendor-card">
+                <div class="vendor-image">
+                    <img src="https://images.pexels.com/photos/3184423/pexels-photo-3184423.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="vendor image">
                 </div>
-                <div class="discount_info">
-                    <h5>Blissful Diaries Wedding Planner</h5>
-                    <small>4.5 rating</small>
+                <div class="vendor-details">
+                    <span class="vendor-catagory">Event Planner</span>
+                    <h4><a href=""><?php echo $eventplanner->bname; ?></a></h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero, possimus nostrum!</p>
+                    <div class="Vendor-bottom-details">
+                        <div class="vendor-price"><small>$96.00</small>$230.99</div>
+                        <div class="vendor-links">
+                            <a href=""><i class="fa fa-heart"></i></a>
+                            <a href=""><i class="fa fa-shopping-cart"></i></a>
+                        </div>
+                    </div>
                 </div>
-                <div class="supplier_btns">
-                    <button class="btn" type="submit">View Profile</button>
-                    <button class="booknow_btn" type="submit">Book Now</button>
-                </div>
-                
-            </article>
-
-            <article class="discount swiper-slide">
-                <div class="discount_img">
-                    <img src="<?php echo URLROOT; ?>public/images/home/disc_salon.jpg">
-                </div>
-                <div class="discount_info">
-                    <h5>MAMA's wedding Planner</h5>
-                    <small>4.7 rating</small>
-                </div>
-                <div class="supplier_btns">
-                    <button class="btn" type="submit">View Profile</button>
-                    <button class="booknow_btn" type="submit">Book Now</button>
-                </div>
-            </article>
-
-            <article class="discount swiper-slide">
-                <div class="discount_img">
-                    <img src="<?php echo URLROOT; ?>public/images/home/disc_cake.jpg">
-                </div>
-                <div class="discount_info">
-                    <h5>Ceylone Elegance</h5>
-                    <small>4.9 rating</small>
-                </div>
-                <div class="supplier_btns">
-                    <button class="btn" type="submit">View Profile</button>
-                    <button class="booknow_btn" type="submit">Book Now</button>
-                </div>
-            </article>
-
-            <article class="discount swiper-slide">
-                <div class="discount_img">
-                    <img src="<?php echo URLROOT; ?>public/images/home/disc_deco.jpg">
-                </div>
-                <div class="discount_info">
-                    <h5>Dream Studio</h5>
-                    <small>4.9 rating</small>
-                </div>
-                <div class="supplier_btns">
-                    <button class="btn" type="submit">View Profile</button>
-                    <button class="booknow_btn" type="submit">Book Now</button>
-                </div>
-            </article>
-
-            <article class="discount swiper-slide">
-                <div class="discount_img">
-                    <img src="<?php echo URLROOT; ?>public/images/home/disc_food.jpg">
-                </div>
-                <div class="discount_info">
-                    <h5>Two Rings Wedding Photography</h5>
-                    <small>4.9 rating</small>
-                </div>
-                <div class="supplier_btns">
-                    <button class="btn" type="submit">View Profile</button>
-                    <button class="booknow_btn" type="submit">Book Now</button>
-                </div>
-            </article>
-        </div>
-        <div class="swiper-pagination"></div>
-    </section>
+            </div>
+        <?php endforeach; ?>
+    </div>
 
 
-    <section class="section container discounts__container mySwiper">
+
+    <!-- <section class="section container discounts__container mySwiper">
         <h2>EventPlanners</h2>
         <button></button>
         <div class="swiper-wrapper">
@@ -209,7 +159,7 @@
             </article>
         </div>
         <div class="swiper-pagination"></div>
-    </section>
+    </section> -->
 
 
     

@@ -116,7 +116,15 @@
 <body>
     <div class="dash-container">
         <aside>
-
+        <div class="top">
+                <div class="logo">
+                    <img src="<?php echo URLROOT; ?>public/images/logo.jpg">
+                    <h2>PlanItEasy</h2>
+                </div>
+                <div class="close" id="close-btn">
+                    <span class="material-icons-sharp">close</span>
+                </div>
+            </div>
             <div class="sidebar">
                 <a href="<?php echo URLROOT; ?>customers" class="active">
                     <span class="material-icons-sharp">grid_view</span>
@@ -191,28 +199,59 @@
                                 <h1><?php echo $data['booked_count']->Count; ?></h1>
                             </div>
 
+            <div class="insights">
+                <div class="users">
+                    <span style="background-color:#f38e62" , class="material-icons-sharp">festival</span>
+                    <div class="middle">
+                        <div class="left">
+                            <h3>Pending Events</h3>
+                            <h1><?php echo $data['pending_count']; ?></h1>
                         </div>
 
                     </div>
 
+                <div class="eventplanners">
+                    <span style="background-color:#f3db62", class="material-icons-sharp">inventory</span>
+                    <div class="middle">
+                        <div class="left">
+                            <h3>Booked Events</h3>
+                            <h1><?php echo $data['booked_count']; ?></h1>
+                        </div>
 
-                    <div class="suppliers">
-                        <span class="material-icons-sharp">groups</span>
-                        <div class="middle">
-                            <div class="left">
-                                <h3>Budget Plans</h3>
-                                <h1><?php echo $data['booked_count']->Count; ?></h1>
-                            </div>
+                    </div>
+                    
+                </div>
 
+
+                <div class="suppliers">
+                    <span style="background-color:#AFE1AF", class="material-icons-sharp">groups</span>
+                    <div class="middle">
+                        <div class="left">
+                            <h3>Completed Events</h3>
+                            <h1><?php echo $data['completed_count']; ?></h1>
                         </div>
 
                     </div>
 
                 </div>
-                <div class="recent-trans">
-                    <h2>Your Ongoing Events</h2>
-                    <table>
-                        <thead>
+
+            </div>
+            <div class="recent-trans">
+                <h2>Your Ongoing Events</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Event ID</th>
+                            <th>Event Type</th>
+                            <th>Tentative Date</th>
+                            <th>Event Status</th>
+                            <th>Action</th>
+                            <th>More</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                         <?php foreach ($data['events'] as $event) : ?>
+
                             <tr>
                                 <th>Event ID</th>
                                 <th>Event Type</th>
@@ -268,30 +307,28 @@
             </div>
             <!-- End of top-->
             <div class="recent-updates">
-                <h2>Recent Updates</h2>
-          
-                    <?php if ($data['recent']) {
 
-                        foreach ($data['recent'] as $recent) {
-                    ?>
-                            <div class="updates">
-                                <div class="update">
-                                    <div class="recent-icon">
-                                        <span class="material-icons-sharp">person</span>
-                                    </div>
-                                    <div class="message">
-                                        <p><b> <?php echo $recent->bname; ?> </b> Accepted your Quotation Request</p>
-                                        <small class="text-muted">recent quotations</small>
-                                        <!-- <button class="btn">View Quotation</button> -->
-                                    </div>
+                <h2>Recent Updates</h2>
+                <?php if ($data['recent']) {
+
+                    foreach ($data['recent'] as $recent) {
+                        ?>
+                        <div class="updates">
+                            <div class="update">
+                                <div class="recent-icon">
+                                    <span class="material-icons-sharp">person</span>
+                                </div>
+                                <div class="message">
+                                    <p><b> <?php echo $recent->name; ?> </b> Accepted your Quotation Request</p>
+                                    <small class="text-muted">recent quotations</small>
+                                    <!-- <button class="btn">View Quotation</button> -->
                                 </div>
                             </div>
-
-                    <?php
-                        }
-                    } ?>
-
-               
+                        </div>
+                
+                <?php
+    } 
+} ?>
             </div>
 
             <!------------ END OF RECENT UPDTAES ------------>

@@ -74,9 +74,12 @@
                 generateCalendar();
             });
 
+            //GPT ANWER
+           
+            
+            
+            const quotePerMonth = <?php echo json_encode(array_column( $data['quotePerMonth'],'month_count')); ?>;
 
-            // Generate random data
-            var data = [];
             const labels = ["Januray", "February", "March", "April", "June", "July", "August", "September", "October", "November", "December"];
 
             // Create a bar chart
@@ -87,7 +90,7 @@
                     labels: labels,
                     datasets: [{
                         label: 'Quotation Requests sent per month',
-                        data: data,
+                        data: quotePerMonth,
                         backgroundColor: '#011f4b',
                         borderWidth: 1,
                     }]
@@ -105,7 +108,7 @@
 </head>
 
 <body>
-    <?php var_dump($data['quotePerMonth']);?>
+    <!-- <?php var_dump($data['calaendarDates']);?> -->
     <div class="dash-container">
         <aside>
             <div class="top">
@@ -178,7 +181,7 @@
                     <span class="material-icons-sharp">festival</span>
                     <div class="middle">
                         <div class="left">
-                            <h3>New Quotation Requests</h3>
+                            <h3>Pending Requests</h3>
                             <h1>
                                     <?php echo $data['countQuote']->Count ?><br>
                             </h1>
@@ -310,3 +313,50 @@
 </body>
 
 </html>
+<!-- 
+<script>
+        // Data for the bar chart
+        var menuItems = <?php echo json_encode(array_column($data['bestsellingtop5menuitems'], 'itemName')); ?>;
+        var quantities = <?php echo json_encode(array_column($data['bestsellingtop5menuitems'], 'total_quantity')); ?>;
+
+        // Bar chart configuration
+        var ctx = document.getElementById('best-selling-chart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: menuItems,
+                datasets: [{
+                    label: 'Quantity Sold',
+                    data: quantities,
+                    backgroundColor: '#4caf50', // Green color
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        var packageNames = <?php echo json_encode(array_column($data['gettotalpackageusage'], 'packageName')); ?>;
+        var packageUsages = <?php echo json_encode(array_column($data['gettotalpackageusage'], 'total_usage')); ?>;
+
+        // Pie chart configuration
+        var pieCtx = document.getElementById('total-package-chart').getContext('2d');
+        var pieChart = new Chart(pieCtx, {
+            type: 'pie',
+            data: {
+                labels: packageNames,
+                datasets: [{
+                    label: 'Package Usage',
+                    data: packageUsages,
+                    backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'], // Colors for the pie slices
+                    borderWidth: 1
+                }]
+            },
+            options: {}
+        });
+    </script> -->
