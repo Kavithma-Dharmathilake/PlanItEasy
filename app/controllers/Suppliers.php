@@ -326,8 +326,6 @@ class Suppliers extends Controller
 
             $_POST = filter_input_array(INPUT_POST);
 
-            
-
             $data = [
                 'event' => trim($_POST['event']),
                 'date' => trim($_POST['date']),
@@ -344,8 +342,15 @@ class Suppliers extends Controller
             // }
 
             $dateStatus = $this->supplierModel->chekStatus($data['date']);
+            
+            
+            if($dateStatus == "Available" || $dateStatus == true){
 
-
+                echo '<script> alert("Date Available");
+                window.location =  "' . URLROOT . 'suppliers/calendar";
+                </script>';
+            }else{
+                var_dump($dateStatus);
             if (!empty($data['event'])) {
 
                 $available = [
@@ -364,8 +369,7 @@ class Suppliers extends Controller
             } else {
                 $this->view('suppliers/calendar', $data);
             }
-
-            
+        }  
         }else{
         $this->view('suppliers/calendar');
         }

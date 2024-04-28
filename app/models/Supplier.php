@@ -417,14 +417,16 @@ class Supplier
         return $result;
     }
 
-    // public function chekStatus($date)
-    // {
-    //     $id= $_SESSION['user_id'];
-    //     $query = "SELECT status FROM calander WHERE date = :date AND supplier = '$id'";
-    //     $this->db->bind(':date', $date);
-    //     $result = $this->db->query($query);
+    public function chekStatus($date)
+    {
+        $id= $_SESSION['user_id'];
+        $this->db->query('SELECT status FROM calander WHERE date = :date AND supplier = :id');
+        $this->db->bind(':date', $date);
+        $this->db->bind(':id', $id);
+        $result = $this->db->single();
 
-    // }
+        return $result;
+    }
 
     public function  edituser($data)
     {
