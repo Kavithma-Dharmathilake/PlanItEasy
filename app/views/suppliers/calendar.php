@@ -120,7 +120,7 @@
                     <h3>Messages</h3>
                     <span class="message-count">5</span>
                 </a>
-                <a href="">
+                <a href="<?php echo URLROOT; ?>users/logout">
                     <span class="material-icons-sharp">logout</span>
                     <h3>Logout</h3>
                 </a>
