@@ -417,6 +417,15 @@ class Supplier
         return $result;
     }
 
+    // public function chekStatus($date)
+    // {
+    //     $id= $_SESSION['user_id'];
+    //     $query = "SELECT status FROM calander WHERE date = :date AND supplier = '$id'";
+    //     $this->db->bind(':date', $date);
+    //     $result = $this->db->query($query);
+
+    // }
+
     public function  edituser($data)
     {
         $this->db->query('UPDATE INTO (name, address, email, contact, password, role,stype, bname, bno, nic, baddress) VALUES(:name, :address, :email, :contact, :password, :role, :stype,:bname, :bno, :nic, :baddress)');
@@ -448,7 +457,9 @@ class Supplier
     }
 
     public function countQuotations(){
-        $this->db->query('SELECT COUNT(*) AS Count FROM quoate');
+        $id = $_SESSION['user_id'];
+        $this->db->query('SELECT COUNT(*) AS Count FROM quoate WHERE sid = :sid AND q_status = "pending"');
+        $this->db->bind(':sid', $id);
         $result = $this->db->single();
         return $result;
     }
