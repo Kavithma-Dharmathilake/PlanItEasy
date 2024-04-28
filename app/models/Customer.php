@@ -1211,6 +1211,7 @@ class Customer
             $this->db->bind(':id', $q->qid);
             $this->db->bind(':status', 'Payment Complete');
             $this->db->execute();
+
         }
 
         return true;
@@ -1221,6 +1222,25 @@ class Customer
         $this->db->query('SELECT * FROM quoate WHERE id = :id');
         $this->db->bind(':id', $id);
         $row = $this->db->single();
+        return $row;
+    }
+
+
+    public function countEvents($status)
+    {
+        $this->db->query('SELECT COUNT(*) AS Count FROM general_requests WHERE idcustomer = :id AND event_status=:status');
+        $this->db->bind(':id', $_SESSION['user_id']);
+        $this->db->bind(':status', $status);
+        $row = $this->db->single();
+        return $row;
+    }
+
+    public function getRecentQuote(){
+        $this->db->query('SELECT * FROM quoate q, user u WHERE uid = :id AND status=:status AND u.id = q.sid');
+        $this->db->bind(':id', $_SESSION['user_id']);
+        $this->db->bind(':status', 'Request Accepted');
+        $row = $this->db->resultSet();
+      
         return $row;
     }
 
