@@ -19,36 +19,75 @@
 
 <body>
     <div class="dash-container">
-        <aside>
-
+    <aside>
+            <div class="top">
+                <div class="logo">
+                    <img src="<?php echo URLROOT; ?>/public/images/logo.jpg">
+                    <h2>PlanItEasy</h2>
+                </div>
+                <div class="close" id="close-btn">
+                    <span class="material-icons-sharp">close</span>
+                </div>
+            </div>
             <div class="sidebar">
-                <a href="<?php echo URLROOT; ?>customers">
-                    <span class="material-icons-sharp" class="active">grid_view</span>
+                <a href="<?php echo URLROOT; ?>eventplanners" class="active">
+                    <span class="material-icons-sharp">grid_view</span>
                     <h3>Dashboard</h3>
                 </a>
-                <a href="<?php echo URLROOT; ?>customers/events">
-                    <span class="material-icons-sharp">man</span>
-                    <h3>Events</h3>
+
+                <a href="<?php echo URLROOT ?>eventplanners/packages">
+                    <span class="material-icons-sharp">
+                        inventory
+                    </span>
+                    <h3>Packages</h3>
                 </a>
-                <a href="<?php echo URLROOT; ?>customers/payments">
-                    <span class="material-icons-sharp">payments</span>
-                    <h3>Payments</h3>
+                <a href="<?php echo URLROOT ?>eventplanners/portfolio">
+                    <span class="material-icons-sharp">
+                        note_add
+                    </span>
+                    <h3>Portfolio</h3>
                 </a>
-                <a href="<?php echo URLROOT; ?>customers/message">
-                    <span class="material-icons-sharp">message</span>
+
+                <a href="<?php echo URLROOT ?>eventplanners/eventRequest">
+                    <span class="material-icons-sharp">
+                        festival
+                    </span>
+                    <h3>Event Requests</h3>
+                </a>
+
+               
+         
+                <a href="<?php echo URLROOT ?>eventplanners/calendar">
+                    <span class="material-icons-sharp">
+                        calendar_month
+                    </span>
+                    <h3>Calender</h3>
+                </a>
+
+                <a href="<?php echo URLROOT ?>eventplanners/profile">
+                    <span class="material-icons-sharp">
+                        account_box
+                    </span>
+                    <h3>Profile</h3>
+                </a>
+
+                <a href="<?php echo URLROOT ?>eventplanners/messages">
+                    <span class="material-icons-sharp">mail</span>
                     <h3>Messages</h3>
+                    <span class="message-count">26</span>
                 </a>
-                <a href="<?php echo URLROOT; ?>customers/profile">
-                    <span class="material-icons-sharp">person</span>
-                    <h3>profile</h3>
+
+                <a href="<?php echo URLROOT ?>eventplanners/inquiry">
+                    <span class="material-icons-sharp">
+                        info
+                    </span>
+                    <h3>Inquiry</h3>
                 </a>
-                <a href="<?php echo URLROOT; ?>users/logout">
+                <a href="<?php echo URLROOT ?>users/logout">
                     <span class="material-icons-sharp">logout</span>
                     <h3>Logout</h3>
                 </a>
             </div>
-
-
         </aside>
 
 

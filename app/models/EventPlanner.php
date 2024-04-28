@@ -153,6 +153,23 @@ class EventPlanner
         return $result;
     }
 
+    public function getPortfolio($id)
+    {
+
+        $this->db->query('SELECT * FROM portfolios WHERE sid = :id');
+        $this->db->bind(':id', $id);
+
+        $row = $this->db->single();
+        return $row;
+    }
+    public function getPortfolioById($id)
+    {
+        $this->db->query('SELECT * ,u.id AS uid, p.id AS pid FROM user u, portfolios p Where u.id=:id  AND u.id = p.sid');
+        $this->db->bind(':id', $id);
+        $result = $this->db->single();
+        return $result;
+    }
+
     public function getMessages($id)
     {
         $this->db->query('SELECT * FROM message Where qid=:id ');

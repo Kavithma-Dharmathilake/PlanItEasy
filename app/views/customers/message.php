@@ -109,6 +109,7 @@
         </aside>
 
         <main>
+            <a href="<?php echo URLROOT ?>customers/quotations/<?php echo $data['event']->id ?>"><button>Go Back</button></a>
             <h1>Messages on Quotation Request - <?php echo $data['request']->id ?></h1>
 
 

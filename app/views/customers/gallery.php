@@ -22,30 +22,30 @@
 
 <body>
 
-   
-    
-    <a href="<?php echo URLROOT ?>customers/supplier/<?php echo $data['request']->id?>">  <button style="padding:1rem; margin:1rem; background-color:#7380ec;color:white; border-radius:0.4rem">All Vendors</button></a>  
-    <a href="<?php echo URLROOT ?>customers/quotations/<?php echo $data['request']->id?>"> <button style="padding:1rem; margin:1rem; background-color:#7380ec;color:white; border-radius:0.4rem">My Quotations</button></a>
+
+
+    <a href="<?php echo URLROOT ?>customers/supplier/<?php echo $data['request']->id ?>"> <button style="padding:1rem; margin:1rem; background-color:#7380ec;color:white; border-radius:0.4rem">All Vendors</button></a>
+    <a href="<?php echo URLROOT ?>customers/quotations/<?php echo $data['request']->id ?>"> <button style="padding:1rem; margin:1rem; background-color:#7380ec;color:white; border-radius:0.4rem">My Quotations</button></a>
     <div class="suppliers-intro">
         <P><?php echo $data['type'] ?></P>
 
     </div>
     <div style="margin-left:20px;margin-top:20px;">
-        <h2>Photgraphers available for the day</h2>
+        <h2><?php echo $data['type'] ?> available for the day</h2>
     </div>
 
 
     <!-- *******VENDOR-GRID************* -->
     <div class="vendor-grid">
 
-        <?php foreach ($data['supplier'] as $i) : 
-      
-            ?>
+        <?php foreach ($data['supplier'] as $i) :
 
-            
+        ?>
+
+
             <div class="vendor-card">
-          
-                <a href="<?php echo URLROOT; ?>customers/portfolio/<?php echo $i->uid?>/<?php echo $data['request']->id ?>">
+
+                <a href="<?php echo URLROOT; ?>customers/portfolio/<?php echo $i->uid ?>/<?php echo $data['request']->id ?>">
                     <div class="vendor-image">
                         <img src="<?php echo URLROOT ?>public/<?php echo $i->caption ?>" alt="vendor image">
                     </div>
@@ -72,8 +72,49 @@
     </div>
 
     <!-- </div> -->
+    <?php if ($data['nosupplier'] != null) { ?>
+        <div style="margin-left:20px;margin-top:20px;">
+            <h2><?php echo $data['type'] ?> not available for the day</h2>
+        </div>
 
 
+        <!-- *******VENDOR-GRID************* -->
+
+        <div class="vendor-grid">
+
+            <?php foreach ($data['nosupplier'] as $s) :
+
+            ?>
+
+
+                <div class="vendor-card">
+
+                    <a href="<?php echo URLROOT; ?>customers/portfolio/<?php echo $s->uid ?>/<?php echo $data['request']->id ?>">
+                        <div class="vendor-image">
+                            <img src="<?php echo URLROOT ?>public/<?php echo $s->caption ?>" alt="vendor image">
+                        </div>
+                        <div class="vendor-details">
+                            <span class="vendor-catagory"><?php echo $data['type'] ?></span>
+                            <h4><?php echo $s->bname ?></h4>
+
+                            <div class="Vendor-bottom-details">
+                                <a href="<?php echo URLROOT; ?>customers/sendquote/<?php echo $s->uid . "/" . $data['request']->id ?>">
+                                    <div class="vendor-price">Send Request</div>
+                                </a>
+
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+
+
+
+            <?php endforeach ?>
+
+
+        </div>
+    <?php } ?>
 
 </body>
 

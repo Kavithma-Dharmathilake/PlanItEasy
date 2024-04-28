@@ -78,9 +78,10 @@
                             <div class="input-field">
                                 <select name="type" id="type">
                                     <option name="packageType" value=""> </option>
-                                    <option name="packageType" value="bronze">Bronze package</option>
-                                    <option name="packageType" value="silver">Silver Package</option>
-                                    <option name="packageType" value="gold"> Gold package</option>
+                                    
+                                    <?php foreach($data['packages'] as $p): ?>
+                                    <option name="packageType" value="<?php echo $p->name ?>(<?php echo $p->price ?>)"><?php echo $p->name ?> - <?php echo $p->price ?></option>
+                                    <?php endforeach?>
 
                                 </select>
                             </div>

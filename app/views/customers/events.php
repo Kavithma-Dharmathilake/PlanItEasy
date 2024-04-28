@@ -210,7 +210,7 @@
                 <a href="<?php echo URLROOT ?>customers/completedEvents"><button type="submit" class="completedButton">Completed</button></a>
             </div>
 
-                <?php var_dump($_SESSION['user_id']);?> 
+             
 
             <div class="event-request" style="margin-top:20px">
 

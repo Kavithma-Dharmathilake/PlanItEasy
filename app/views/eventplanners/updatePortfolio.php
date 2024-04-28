@@ -12,7 +12,6 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- STYLESHEET -->
     <link rel="stylesheet" href="<?php echo URLROOT; ?>public/css/admindash.css">
-    <link rel="stylesheet" href="<?php echo URLROOT; ?>public/css/requests.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>public/css/eventplannerdash.css">
 
 
@@ -92,86 +91,59 @@
         </aside>
 
 
-        <main>
-            <h1>Your Packages</h1>
+        <!-- Content start here -->
+        <div>
 
-            <div style="padding-top:40px;">
-                <a href="<?php echo URLROOT; ?>eventplanners/addNewPackage" class="package-add">
-                    <i class="fa fa-add" style="font-size: 18px; padding-right:15px;">
-                    </i>
-                    Add new Package
-                </a>
+
+            <!-- Heading and search bar -->
+
+
+            <div class="planner-title" style="padding-bottom:50px;">
+                <h1>Update Your Portfolio</h1>
             </div>
+            <form action="<?php echo URLROOT; ?>eventplanners/updatePortfolio" method="post" enctype="multipart/form-data">
+                <div class="form-add-package">
+                    <div class="form-wrapper">
+                        <div class="form-heading">
+                            <h2 style="padding: 20px;">Add Items</h2>
+                        </div>
+                        <div class="form-content">
+                            <div class="text-box">
+                                <label>Bio<span style="color:red"><sup>*</sup></span></label><br />
+                                <textarea name="bio" id="descript" cols="50" rows="5"><?php echo $data['portfolio']->bio; ?>
+                                </textarea>
+                            </div>
+                            <div class="text-box">
+                                <label>Description<span style="color:red"><sup>*</sup></span></label><br />
+                                <textarea name="description" id="descript" cols="50" rows="5"><?php echo $data['portfolio']->description; ?>
+                                </textarea>
+                            </div>
+                            <div style="margin-left:1.5rem; margin-bottom:3rem;">
+                            <label>Caption<span style="color:red"><sup>*</sup></span></label><br />
+                                <input type="file" name="caption" accept="image/*" required />
+                            </div>
+                            <div style="margin-left:1.5rem;  margin-bottom:3rem">
+                            <label>Gallery Images (Select at least 10 images)<span style="color:red"><sup>*</sup></span></label><br />
+                                <input type="file" name="images[]" accept="image/*" multiple required/>
+                            </div>
+                            <div style="margin-left:1.5rem">
+                            <label>Quotation Documents(.pdf)<span style="color:red"><sup>*</sup></span></label><br />
+                                <input type="file" name="document" accept="application/pdf" required />
+                            </div>
+                        </div>
 
-            <div class="userRequest_table">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Product ID</th>
-                            <th>PRoduct Name</th>
-                            <th>Description</th>
-                            <th>Price</th>
-                            <th>Servces</th>
-                            <th>Created At</th>
-                            <th>Update</th>
-                            <th>Delete</th>
-                        </tr>
-                    </thead>
-                    <tbody>
 
-                        <?php foreach ($data as $i) : ?>
+                        <div class="input-box">
+                            <input type="Submit" value="Submit" class="input-submit">
+                        </div>
 
-
-                            <tr>
-                                <td> #PO<?php echo $i->id ?></td>
-                                <td> <?php echo $i->name ?></td>
-                                <td> <?php echo $i->description ?></td>
-                                <td> <?php echo $i->price ?></td>
-                                <td> <?php echo $i->services ?></td>
-                                <td> <?php echo $i->date ?></td>
-                                <td><a href="<?php echo URLROOT ?>suppliers/updatepackage/<?php echo $i->id ?>"><button class="btn_accept" type="button">Update</button></a></td>
-                                <td><a href="<?php echo URLROOT ?>suppliers/deleteuser/<?php echo $i->id ?>"><button class="btn_reject" type="button" onclick="confirmDelete(<?php echo $i->id ?>)">Delete</button></a></td>
-                                </td>
-                            </tr>
-
-                        <?php endforeach ?>
-
-                    </tbody>
-                </table>
-            </div>
-
-            </main>
+                    </div>
+                </div>
+        </div>
+        </form>
 
 
 
 </body>
-<script>
-    function confirmDelete(requestId) {
-        var confirmation = confirm("Are you sure you want to Delete?");
-        if (confirmation) {
-            deleteReq(requestId);
-        } else {
-
-        }
-    }
-
-    function deleteReq(requestId) {
-        alert('User #' + requestId + ' has been deleted.');
-
-    }
-
-    function confirmReject(requestId) {
-        var confirmation = confirm("Are you sure you want to reject this request?");
-        if (confirmation) {
-            rejectRequest(requestId);
-        } else {
-
-        }
-    }
-
-    function rejectRequest(requestId) {
-        alert('Request #' + requestId + ' has been reject.');
-    }
-</script>
 
 </html>

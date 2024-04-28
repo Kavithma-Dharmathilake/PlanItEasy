@@ -490,6 +490,15 @@ class Customer
         return $result;
     }
 
+    public function getAllPackages($id)
+    {
+
+        $this->db->query('SELECT * FROM packages Where supplier =:id');
+        $this->db->bind(':id', $id);
+        $result = $this->db->resultSet();
+        return $result;
+    }
+
     public function getBookedEvents($id)
     {
 
@@ -610,11 +619,18 @@ class Customer
         return $result;
     }
 
+    public function getCalander($id)
+    {
+   
+        $this->db->query('SELECT * FROM calander where supplier = :id AND status=:status');
+        $this->db->bind(':id', $id );
+        $this->db->bind(':status', 'Not Available' );
+        $result = $this->db->fetchAllAssoc();
+        return $result;
+    }
+
     public function getRequestSentQuotations($id)
     {
-        if ($stype == 'Catering') {
-            $stype = "Catering Service";
-        }
         $this->db->query('SELECT *,u.id as uid FROM user u , portfolios p WHERE u.stype =:stype AND u.id = p.sid');
 
         $uid = $_SESSION['user_id'];
@@ -624,7 +640,6 @@ class Customer
         //bind values
         $this->db->bind(':id', $id);
         $this->db->bind(':uid', $uid);
-        $this->db->bind(':stype', $stype);
 
         $result = $this->db->resultSet();
         return $result;
@@ -826,21 +841,61 @@ class Customer
     }
 
 
-    public function getSuppliers($type)
+    // public function getSuppliers($type, $date)
+    // {
+
+
+    //     $this->db->query('SELECT *, u.id AS uid, p.id AS pid
+    //     FROM user u , portfolios p, calander c
+    //     WHERE stype =:type AND u.id = p.sid AND c.supplier = u.id');
+
+    //     //bind values
+    //     $this->db->bind(':type', $type);
+
+    //     $result = $this->db->resultSet();
+    //     return $result;
+    // }
+
+    public function getSuppliers($type, $date)
     {
+        // Prepare the SQL query to fetch available suppliers
+        $this->db->query('
+        SELECT *,u.id as uid, p.id AS pid, c.date AS available_date
+        FROM user u
+        JOIN portfolios p ON u.id = p.sid
+        LEFT JOIN calander c ON u.id = c.supplier AND c.date = :date AND c.status = \'Not Available\'
+        WHERE u.stype = :type AND c.supplier IS NULL
+    ');
 
-
-        $this->db->query('SELECT *, u.id AS uid, p.id AS pid
-        FROM user u , portfolios p
-        WHERE stype =:type AND u.id = p.sid');
-
-        //bind values
+        // Bind the `type` and `date` parameters
         $this->db->bind(':type', $type);
+        $this->db->bind(':date', $date);
 
+        // Fetch and return the results
         $result = $this->db->resultSet();
         return $result;
     }
 
+
+    public function getUnavailableSuppliers($type, $date)
+    {
+
+        $this->db->query('
+        SELECT *, u.id as uid, p.id AS pid, c.date AS unavailable_date
+        FROM user u
+        JOIN portfolios p ON u.id = p.sid
+        JOIN calander c ON u.id = c.supplier
+        WHERE u.stype = :type AND c.date = :date AND c.status = \'Not Available\'
+    ');
+
+        // Bind the `type` and `date` parameters
+        $this->db->bind(':type', $type);
+        $this->db->bind(':date', $date);
+
+        // Fetch and return the results
+        $result = $this->db->resultSet();
+        return $result;
+    }
 
 
     public function lowestbudget($id)
@@ -1125,6 +1180,24 @@ class Customer
         }
     }
 
+    public function updateAdvBudgetQuotations($id)
+    {
+
+
+        $this->db->query('SELECT * from budget_item WHERE bid = :id');
+        $this->db->bind(':id', $id);
+        $quotes = $this->db->resultSet();
+
+        foreach ($quotes as $q) {
+            $this->db->query('UPDATE quoate SET status=:status, q_status =:status WHERE id=:id');
+            $this->db->bind(':id', $q->qid);
+            $this->db->bind(':status', 'Booked');
+            $this->db->execute();
+        }
+
+        return true;
+    }
+
     public function updateBudgetQuotations($id)
     {
 
@@ -1183,7 +1256,7 @@ class Customer
         date_default_timezone_set('Asia/Kolkata');
         $time = date('H:i:s');
         $this->db->query('INSERT INTO message(sid, cuid,content,date,time,sender) VALUES(:sid, :cuid,:content,:date,:time,:sender) ');
-       
+
         $this->db->bind(':cuid', $sid);
         $this->db->bind(':sid', $data['cuid']);
         $this->db->bind(':content', $data['content']);
@@ -1200,7 +1273,7 @@ class Customer
     public function getMessages($qid)
     {
 
-        $this->db->query('SELECT * FROM message WHERE qid = :qid ORDER BY date ASC, time ASC');
+        $this->db->query('SELECT * FROM message WHERE qid =:qid AND sender =:sender ORDER BY date ASC, time ASC');
         $this->db->bind(':qid', $qid);
         $this->db->bind(':sender', $_SESSION['user_id']);
         $result = $this->db->resultSet();
@@ -1218,13 +1291,12 @@ class Customer
         return $result;
     }
 
-    public function viewQuotation($id){
+    public function viewQuotation($id)
+    {
         $this->db->query('SELECT *, q.id AS qid FROM quoate q, user u WHERE q.id = :id AND q.sid = u.id');
         $this->db->bind(':id', $id);
         $result = $this->db->single();
 
         return $result;
     }
-
-
 }
