@@ -202,6 +202,15 @@ class Supplier
         return $result;
     }
 
+    public function getDate()
+    {
+        $id= $_SESSION['user_id'];
+        $this->db->query('SELECT date FROM calander where supplier = :id AND status != "Available"');
+        $this->db->bind(':id', $id );
+        $result = $this->db->resultSet();
+        return $result;
+    }
+
     
     public function sendMessage($data)
     {

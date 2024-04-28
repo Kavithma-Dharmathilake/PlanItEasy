@@ -74,7 +74,7 @@
                 </div>
             </div>
             <div class="sidebar">
-                <a href="<?php echo URLROOT; ?>suppliers/index" class="active">
+                <a href="<?php echo URLROOT; ?>suppliers/index">
                     <span class="material-icons-sharp">grid_view</span>
                     <h3>Dashboard</h3>
                 </a>
@@ -101,7 +101,7 @@
                 </a>
           
 
-                <a href="<?php echo URLROOT; ?>suppliers/calendar">
+                <a href="<?php echo URLROOT; ?>suppliers/calendar" class="active">
                     <span class="material-icons-sharp">
                         calendar_month
                     </span>
@@ -137,6 +137,20 @@
             </main>
 
             <div class="right">
+            <div class="top">
+                <button id="menu-btn">
+                    <span class="material-icons-sharp">menu</span>
+                </button>
+                <div class="profile">
+                    <div class="info">
+                        <p>Hey, <b><?php echo $_SESSION['user_name']?></b></p>
+                        <small class="text-muted">Supplier</small>
+                    </div>
+                    <div class="profile-photo">
+                    <!-- <img src="<?php echo URLROOT; ?>public/images/photo1.jpg"> -->
+                    </div>  
+                </div>
+            </div>
             <div class="recent-updates">
             <div class="updates">
                 <h2>Availability</h2></br>

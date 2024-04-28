@@ -316,15 +316,29 @@ class Suppliers extends Controller
 
     public function Calendar()
     {
+        $avldates = $this->supplierModel->getDate();
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             $_POST = filter_input_array(INPUT_POST);
 
+            
+
             $data = [
                 'event' => trim($_POST['event']),
                 'date' => trim($_POST['date']),
             ];
+
+
+            foreach ($avldates as $date) {
+                if ($data['date'] == $date->date) {
+                    echo '<script> alert("Date Already Taken")</script>';
+                    redirect('suppliers/calendar');
+                }else{
+                    echo '<script> alert("Date Available")</script>';
+                }
+            }
+
 
             if (!empty($data['event'])) {
 
@@ -335,7 +349,7 @@ class Suppliers extends Controller
 
                 if ($this->supplierModel->addAvailability($available)) {
                     echo '<script> alert("Clicked!");
-                    window.location = window.suppliers/calendar;
+                    window.location = "suppliers/calendar";
                     </script>';
                     // redirect('suppliers/calendar');
                 } else {
@@ -344,6 +358,8 @@ class Suppliers extends Controller
             } else {
                 $this->view('suppliers/calendar', $data);
             }
+
+            
         }else{
         $this->view('suppliers/calendar');
         }
@@ -397,6 +413,7 @@ class Suppliers extends Controller
         $this->view('suppliers/message', $data);
     }
 
+    //Quotation Filters
     public function acceptedQuotes()
     {
         $result = $this->supplierModel->getAcceptedQuotations();
