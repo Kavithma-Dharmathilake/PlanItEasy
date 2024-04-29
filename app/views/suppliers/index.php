@@ -89,7 +89,7 @@
                 data: {
                     labels: labels,
                     datasets: [{
-                        label: 'Quotation Requests sent per month',
+                        label: 'Quotation Requests Recieved Per Month',
                         data: quotePerMonth,
                         backgroundColor: '#011f4b',
                         borderWidth: 1,
@@ -195,8 +195,10 @@
                     <span class="material-icons-sharp">inventory</span>
                     <div class="middle">
                         <div class="left">
-                            <h3>New Project Requests</h3>
-                            <h1>5</h1>
+                            <h3>Accepted Requests</h3>
+                            <h1>
+                            <?php echo $data['countAccepted']->Count ?><br>
+                            </h1>
                         </div>
 
                     </div>
@@ -219,7 +221,7 @@
 
             </div>
             <div class="recent-trans">
-                <h2>Event Completed</h2>
+                <h2>Quotation Requests Recieved Per Month</h2>
                 <canvas id="barChart"></canvas>
 
             </div>
@@ -247,33 +249,21 @@
             <div class="recent-updates">
                 <h2>Recent Updates</h2>
                 <div class="updates">
+                    
+                <?php foreach($data['recentQuotes'] as $update): ?>
+
                     <div class="update">
                         <div class="profile-photo">
                             <!-- <img src="images/photo2.jpg"> -->
                         </div>
                         <div class="message">
-                            <p><b>Chamod Deshan</b> Sent a quotation Request</p>
+                            <p><b></b> Sent a quotation Request</p>
                             <small class="text-muted">10 Minutes Ago</small>
                         </div>
                     </div>
-                    <div class="update">
-                        <div class="profile-photo">
-                            <!-- <img src="images/photo2.jpg"> -->
-                        </div>
-                        <div class="message">
-                            <p><b>Nisal Abeyweera</b> Sent a quotation request</p>
-                            <small class="text-muted">1 Day Ago</small>
-                        </div>
-                    </div>
-                    <div class="update">
-                        <div class="profile-photo">
-                            <!-- <img src="images/photo2.jpg"> -->
-                        </div>
-                        <div class="message">
-                            <p><b>Hasith Perera</b> Sent a quotation</p>
-                            <small class="text-muted">2 Days Ago</small>
-                        </div>
-                    </div>
+                    
+                <?php endforeach; ?>    
+                   
                 </div>
             </div>
 
