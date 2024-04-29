@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="<?php echo URLROOT; ?>public/css/admindash.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>public/css/eventplannerdash.css">
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             const calendarBody = document.getElementById('calendar-body');
             const currentMonthYear = document.getElementById('current-month-year');
             const prevMonthButton = document.getElementById('prev-month');
@@ -35,7 +35,10 @@
                 calendarBody.innerHTML = '';
 
                 // Set the current month and year in the header
-                currentMonthYear.textContent = new Date(year, month).toLocaleDateString('en-US', { year: 'numeric', month: 'long' });
+                currentMonthYear.textContent = new Date(year, month).toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long'
+                });
 
                 // Generate calendar cells
                 let date = 1;
@@ -63,12 +66,12 @@
             generateCalendar();
 
             // Event listeners for changing months
-            prevMonthButton.addEventListener('click', function () {
+            prevMonthButton.addEventListener('click', function() {
                 currentDate.setMonth(currentDate.getMonth() - 1);
                 generateCalendar();
             });
 
-            nextMonthButton.addEventListener('click', function () {
+            nextMonthButton.addEventListener('click', function() {
                 currentDate.setMonth(currentDate.getMonth() + 1);
                 generateCalendar();
             });
@@ -80,7 +83,7 @@
 
             for (let i = 0; i < 12; i++) {
                 data.push(Math.floor(Math.random() * 15)); // Generate random data values between 0 and 100
-               
+
             }
 
             // Create a bar chart
@@ -105,9 +108,6 @@
                 }
             });
         });
-
-
-
     </script>
 
 
@@ -165,18 +165,39 @@
         <div>
             <div class="profile end">
                 <div class="info" style="padding-right:25px;">
-                    <p>Hey, <b><?php echo $_SESSION['user_name']?></b></p>
-                    <small class="text-muted"><?php echo $_SESSION['user_role']?></small>
+                    <p>Hey, <b><?php echo $_SESSION['user_name'] ?></b></p>
+                    <small class="text-muted"><?php echo $_SESSION['user_role'] ?></small>
                 </div>
                 <div class="profile-photo">
-                    <!-- <img src="<?php echo URLROOT ?>public/images/photo2.jpg"> -->
+                    <img src="<?php echo URLROOT ?>public/images/user.svg">
                 </div>
             </div>
 
             <!-- Heading and search bar -->
 
             <main>
-            <h1>Dashboard</h1>
+                <h1>Dashboard</h1>
+
+                <div class="insights">
+                    <div class="users">
+                        <span class="material-icons-sharp">festival</span>
+                        <div class="middle">
+                            <div class="left">
+                                <h3>Pending Events</h3>
+                                <h1><?php echo $data['pending_count']->Count; ?></h1>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <div class="eventplanners">
+                        <span class="material-icons-sharp">inventory</span>
+                        <div class="middle">
+                            <div class="left">
+                                <h3>Quotation</h3>
+                                <h1><?php echo $data['booked_count']->Count; ?></h1>
+                            </div>
 
             <div class="insights">
                 <div class="users">
@@ -188,7 +209,6 @@
                         </div>
 
                     </div>
-                </div>
 
                 <div class="eventplanners">
                     <span style="background-color:#f3db62", class="material-icons-sharp">inventory</span>
@@ -233,45 +253,57 @@
                          <?php foreach ($data['events'] as $event) : ?>
 
                             <tr>
-                                <td><?php echo $event->id; ?></td>
-                                <td> <?php echo $event->event_type; ?> </td>
-                                <td><?php echo $event->date; ?> </td>
-                                <td><?php echo $event->event_status; ?> </td>
-                                <td>
-                                    <form action="<?php echo URLROOT ?>customers/deleteevent/<?php echo $event->id;?>" method="post">
-                                        <input type="hidden" name="delete_event" value="1">
-                                        <button type="submit">Delete</button>
-                                    </form>
-                                </td>
-                                <td>
-                                    <a href="<?php echo URLROOT ?>customers/oneevent/<?php echo $event->id; ?>">
-                                        <span class="material-icons-sharp">
-
-                                            expand_circle_down
-
-                                        </span>
-                                    </a>
-                                </td>
-
-
+                                <th>Event ID</th>
+                                <th>Event Type</th>
+                                <th>Tentative Date</th>
+                                <th>Event Status</th>
+                                <th>Action</th>
+                                <th>More</th>
                             </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($data['events'] as $event) : ?>
 
-            </div>
-            <!------------End of insights------------>
+                                <tr>
+                                    <td><?php echo $event->id; ?></td>
+                                    <td> <?php echo $event->event_type; ?> </td>
+                                    <td><?php echo $event->date; ?> </td>
+                                    <td><?php echo $event->event_status; ?> </td>
+                                    <td>
+                                        <form action="<?php echo URLROOT ?>customers/deleteevent/<?php echo $event->id; ?>" method="post">
+                                            <input type="hidden" name="delete_event" value="1">
+                                            <button type="submit">Delete</button>
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <a href="<?php echo URLROOT ?>customers/oneevent/<?php echo $event->id; ?>">
+                                            <span class="material-icons-sharp">
 
-        </main>
+                                                expand_circle_down
 
-        
-    </div>
-    <div class="right">
+                                            </span>
+                                        </a>
+                                    </td>
+
+
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+
+                </div>
+                <!------------End of insights------------>
+
+            </main>
+
+
+        </div>
+        <div class="right">
             <div class="top">
                 <button id="menu-btn">
                     <span class="material-icons-sharp">menu</span>
                 </button>
-               
+
             </div>
             <!-- End of top-->
             <div class="recent-updates">
