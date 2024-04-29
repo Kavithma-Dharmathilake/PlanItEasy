@@ -277,6 +277,76 @@ class Customers extends Controller
         $this->view('customers/oneevent', $data);
     }
 
+    public function inquiry(){
+
+        $data = [];
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $_INQUIRY = filter_input_array(INPUT_POST);
+
+            $data = [
+                'cusid' => $_SESSION['user_id'],
+                'name' => trim($_POST['name']),
+                'email' => trim($_POST['email']),
+                'inquiry' => trim($_POST['inquiry']),
+            ];
+
+
+            $eid = $this->customerModel->inquiry($data);
+            echo '<script>alert("Inquiry sent Successfully");';
+            echo 'window.location.href = "' . URLROOT . 'customers/inquiry/' . $eid . '";</script>';
+
+
+        } else {
+            $this->view('customers/inquiry', $data);
+        }
+    }
+
+    // public function getinquirymail(){
+    //     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    //         // Sanitize POST data
+    //         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+    
+    //         // Get form data
+    //         $name = $_POST["name"];
+    //         $email = $_POST["email"];
+    //         $inquiry = $_POST["inquiry"];
+    //         $toEmail = "mahogaharith@gmail.com";
+    
+    //         // Email subject
+    //         $subject = "New Inquiry from $name";
+    
+    //         // Email headers
+    //         $headers = "From: $name <$email>" . "\r\n";
+    //         $headers .= "Reply-To: $email" . "\r\n";
+    //         $headers .= "Content-type: text/html; charset=UTF-8" . "\r\n";
+    
+    //         // Email body
+    //         $message = "Name: $name <br>";
+    //         $message .= "Email: $email <br>";
+    //         $message .= "Inquiry: $inquiry <br>";
+    
+    //         // Send email
+    //         if (mail($toEmail, $subject, $message, $headers)) {
+    //             $message = "Your inquiry has been sent successfully.";
+    //         } else {
+    //             $message = "Failed to send your inquiry.";
+    //         }
+    
+    //         // Render the view with the appropriate message
+    //         $data['message'] = $message;
+    //         $this->view('path_to_your_view_file', $data); // Replace 'path_to_your_view_file' with the actual path to your view file
+    //     } else {
+    //         // Invalid form submission
+    //         $message = "Invalid form submission.";
+    //         // Render the view with the appropriate message
+    //         $data['message'] = $message;
+    //         $this->view('path_to_your_view_file', $data); // Replace 'path_to_your_view_file' with the actual path to your view file
+    //     }
+    // }
+    
+
     //viewing all suppliers
     public function supplier($id)
     {

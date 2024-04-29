@@ -47,7 +47,7 @@
 
         </aside>
 
-
+       
 
         <!-- Content start here -->
         <div>
@@ -64,8 +64,9 @@
 
             <div class="profile-icon" style="display:flex; width:500px">
                 <div>
-                    <img src="<?php echo URLROOT ?>public/images/photo2.jpg">
-                    <i class="fa fa-plus-circle" aria-hidden="true"><input type="file" accept=".jpg, .jpeg, .png" style="display: none;" /></i>
+                    <img src="<?php echo URLROOT ?>public/images/user.svg">
+                    <div class="edit-profile">
+                    </div>
                 </div>
                 <div>
 
@@ -106,6 +107,16 @@
 
             </div>
 
+
+<script>
+function openForm() {
+  document.getElementById("myForm").style.display = "block";
+}
+
+function closeForm() {
+  document.getElementById("myForm").style.display = "none";
+}
+</script>
 
 
 
