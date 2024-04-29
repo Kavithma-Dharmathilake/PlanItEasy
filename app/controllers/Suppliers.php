@@ -19,6 +19,12 @@ class Suppliers extends Controller
         $countProduct = $this->supplierModel->countAllProducts();
         $countQuote = $this->supplierModel->countQuotations();
         $quotePerMonth = $this->supplierModel->countQuotationsPerMonth();
+        $calanderDates =  $result = $this->supplierModel->getCalander();
+        $countAccepted = $this->supplierModel->countAccepted();
+        $recentQuotes = $this->supplierModel->getRecentQuotes();
+
+        var_dump($_SESSION['user_id']);
+        var_dump($_SESSION['user_name']);
         
         // var_dump[$quotePerMonth];
         //var_dump[$countQuote];
@@ -27,10 +33,15 @@ class Suppliers extends Controller
             'userName' => $userName,
             'countProduct' => $countProduct,
             'countQuote' => $countQuote,
-            'quotePerMonth' => $quotePerMonth
+            'quotePerMonth' => $quotePerMonth,
+            'calaendarDates' => $calanderDates,
+            'countAccepted' => $countAccepted,
+            'recentQuotes' => $recentQuotes
         ];
         $this->view('suppliers/index', $data);
+        
     }
+
 
     public function profile()
     {
@@ -167,9 +178,12 @@ class Suppliers extends Controller
 
         $uploadDir = 'images/uploads/';
         $pdfUploadDir = 'uploads/';
+
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
+          
             $bio = $_POST['bio'];
+            
             $description = $_POST['description'];
 
             $caption = $_FILES['caption'];
@@ -322,24 +336,31 @@ class Suppliers extends Controller
 
             $_POST = filter_input_array(INPUT_POST);
 
-            
-
             $data = [
                 'event' => trim($_POST['event']),
                 'date' => trim($_POST['date']),
             ];
 
 
-            foreach ($avldates as $date) {
-                if ($data['date'] == $date->date) {
-                    echo '<script> alert("Date Already Taken")</script>';
-                    redirect('suppliers/calendar');
-                }else{
-                    echo '<script> alert("Date Available")</script>';
-                }
-            }
+            // foreach ($avldates as $date) {
+            //     if ($data['date'] == $date->date) {
+            //         echo '<script> alert("Date Already Taken")</script>';
+            //         redirect('suppliers/calendar');
+            //     }else{
+            //         echo '<script> alert("Date Available")</script>';
+            //     }
+            // }
 
+            $dateStatus = $this->supplierModel->chekStatus($data['date']);
+            
+            
+            if($dateStatus == "Available" || $dateStatus == true){
 
+                echo '<script> alert("Date Available");
+                window.location =  "' . URLROOT . 'suppliers/calendar";
+                </script>';
+            }else{
+                var_dump($dateStatus);
             if (!empty($data['event'])) {
 
                 $available = [
@@ -348,18 +369,17 @@ class Suppliers extends Controller
                 ];
 
                 if ($this->supplierModel->addAvailability($available)) {
-                    echo '<script> alert("Clicked!");
-                    window.location = "suppliers/calendar";
+                    echo '<script> alert("Availability Added ");
+                    window.location =  "' . URLROOT . 'suppliers/calendar";
                     </script>';
-                    // redirect('suppliers/calendar');
+                    // header('Location: ' . URLROOT . 'suppliers/calendar' );
                 } else {
                     $this->view('suppliers/calendar', $data);
                 }
             } else {
                 $this->view('suppliers/calendar', $data);
             }
-
-            
+        }  
         }else{
         $this->view('suppliers/calendar');
         }

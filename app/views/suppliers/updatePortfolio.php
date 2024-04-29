@@ -94,7 +94,7 @@
             <div class="planner-title" style="padding-bottom:50px;">
                 <h1>Update Your Portfolio</h1>
             </div>
-            <form action="<?php echo URLROOT; ?>suppliers/updatePortfolio" method="post" enctype="multipart/form-data">
+            <form action="<?php echo URLROOT; ?>suppliers/updatePortfolio" method="POST" enctype="multipart/form-data">
                 <div class="form-add-package">
                     <div class="form-wrapper">
                         <div class="form-heading">

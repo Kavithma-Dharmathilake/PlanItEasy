@@ -9,74 +9,16 @@
     <!-- MATERIAL CDN -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
+    
     <!-- STYLESHEET -->
     <link rel="stylesheet" href="<?php echo URLROOT; ?>public/css/admindash.css">
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const calendarBody = document.getElementById('calendar-body');
-            const currentMonthYear = document.getElementById('current-month-year');
-            const prevMonthButton = document.getElementById('prev-month');
-            const nextMonthButton = document.getElementById('next-month');
+                  
+            const quotePerMonth = <?php echo json_encode(array_column( $data['quotePerMonth'],'month_count')); ?>;
 
-            let currentDate = new Date();
-
-            // Function to generate the calendar for the current month
-            function generateCalendar() {
-                const year = currentDate.getFullYear();
-                const month = currentDate.getMonth();
-                const firstDay = new Date(year, month, 1);
-                const lastDay = new Date(year, month + 1, 0);
-                const daysInMonth = lastDay.getDate();
-                const startingDay = firstDay.getDay();
-
-                // Clear the previous month's calendar
-                calendarBody.innerHTML = '';
-
-                // Set the current month and year in the header
-                currentMonthYear.textContent = new Date(year, month).toLocaleDateString('en-US', {
-                    year: 'numeric',
-                    month: 'long'
-                });
-
-                // Generate calendar cells
-                let date = 1;
-                for (let i = 0; i < 6; i++) {
-                    const row = document.createElement('tr');
-                    for (let j = 0; j < 7; j++) {
-                        const cell = document.createElement('td');
-                        if (i === 0 && j < startingDay) {
-                            // Empty cells before the start of the month
-                            cell.textContent = '';
-                        } else if (date > daysInMonth) {
-                            // Empty cells after the end of the month
-                            cell.textContent = '';
-                        } else {
-                            cell.textContent = date;
-                            date++;
-                        }
-                        row.appendChild(cell);
-                    }
-                    calendarBody.appendChild(row);
-                }
-            }
-
-            // Initial calendar generation
-            generateCalendar();
-
-            // Event listeners for changing months
-            prevMonthButton.addEventListener('click', function() {
-                currentDate.setMonth(currentDate.getMonth() - 1);
-                generateCalendar();
-            });
-
-            nextMonthButton.addEventListener('click', function() {
-                currentDate.setMonth(currentDate.getMonth() + 1);
-                generateCalendar();
-            });
-
-
-            // Generate random data
-            var data = [];
             const labels = ["Januray", "February", "March", "April", "June", "July", "August", "September", "October", "November", "December"];
 
             // Create a bar chart
@@ -86,8 +28,8 @@
                 data: {
                     labels: labels,
                     datasets: [{
-                        label: 'Quotation Requests sent per month',
-                        data: data,
+                        label: 'Quotation Requests Recieved Per Month',
+                        data: quotePerMonth,
                         backgroundColor: '#011f4b',
                         borderWidth: 1,
                     }]
@@ -101,11 +43,11 @@
                 }
             });
         });
-    </script>
+</script>
 </head>
 
 <body>
-    <?php var_dump($data['quotePerMonth']);?>
+    <!-- <?php var_dump($data['calaendarDates']);?> -->
     <div class="dash-container">
         <aside>
             <div class="top">
@@ -162,7 +104,7 @@
                 <a href="<?php echo URLROOT; ?>suppliers/message">
                     <span class="material-icons-sharp">mail</span>
                     <h3>Messages</h3>
-                    <span class="message-count">5</span>
+                    
                 </a>
                 <a href="<?php echo URLROOT; ?>users/logout">
                     <span class="material-icons-sharp">logout</span>
@@ -178,7 +120,7 @@
                     <span class="material-icons-sharp">festival</span>
                     <div class="middle">
                         <div class="left">
-                            <h3>New Quotation Requests</h3>
+                            <h3>Pending Requests</h3>
                             <h1>
                                     <?php echo $data['countQuote']->Count ?><br>
                             </h1>
@@ -192,8 +134,10 @@
                     <span class="material-icons-sharp">inventory</span>
                     <div class="middle">
                         <div class="left">
-                            <h3>New Project Requests</h3>
-                            <h1>5</h1>
+                            <h3>Accepted Requests</h3>
+                            <h1>
+                            <?php echo $data['countAccepted']->Count ?><br>
+                            </h1>
                         </div>
 
                     </div>
@@ -216,7 +160,7 @@
 
             </div>
             <div class="recent-trans">
-                <h2>Event Completed</h2>
+                <h2>Quotation Requests Recieved Per Month</h2>
                 <canvas id="barChart"></canvas>
 
             </div>
@@ -244,69 +188,115 @@
             <div class="recent-updates">
                 <h2>Recent Updates</h2>
                 <div class="updates">
+                    
+                <?php foreach($data['recentQuotes'] as $update): ?>
+
                     <div class="update">
                         <div class="profile-photo">
                             <!-- <img src="images/photo2.jpg"> -->
                         </div>
                         <div class="message">
-                            <p><b>Chamod Deshan</b> Sent a quotation Request</p>
+                            <p><b></b> Sent a quotation Request</p>
                             <small class="text-muted">10 Minutes Ago</small>
                         </div>
                     </div>
-                    <div class="update">
-                        <div class="profile-photo">
-                            <!-- <img src="images/photo2.jpg"> -->
-                        </div>
-                        <div class="message">
-                            <p><b>Nisal Abeyweera</b> Sent a quotation request</p>
-                            <small class="text-muted">1 Day Ago</small>
-                        </div>
-                    </div>
-                    <div class="update">
-                        <div class="profile-photo">
-                            <!-- <img src="images/photo2.jpg"> -->
-                        </div>
-                        <div class="message">
-                            <p><b>Hasith Perera</b> Sent a quotation</p>
-                            <small class="text-muted">2 Days Ago</small>
-                        </div>
-                    </div>
+                    
+                <?php endforeach; ?>    
+                   
                 </div>
             </div>
 
             <!------------ END OF RECENT UPDTAES ------------>
             <div class="analytics">
-                <h2>Calander</h2>
-                <div class="calendar">
-                    <div class="calendar-header">
-                        <button id="prev-month">Previous</button>
-                        <h2 id="current-month-year">Month Year</h2>
-                        <button id="next-month">Next</button>
-                    </div>
-                    <a href="<?php echo URLROOT; ?>suppliers/calendar"> 
-                    <table class="calendar-table" style="cursor: pointer;">
-                        <thead>
-                            <tr>
-                                <th>Sun</th>
-                                <th>Mon</th>
-                                <th>Tue</th>
-                                <th>Wed</th>
-                                <th>Thu</th>
-                                <th>Fri</th>
-                                <th>Sat</th>
-                            </tr>
-                        </thead>
-                        <tbody id="calendar-body">
-                            <!-- Calendar cells will be dynamically generated here -->
-                        </tbody>
-                    </table>
-                    </a>
-                </div>
-
+                <div id='calendar'></div>
             </div>
         </div>
     </div>
 
-</body>
 
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            height: 400,
+            events: '<?php echo URLROOT; ?>suppliers/getCalendarEvents',
+
+        });
+
+        calendar.render();
+    });
+
+    var modal = document.getElementById("myModal");
+    var btn = document.getElementById("myBtn");
+    var span = document.getElementsByClassName("close")[0];
+    btn.onclick = function() {
+        modal.style.display = "block";
+    }
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    btn.onclick = function() {
+        modal.style.display = "block";
+    }
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
+
+</body>
 </html>
+
+
+
+<!-- 
+<script>
+        // Data for the bar chart
+        var menuItems = <?php echo json_encode(array_column($data['bestsellingtop5menuitems'], 'itemName')); ?>;
+        var quantities = <?php echo json_encode(array_column($data['bestsellingtop5menuitems'], 'total_quantity')); ?>;
+
+        // Bar chart configuration
+        var ctx = document.getElementById('best-selling-chart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: menuItems,
+                datasets: [{
+                    label: 'Quantity Sold',
+                    data: quantities,
+                    backgroundColor: '#4caf50', // Green color
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        var packageNames = <?php echo json_encode(array_column($data['gettotalpackageusage'], 'packageName')); ?>;
+        var packageUsages = <?php echo json_encode(array_column($data['gettotalpackageusage'], 'total_usage')); ?>;
+
+        // Pie chart configuration
+        var pieCtx = document.getElementById('total-package-chart').getContext('2d');
+        var pieChart = new Chart(pieCtx, {
+            type: 'pie',
+            data: {
+                labels: packageNames,
+                datasets: [{
+                    label: 'Package Usage',
+                    data: packageUsages,
+                    backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'], // Colors for the pie slices
+                    borderWidth: 1
+                }]
+            },
+            options: {}
+        });
+    </script> -->

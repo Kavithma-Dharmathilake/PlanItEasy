@@ -35,11 +35,11 @@
                 </div>
             </div>
             <div class="sidebar">
-                <a href="<?php echo URLROOT; ?>customers" class="active">
+                <a href="<?php echo URLROOT; ?>customers" >
                     <span class="material-icons-sharp">grid_view</span>
                     <h3>Dashboard</h3>
                 </a>
-                <a href="<?php echo URLROOT; ?>customers/events">
+                <a href="<?php echo URLROOT; ?>customers/events" class="active">
                     <span class="material-icons-sharp">man</span>
                     <h3>Events</h3>
                 </a>
