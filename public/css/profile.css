@@ -1,4 +1,3 @@
-
 :root {
     --color-primary: #7380ec;
     --color-danger: #ff7782;
@@ -12,17 +11,13 @@
     --color-primary-variant: #03396c;
     --color-dark-variant: #005b96;
     --color-background: #f6f6f9;
-
     --card-border-radius: 2rem;
     --border-radius-1: 0.4rem;
     --border-radius-2: 0.8rem;
     --border-radius-3: 1.2rem;
-
     --card-padding: 1.8rem;
     --padding-1: 1.2rem;
-
     --box-shadow: 0 2rem 3rem var(--color-info-light);
-
 }
 
 * {
@@ -47,22 +42,17 @@ body {
     color: rgb(83, 83, 83);
 }
 
-
-
-.profile-icon{
-  margin-top: 100px;
-  margin-left:200px;
+.profile-icon {
+    margin-top: 100px;
+    margin-left: 200px;
 }
 
-.profile-icon img{
+.profile-icon img {
     height: 100px;
-    width:100px;
+    width: 100px;
     border-radius: 60px;
-    box-shadow:inset;
+    box-shadow: inset;
     overflow: hidden;
-
-
-    
 }
 
 .profile-icon p {
@@ -71,53 +61,50 @@ body {
     font-weight: bold;
 }
 
-.profile-img{
+.profile-img {
     z-index: -12;
     overflow: hidden;
-  
-
 }
 
-.profile-icon div{
+.profile-icon div {
     display: flex;
 }
 
-
-.profile-icon i{
-    z-index:0;
-    color:#7380ec;
+.profile-icon i {
+    z-index: 0;
+    color: #7380ec;
     font-size: 25px;
     margin-top: 75px;
-    margin-left:-20px;
+    margin-left: -20px;
 }
 
-.profile-icon h3{
-    margin-top:55px;
+.profile-icon h3 {
+    margin-top: 55px;
     margin-left: -200px;
 }
 
-.profile-content{
+.profile-content {
     margin-top: 50px;
-    margin-left:200px;
+    margin-left: 200px;
 }
 
-.profile-content label{
-    font-size:small;
-    color:#011f4b
+.profile-content label {
+    font-size: small;
+    color: #011f4b
 }
 
-.profile-content input{
-    margin:20px;
-    padding:20px;
-    width:300px;
+.profile-content input {
+    margin: 20px;
+    padding: 20px;
+    width: 300px;
     border-radius: 30px;
 }
 
-.profile-content input:hover{
-    margin:20px;
-    padding:20px;
-    width:300px;
+.profile-content input:hover {
+    margin: 20px;
+    padding: 20px;
+    width: 300px;
     border-radius: 30px;
     background-color: #7380ec;
-    color:white;
+    color: white;
 }
