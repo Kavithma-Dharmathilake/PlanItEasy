@@ -20,7 +20,7 @@
 
 <body>
     <div class="dash-container">
-        <aside>
+    <aside>
             <div class="top">
                 <div class="logo">
                     <img src="<?php echo URLROOT; ?>/public/images/logo.jpg">
@@ -42,7 +42,7 @@
                     </span>
                     <h3>Packages</h3>
                 </a>
-                <a href="<?php echo URLROOT ?>eventplanners/quoteReq">
+                <a href="<?php echo URLROOT ?>eventplanners/portfolio">
                     <span class="material-icons-sharp">
                         note_add
                     </span>
@@ -56,8 +56,8 @@
                     <h3>Event Requests</h3>
                 </a>
 
-
-
+               
+         
                 <a href="<?php echo URLROOT ?>eventplanners/calendar">
                     <span class="material-icons-sharp">
                         calendar_month
@@ -84,7 +84,7 @@
                     </span>
                     <h3>Inquiry</h3>
                 </a>
-                <a href="<?php echo URLROOT ?>">
+                <a href="<?php echo URLROOT ?>users/logout">
                     <span class="material-icons-sharp">logout</span>
                     <h3>Logout</h3>
                 </a>
@@ -129,8 +129,8 @@
                                 <td> <?php echo $i->price ?></td>
                                 <td> <?php echo $i->services ?></td>
                                 <td> <?php echo $i->date ?></td>
-                                <td><a href="<?php echo URLROOT ?>suppliers/updatepackage/<?php echo $i->id ?>"><button class="btn_accept" type="button">Update</button></a></td>
-                                <td><a href="<?php echo URLROOT ?>suppliers/deleteuser/<?php echo $i->id ?>"><button class="btn_reject" type="button" onclick="confirmDelete(<?php echo $i->id ?>)">Delete</button></a></td>
+                                <td><a href="<?php echo URLROOT ?>eventplanners/updatepackage/<?php echo $i->id ?>"><button class="btn_accept" type="button">Update</button></a></td>
+                                <td><a href="<?php echo URLROOT ?>eventplanners/deletePackage/<?php echo $i->id ?>"><button class="btn_reject" type="button" onclick="confirmDelete(<?php echo $i->id ?>)">Delete</button></a></td>
                                 </td>
                             </tr>
 

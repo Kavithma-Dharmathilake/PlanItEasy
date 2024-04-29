@@ -9,6 +9,7 @@ class Pages extends Controller
 
      
         $this->userModel = $this->model('User');
+        $this->pagesModel = $this->model('Page');
     }
 
     public function index()
@@ -28,13 +29,28 @@ class Pages extends Controller
 
     public function eventplanners()
     {
-        $this->view('pages/eventplanners');
+        $eventplanners = $this->pagesModel->getEventPlanner('Event Planner');
+
+        $data =[
+            'eventplanners' => $eventplanners,
+        ];
+        $this->view('pages/eventplanners', $data);
     }
 
     public function suppliers()
     {
+        $photographers = $this->pagesModel->getSupplier('Photographer');
+        $reception = $this->pagesModel->getSupplier('Reception hall');
+        $catering = $this->pagesModel->getSupplier('Catering Service');
+        
 
-        $this->view('pages/suppliers');
+        $data = [
+            'photographers' => $photographers,
+            'reception' => $reception,
+            'catering' => $catering,
+        ];
+
+        $this->view('pages/suppliers', $data);
     }
 
     public function join()

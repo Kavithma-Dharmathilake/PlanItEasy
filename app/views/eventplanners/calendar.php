@@ -1,15 +1,4 @@
-<?php
-$eventsArr = array();
-if ($data['events']->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        array_push($eventsArr, $row);
-    }
-}
 
-// Render event data in JSON format 
-echo json_encode($eventsArr);
-
-?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -34,7 +23,7 @@ echo json_encode($eventsArr);
 <body>
 
     <div class="dash-container">
-        <aside>
+    <aside>
             <div class="top">
                 <div class="logo">
                     <img src="<?php echo URLROOT; ?>/public/images/logo.jpg">
@@ -45,7 +34,7 @@ echo json_encode($eventsArr);
                 </div>
             </div>
             <div class="sidebar">
-                <a href="<?php echo URLROOT; ?>eventplanners">
+                <a href="<?php echo URLROOT; ?>eventplanners" class="active">
                     <span class="material-icons-sharp">grid_view</span>
                     <h3>Dashboard</h3>
                 </a>
@@ -56,6 +45,12 @@ echo json_encode($eventsArr);
                     </span>
                     <h3>Packages</h3>
                 </a>
+                <a href="<?php echo URLROOT ?>eventplanners/portfolio">
+                    <span class="material-icons-sharp">
+                        note_add
+                    </span>
+                    <h3>Portfolio</h3>
+                </a>
 
                 <a href="<?php echo URLROOT ?>eventplanners/eventRequest">
                     <span class="material-icons-sharp">
@@ -64,26 +59,9 @@ echo json_encode($eventsArr);
                     <h3>Event Requests</h3>
                 </a>
 
-                <a href="<?php echo URLROOT ?>eventplanners/quoteReq">
-                    <span class="material-icons-sharp">
-                        note_add
-                    </span>
-                    <h3>Quoatation Requests</h3>
-                </a>
-                <a href="<?php echo URLROOT ?>eventplanners/supplierReq">
-                    <span class="material-icons-sharp">
-                        request_quote
-                    </span>
-                    <h3>Supplier Quotations</h3>
-                </a>
-                <a href="<?php echo URLROOT ?>eventplanners/budget">
-                    <span class="material-icons-sharp">
-                        paid
-                    </span>
-                    <h3>Budget Plans</h3>
-                </a>
-
-                <a href="<?php echo URLROOT ?>eventplanners/calendar" class="active">
+               
+         
+                <a href="<?php echo URLROOT ?>eventplanners/calendar">
                     <span class="material-icons-sharp">
                         calendar_month
                     </span>
@@ -109,34 +87,70 @@ echo json_encode($eventsArr);
                     </span>
                     <h3>Inquiry</h3>
                 </a>
-                <a href="<?php echo URLROOT ?>">
+                <a href="<?php echo URLROOT ?>users/logout">
                     <span class="material-icons-sharp">logout</span>
                     <h3>Logout</h3>
                 </a>
             </div>
         </aside>
-        <!-- Content start here -->
-        <div>
-            <div class="profile end">
-                <div class="info" style="padding-right:25px;">
-                    <p>Hey, <b>Sunimal</b></p>
-                    <small class="text-muted">Eventplanner</small>
-                </div>
-                <div class="profile-photo">
-                    <img src="<?php echo URLROOT ?>public/images/photo2.jpg">
-                </div>
-            </div>
-            <!-- Heading and search bar -->
+        <main> 
             <div class="planner-title">
                 <h1>Calendar</h1>
             </div>
-            <div id="calendar">
-            </div>
-        </div>
 
-    </div>
+            <div id='calendar'></div>
+
+            </main>
+
+            <div class="right">
+            <div class="top">
+                <button id="menu-btn">
+                    <span class="material-icons-sharp">menu</span>
+                </button>
+                <div class="profile">
+                    <div class="info">
+                        <p>Hey, <b><?php echo $_SESSION['user_name']?></b></p>
+                        <small class="text-muted">Eventplanner</small>
+                    </div>
+                    <div class="profile-photo">
+                    <!-- <img src="<?php echo URLROOT; ?>public/images/photo1.jpg"> -->
+                    </div>  
+                </div>
+            </div>
+            <div class="recent-updates">
+            <div class="updates">
+                <h2>Availability</h2></br>
+                <h3><b>Insert the dates you are not available here.</b></h3></br>
+                    <form method="POST" class="form" action="<?php echo URLROOT ?>eventplanners/Calendar">
+                        <div class="input-box">
+                            <label>Event Title</label>
+                            <input type="text" name="event" placeholder="Enter event title">
+                        </div></br>
+                        <div class="input-box">
+                            <label>Date</label>
+                            <input type="date" name="date">
+                        </div>
+                        <button type="submit" class="btn" style="display: block; margin: 0 auto; background:var(--color-primary); color: var(--color-black); padding: 1rem 2rem; border: 1px solid transparent; font-weight: 500; transition: var(--transition); border-radius: var(--border-radius-2); margin-top: 3rem; cursor: pointer;">
+                        Add Event</button>
+                    </form>
+            </div>
+            </div>
 
 </body>
 
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            height: 650,
+            events: '<?php echo URLROOT; ?>suppliers/getCalendarEvents',
+
+        });
+
+        calendar.render();
+    });
+</script>
 </html>
 

@@ -12,7 +12,7 @@
     <!-- STYLESHEET -->
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/public/css/admindash.css">
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             const calendarBody = document.getElementById('calendar-body');
             const currentMonthYear = document.getElementById('current-month-year');
             const prevMonthButton = document.getElementById('prev-month');
@@ -33,7 +33,10 @@
                 calendarBody.innerHTML = '';
 
                 // Set the current month and year in the header
-                currentMonthYear.textContent = new Date(year, month).toLocaleDateString('en-US', { year: 'numeric', month: 'long' });
+                currentMonthYear.textContent = new Date(year, month).toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long'
+                });
 
                 // Generate calendar cells
                 let date = 1;
@@ -61,12 +64,12 @@
             generateCalendar();
 
             // Event listeners for changing months
-            prevMonthButton.addEventListener('click', function () {
+            prevMonthButton.addEventListener('click', function() {
                 currentDate.setMonth(currentDate.getMonth() - 1);
                 generateCalendar();
             });
 
-            nextMonthButton.addEventListener('click', function () {
+            nextMonthButton.addEventListener('click', function() {
                 currentDate.setMonth(currentDate.getMonth() + 1);
                 generateCalendar();
             });
@@ -78,7 +81,7 @@
 
             for (let i = 0; i < 12; i++) {
                 data.push(Math.floor(Math.random() * 15)); // Generate random data values between 0 and 100
-               
+
             }
 
             // Create a bar chart
@@ -103,9 +106,6 @@
                 }
             });
         });
-
-
-
     </script>
 </head>
 
@@ -133,7 +133,7 @@
                     </span>
                     <h3>Packages</h3>
                 </a>
-                <a href="<?php echo URLROOT ?>eventplanners/quoteReq">
+                <a href="<?php echo URLROOT ?>eventplanners/portfolio">
                     <span class="material-icons-sharp">
                         note_add
                     </span>
@@ -147,8 +147,8 @@
                     <h3>Event Requests</h3>
                 </a>
 
-               
-         
+
+
                 <a href="<?php echo URLROOT ?>eventplanners/calendar">
                     <span class="material-icons-sharp">
                         calendar_month
@@ -175,7 +175,7 @@
                     </span>
                     <h3>Inquiry</h3>
                 </a>
-                <a href="<?php echo URLROOT ?>">
+                <a href="<?php echo URLROOT ?>users/logout">
                     <span class="material-icons-sharp">logout</span>
                     <h3>Logout</h3>
                 </a>
@@ -191,7 +191,7 @@
                     <div class="middle">
                         <div class="left">
                             <h3>Total Event Requests</h3>
-                            <h1>15</h1>
+                            <h1><?php echo $data['quotes']->count?></h1>
                         </div>
 
                     </div>
@@ -203,7 +203,7 @@
                     <div class="middle">
                         <div class="left">
                             <h3>Packages and Services</h3>
-                            <h1>5</h1>
+                            <h1><?php echo $data['packages']->count?></h1>
                         </div>
 
                     </div>
@@ -216,7 +216,7 @@
                     <div class="middle">
                         <div class="left">
                             <h3>Budget Plans</h3>
-                            <h1>51</h1>
+                            <h1><?php echo $data['budgets']->count?></h1>
                         </div>
 
                     </div>
@@ -240,47 +240,40 @@
                     <span class="material-icons-sharp">menu</span>
                 </button>
                 <div class="profile">
-                    <div class="info">
-                        <p>Hey, <b>Sunimal</b></p>
-                        <small class="text-muted">Eventplanner</small>
+                    <div class="info" style="padding-right:25px;">
+                        <p>Hey, <b><?php echo $_SESSION['user_name'] ?></b></p>
+                        <small class="text-muted"><?php echo $_SESSION['user_role'] ?></small>
                     </div>
                     <div class="profile-photo">
-                        <img src="images/photo2.jpg">
+                        <img src="<?php echo URLROOT ?>public/images/user.svg">
                     </div>
                 </div>
             </div>
             <!-- End of top-->
             <div class="recent-updates">
                 <h2>Recent Updates</h2>
-                <div class="updates">
-                    <div class="update">
-                        <div class="profile-photo">
-                            <img src="images/photo1.jpg">
+
+                <?php if ($data['recent']) {
+
+                    foreach ($data['recent'] as $recent) {
+                ?>
+                        <div class="updates">
+                            <div class="update">
+                                <div class="recent-icon">
+                                    <span class="material-icons-sharp">person</span>
+                                </div>
+                                <div class="message">
+                                    <p><b> <?php echo $recent->bname; ?> </b> Accepted your Quotation Request</p>
+                                    <small class="text-muted">recent quotations</small>
+                                    <!-- <button class="btn">View Quotation</button> -->
+                                </div>
+                            </div>
                         </div>
-                        <div class="message">
-                            <p><b>Amal Gunasinghe</b> Sent a quotation.</p>
-                            <small class="text-muted">2 Minutes Ago</small>
-                        </div>
-                    </div>
-                    <div class="update">
-                        <div class="profile-photo">
-                            <img src="images/photo1.jpg">
-                        </div>
-                        <div class="message">
-                            <p><b>Amal Gunasinghe</b> Sent a quotation</p>
-                            <small class="text-muted">2 Minutes Ago</small>
-                        </div>
-                    </div>
-                    <div class="update">
-                        <div class="profile-photo">
-                            <img src="images/photo1.jpg">
-                        </div>
-                        <div class="message">
-                            <p><b>Amal Gunasinghe</b> Sent a quotation</p>
-                            <small class="text-muted">2 Minutes Ago</small>
-                        </div>
-                    </div>
-                </div>
+
+                <?php
+                    }
+                } ?>
+
             </div>
 
             <!------------ END OF RECENT UPDTAES ------------>

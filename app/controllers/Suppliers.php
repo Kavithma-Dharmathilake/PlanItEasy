@@ -178,9 +178,12 @@ class Suppliers extends Controller
 
         $uploadDir = 'images/uploads/';
         $pdfUploadDir = 'uploads/';
+
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
+          
             $bio = $_POST['bio'];
+            
             $description = $_POST['description'];
 
             $caption = $_FILES['caption'];

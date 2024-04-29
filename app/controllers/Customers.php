@@ -17,22 +17,40 @@ class Customers extends Controller
         $this->userModel = $this->model('User');
     }
 
-    public function index()
-    {
+    public function index(){
+    $id = $_SESSION['user_id'];
+
+    $events = $this->customerModel->getAllEvents($_SESSION['user_id']);
+    $recentquotes = $this->customerModel->getRecentQuote($id);
+    // $total_count = $this->customerModel->countAcceptedQuote($id);
+    // $total_count_pending = $this->customerModel->countPendingQuote($id);
+    $pending_count = $this->customerModel->countPendingEvents($id);
+    $booked_count = $this->customerModel->countBookedEvents($id);
+    $completed_count = $this->customerModel->countCompletedEvents($id);
 
 
         $events = $this->customerModel->getAllEvents($_SESSION['user_id']);
-        $userName = $_SESSION['user_name'];
+
+      
+        $recentquotes = $this->customerModel->getRecentQuote();
+        $pending_count = $this->customerModel->countEvents('Pending');
+        $booked_count = $this->customerModel->countEvents('Booked');
+        $completed_count = $this->customerModel->countEvents('Completed');
+
 
         $data = [
             'title' => 'Welcome',
-            'name' => $userName,
-            'events' => $events
+            'events' => $events,
+            'recent' => $recentquotes,
+            'pending_count' => $pending_count,
+            'booked_count' => $booked_count,
+            'completed_count' => $completed_count
         ];
 
         $this->view('customers/index', $data);
     }
 
+  
     public function events()
     {
 
@@ -42,7 +60,7 @@ class Customers extends Controller
             'events' => $events
         ];
 
-        
+
 
         $this->view('customers/events', $data);
     }
@@ -125,10 +143,10 @@ class Customers extends Controller
 
             ];
 
-            $time1 =$data['start'];
+            $time1 = $data['start'];
             $time2 = $data['end'];
 
-         
+
             $timestamp1 = strtotime($time1);
             $timestamp2 = strtotime($time2);
 
@@ -174,7 +192,7 @@ class Customers extends Controller
     public function editevent()
     {
 
-  
+
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
@@ -200,7 +218,7 @@ class Customers extends Controller
 
             ];
 
-            $time1 =$data['start'];
+            $time1 = $data['start'];
             $time2 = $data['end'];
 
             // Convert time strings to timestamps using strtotime()
@@ -244,7 +262,6 @@ class Customers extends Controller
         } else {
             $this->view('customers/newevent', $data);
         }
-    
     }
 
 
@@ -256,11 +273,11 @@ class Customers extends Controller
 
         $request = $this->customerModel->getEventById($id);
         $quote = $this->customerModel->getAcceptedQuote($id);
-       
+
 
         $data = [
             'request' => $request,
-            'quote' =>$quote
+            'quote' => $quote
         ];
 
 
@@ -286,14 +303,15 @@ class Customers extends Controller
     public function photography($id)
     {
         $request = $this->customerModel->getEventById($id);
+        $photo = $this->customerModel->getSuppliers('Photographer', $request->date);
+        $nosupplier = $this->customerModel->getUnavailableSuppliers('Photographer', $request->date);
 
-        $photo = $this->customerModel->getSuppliers('Photographer');
-       
-        
+
         $data1 = [
             'request' => $request,
             'supplier' => $photo,
             'type' => "Photographers",
+            'nosupplier' => $nosupplier
         ];
         $this->view('customers/gallery', $data1);
     }
@@ -302,12 +320,14 @@ class Customers extends Controller
     public function caterings($id)
     {
         $request = $this->customerModel->getEventById($id);
-        $cater = $this->customerModel->getSuppliers('Catering Service');
+        $cater = $this->customerModel->getSuppliers('Catering Service', $request->date);
+        $nosupplier = $this->customerModel->getUnavailableSuppliers('Catering Service', $request->date);
 
         $data2 = [
             'request' => $request,
             'supplier' => $cater,
-            'type' => "Catering"
+            'type' => "Catering",
+            'nosupplier' => $nosupplier
         ];
         $this->view('customers/gallery', $data2);
     }
@@ -316,12 +336,14 @@ class Customers extends Controller
     public function reception($id)
     {
         $request = $this->customerModel->getEventById($id);
-        $reception = $this->customerModel->getSuppliers('Reception hall');
+        $reception = $this->customerModel->getSuppliers('Reception hall', $request->date);
+        $nosupplier = $this->customerModel->getUnavailableSuppliers('Reception hall', $request->date);
 
         $data3 = [
             'request' => $request,
             'supplier' => $reception,
-            'type' => "Reception"
+            'type' => "Reception",
+            'nosupplier' => $nosupplier
         ];
         $this->view('customers/gallery', $data3);
     }
@@ -329,69 +351,84 @@ class Customers extends Controller
     public function eventplanner($id)
     {
         $request = $this->customerModel->getEventById($id);
-        $reception = $this->customerModel->getSuppliers('Event Planner');
+        $reception = $this->customerModel->getSuppliers('Event Planner', $request->date);
+        $nosupplier = $this->customerModel->getUnavailableSuppliers('Event Planner', $request->date);
 
         $data = [
             'request' => $request,
             'supplier' => $reception,
-            'type' => "Event Planners"
+            'type' => "Event Planners",
+            'nosupplier' => $nosupplier
         ];
         $this->view('customers/gallery', $data);
     }
 
-    public function cake($id){
+    public function cake($id)
+    {
 
         $request = $this->customerModel->getEventById($id);
-        $reception = $this->customerModel->getSuppliers('Cake Service');
+        $reception = $this->customerModel->getSuppliers('Cake Service', $request->date);
+        $nosupplier = $this->customerModel->getUnavailableSuppliers('Cake Service', $request->date);
 
         $data = [
             'request' => $request,
             'supplier' => $reception,
-            'type' => "Cake Service"
+            'type' => "Cake Service",
+            'nosupplier' => $nosupplier
         ];
         $this->view('customers/gallery', $data);
     }
 
-    public function dancing($id){
+    public function dancing($id)
+    {
 
         $request = $this->customerModel->getEventById($id);
-        $reception = $this->customerModel->getSuppliers('Dancing');
+        $reception = $this->customerModel->getSuppliers('Dancing', $request->date);
+        $nosupplier = $this->customerModel->getUnavailableSuppliers('Dancing', $request->date);
+
 
         $data = [
             'request' => $request,
             'supplier' => $reception,
-            'type' => "Dancing Crews"
+            'type' => "Dancing Crews",
+            'nosupplier' => $nosupplier
         ];
         $this->view('customers/gallery', $data);
     }
 
-    public function music($id){
+    public function music($id)
+    {
 
         $request = $this->customerModel->getEventById($id);
-        $reception = $this->customerModel->getSuppliers('Music');
+        $reception = $this->customerModel->getSuppliers('Music', $request->date);
+        $nosupplier = $this->customerModel->getUnavailableSuppliers('Music', $request->date);
 
         $data = [
             'request' => $request,
             'supplier' => $reception,
-            'type' => "Music Crews"
+            'type' => "Music Crews",
+            'nosupplier' => $nosupplier
         ];
         $this->view('customers/gallery', $data);
     }
 
-    public function dj($id){
+    public function dj($id)
+    {
 
         $request = $this->customerModel->getEventById($id);
-        $reception = $this->customerModel->getSuppliers('DJ');
+        $reception = $this->customerModel->getSuppliers('DJ', $request->date);
+        $nosupplier = $this->customerModel->getUnavailableSuppliers('DJ', $request->date);
 
         $data = [
             'request' => $request,
             'supplier' => $reception,
-            'type' => "DJ"
+            'type' => "DJ",
+            'nosupplier' => $nosupplier
         ];
         $this->view('customers/gallery', $data);
     }
 
-    
+
 
     public function portfolio($sid, $eid)
     {
@@ -403,8 +440,8 @@ class Customers extends Controller
         $data = [
             'request' => $request,
             'user' => $user,
-            'portfolio' =>$portfolio,
-            'packages'=>$packages
+            'portfolio' => $portfolio,
+            'packages' => $packages
 
         ];
         $this->view('customers/portfolio', $data);
@@ -414,12 +451,15 @@ class Customers extends Controller
     public function catering($id)
     {
         $request = $this->customerModel->getEventById($id);
-        $supplier = $this->customerModel->getSuppliers('Catering');
+        $supplier = $this->customerModel->getSuppliers('Catering Service', $request->date);
+        $nosupplier = $this->customerModel->getUnavailableSuppliers('Catering Service', $request->date);
+
 
         $data = [
             'request' => $request,
             'supplier' => $supplier,
-            'type' => "Catering Service"
+            'type' => "Catering Service",
+            'nosupplier' => $nosupplier
         ];
         $this->view('customers/gallery', $data);
     }
@@ -433,21 +473,30 @@ class Customers extends Controller
     public function decorations($id)
     {
         $request = $this->customerModel->getEventById($id);
-        $supplier = $this->customerModel->getSuppliers('Decorations');
+        $supplier = $this->customerModel->getSuppliers('Decorations', $request->date);
+        $nosupplier = $this->customerModel->getUnavailableSuppliers('Decorations', $request->date);
 
         $data = [
             'request' => $request,
             'supplier' => $supplier,
-            'type' => "Decorations"
+            'type' => "Decorations",
+            'nosupplier' => $nosupplier
         ];
         $this->view('customers/gallery', $data);
     }
 
     public function payments()
+
     {
+        $id=$_SESSION['user_id'];
+        $payments = $this->customerModel->showPayment($id);
+
+        // var_dump($payments);
+
         $data = [
-            'title' => 'Welcome'
+            'payments' => $payments,
         ];
+
         $this->view('customers/payments', $data);
     }
 
@@ -465,12 +514,14 @@ class Customers extends Controller
     {
         $request = $this->customerModel->getEventById($eid);
         $supplier = $this->customerModel->getOneSupplier($sid);
+        $packages = $this->customerModel->getAllPackages($sid);
 
         $type = $supplier->stype;
 
         $data = [
             'request' => $request,
             'supplier' => $supplier,
+            'packages' => $packages
         ];
 
         if ($type == "none") {
@@ -827,7 +878,7 @@ class Customers extends Controller
                     'stype' => 'Cake'
                 ];
 
-               
+
                 if ($this->customerModel->RequestCakeQuote($quote)) {
                     echo '<script> alert("Quotation Added Succfully")</script>';
                     header('location: ' . URLROOT . 'customers/catering/' . $request->id);
@@ -837,7 +888,6 @@ class Customers extends Controller
             } else {
                 $this->view('customers/cake-quote', $data);
             }
-          
         } else if ($type == "DJ") {
 
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -864,7 +914,7 @@ class Customers extends Controller
                     'stype' => 'DJ'
                 ];
 
-               
+
                 if ($this->customerModel->RequestDJQuote($quote)) {
                     echo '<script> alert("Quotation Added Succfully")</script>';
                     header('location: ' . URLROOT . 'customers/dj/' . $request->id);
@@ -888,14 +938,14 @@ class Customers extends Controller
                     'stime' => $stime,
                     'etime' => $etime,
                     'remark' => $remark,
-                   
+
                     'rid' => $request->id,
                     'sid' => $supplier->id,
                     'uid' => $_SESSION['user_id'],
                     'stype' => 'Music'
                 ];
 
-               
+
                 if ($this->customerModel->RequestMusicQuote($quote)) {
                     echo '<script> alert("Quotation Added Succfully")</script>';
                     header('location: ' . URLROOT . 'customers/music/' . $request->id);
@@ -913,20 +963,20 @@ class Customers extends Controller
                 $etime = $_POST['end'];
                 $remark = $_POST['remark'];
 
-             
+
                 $quote = [
                     'package' => $package,
                     'stime' => $stime,
                     'etime' => $etime,
                     'remark' => $remark,
-                  
+
                     'rid' => $request->id,
                     'sid' => $supplier->id,
                     'uid' => $_SESSION['user_id'],
                     'stype' => 'Dancing'
                 ];
 
-               
+
                 if ($this->customerModel->RequestDanceQuote($quote)) {
                     echo '<script> alert("Quotation Added Succfully")</script>';
                     header('location: ' . URLROOT . 'customers/dancing/' . $request->id);
@@ -1115,6 +1165,13 @@ class Customers extends Controller
         }
     }
 
+    public function getCalendarEvents($id)
+    {
+
+        $result = $this->customerModel->getCalander($id);
+
+        echo json_encode($result);
+    }
 
     public function quotations($id)
     {
@@ -1351,7 +1408,7 @@ class Customers extends Controller
                 'price' => trim($_POST['amount']),
                 'rid' => trim($_POST['event']),
                 'bid' => trim($_POST['budget']),
-                'desc' =>'Advance Payment Done'
+                'desc' => 'Advance Payment Done'
             ];
 
             $s_amount = (int) $_POST['amount'] * 100;
@@ -1375,7 +1432,7 @@ class Customers extends Controller
 
             $tid = $this->customerModel->insertAdvPayement($data);
             if ($tid != null) {
-                $this->customerModel->updateBudgetQuotations($id);
+                $this->customerModel->updateAdvBudgetQuotations($id);
 
                 echo '<script> alert("Full Payment Successful")</script>';
                 header('location: ' . URLROOT . 'customers/budget/' . $rid);
@@ -1408,7 +1465,7 @@ class Customers extends Controller
                 'price' => trim($_POST['amount']),
                 'rid' => trim($_POST['event']),
                 'bid' => trim($_POST['budget']),
-                'desc' =>'Full Payment Done'
+                'desc' => 'Full Payment Done'
             ];
 
             $s_amount = (int) $_POST['amount'] * 100;
@@ -1478,15 +1535,15 @@ class Customers extends Controller
         $this->view('customers/message', $data);
     }
 
-    public function downloadbudget($bid, $id){
+    public function downloadbudget($bid, $id)
+    {
 
-        
+
         $budgetData = $this->customerModel->getBudgetData($bid, $id);
         echo json_encode($budgetData);
-
     }
 
-    public function chat($id,$eid)
+    public function chat($id, $eid)
     {
         $supplier = $this->userModel->getUserById($id);
         $messages = $this->customerModel->getSupplierMessages($id);
@@ -1495,7 +1552,7 @@ class Customers extends Controller
             'supplier' => $supplier,
             'customer' => $_SESSION['user_name'],
             'messages' => $messages,
-            'eid'=>$eid
+            'eid' => $eid
 
         ];
 
@@ -1505,13 +1562,13 @@ class Customers extends Controller
             $content = $_POST['content'];
             $data = [
                 'content' => $content,
-                'cuid'=>$id,
-                
+                'cuid' => $id,
+
 
             ];
 
             $this->customerModel->sendSupplierMessage($data);
-            header('location: ' . URLROOT . 'customers/chat/' . $id);
+            header('location: ' . URLROOT . 'customers/chat/' . $id . "/" . $eid);
         }
 
 

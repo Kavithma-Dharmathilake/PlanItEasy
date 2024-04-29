@@ -45,7 +45,7 @@ class EventPlanner
 
         return $result;
     }
-    public function getSupplier($type)
+    public function getSupplier($type, $date)
     {
 
         if ($type == 'reception') {
@@ -57,12 +57,23 @@ class EventPlanner
         if ($type == 'catering') {
             $type = 'Catering Service';
         }
-        $this->db->query('SELECT * FROM user Where stype=:stype ');
 
-        $this->db->bind(':stype', $type);
+        $this->db->query('
+        SELECT *,u.id as uid, p.id AS pid, c.date AS available_date
+        FROM user u
+        JOIN portfolios p ON u.id = p.sid
+        LEFT JOIN calander c ON u.id = c.supplier AND c.date = :date AND c.status = \'Not Available\'
+        WHERE u.stype = :type AND c.supplier IS NULL
+    ');
+
+        // Bind the `type` and `date` parameters
+        $this->db->bind(':type', $type);
+        $this->db->bind(':date', $date);
+
+        // Fetch and return the results
         $result = $this->db->resultSet();
-
         return $result;
+    
     }
 
     public function getOnePlannerQuote($id)
@@ -148,6 +159,23 @@ class EventPlanner
     public function getUserById($id)
     {
         $this->db->query('SELECT * FROM user Where id=:id ');
+        $this->db->bind(':id', $id);
+        $result = $this->db->single();
+        return $result;
+    }
+
+    public function getPortfolio($id)
+    {
+
+        $this->db->query('SELECT * FROM portfolios WHERE sid = :id');
+        $this->db->bind(':id', $id);
+
+        $row = $this->db->single();
+        return $row;
+    }
+    public function getPortfolioById($id)
+    {
+        $this->db->query('SELECT * ,u.id AS uid, p.id AS pid FROM user u, portfolios p Where u.id=:id  AND u.id = p.sid');
         $this->db->bind(':id', $id);
         $result = $this->db->single();
         return $result;
@@ -387,6 +415,14 @@ class EventPlanner
         return $data;
     }
     
+    public function getPackageByID($id)
+    {
+        $this->db->query('SELECT * FROM packages where id = :id');
+        $this->db->bind(':id', $id );
+        $result = $this->db->single();
+        return $result;
+    }
+
     public function getAllPackages()
     {
         $id= $_SESSION['user_id'];
@@ -408,6 +444,85 @@ class EventPlanner
         $this->db->bind(':services', $data['services']);
         $this->db->bind(':price', $data['price']);
         $this->db->bind(':date', $date);
+
+
+        //Execute the query
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function updatepackage($data){
+
+        $date = date("Y-m-d");
+        $this->db->query('UPDATE packages SET name=:name,price=:price ,supplier=:supplier, services=:services,description=:description, date=:date WHERE id=:id');
+
+        $this->db->bind(':id', $data['id']);
+        $this->db->bind(':supplier', $_SESSION['user_id']);
+        $this->db->bind(':name', $data['name']);
+        $this->db->bind(':description', $data['description']);
+        $this->db->bind(':services', $data['services']);
+        $this->db->bind(':price', $data['price']);
+        $this->db->bind(':date', $date);
+
+
+        //Execute the query
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+    public function countPackages(){
+
+        $this->db->query('SELECT COUNT(*) AS count FROM packages where supplier = :id');
+        $this->db->bind(':id', $_SESSION['user_id'] );
+        $result = $this->db->single();
+        return $result;
+        
+    }
+
+    public function countBudgets(){
+
+        $this->db->query('SELECT COUNT(*) AS count FROM planner_budget');
+        $result = $this->db->single();
+        return $result;
+        
+    }
+
+    public function countQuotes(){
+
+        $this->db->query('SELECT COUNT(*) AS count FROM quoate WHERE sid=:id');
+        $this->db->bind(':id', $_SESSION['user_id'] );
+        $result = $this->db->single();
+        return $result;
+        
+    }
+
+    
+    public function getRecentQuote(){
+
+        $this->db->query('SELECT * FROM quoate q, user u WHERE uid = :id AND status=:status AND u.id = q.sid');
+        $this->db->bind(':id', $_SESSION['user_id']);
+        $this->db->bind(':status', 'Request Accepted');
+        $row = $this->db->resultSet();
+      
+        return $row;
+        
+    }
+
+
+
+    public function deletePackage($id)
+    {
+        $this->db->query('DELETE FROM packages WHERE id=:id');
+
+        //bind values
+        $this->db->bind(':id', $id);
 
 
         //Execute the query

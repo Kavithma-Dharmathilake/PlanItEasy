@@ -10,14 +10,29 @@ class Eventplanners extends Controller
             redirect('users/login');
         }
 
-        $this->userModel = $this->model('Package');
+        $this->userModel = $this->model('User');
         $this->plannerModel = $this->model('EventPlanner');
         $this->CustomerModel = $this->model('Customer');
+        $this->SupplierModel = $this->model('Supplier');
     }
 
     public function index()
     {
-        $this->view('eventplanners/index');
+        $recentquotes = $this->plannerModel->getRecentQuote();
+        $packages = $this->plannerModel->countPackages();
+        $budgets = $this->plannerModel->countBudgets();
+        $quotes = $this->plannerModel->countQuotes();
+
+
+        $data = [
+            'title' => 'Welcome',
+            'recent' => $recentquotes,
+            'packages' => $packages,
+            'budgets' => $budgets,
+            'quotes' => $quotes
+        ];
+
+        $this->view('eventplanners/index', $data);
     }
 
     public function packages()
@@ -27,78 +42,78 @@ class Eventplanners extends Controller
         $this->view('eventplanners/packages', $data);
     }
 
-    public function updatepackage($id)
-    {
+    // public function updatepackage($id)
+    // {
 
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    //     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-            $file_path = '';
-            $destination = '';
+    //         $file_path = '';
+    //         $destination = '';
 
-            if ($_FILES['img']['error'] === UPLOAD_ERR_OK) {
-                $file_name = $_FILES['img']['name'];
-                $file_tmp = $_FILES['img']['tmp_name'];
+    //         if ($_FILES['img']['error'] === UPLOAD_ERR_OK) {
+    //             $file_name = $_FILES['img']['name'];
+    //             $file_tmp = $_FILES['img']['tmp_name'];
 
-                $upload_dir = "uploads/events"; // Create an 'uploads' directory in your project folder
+    //             $upload_dir = "uploads/events"; // Create an 'uploads' directory in your project folder
 
-                // Move the uploaded file to the desired location
-                $destination = $upload_dir . '/' . $file_name;
-
-
-                if (move_uploaded_file($file_tmp, $destination)) {
-                    $file_path = $destination;
-                } else {
-                    $data['file_err'] = 'File upload failed';
-                }
-            }
-
-            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-            $result = $this->userModel->getUserById($id);
-
-            $data = [
-                'id' => $result->id,
-                'name' => trim($_POST['name']),
-                'type' => trim($_POST['type']),
-                'price' => trim($_POST['price']),
-                'description' => trim($_POST['description']),
-                'img' => $destination,
-            ];
-
-            if (!empty($data['name']) && !empty($data['price']) && !empty($data['description']) && !empty($data['type'])) {
+    //             // Move the uploaded file to the desired location
+    //             $destination = $upload_dir . '/' . $file_name;
 
 
-                if ($this->userModel->edituser($data)) {
-                    redirect('eventplanners/packages');
-                } else {
-                    die('Something went wrong');
-                }
-            }
-        } else {
-            $result = $this->userModel->getUserById($id);
-            $data = [
-                'id' => $result->id,
-                'name' => $result->name,
-                'type' => $result->type,
-                'price' => $result->price,
-                'description' => $result->description,
-                'img' => $result->img
-            ];
-            $this->view('eventplanners/updatepackage', $data);
-        }
-    }
+    //             if (move_uploaded_file($file_tmp, $destination)) {
+    //                 $file_path = $destination;
+    //             } else {
+    //                 $data['file_err'] = 'File upload failed';
+    //             }
+    //         }
 
-    public function deleteuser($id)
-    {
+    //         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+    //         $result = $this->userModel->getUserById($id);
+
+    //         $data = [
+    //             'id' => $result->id,
+    //             'name' => trim($_POST['name']),
+    //             'type' => trim($_POST['type']),
+    //             'price' => trim($_POST['price']),
+    //             'description' => trim($_POST['description']),
+    //             'img' => $destination,
+    //         ];
+
+    //         if (!empty($data['name']) && !empty($data['price']) && !empty($data['description']) && !empty($data['type'])) {
 
 
+    //             if ($this->userModel->edituser($data)) {
+    //                 redirect('eventplanners/packages');
+    //             } else {
+    //                 die('Something went wrong');
+    //             }
+    //         }
+    //     } else {
+    //         $result = $this->userModel->getUserById($id);
+    //         $data = [
+    //             'id' => $result->id,
+    //             'name' => $result->name,
+    //             'type' => $result->type,
+    //             'price' => $result->price,
+    //             'description' => $result->description,
+    //             'img' => $result->img
+    //         ];
+    //         $this->view('eventplanners/updatepackage', $data);
+    //     }
+    // }
+
+    // public function deleteuser($id)
+    // {
 
 
-        if ($this->userModel->deleteUser($id)) {
-            redirect('eventplanners/packages');
-        } else {
-            die("something went wrong");
-        }
-    }
+
+
+    //     if ($this->userModel->deleteUser($id)) {
+    //         redirect('eventplanners/packages');
+    //     } else {
+    //         die("something went wrong");
+    //     }
+    // }
 
     public function createbudget()
     {
@@ -135,7 +150,7 @@ class Eventplanners extends Controller
     public function budget($id)
     {
 
-       
+
         $budget = $this->plannerModel->getAllBudgets($id);
 
         $data = [
@@ -185,7 +200,7 @@ class Eventplanners extends Controller
                 'request' => $request,
                 'bid' => $bid,
                 'budget' => $items,
-                'user'=>$user
+                'user' => $user
 
             ];
 
@@ -198,7 +213,7 @@ class Eventplanners extends Controller
     {
 
         $result = $this->plannerModel->lowestbudget($id);
-        
+
         $data = [
             'eventid' => $id,
             'bid' => $bid,
@@ -234,7 +249,7 @@ class Eventplanners extends Controller
 
     public function addItem($bid, $eid, $qid)
     {
-     
+
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
@@ -292,19 +307,61 @@ class Eventplanners extends Controller
     }
 
 
-    public function downloadbudget($bid, $id){
+    public function downloadbudget($bid, $id)
+    {
 
-        
+
         $budgetData = $this->plannerModel->getBudgetData($bid, $id);
         echo json_encode($budgetData);
-
     }
 
 
     public function calendar()
     {
 
-        $this->view('eventplanners/calendar');
+        $avldates = $this->SupplierModel->getDate();
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $_POST = filter_input_array(INPUT_POST);
+
+
+
+            $data = [
+                'event' => trim($_POST['event']),
+                'date' => trim($_POST['date']),
+            ];
+
+
+            foreach ($avldates as $date) {
+                if ($data['date'] == $date->date) {
+                    echo '<script> alert("Date Already Taken")</script>';
+                    redirect('eventplanners/calendar');
+                } else {
+                    echo '<script> alert("Date Available")</script>';
+                }
+            }
+
+
+            if (!empty($data['event'])) {
+
+                $available = [
+                    'event' => $data['event'],
+                    'date' => $data['date'],
+                ];
+
+                if ($this->SupplierModel->addAvailability($available)) {
+                    echo '<script> alert("Clicked!");</script>';
+                    $this->view('eventplanners/calendar', $data);
+                } else {
+                    $this->view('eventplanners/calendar', $data);
+                }
+            } else {
+                $this->view('eventplanners/calendar', $data);
+            }
+        } else {
+            $this->view('eventplanners/calendar');
+        }
     }
 
     public function profile()
@@ -358,7 +415,6 @@ class Eventplanners extends Controller
                     echo '<script> prompt("Package Added Succfully")</script>';
                     redirect('eventplanners/packages');
                 } else {
-                    
                 }
             } else {
                 $this->view('eventplanners/addNewPackage', $data);
@@ -441,7 +497,8 @@ class Eventplanners extends Controller
     public function suppliers($type, $id)
     {
         $request = $this->plannerModel->getRequestEvent($id);
-        $supplier = $this->plannerModel->getSupplier($type);
+        $supplier = $this->plannerModel->getSupplier($type, $request->date);
+      
 
 
         $data = [
@@ -457,20 +514,131 @@ class Eventplanners extends Controller
 
         $this->view('eventplanners/recivedquote');
     }
-    public function portfolio($sid, $eid)
+    public function portfolio()
     {
-
-        $request = $this->CustomerModel->getEventById($eid);
-        $user = $this->plannerModel->getUserById($sid);
-
+        $user = $this->plannerModel->getPortfolioById($_SESSION['user_id']);
         $data = [
-            'request' => $request,
-            'user' => $user,
+
+            'portfolio' => $user,
+            'user' => $user
 
 
         ];
 
         $this->view('eventplanners/portfolio', $data);
+    }
+
+    public function portfolio2($id, $rid)
+    {
+
+        $request = $this->CustomerModel->getEventById($rid);
+        
+        $user = $this->userModel->getUserById($id);
+        $portfolio = $this->CustomerModel->getPortfolioById($id);
+        $packages = $this->CustomerModel->getPackagesById($id);
+       
+        $data = [
+            'request' => $request,
+            'user' => $user,
+            'portfolio' => $portfolio,
+            'packages' => $packages
+
+        ];
+        $this->view('eventplanners/portfolio2', $data);
+    }
+
+    // $request = $this->customerModel->getEventById($eid);
+    //     $user = $this->userModel->getUserById($sid);
+    //     $portfolio = $this->customerModel->getPortfolioById($sid);
+    //     $packages = $this->customerModel->getPackagesById($sid);
+
+    //     $data = [
+    //         'request' => $request,
+    //         'user' => $user,
+    //         'portfolio' => $portfolio,
+    //         'packages' => $packages
+
+    //     ];
+    //     $this->view('customers/portfolio', $data);
+
+
+    public function updatePortfolio()
+    {
+        $user = $this->plannerModel->getUserById($_SESSION['user_id']);
+        $portfolio = $this->plannerModel->getPortfolio($_SESSION['user_id']);
+        $data = [
+            'user' => $user,
+            'portfolio' => $portfolio
+        ];
+
+        $uploadDir = 'images/uploads/';
+        $pdfUploadDir = 'uploads/';
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $bio = $_POST['bio'];
+            $description = $_POST['description'];
+
+            $caption = $_FILES['caption'];
+            $filePaths = [];
+
+            if ($caption['error'] === UPLOAD_ERR_OK) {
+                // Get the file name
+                $CaptionName = basename($caption['name']);
+
+                // Define the target file path
+                $captionFilePath = $uploadDir . $CaptionName;
+
+                // Move the uploaded file to the specified directory
+                if (move_uploaded_file($caption['tmp_name'], $captionFilePath)) {
+                } else {
+                    echo "Error moving the uploaded file.";
+                }
+            }
+
+            foreach ($_FILES['images']['tmp_name'] as $index => $tmp_name) {
+
+                if (is_uploaded_file($tmp_name)) {
+                    $fileName = basename($_FILES['images']['name'][$index]);
+                    $targetFilePath = $uploadDir . $fileName;
+
+
+                    if (move_uploaded_file($tmp_name, $targetFilePath)) {
+
+                        $filePaths[] = $targetFilePath;
+                    } else {
+                        echo "Error moving the uploaded file: {$fileName}\n";
+                    }
+                } else {
+                    echo "Error uploading file: " . $_FILES['images']['name'][$index];
+                }
+            }
+
+            $uploadedFile = $_FILES['document'];
+            if ($uploadedFile['error'] === UPLOAD_ERR_OK) {
+                $pdfName = basename($uploadedFile['name']);
+                $targetFilePath = $pdfUploadDir . $pdfName;
+                if (move_uploaded_file($uploadedFile['tmp_name'], $targetFilePath)) {
+                } else {
+                    echo "Error moving the uploaded file.";
+                }
+            }
+
+            $data = [
+                'bio' => $bio,
+                'description' => $description,
+                'caption' => $captionFilePath,
+                'images' => $filePaths,
+                'document' => $targetFilePath
+            ];
+
+
+            $this->SupplierModel->updatePortfolio($data);
+
+            header('location:' . URLROOT . 'eventplanners/portfolio');
+        }
+
+
+        $this->view('eventplanners/updatePortfolio', $data);
     }
 
     public function sendquote($sid, $eid)
@@ -719,5 +887,63 @@ class Eventplanners extends Controller
             'quote' => $quote
         ];
         $this->view('eventplanners/quotations', $data);
+    }
+
+    public function updatepackage($id)
+    {
+
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+
+            $data = [
+                'id' => $id,
+                'name' => trim($_POST['name']),
+                'services' => trim($_POST['services']),
+                'price' => trim($_POST['price']),
+                'description' => trim($_POST['description']),
+
+            ];
+
+            if (!empty($data['name']) && !empty($data['price']) && !empty($data['description']) && !empty($data['services'])) {
+
+
+                if ($this->plannerModel->updatepackage($data)) {
+                    redirect('eventplanners/packages');
+                } else {
+                    die('Something went wrong');
+                }
+            }
+        } else {
+            $result = $this->plannerModel->getPackageByID($id);
+
+            $data = [
+                'id' => $result->id,
+                'name' => $result->name,
+                'services' => $result->services,
+                'price' => $result->price,
+                'description' => $result->description,
+
+            ];
+            $this->view('eventplanners/updatepackage', $data);
+        }
+    }
+
+
+    public function getCalendarEvents()
+    {
+
+        $result = $this->supplierModel->getCalander();
+        echo json_encode($result);
+    }
+
+
+    public function deletePackage($id)
+    {
+        if ($this->plannerModel->deletePackage($id)) {
+            redirect('eventplanners/packages');
+        } else {
+            die("something went wrong");
+        }
     }
 }
