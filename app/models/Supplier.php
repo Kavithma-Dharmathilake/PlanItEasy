@@ -452,8 +452,19 @@ class Supplier
         }
     }
 
+    public function getRecentQuotes()
+    {
+        $id = $_SESSION['user_id'];
+        $this->db->query("SELECT * FROM quoate WHERE sid = :sid AND q_status = 'pending' ORDER BY received_date DESC LIMIT 3");
+        $this->db->bind(':sid', $id);
+        $result = $this->db->resultSet();
+        return $result;
+    }
+
     public function countAllProducts(){
-        $this->db->query('SELECT COUNT(*) AS Count FROM packages');
+        $id = $_SESSION['user_id'];
+        $this->db->query('SELECT COUNT(*) AS Count FROM packages WHERE supplier = :sid');
+        $this->db->bind(':sid', $id);
         $result = $this->db->single();
         return $result;
     }
@@ -461,6 +472,15 @@ class Supplier
     public function countQuotations(){
         $id = $_SESSION['user_id'];
         $this->db->query('SELECT COUNT(*) AS Count FROM quoate WHERE sid = :sid AND q_status = "pending"');
+        $this->db->bind(':sid', $id);
+        $result = $this->db->single();
+        return $result;
+    }
+
+    public function countAccepted()
+    {
+        $id = $_SESSION['user_id'];
+        $this->db->query('SELECT COUNT(*) AS Count FROM quoate WHERE sid = :sid AND q_status = "Accepted"');
         $this->db->bind(':sid', $id);
         $result = $this->db->single();
         return $result;
@@ -481,16 +501,9 @@ class Supplier
 
     public function countQuotationsPerMonth()
     {
-        $this->db->query('SELECT 
-    MONTH(received_date) AS month,
-    COUNT(*) AS month_count
-FROM 
-    quoate
-GROUP BY 
-    MONTH(received_date)
-ORDER BY 
-    month
-');
+        $id = $_SESSION['user_id'];
+        $this->db->query('SELECT MONTH(received_date) AS month,COUNT(*) AS month_count FROM quoate WHERE sid = :sid GROUP BY MONTH(received_date) ORDER BY month');
+        $this->db->bind(':sid', $id);
         $result = $this->db->resultSet();
         return $result;
     }
