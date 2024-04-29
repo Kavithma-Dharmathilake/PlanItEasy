@@ -129,8 +129,8 @@
                                 <td> <?php echo $i->price ?></td>
                                 <td> <?php echo $i->services ?></td>
                                 <td> <?php echo $i->date ?></td>
-                                <td><a href="<?php echo URLROOT ?>suppliers/updatepackage/<?php echo $i->id ?>"><button class="btn_accept" type="button">Update</button></a></td>
-                                <td><a href="<?php echo URLROOT ?>suppliers/deleteuser/<?php echo $i->id ?>"><button class="btn_reject" type="button" onclick="confirmDelete(<?php echo $i->id ?>)">Delete</button></a></td>
+                                <td><a href="<?php echo URLROOT ?>eventplanners/updatepackage/<?php echo $i->id ?>"><button class="btn_accept" type="button">Update</button></a></td>
+                                <td><a href="<?php echo URLROOT ?>eventplanners/deletePackage/<?php echo $i->id ?>"><button class="btn_reject" type="button" onclick="confirmDelete(<?php echo $i->id ?>)">Delete</button></a></td>
                                 </td>
                             </tr>
 

@@ -20,6 +20,11 @@ class Suppliers extends Controller
         $countQuote = $this->supplierModel->countQuotations();
         $quotePerMonth = $this->supplierModel->countQuotationsPerMonth();
         $calanderDates =  $result = $this->supplierModel->getCalander();
+        $countAccepted = $this->supplierModel->countAccepted();
+        $recentQuotes = $this->supplierModel->getRecentQuotes();
+
+        var_dump($_SESSION['user_id']);
+        var_dump($_SESSION['user_name']);
         
         // var_dump[$quotePerMonth];
         //var_dump[$countQuote];
@@ -29,7 +34,9 @@ class Suppliers extends Controller
             'countProduct' => $countProduct,
             'countQuote' => $countQuote,
             'quotePerMonth' => $quotePerMonth,
-            'calaendarDates' => $calanderDates
+            'calaendarDates' => $calanderDates,
+            'countAccepted' => $countAccepted,
+            'recentQuotes' => $recentQuotes
         ];
         $this->view('suppliers/index', $data);
         
@@ -171,9 +178,12 @@ class Suppliers extends Controller
 
         $uploadDir = 'images/uploads/';
         $pdfUploadDir = 'uploads/';
+
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
+          
             $bio = $_POST['bio'];
+            
             $description = $_POST['description'];
 
             $caption = $_FILES['caption'];
