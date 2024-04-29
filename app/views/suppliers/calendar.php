@@ -164,7 +164,7 @@
                             <label>Date</label>
                             <input type="date" name="date">
                         </div>
-                        <button type="submit" class="btn" style="display: block; margin: 0 auto; background:var(--color-primary); color: var(--color-black); padding: 1rem 2rem; border: 1px solid transparent; font-weight: 500; transition: var(--transition); border-radius: var(--border-radius-2); margin-top: 3rem; cursor: pointer;">
+                        <button type="submit" class="btn" style="display: block; margin: 0 auto; background:var(--color-primary); color: white; padding: 1rem 2rem; border: 1px solid transparent; font-weight: 500; transition: var(--transition); border-radius: var(--border-radius-2); margin-top: 3rem; cursor: pointer;">
                         Add Event</button>
                     </form>
             </div>
@@ -175,7 +175,7 @@
 </body>
 
 </html>
-<script>
+<!-- <script>
     document.addEventListener('DOMContentLoaded', function() {
         var calendarEl = document.getElementById('calendar');
 
@@ -191,6 +191,40 @@
 </script>
 
 <script>
+    var modal = document.getElementById("myModal");
+    var btn = document.getElementById("myBtn");
+    var span = document.getElementsByClassName("close")[0];
+    btn.onclick = function() {
+        modal.style.display = "block";
+    }
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    btn.onclick = function() {
+        modal.style.display = "block";
+    }
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script> -->
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            height: 650,
+            events: '<?php echo URLROOT; ?>suppliers/getCalendarEvents',
+
+        });
+
+        calendar.render();
+    });
+
     var modal = document.getElementById("myModal");
     var btn = document.getElementById("myBtn");
     var span = document.getElementsByClassName("close")[0];
