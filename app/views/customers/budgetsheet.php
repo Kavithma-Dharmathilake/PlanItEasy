@@ -14,6 +14,9 @@
     <link rel="stylesheet" href="<?php echo URLROOT; ?>public/css/admindash.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>public/css/eventplannerdash.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>public/css/budgetplan.css">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.18/jspdf.plugin.autotable.min.js"></script>
 
 
 </head>
@@ -68,6 +71,7 @@
                     <form action="<?php echo URLROOT ?>customers/ratingbudget/<?php echo $data['bid'] ?>/<?php echo $data['eventid'] ?>" method="POST">
                         <input id="pricebtn" name="rate" type="submit" class="view" value="Budget By Rating">
                     </form>
+                    <button id="generate-pdf">Generate PDF</button>
                 </div>
                 <table>
                     <caption>Requested Services</caption>
@@ -166,6 +170,66 @@
     </div>
 
 </body>
+<script>
+    document.getElementById('generate-pdf').addEventListener('click', function() {
+        const url = `<?php echo URLROOT ?>customers/downloadbudget/${<?php echo $data['bid'] ?>}/${<?php echo $data['eventid'] ?>}`;
+        console.log('Fetching data from URL:', url);
+        fetch(url)
+            .then(response => {
+                // Check if the response is OK (status code 200)
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                // Parse the JSON data from the response
+                return response.json();
+            })
+            .then(data => {
+                // Process the data (e.g., generate PDF)
+                // Create a new PDF document
+                const {
+                    jsPDF
+                } = window.jspdf;
+                const doc = new jsPDF();
+
+                //Add a heading to the PDF
+                doc.setFontSize(16); // Set the font size
+                doc.text('Budget Sheet', 10, 20); // Add heading at position (x, y)
+
+                // Define the table headers and data
+                const headers = [
+                    ['BudgetID', 'QuotationID', 'Type', 'Price', 'Supplier']
+                ];
+
+
+                // Convert data array to format compatible with autoTable
+                const rows = data.map(item => [item.bid, item.qid, item.stype, item.r_price, item.bname]);
+                const totalPrice = data.reduce((sum, item) => sum + parseFloat(item.r_price), 0);
+
+                // Add the table to the PDF
+                doc.autoTable({
+                    startY: 30, // Start the table below the heading
+                    head: headers, // Table headers
+                    body: rows, // Table data
+                    theme: 'grid', // Table theme (can be 'grid', 'striped', or 'plain')
+                    didDrawPage: function(data) {
+                        // Calculate the position for the footer based on the table's height
+                        const footerY = data.cursor.y + 10; // Add some padding
+
+                        // Add a footer containing the total price
+                        doc.setFontSize(12); // Set font size for footer
+                        doc.text(`Total Price: ${totalPrice.toFixed(2)}`, data.settings.margin.left, footerY);
+                    }
+                });
+
+                // Save the PDF
+                doc.save('output.pdf');
+            })
+            .catch(error => {
+                // Handle errors (e.g., network errors)
+                console.error('Error fetching data:', error);
+            });
+    });
+</script>
 
 
 

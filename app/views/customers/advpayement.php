@@ -17,7 +17,7 @@
     <div class="main-container">
       <div class="checkout-form">
 
-        <form action="<?php echo URLROOT ?>customers/payement/<?php echo $data['rid']; ?>/<?php echo $data['bid']; ?>/<?php echo $data['price'] ?>" method="POST" id="payment-form">
+        <form action="<?php echo URLROOT ?>customers/Advpayement/<?php echo $data['rid']; ?>/<?php echo $data['bid']; ?>/<?php echo $data['price'] ?>" method="POST" id="payment-form">
           <div class="info-container">
 
             <h2>User information</h2>

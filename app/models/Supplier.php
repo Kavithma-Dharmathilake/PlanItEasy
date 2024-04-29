@@ -11,6 +11,15 @@ class Supplier
         $this->db = new Database;
     }
 
+    // public function loadUsername(){
+    //     $id = $_SESSION['user_id'];
+    //     $this->db->query('SELECT name FROM user WHERE id = :id');
+    //     $this->db->bind(':id', $id);
+    //     $result = $this->db->single();
+    //     return $result;
+    // }
+
+
     public function findUserByEmail($email)
     {
         $this->db->query('SELECT * FROM user WHERE email = :email');
@@ -193,9 +202,19 @@ class Supplier
         return $result;
     }
 
+    public function getDate()
+    {
+        $id= $_SESSION['user_id'];
+        $this->db->query('SELECT date FROM calander where supplier = :id AND status != "Available"');
+        $this->db->bind(':id', $id );
+        $result = $this->db->resultSet();
+        return $result;
+    }
+
     
     public function sendMessage($data)
     {
+        date_default_timezone_set('Asia/Kolkata');
 
         $sid= $_SESSION['user_id'];
         $date = date('Y-m-d');
@@ -218,6 +237,7 @@ class Supplier
 
     public function getMessages($qid)
     {
+        date_default_timezone_set('Asia/Kolkata');
 
         $this->db->query('SELECT * FROM message WHERE qid = :qid ORDER BY date ASC, time ASC');
         $this->db->bind(':qid', $qid);
@@ -230,10 +250,9 @@ class Supplier
 
     public function getAllPackages()
     {
-        // $id= $_SESSION['user_id'];
-        $this->db->query('SELECT * FROM packages');
-        // $this->db->bind(':id', $id );
-        //where supplier = :id
+        $id= $_SESSION['user_id'];
+        $this->db->query('SELECT * FROM packages where supplier = :id');
+        $this->db->bind(':id', $id );
         $result = $this->db->resultSet();
         return $result;
     }
@@ -349,8 +368,9 @@ class Supplier
     {
 
         $date = date("Y-m-d");
-        $this->db->query('INSERT INTO packages(name, price, description, services, date) VALUES(:name, :price, :description, :services, :date)');
+        $this->db->query('INSERT INTO packages(supplier,name, price, description, services, date) VALUES(:supplier,:name, :price, :description, :services, :date)');
       
+        $this->db->bind(':supplier', $_SESSION['user_id']);
         $this->db->bind(':name', $data['name']);
         $this->db->bind(':description', $data['description']);
         $this->db->bind(':services', $data['services']);
@@ -366,6 +386,19 @@ class Supplier
         }
     }
 
+    public function addAvailability($available)
+    {
+        $this->db->query('INSERT INTO calander(supplier,title, date, status) VALUES(:supplier, :title, :date, "Not Available")');
+        $this->db->bind(':supplier', $_SESSION['user_id']);
+        $this->db->bind(':title', $available['event']);
+        $this->db->bind(':date', $available['date']); 
+
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     //calander functions
     public function fetchEvents($id)
@@ -435,6 +468,59 @@ class Supplier
         // return $result;
     }
 
+    public function countQuotationsPerMonth()
+    {
+        $this->db->query('SELECT 
+    MONTH(received_date) AS month,
+    COUNT(*) AS month_count
+FROM 
+    quoate
+GROUP BY 
+    MONTH(received_date)
+ORDER BY 
+    month
+');
+        $result = $this->db->resultSet();
+        return $result;
+    }
 
+    public function getAcceptedQuotations()
+    {
+        $id= $_SESSION['user_id'];
+        $this->db->query('SELECT * FROM quoate WHERE sid = :id AND q_status = :status');
+        $this->db->bind(':id', $id);
+        $this->db->bind(':status', 'Accepted');
+        $result = $this->db->resultSet();
+        return $result;
+    }
 
+    public function getPendingQuotations()
+    {
+        $id= $_SESSION['user_id'];
+        $this->db->query('SELECT * FROM quoate WHERE sid = :id AND q_status = :status');
+        $this->db->bind(':id', $id);
+        $this->db->bind(':status', 'Pending');
+        $result = $this->db->resultSet();
+        return $result;
+    }
+
+    public function getDeclinedQuotations()
+    {
+        $id= $_SESSION['user_id'];
+        $this->db->query('SELECT * FROM quoate WHERE sid = :id AND q_status = :status');
+        $this->db->bind(':id', $id);
+        $this->db->bind(':status', 'Declined');
+        $result = $this->db->resultSet();
+        return $result;
+    }
+
+    public function getPaidQuotations()
+    {
+        $id= $_SESSION['user_id'];
+        $this->db->query('SELECT * FROM quoate WHERE sid = :id AND q_status = :status');
+        $this->db->bind(':id', $id);
+        $this->db->bind(':status', 'Payment Complete');
+        $result = $this->db->resultSet();
+        return $result;
+    }
 }

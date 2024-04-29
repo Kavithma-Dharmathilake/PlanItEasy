@@ -14,6 +14,135 @@
     <link rel="stylesheet" href="<?php echo URLROOT; ?>public/css/admindash.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>public/css/eventplannerdash.css">
 
+    <style>
+
+.allButton {
+  background-color: black;
+  color: white;
+  border: none; 
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+/* Hover state */
+.allButton:hover {
+  background-color: darkyellow;
+}
+
+/* Active state (when clicked) */
+.allButton:active {
+  background-color: grey;
+  color: black;
+}
+
+
+.pendingButton {
+  background-color: #e69500;
+  color: white;
+  border: none;
+  border-radius: 20px;   
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+/* Hover state */
+.pendingButton:hover {
+  background-color: darkyellow;
+}
+
+/* Active state (when clicked) */
+.pendingButton:active {
+  background-color: white;
+  color: #e69500;
+}
+
+.acceptedButton {
+  background-color: blue;
+  color: white;
+  border: none;
+  border-radius: 20px;   
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+/* Hover state */
+.acceptedButton:hover {
+  background-color: darkblue;
+}
+
+/* Active state (when clicked) */
+.acceptedButton:active {
+  background-color: white;
+  color: blue;
+}
+
+.declinedButton {
+  background-color: #CE2029;
+  color: white;
+  border: none;
+  border-radius: 20px;   
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+/* Hover state */
+.declinedButton:hover {
+  background-color: darkred;
+}
+
+/* Active state (when clicked) */
+.declinedButton:active {
+  background-color: white;
+  color: #CE2029;
+}
+
+.completedButton {
+  background-color: green;
+  color: white;
+  border: none;
+  border-radius: 20px;   
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+/* Hover state */
+.completedButton:hover {
+  background-color: darkgreen;
+}
+
+/* Active state (when clicked) */
+.completedButton:active {
+  background-color: white;
+  color: green;
+}
+
+
+    </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.0/jspdf.umd.min.js"></script>
 
@@ -32,7 +161,7 @@
                 </div>
             </div>
             <div class="sidebar">
-                <a href="<?php echo URLROOT; ?>suppliers/index" class="active">
+                <a href="<?php echo URLROOT; ?>suppliers/index">
                     <span class="material-icons-sharp">grid_view</span>
                     <h3>Dashboard</h3>
                 </a>
@@ -44,7 +173,7 @@
                     <h3>Portfolio</h3>
                 </a>
 
-                <a href="<?php echo URLROOT; ?>suppliers/quotationRequest">
+                <a href="<?php echo URLROOT; ?>suppliers/quotationRequest" class="active">
                     <span class="material-icons-sharp">
                         note_add
                     </span>
@@ -100,7 +229,10 @@
                     <div class="planner-title">
                         <h1>Quotation Requests</h1>
 
+                        
+                    </div>
 
+                    <div>
                     </div>
                     <div class="planner-search">
                         <form action="#" method="post">
@@ -112,12 +244,35 @@
                                 </i>
                             </button>
                         </form>
+
+                        <!-- <div class="top">
+                        <div class="profile" style="margin-right: -">
+                            <div class="info">
+                                <p>Hey, <b><?php echo $_SESSION['user_name']?></b></p>
+                                <small class="text-muted">Supplier</small>
+                            </div>
+                            <div class="profile-photo">
+                           
+                            </div>  
+                        </div> -->
+            </div>
                     </div>
 
+                </div></br>
+                
+                <div style="margin-top:3rem;"> 
+                <a href="<?php echo URLROOT ?>suppliers/quotationRequest"><button type="submit" class="allButton">All</button></a>
+                <a href="<?php echo URLROOT ?>suppliers/pendingQuotes"><button type="submit" class="pendingButton">Pending</button></a>
+                <a href="<?php echo URLROOT ?>suppliers/acceptedQuotes"><button type="submit" class="acceptedButton">Accepted</button></a>
+                <a href="<?php echo URLROOT ?>suppliers/declinedQuotes"><button type="submit" class="declinedButton">Declined</button></a>
+                <a href="<?php echo URLROOT ?>suppliers/paidQuotes"><button type="submit" class="completedButton">Payment Complete</button></a>
                 </div>
+
+                <!-- <?php var_dump($_SESSION['user_id']);?> -->
 
                 <!-- Event Request Table -->
                 <div class="event-request" style="margin-top:60px">
+                    <table>
                     <button class="downloadButton" id="downloadButton">Download</button>
                     <table id="myTable">
                         <thead>
@@ -151,6 +306,11 @@
 
 
             </div>
+        </main>
+
+        <div class="right">
+            
+        </div>
 
 </body>
 

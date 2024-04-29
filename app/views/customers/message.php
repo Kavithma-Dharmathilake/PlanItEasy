@@ -109,6 +109,7 @@
         </aside>
 
         <main>
+            <a href="<?php echo URLROOT ?>customers/quotations/<?php echo $data['event']->id ?>"><button>Go Back</button></a>
             <h1>Messages on Quotation Request - <?php echo $data['request']->id ?></h1>
 
 
@@ -129,7 +130,7 @@
 
 
                     <div class="container">
-                        <strong class="user">Customer</strong><br /><br />
+                        <strong class="user">Supplier</strong><br /><br />
                         <p><?php echo $i->content ?></p>
                         <span class="time-right"><?php echo $i->time ?> | <?php echo $i->date ?></span>
                     </div>

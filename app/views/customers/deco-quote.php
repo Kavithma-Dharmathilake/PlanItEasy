@@ -72,15 +72,15 @@
 
                             <p class="form-text">Supplier Name</p>
                             <div class="input-field">
-                                <input type="text" name="count" value="Sri Malee GrandMeridian" readonly>
+                                <input type="text" name="count" value="<?php echo $data['supplier']->bname ?>" readonly>
                             </div>
                             <p class="form-text" style="margin-top:3rem;">Package Type</p>
                             <div class="input-field">
                                 <select name="type" id="type">
                                     <option name="packageType" value=""> </option>
-                                    <option name="packageType" value="bronze">Bronze package</option>
-                                    <option name="packageType" value="silver">Silver Package</option>
-                                    <option name="packageType" value="gold"> Gold package</option>
+                                    <?php foreach($data['packages'] as $p): ?>
+                                    <option name="packageType" value="<?php echo $p->name ?>(<?php echo $p->price ?>)"><?php echo $p->name ?> - <?php echo $p->price ?></option>
+                                    <?php endforeach?>
 
                                 </select>
                             </div>
@@ -139,7 +139,7 @@
 
                         </div>
                     </div>
-                    <p class="form-text" style="margin-top:2rem; margin-left:2rem;  margin-right:2rem">Additional Remarks for the Sri Malee GrandMeridian</p>
+                    <p class="form-text" style="margin-top:2rem; margin-left:2rem;  margin-right:2rem">Additional Remarks for the <?php echo $data['supplier']->bname ?></p>
                     <div class="input-field" style="margin-left:2rem;">
                         <textarea name="remark" id="theme" cols="80" rows="5"></textarea>
 

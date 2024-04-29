@@ -55,7 +55,7 @@
                 </div>
             </div>
             <div class="sidebar">
-                <a href="<?php echo URLROOT; ?>suppliers/index" class="active">
+                <a href="<?php echo URLROOT; ?>suppliers/index">
                     <span class="material-icons-sharp">grid_view</span>
                     <h3>Dashboard</h3>
                 </a>
@@ -67,7 +67,7 @@
                     <h3>Portfolio</h3>
                 </a>
 
-                <a href="<?php echo URLROOT; ?>suppliers/quotationRequest">
+                <a href="<?php echo URLROOT; ?>suppliers/quotationRequest" class="active">
                     <span class="material-icons-sharp">
                         note_add
                     </span>

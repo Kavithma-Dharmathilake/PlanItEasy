@@ -61,7 +61,134 @@
             text-decoration: none;
             cursor: pointer;
         }
-    </style>
+
+
+        .allButton {
+        background-color: black;
+        color: white;
+        border: none; 
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        }
+
+        /* Hover state */
+        .allButton:hover {
+        background-color: darkyellow;
+        }
+
+        /* Active state (when clicked) */
+        .allButton:active {
+        background-color: grey;
+        color: black;
+        }
+
+
+        .pendingButton {
+        background-color: #e69500;
+        color: white;
+        border: none;
+        border-radius: 20px;   
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        }
+
+        /* Hover state */
+        .pendingButton:hover {
+        background-color: darkyellow;
+        }
+
+        /* Active state (when clicked) */
+        .pendingButton:active {
+        background-color: white;
+        color: #e69500;
+        }
+
+        .acceptedButton {
+        background-color: blue;
+        color: white;
+        border: none;
+        border-radius: 20px;   
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        }
+
+        /* Hover state */
+        .acceptedButton:hover {
+        background-color: darkblue;
+        }
+
+        /* Active state (when clicked) */
+        .acceptedButton:active {
+        background-color: white;
+        color: blue;
+        }
+
+        .declinedButton {
+        background-color: #CE2029;
+        color: white;
+        border: none;
+        border-radius: 20px;   
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        }
+
+        /* Hover state */
+        .declinedButton:hover {
+        background-color: darkred;
+        }
+
+        /* Active state (when clicked) */
+        .declinedButton:active {
+        background-color: white;
+        color: #CE2029;
+        }
+
+        .completedButton {
+        background-color: green;
+        color: white;
+        border: none;
+        border-radius: 20px;   
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        }
+
+        /* Hover state */
+        .completedButton:hover {
+        background-color: darkgreen;
+        }
+
+        /* Active state (when clicked) */
+        .completedButton:active {
+        background-color: white;
+        color: green;
+        }
+            
+        </style>
 
 
 </head>
@@ -116,17 +243,23 @@
 
                 <div class="planner-title">
                     <h1>Your Quotations</h1>
-
-
                 </div>
-
-
             </div>
 
+            <div style="margin-top:3rem;"> 
+                <a href="<?php echo URLROOT ?>customers/quotations/<?php echo $data['eventid']; ?>"><button type="submit" class="allButton">All</button></a>
+                <a href="<?php echo URLROOT ?>customers/requestSentQuotations/<?php echo $data['eventid']; ?>"><button type="submit" class="pendingButton">Request Sent</button></a>
+                <a href="<?php echo URLROOT ?>customers/requestAcceptedQuotations/<?php echo $data['eventid']; ?>"><button type="submit" class="acceptedButton">Request Accepted</button></a>
+                <a href="<?php echo URLROOT ?>customers/requestDeclinedQuotations/<?php echo $data['eventid']; ?>"><button type="submit" class="declinedButton">Request Declined</button></a>
+                <a href="<?php echo URLROOT ?>customers/bookedQuotations/<?php echo $data['eventid']; ?>"><button type="submit" class="acceptedButton">Booked</button></a>
+                <a href="<?php echo URLROOT ?>customers/paymentCompletedQuotations/<?php echo $data['eventid']; ?>"><button type="submit" class="completedButton">Payment Complete</button></a>
+                <a href="<?php echo URLROOT ?>customers/expiredQuotations/<?php echo $data['eventid']; ?>"><button type="submit" class="declinedButton">Expired</button></a>
+            </div>
+
+          
+
+           
             <!-- Event Request Table -->
-
-
-
             <div class="event-request" style="margin-top:60px">
                 Done with quotations?
                 <button style="padding:0.5rem;margin:0.5rem; background-color:#41f1b6;color:white; border-radius:0.7rem"><a href="<?php echo URLROOT ?>customers/budget/<?php echo $data['eventid']; ?>">Create Budget </a></button>
@@ -136,8 +269,8 @@
                             <th>ID</th>
                             <th>Supplier</th>
                             <th>Sent Date</th>
-                            <th>Requested Price</th>
-                            <th>Final Price</th>
+                            <th>Package</th>
+                            <th>Final Price(LKR)</th>
                             <th>Status</th>
                             <th>View More</th>
                             <th>Message with Supplier</th>
@@ -152,93 +285,11 @@
                                 <td><?php echo $q->qid; ?></td>
                                 <td><?php echo  $q->bname ?></td>
                                 <td> <?php echo $q->send_date; ?>
-                                <td>LKR. <?php echo $q->r_price; ?></td>
-                                <td>LKR. <?php echo $q->price; ?>
+                                <td><?php echo $q->package; ?></td>
+                                <td><?php echo $q->r_price; ?>
                                 <td> <?php echo $q->status; ?></td>
                                 <td>
-                                    <button class="viewBtn" data-target="<?php echo $q->qid; ?>">View</button>
-
-                                    <div id="myModal-<?php echo $q->qid; ?>" class="modal">
-
-                                        <!-- Modal content -->
-                                        <div class="modal-content">
-
-                                            <div class="search-quoate">
-
-                                                <div style="display:flex; flex-direction:row">
-                                                    <div class="event-details" style="width:700px;">
-                                                        <p style="text-align:center">Requested Quotation</p>
-
-                                                        <div style="display:flex; margin-top:20px; margin-left:30px; border-bottom:2px ridge;padding-bottom:5px; ">
-                                                            <div class="req-title" style="width:50%">Supplier</div>
-                                                            <div class="req-data" style="width:50%"><?php echo $q->bname  ?></div>
-                                                        </div>
-
-                                                        <div style="display:flex; margin-top:20px; margin-left:30px; border-bottom:2px ridge;padding-bottom:5px;">
-                                                            <div class="req-title" style="width:50%">Package</div>
-                                                            <div class="req-data" style="width:50%"><?php echo  $q->package  ?> - (LKR. <?php echo  $q->price ?>)</div>
-                                                        </div>
-                                                        <div style="display:flex; margin-top:20px; margin-left:30px; border-bottom:2px ridge;padding-bottom:5px;">
-                                                            <div class="req-title" style="width:50%">Sent date</div>
-                                                            <div class="req-data" style="width:50%"><?php echo  $q->send_date  ?> </div>
-                                                        </div>
-
-
-                                                        <div style="display:flex; margin-top:20px; margin-left:30px; border-bottom:2px ridge;padding-bottom:5px;">
-                                                            <div class="req-title" style="width:50%">Your Remarks</div>
-                                                            <div class="req-data" style="width:50%"><?php echo  $q->remarks  ?></div>
-                                                        </div>
-                                                        <div style="display:flex; margin-top:20px; margin-left:30px; border-bottom:2px ridge;padding-bottom:5px;">
-                                                            <div class="req-title" style="width:50%">Supplier Remarks</div>
-                                                            <div class="req-data" style="width:50%"><?php echo  $q->s_remark  ?></div>
-                                                        </div>
-                                                        <div style="display:flex; margin-top:20px; margin-left:30px; border-bottom:2px ridge;padding-bottom:5px;">
-                                                            <div class="req-title" style="width:50%">Service Duration</div>
-                                                            <div class="req-data" style="width:50%"><?php echo  $q->stime  ?> to <?php echo  $q->etime  ?> </div>
-                                                        </div>
-                                                        <div style="display:flex; margin-top:20px; margin-left:30px; border-bottom:2px ridge;padding-bottom:5px;">
-                                                            <div class="req-title" style="width:50%">Received date</div>
-                                                            <div class="req-data" style="width:50%"><?php echo  $q->received_date  ?> </div>
-                                                        </div>
-                                                        <div style="display:flex; margin-top:20px; margin-left:30px; border-bottom:2px ridge;padding-bottom:5px;">
-                                                            <div class="req-title" style="width:50%">Additional Services</div>
-                                                            <div class="req-data" style="width:50%"><?php echo  $q->additional_services ?> </div>
-                                                        </div>
-                                                        <?php if ($q->stype == 'decoration') : ?>
-                                                            <!-- Display types of flowers for decoration -->
-                                                            <div style="display:flex; margin-top:20px; margin-left:30px; border-bottom:2px ridge;padding-bottom:5px;">
-                                                                <div class="req-title" style="width:50%">Types of Flowers</div>
-                                                                <div class="req-data" style="width:50%"><?php echo $q->flowers; ?></div>
-                                                            </div>
-                                                        <?php endif; ?>
-
-                                                        <?php if ($q->stype == 'catering') : ?>
-
-                                                            <div style="display:flex; margin-top:20px; margin-left:30px; border-bottom:2px ridge;padding-bottom:5px;">
-                                                                <div class="req-title" style="width:50%">Time </div>
-                                                                <div class="req-data" style="width:50%"><?php echo $q->time; ?></div>
-                                                            </div>
-                                                        <?php endif; ?>
-                                                        <div style="display:flex; margin-top:20px; margin-left:30px; border-bottom:2px ridge;padding-bottom:5px;">
-                                                            <div class="req-title" style="width:50%">Quotation Status</div>
-                                                            <div class="req-data" style="width:50%"><?php echo  $q->q_status  ?></div>
-                                                        </div>
-
-                                                        <?php
-                                                        $disabled = ($q->q_status !== 'Pending') ? 'disabled' : '';
-
-                                                        ?>
-
-                                                    </div>
-
-                                                </div>
-
-
-
-                                            </div>
-                                        </div>
-
-                                    </div>
+                                  <a href="<?php echo URLROOT ?>customers/viewquote/<?php echo $q->qid; ?>">View Quote</a>
 
                                 </td>
 

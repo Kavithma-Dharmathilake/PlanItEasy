@@ -18,7 +18,7 @@
     <!-- STYLESHEET -->
     <link rel="stylesheet" href="<?php echo URLROOT; ?>public/css/admindash.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>public/css/eventplannerdash.css">
-
+    
 
     <style>
         .modal {
@@ -74,7 +74,7 @@
                 </div>
             </div>
             <div class="sidebar">
-                <a href="<?php echo URLROOT; ?>suppliers/index" class="active">
+                <a href="<?php echo URLROOT; ?>suppliers/index">
                     <span class="material-icons-sharp">grid_view</span>
                     <h3>Dashboard</h3>
                 </a>
@@ -101,7 +101,7 @@
                 </a>
           
 
-                <a href="<?php echo URLROOT; ?>suppliers/calendar">
+                <a href="<?php echo URLROOT; ?>suppliers/calendar" class="active">
                     <span class="material-icons-sharp">
                         calendar_month
                     </span>
@@ -127,47 +127,50 @@
             </div>
         </aside>
 
-
-
-        <!-- Content start here -->
-        <div>
-
-
-
-
-            <!-- Heading and search bar -->
-
-
+        <main> 
             <div class="planner-title">
                 <h1>Calendar</h1>
-
             </div>
-
-            <!-- Trigger/Open The Modal -->
-            <button id="myBtn">Add New Event</button>
-
-            <!-- The Modal -->
-            <div id="myModal" class="modal">
-
-                <!-- Modal content -->
-                <div class="modal-content">
-                    <form method="POST" action="<?php echo URLROOT ?>suppliers/Calendar">
-                        Enter the Title<input type="text" name="title"><br />
-                        Enter the date <input type="date" name="date"><br />
-                        Not Available <input type="radio" name="status" value="Not Available"></br>
-
-                    </form>
-                </div>
-
-            </div>
-
 
             <div id='calendar'></div>
 
+            </main>
 
+            <div class="right">
+            <div class="top">
+                <button id="menu-btn">
+                    <span class="material-icons-sharp">menu</span>
+                </button>
+                <div class="profile">
+                    <div class="info">
+                        <p>Hey, <b><?php echo $_SESSION['user_name']?></b></p>
+                        <small class="text-muted">Supplier</small>
+                    </div>
+                    <div class="profile-photo">
+                    <!-- <img src="<?php echo URLROOT; ?>public/images/photo1.jpg"> -->
+                    </div>  
+                </div>
+            </div>
+            <div class="recent-updates">
+            <div class="updates">
+                <h2>Availability</h2></br>
+                <h3><b>Insert the dates you are not available here.</b></h3></br>
+                    <form method="POST" class="form" action="<?php echo URLROOT ?>suppliers/Calendar">
+                        <div class="input-box">
+                            <label>Event Title</label>
+                            <input type="text" name="event" placeholder="Enter event title">
+                        </div></br>
+                        <div class="input-box">
+                            <label>Date</label>
+                            <input type="date" name="date">
+                        </div>
+                        <button type="submit" class="btn" style="display: block; margin: 0 auto; background:var(--color-primary); color: var(--color-black); padding: 1rem 2rem; border: 1px solid transparent; font-weight: 500; transition: var(--transition); border-radius: var(--border-radius-2); margin-top: 3rem; cursor: pointer;">
+                        Add Event</button>
+                    </form>
+            </div>
+            </div>
 
-
-        </div>
+        
 
 </body>
 
