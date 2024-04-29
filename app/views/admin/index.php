@@ -16,7 +16,7 @@
         <aside>
             <div class="top">
                 <div class="logo">
-                <img src="<?php echo URLROOT; ?>/public/images/logo.jpg">
+                <img src="<?php echo URLROOT; ?>/public/images/planiteasylogo.png">
                     <h2>PlanItEasy</h2>
                 </div>
                 <div class="close" id="close-btn">
@@ -53,6 +53,10 @@
                     <span class="material-icons-sharp">analytics</span>
                     <h3>User Requests</h3>
                 </a>
+                <a href="<?php echo URLROOT ?>admin/inquiry" class="active">
+                    <span class="material-icons-sharp">info</span>
+                    <h3>Inquiry</h3>
+                </a>
              
                 <a href="<?php echo URLROOT ?>">
                     <span class="material-icons-sharp">logout</span>
@@ -64,7 +68,7 @@
         <main>
             <h1>Dashboard</h1>
             <div class="date">
-                <input type="date">
+                <p><?php echo $data['currentDate'] ?></p>
             </div>
 
             <div class="insights">
@@ -73,15 +77,7 @@
                     <div class="middle">
                         <div class="left">
                             <h3>Total Users</h3>
-                            <h1>1,259</h1>
-                        </div>
-                        <div class="progress">
-                            <svg>
-                                <circle cx="38" cy="38" r="36"></circle>
-                            </svg>
-                            <div class="number">
-                                <p>81%</p>
-                            </div>
+                            <h1><?php echo $data['total_user_count'] ?></h1>
                         </div>
                     </div>
                     <small class="text-muted">last 24 Hours</small>
@@ -93,15 +89,7 @@
                     <div class="middle">
                         <div class="left">
                             <h3>Total Event planners</h3>
-                            <h1>27</h1>
-                        </div>
-                        <div class="progress">
-                            <svg>
-                                <circle cx="38" cy="38" r="36"></circle>
-                            </svg>
-                            <div class="number">
-                                <p>3%</p>
-                            </div>
+                            <h1><?php echo $data['total_eventplanner_count'] ?></h1>
                         </div>
                     </div>
                     <small class="text-muted">last 24 Hours</small>
@@ -113,15 +101,7 @@
                     <div class="middle">
                         <div class="left">
                             <h3>Total Suppliers</h3>
-                            <h1>167</h1>
-                        </div>
-                        <div class="progress">
-                            <svg>
-                                <circle cx="38" cy="38" r="36"></circle>
-                            </svg>
-                            <div class="number">
-                                <p>16%</p>
-                            </div>
+                            <h1><?php echo $data['total_supplier_count']?></h1>
                         </div>
                     </div>
                     <small class="text-muted">last 24 Hours</small>
@@ -205,38 +185,7 @@
                 </div>
             </div>
             <!-- End of top-->
-            <div class="recent-updates">
-                <h2>Recent Updates</h2>
-                    <div class="updates">
-                        <div class="update">
-                            <div class="profile-photo">
-                                <img src="<?php echo URLROOT; ?>/public/images/photo1.jpg">
-                            </div>
-                            <div class="message">
-                                <p><b>Amal Gunasinghe</b>Updated his business name</p>
-                                <small class="text-muted">2 Minutes Ago</small>
-                            </div>
-                        </div>
-                        <div class="update">
-                            <div class="profile-photo">
-                                <img src="<?php echo URLROOT; ?>/public/images/photo1.jpg">
-                            </div>
-                            <div class="message">
-                                <p><b>Amal Gunasinghe</b>Updated his business name</p>
-                                <small class="text-muted">2 Minutes Ago</small>
-                            </div>
-                        </div>
-                        <div class="update">
-                            <div class="profile-photo">
-                                <img src="<?php echo URLROOT; ?>/public/images/photo1.jpg">
-                            </div>
-                            <div class="message">
-                                <p><b>Amal Gunasinghe</b>Updated his business name</p>
-                                <small class="text-muted">2 Minutes Ago</small>
-                            </div>
-                        </div>
-                    </div>
-            </div>
+            
 
             <!------------ END OF RECENT UPDTAES ------------>
             <div class="analytics">
@@ -247,7 +196,7 @@
                             <h3>Completed Events</h3>
                             <small class="text-muted">this year</small>
                         </div>
-                        <h4 class="success">127</h4>
+                        <h4 class="success"><?php echo $data['total_completed_events']->count; ?></h4>
                     </div>
                 </div>
 

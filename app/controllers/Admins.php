@@ -1,18 +1,31 @@
 <?php
 
-class Admin extends Controller
+class Admins extends Controller
 {
 
     public function __construct()
     {
         $this->userModel = $this->model('User');
+        $this->AdminModel = $this->model('Admin');
 
     }
 
     public function index()
     {
+        $currentDate = date('Y-m-d');
+        $total_user_count = $this->AdminModel->countAllUsers();
+        $total_eventplanner_count = $this->AdminModel->countAllEventplanners();
+        $total_supplier_count = $this->AdminModel->countAllSuppliers();
+        $total_completed_events = $this->AdminModel->getEventStatus('Payment Complete');
 
-        $this->view('admin/index');
+        $data = [
+            'currentDate' => $currentDate,
+            'total_user_count' => $total_user_count,
+            'total_eventplanner_count' => $total_eventplanner_count,
+            'total_supplier_count'=> $total_supplier_count,
+            'total_completed_events' => $total_completed_events
+        ];
+        $this->view('admin/index',$data);
 
     }
 
@@ -112,10 +125,6 @@ class Admin extends Controller
 
     public function deleteuser($id)
     {
-
-
-
-
         if ($this->userModel->deleteUser($id)) {
             redirect('admin/user');
         } else {
@@ -180,6 +189,7 @@ class Admin extends Controller
     {
         $this->view('admin/feedback');
     }
+
 
 
 

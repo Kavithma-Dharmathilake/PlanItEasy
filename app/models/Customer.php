@@ -41,6 +41,21 @@ class Customer
         }
     }
 
+    public function inquiry($data){
+        $this->db->query('INSERT INTO inquiry(uid,name,email,inquiry) VALUES(:uid, :name, :email, :inquiry)');
+        $this->db->bind(':uid', $_SESSION['user_id']);
+        $this->db->bind(':name', $data['name']);
+        $this->db->bind(':email', $data['email']);
+        $this->db->bind(':inquiry', $data['inquiry']);
+
+        if ($this->db->execute()) {
+            $id = $this->db->lastInsertedId();
+            return $id;
+        } else {
+            return false;
+        }
+    }
+
     public function  RequestPhotoQuote($data)
     {
 

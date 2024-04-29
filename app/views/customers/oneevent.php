@@ -25,17 +25,15 @@
 <body>
     <div class="dash-container">
         <aside>
-
             <div class="top">
-                <div class="logo">
-                    <img src="<?php echo URLROOT; ?>public/images/logo.jpg">
+                <!-- <div class="logo">
+                    <img src="<?php echo URLROOT; ?>/public/images/logo.jpg">
                     <h2>PlanItEasy</h2>
-                </div>
+                </div> -->
                 <div class="close" id="close-btn">
                     <span class="material-icons-sharp">close</span>
                 </div>
             </div>
-                
             <div class="sidebar">
                 <a href="<?php echo URLROOT; ?>customers" >
                     <span class="material-icons-sharp">grid_view</span>
@@ -49,14 +47,18 @@
                     <span class="material-icons-sharp">payments</span>
                     <h3>Payments</h3>
                 </a>
+                <a href="<?php echo URLROOT ?>customers/inquiry">
+                    <span class="material-icons-sharp">info</span>
+                    <h3>Inquiry</h3>
+                </a>
                 <!-- <a href="<?php echo URLROOT; ?>customers/message">
-        <span class="material-icons-sharp">message</span>
-        <h3>Messages</h3>
-    </a> -->
-                <!-- <a href="<?php echo URLROOT; ?>customers/viewquote">
-        <span class="material-icons-sharp"> note_add</span>
-        <h3>supplier quotation</h3>
-    </a> -->
+                    <span class="material-icons-sharp">message</span>
+                    <h3>Messages</h3>
+                </a> -->
+                <a href="<?php echo URLROOT; ?>customers/viewquote">
+                    <span class="material-icons-sharp"> note_add</span>
+                    <h3>supplier quotation</h3>
+                </a>
                 <a href="<?php echo URLROOT; ?>customers/profile">
                     <span class="material-icons-sharp">person</span>
                     <h3>profile</h3>
