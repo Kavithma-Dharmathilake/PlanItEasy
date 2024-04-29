@@ -7,6 +7,7 @@
     <title>Supplier Portfolio</title>
     <link rel="stylesheet" href="<?php echo URLROOT ?>/public/css/supplierPortfolio.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
 
 
 </head>
@@ -105,9 +106,9 @@
             <div style="width:800px;padding:2rem">
             <?php echo $data['portfolio']->description ?>
             </div>
-            <div style="width:300px;padding:2rem">
-                <----- calander space 
-
+            <div style="width:500px;padding:2rem">
+             
+            <div id='calendar'></div>
             </div>
         </div>
 
@@ -136,9 +137,23 @@
         </div>
     </div>
 
-  
 
 
 </body>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            height: 500,
+            events: '<?php echo URLROOT; ?>customers/getCalendarEvents/<?php echo $data['user']->id ?>',
+
+        });
+
+        calendar.render();
+    });
+</script>
 
 </html>

@@ -272,8 +272,8 @@
                             <th>ID</th>
                             <th>Supplier</th>
                             <th>Sent Date</th>
-                            <th>Requested Price</th>
-                            <th>Final Price</th>
+                            <th>Package</th>
+                            <th>Final Price(LKR)</th>
                             <th>Status</th>
                             <th>View More</th>
                             <th>Message with Supplier</th>
@@ -288,8 +288,8 @@
                                 <td><?php echo $q->qid; ?></td>
                                 <td><?php echo  $q->bname ?></td>
                                 <td> <?php echo $q->send_date; ?>
-                                <td>LKR. <?php echo $q->r_price; ?></td>
-                                <td>LKR. <?php echo $q->price; ?>
+                                <td><?php echo $q->package; ?></td>
+                                <td><?php echo $q->r_price; ?>
                                 <td> <?php echo $q->status; ?></td>
                                 <td>
                                   <a href="<?php echo URLROOT ?>customers/viewquote/<?php echo $q->qid; ?>">View Quote</a>

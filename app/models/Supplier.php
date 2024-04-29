@@ -214,6 +214,7 @@ class Supplier
     
     public function sendMessage($data)
     {
+        date_default_timezone_set('Asia/Kolkata');
 
         $sid= $_SESSION['user_id'];
         $date = date('Y-m-d');
@@ -236,6 +237,7 @@ class Supplier
 
     public function getMessages($qid)
     {
+        date_default_timezone_set('Asia/Kolkata');
 
         $this->db->query('SELECT * FROM message WHERE qid = :qid ORDER BY date ASC, time ASC');
         $this->db->bind(':qid', $qid);

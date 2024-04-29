@@ -457,20 +457,98 @@ class Eventplanners extends Controller
 
         $this->view('eventplanners/recivedquote');
     }
-    public function portfolio($sid, $eid)
-    {
-
-        $request = $this->CustomerModel->getEventById($eid);
-        $user = $this->plannerModel->getUserById($sid);
-
+    public function portfolio()
+    {   
+        $user = $this->plannerModel->getPortfolioById($_SESSION['user_id']);
         $data = [
-            'request' => $request,
-            'user' => $user,
+           
+            'portfolio' => $user,
+            'user'=>$user
 
 
         ];
 
         $this->view('eventplanners/portfolio', $data);
+    }
+    
+
+    public function updatePortfolio()
+    {
+        $user = $this->plannerModel->getUserById($_SESSION['user_id']);
+        $portfolio = $this->plannerModel->getPortfolio($_SESSION['user_id']);
+        $data = [
+            'user' => $user,
+            'portfolio' => $portfolio
+        ];
+
+        $uploadDir = 'images/uploads/';
+        $pdfUploadDir = 'uploads/';
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $bio = $_POST['bio'];
+            $description = $_POST['description'];
+
+            $caption = $_FILES['caption'];
+            $filePaths = [];
+
+            if ($caption['error'] === UPLOAD_ERR_OK) {
+                // Get the file name
+                $CaptionName = basename($caption['name']);
+
+                // Define the target file path
+                $captionFilePath = $uploadDir . $CaptionName;
+
+                // Move the uploaded file to the specified directory
+                if (move_uploaded_file($caption['tmp_name'], $captionFilePath)) {
+                } else {
+                    echo "Error moving the uploaded file.";
+                }
+            }
+
+            foreach ($_FILES['images']['tmp_name'] as $index => $tmp_name) {
+
+                if (is_uploaded_file($tmp_name)) {
+                    $fileName = basename($_FILES['images']['name'][$index]);
+                    $targetFilePath = $uploadDir . $fileName;
+
+
+                    if (move_uploaded_file($tmp_name, $targetFilePath)) {
+
+                        $filePaths[] = $targetFilePath;
+                    } else {
+                        echo "Error moving the uploaded file: {$fileName}\n";
+                    }
+                } else {
+                    echo "Error uploading file: " . $_FILES['images']['name'][$index];
+                }
+            }
+
+            $uploadedFile = $_FILES['document'];
+            if ($uploadedFile['error'] === UPLOAD_ERR_OK) {
+                $pdfName = basename($uploadedFile['name']);
+                $targetFilePath = $pdfUploadDir . $pdfName;
+                if (move_uploaded_file($uploadedFile['tmp_name'], $targetFilePath)) {
+                } else {
+                    echo "Error moving the uploaded file.";
+                }
+            }
+
+            $data = [
+                'bio' => $bio,
+                'description' => $description,
+                'caption' => $captionFilePath,
+                'images' => $filePaths,
+                'document' =>$targetFilePath
+            ];
+            
+
+            $this->plannerModel->updatePortfolio($data);
+
+            header('location:' . URLROOT . '/eventplanners/portfolio');
+        }
+
+
+        $this->view('eventplanners/updatePortfolio', $data);
     }
 
     public function sendquote($sid, $eid)
