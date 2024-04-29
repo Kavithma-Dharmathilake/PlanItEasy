@@ -240,13 +240,13 @@
                                 <div style="display:flex; margin-top:20px; margin-left:30px;">
                                     <div class="req-title" style="width:50%">Final Charge</div>
                                     <div class="req-data" style="width:10%">
-                                        <input type="number" value="<?php echo  $data['request']->r_price ?>" name="r_price" style="padding:7px;border-radius:5px;" <?php echo $disabled; ?>>
+                                        <input type="number" value="<?php echo  $data['request']->r_price ?>" name="r_price" style="padding:7px;border-radius:5px;" <?php echo $disabled; ?> required>
                                     </div>
                                 </div>
                                 <div style="display:flex; margin-top:20px; margin-left:30px;">
                                     <div class="req-title" style="width:50%">Remarks for the Customer</div>
                                     <div class="req-data" style="width:10%">
-                                        <textarea id="remark" cols="30" rows="5" name="remark" <?php echo $disabled; ?>>  <?php echo $data['request']->s_remark ?>  </textarea>
+                                        <textarea id="remark" cols="30" rows="5" name="remark" <?php echo $disabled; ?> required>  <?php echo $data['request']->s_remark ?>  </textarea>
                                     </div>
                                 </div>
 

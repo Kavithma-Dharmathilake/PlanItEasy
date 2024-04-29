@@ -104,16 +104,7 @@
 
                 </div>
                 <div class="planner-search">
-                    <form action="#" method="post">
-
-                        <input type="search" id="query" name="q" placeholder="       Search Requests"
-                            class="planner-textbox">
-
-                        <button>
-                            <i class="fa fa-search" style="font-size: 18px;">
-                            </i>
-                        </button>
-                    </form>
+        
                 </div>
 
             </div>

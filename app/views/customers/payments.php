@@ -62,6 +62,7 @@
                             <th scope="col">Event ID</th>
                             <th scope="col">Budget ID</th>
                             <th scope="col">Amount(LKR)</th>
+                            <th scope="col">Description</th>
                             <th scope="col"></th>
                         </tr>
                     </thead>
@@ -71,6 +72,7 @@
                             <td data-label="Service"><?php echo $payment->rid; ?></td>
                             <td data-label="Vendor Name"><?php echo $payment->bid; ?></td>
                             <td data-label="Amount(LKR)"><?php echo $payment->amount; ?></td>
+                            <td data-label="Amount(LKR)"><?php echo $payment->description; ?></td>
                             <td data-label="">
                                 <!-- <form action="<?php echo URLROOT ?>customers/deleteItem/<?php echo $data['bid'] ?>/<?php echo $data['eventid'] ?>/<?php echo $l->id ?>" method="POST">
                                     <input name="remove" type="submit" class="rmv" value="Remove">

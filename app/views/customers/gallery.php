@@ -41,32 +41,41 @@
         <?php foreach ($data['supplier'] as $i) :
 
         ?>
+            <?php $disabled = true; ?>
+            <?php foreach ($data['sent'] as $s) {
+                if ($i->uid == $s->sid) {
 
+                    $disabled = false;
+                    break;
+                }
+            } ?>
+            <?php if ($disabled) { ?>
+                <div class="vendor-card">
 
-            <div class="vendor-card">
-
-                <a href="<?php echo URLROOT; ?>customers/portfolio/<?php echo $i->uid ?>/<?php echo $data['request']->id ?>">
-                    <div class="vendor-image">
-                        <img src="<?php echo URLROOT ?>public/<?php echo $i->caption ?>" alt="vendor image">
-                    </div>
-                    <div class="vendor-details">
-                        <span class="vendor-catagory"><?php echo $data['type'] ?></span>
-                        <h4><?php echo $i->bname ?></h4>
-
-                        <div class="Vendor-bottom-details">
-                            <a href="<?php echo URLROOT; ?>customers/sendquote/<?php echo $i->uid . "/" . $data['request']->id ?>">
-                                <div class="vendor-price">Send Request</div>
-                            </a>
-
+                    <a href="<?php echo URLROOT; ?>customers/portfolio/<?php echo $i->uid ?>/<?php echo $data['request']->id ?>">
+                        <div class="vendor-image">
+                            <img src="<?php echo URLROOT ?>public/<?php echo $i->caption ?>" alt="vendor image">
                         </div>
-                    </div>
-                </a>
-            </div>
+                        <div class="vendor-details">
+                            <span class="vendor-catagory"><?php echo $data['type'] ?></span>
+                            <h4><?php echo $i->bname ?></h4>
 
 
+                            <div class="Vendor-bottom-details">
+                                <a href="<?php echo URLROOT; ?>customers/sendquote/<?php echo $i->uid . "/" . $data['request']->id ?>">
+                                    <div class="vendor-price">Send Request</div>
+                                </a>
+
+                            </div>
+                    
+                        </div>
+                    </a>
+                </div>
+
+                <?php } ?>
 
 
-        <?php endforeach ?>
+            <?php endforeach ?>
 
 
     </div>
@@ -85,6 +94,11 @@
             <?php foreach ($data['nosupplier'] as $s) :
 
             ?>
+
+
+
+
+
 
 
                 <div class="vendor-card">

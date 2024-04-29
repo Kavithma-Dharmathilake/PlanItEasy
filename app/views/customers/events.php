@@ -229,7 +229,7 @@
                             <th>Event type</th>
                             <th>Tentative Date</th>
                             <th>Event Status</th>
-                            <th>Action </th>
+                            <!-- <th>Action </th> -->
                             <th>More </th>
 
 
@@ -243,10 +243,10 @@
                                 <td> <?php echo $event->event_type; ?> </td>
                                 <td><?php echo $event->date; ?> </td>
                                 <td><?php echo $event->event_status; ?> </td>
-                                <td style="display:flex;padding-top:0.5rem">
+                                <!-- <td style="display:flex;padding-top:0.5rem">
                                     <a id="editEvent" style="padding-left:3rem" href="<?php ?>">Edit</a>
                                     <a id="deleteEvent" style="padding-right:3rem" href="#"> Delete</a>
-                                </td>
+                                </td> -->
                                 <td><a  href="<?php echo URLROOT ?>customers/oneevent/<?php echo $event->id; ?>">
                                         <span class="material-icons-sharp">
 

@@ -76,13 +76,9 @@
 
 
             // Generate random data
-            const data = [];
+            const data = [0,0,1,0,0,0,0,0,0,0,0,0];
             const labels = ["Januray", "February", "March", "April", "June", "July", "August", "September", "October", "November", "December"];
 
-            for (let i = 0; i < 12; i++) {
-                data.push(Math.floor(Math.random() * 15)); // Generate random data values between 0 and 100
-
-            }
 
             // Create a bar chart
             const ctx = document.getElementById('barChart').getContext('2d');

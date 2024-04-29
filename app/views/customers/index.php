@@ -13,6 +13,7 @@
     <!-- STYLESHEET -->
     <link rel="stylesheet" href="<?php echo URLROOT; ?>public/css/admindash.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>public/css/eventplannerdash.css">
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const calendarBody = document.getElementById('calendar-body');
@@ -116,7 +117,7 @@
 <body>
     <div class="dash-container">
         <aside>
-        <div class="top">
+            <div class="top">
                 <div class="logo">
                     <img src="<?php echo URLROOT; ?>public/images/logo.jpg">
                     <h2>PlanItEasy</h2>
@@ -192,66 +193,35 @@
 
 
                     <div class="eventplanners">
-                        <span class="material-icons-sharp">inventory</span>
+                        <span style="background-color:#f3db62" , class="material-icons-sharp">inventory</span>
                         <div class="middle">
                             <div class="left">
-                                <h3>Quotation</h3>
+                                <h3>Booked Events</h3>
                                 <h1><?php echo $data['booked_count']->Count; ?></h1>
                             </div>
 
-            <div class="insights">
-                <div class="users">
-                    <span style="background-color:#f38e62" , class="material-icons-sharp">festival</span>
-                    <div class="middle">
-                        <div class="left">
-                            <h3>Pending Events</h3>
-                            <h1><?php echo $data['pending_count']; ?></h1>
                         </div>
 
                     </div>
 
-                <div class="eventplanners">
-                    <span style="background-color:#f3db62", class="material-icons-sharp">inventory</span>
-                    <div class="middle">
-                        <div class="left">
-                            <h3>Booked Events</h3>
-                            <h1><?php echo $data['booked_count']; ?></h1>
-                        </div>
 
-                    </div>
-                    
-                </div>
+                    <div class="suppliers">
+                        <span style="background-color:#AFE1AF" , class="material-icons-sharp">groups</span>
+                        <div class="middle">
+                            <div class="left">
+                                <h3>Completed Events</h3>
+                                <h1><?php echo $data['completed_count']->Count; ?></h1>
+                            </div>
 
-
-                <div class="suppliers">
-                    <span style="background-color:#AFE1AF", class="material-icons-sharp">groups</span>
-                    <div class="middle">
-                        <div class="left">
-                            <h3>Completed Events</h3>
-                            <h1><?php echo $data['completed_count']; ?></h1>
                         </div>
 
                     </div>
 
                 </div>
-
-            </div>
-            <div class="recent-trans">
-                <h2>Your Ongoing Events</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Event ID</th>
-                            <th>Event Type</th>
-                            <th>Tentative Date</th>
-                            <th>Event Status</th>
-                            <th>Action</th>
-                            <th>More</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                         <?php foreach ($data['events'] as $event) : ?>
-
+                <div class="recent-trans">
+                    <h2>Your Ongoing Events</h2>
+                    <table>
+                        <thead>
                             <tr>
                                 <th>Event ID</th>
                                 <th>Event Type</th>
@@ -261,6 +231,7 @@
                                 <th>More</th>
                             </tr>
                         </thead>
+                        <tbody>
                         <tbody>
                             <?php foreach ($data['events'] as $event) : ?>
 
@@ -311,8 +282,7 @@
                 <h2>Recent Updates</h2>
                 <?php if ($data['recent']) {
 
-                    foreach ($data['recent'] as $recent) {
-                        ?>
+                    foreach ($data['recent'] as $recent) { ?>
                         <div class="updates">
                             <div class="update">
                                 <div class="recent-icon">
@@ -325,37 +295,18 @@
                                 </div>
                             </div>
                         </div>
-                
-                <?php
-    } 
-} ?>
+
+
+                <?php }
+                } ?>
+
             </div>
 
             <!------------ END OF RECENT UPDTAES ------------>
             <div class="analytics">
-                <h2>Calander</h2>
-                <div class="calendar">
-                    <div class="calendar-header">
-                        <button id="prev-month">Previous</button>
-                        <h2 id="current-month-year">Month Year</h2>
-                        <button id="next-month">Next</button>
-                    </div>
-                    <table class="calendar-table">
-                        <thead>
-                            <tr>
-                                <th>Sun</th>
-                                <th>Mon</th>
-                                <th>Tue</th>
-                                <th>Wed</th>
-                                <th>Thu</th>
-                                <th>Fri</th>
-                                <th>Sat</th>
-                            </tr>
-                        </thead>
-                        <tbody id="calendar-body">
-                            <!-- Calendar cells will be dynamically generated here -->
-                        </tbody>
-                    </table>
+           
+                <div id='calendar'>
+
                 </div>
 
             </div>
@@ -365,5 +316,20 @@
     </div>
 
 </body>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            height: 405,
+            events: '<?php echo URLROOT; ?>customers/getCalendarEvents',
+
+        });
+
+        calendar.render();
+    });
+</script>
 
 </html>

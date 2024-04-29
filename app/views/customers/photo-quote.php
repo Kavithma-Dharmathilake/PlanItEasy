@@ -122,6 +122,7 @@
                         <textarea name="remark" id="theme" cols="80" rows="5"></textarea>
 
                     </div>
+                    <sup style="color:red;margin-left:30px">*An advance payment must be done with 7 days once supplier accepted the quotation. </sup><br />
                     <input style="padding:1rem; margin:1rem; background-color:#7380ec;color:white; border-radius:0.4rem" type="submit" value="submit">
                 </form>
             </div>

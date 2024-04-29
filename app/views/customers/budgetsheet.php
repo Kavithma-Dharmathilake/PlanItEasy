@@ -72,7 +72,7 @@
                         <input id="pricebtn" name="price" type="submit" class="view" value="Budget By Price">
                     </form> -->
                     <a href="<?php echo URLROOT ?>customers/pricebudget/<?php echo $data['bid'] ?>/<?php echo $data['eventid'] ?>" class="view">Budget By Price</a>
-                    <form action="<?php echo URLROOT ?>customers/ratingbudget/<?php echo $data['bid'] ?>/<?php echo $data['eventid'] ?>" method="POST">
+                    <form action="<?php echo URLROOT ?>customers/pricebudget/<?php echo $data['bid'] ?>/<?php echo $data['eventid'] ?>" method="POST">
                         <input id="pricebtn" name="rate" type="submit" class="view" value="Budget By Rating">
                     </form>
                     <button id="generate-pdf">Generate PDF</button>
@@ -222,6 +222,7 @@
                         // Add a footer containing the total price
                         doc.setFontSize(12); // Set font size for footer
                         doc.text(`Total Price: ${totalPrice.toFixed(2)}`, data.settings.margin.left, footerY);
+                       
                     }
                 });
 

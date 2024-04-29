@@ -2,15 +2,14 @@
 
 
 
---> add packages to suppliers
 
 
 
---> filter according to calander
 
---> manage calander
 
---> supplier working area update
+
+
+
 
 --> event planner:once the event got it payement location and reception hall should be exhanged between vendors
 --> event editing  -> rules
@@ -24,7 +23,7 @@
 
 
 -->terms and conditions
-advance payment must be done with 3 days once supplier accepted the quotation. 
+advance payment must be done with 7 days once supplier accepted the quotation. 
 advance payment is non refundable
 full payment must be done prior to the week of the event.
 

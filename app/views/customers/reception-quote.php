@@ -89,19 +89,19 @@
                         <div style="width:20rem; margin-left:2rem">
                             <p class="form-text">Event Date</p>
                             <div class="input-field">
-                                <input type="date" name="date" value="2024-03-24" readonly>
+                                <input type="date" name="date" value="<?php echo $data['request']->date ?>" readonly>
 
                             </div>
                             <p class="form-text" style="margin-top:2rem;">Service Duration</p>
                             <div style="display:flex;">
                                 <div>Start Time<br />
                                     <div class="input-field2">
-                                        <input type="time" name="start">
+                                        <input type="time" name="start" value="<?php echo $data['request']->starttime ?>">
                                     </div>
                                 </div>
                                 <div>End Time
                                     <div class="input-field2">
-                                        <input type="time" name="end">
+                                        <input type="time" name="end" value="<?php echo $data['request']->endtime ?>" >
                                     </div>
                                 </div>
                             </div>
@@ -115,6 +115,7 @@
                         <textarea name="remark" id="theme" cols="80" rows="5"></textarea>
 
                     </div>
+                    <sup style="color:red;margin-left:30px">*An advance payment must be done with 7 days once supplier accepted the quotation. </sup><br />
                     <input style="padding:1rem; margin:1rem; background-color:#7380ec;color:white; border-radius:0.4rem" type="submit">
                 </form>
             </div>

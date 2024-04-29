@@ -619,12 +619,12 @@ class Customer
         return $result;
     }
 
-    public function getCalander($id)
+    public function getCalander()
     {
    
-        $this->db->query('SELECT * FROM calander where supplier = :id AND status=:status');
-        $this->db->bind(':id', $id );
-        $this->db->bind(':status', 'Not Available' );
+        $this->db->query('SELECT * FROM calander where customer = :id');
+        $this->db->bind(':id', $_SESSION['user_id'] );
+    
         $result = $this->db->fetchAllAssoc();
         return $result;
     }
@@ -876,6 +876,19 @@ class Customer
         return $result;
     }
 
+    public function getSentSuppliers($type, $rid)
+    {
+        
+        $this->db->query('SELECT * FROM quoate
+         WHERE stype=:type AND eid=:rid AND uid=:id ');
+        $this->db->bind(':type', $type);
+        $this->db->bind(':rid', $rid);
+        $this->db->bind(':id', $_SESSION['user_id']);
+        $data = $this->db->resultSet();
+
+        return $data;
+    }
+
 
     public function getUnavailableSuppliers($type, $date)
     {
@@ -911,7 +924,7 @@ class Customer
         JOIN (
             SELECT stype, MIN(r_price) AS min_quotation
             FROM planiteasy.quoate 
-            WHERE status = :status AND stype != :except1 AND eid = :event_id
+            WHERE status = :status AND stype != :except1 AND eid = :event_id AND uid=:uid
             GROUP BY stype
         ) AS min_prices
         ON q.stype = min_prices.stype AND q.r_price = min_prices.min_quotation');
@@ -920,6 +933,7 @@ class Customer
         $this->db->bind(':event_id', $id);
         $this->db->bind(':status', $status);
         $this->db->bind(':except1', $eventplanner);
+        $this->db->bind(':uid', $uid);
         $result = $this->db->resultSet();
         return $result;
     }
@@ -1194,7 +1208,7 @@ class Customer
         // return $results;
 
         $this->db->query(
-            'SELECT p.amount , p.bid , p.rid
+            'SELECT p.amount , p.bid , p.rid,p.description
             FROM payment p
             WHERE p.user = :id'
         );
@@ -1203,18 +1217,40 @@ class Customer
         return $results;
     }
     
-    public function updateAdvBudgetQuotations($id)
+    public function updateAdvBudgetQuotations($data)
     {
 
+      
 
-        $this->db->query('SELECT * from budget_item WHERE bid = :id');
-        $this->db->bind(':id', $id);
+        $this->db->query('SELECT * from budget_item WHERE bid =:id');
+        $this->db->bind(':id', $data['id']);
         $quotes = $this->db->resultSet();
 
+        $this->db->query('SELECT * from general_requests WHERE id =:id');
+        $this->db->bind(':id', $data['rid']);
+        $request = $this->db->single();
+
+
         foreach ($quotes as $q) {
+
+          
             $this->db->query('UPDATE quoate SET status=:status, q_status =:status WHERE id=:id');
             $this->db->bind(':id', $q->qid);
             $this->db->bind(':status', 'Booked');
+            $this->db->execute();
+
+            $this->db->query('SELECT * from quoate WHERE id = :id');
+            $this->db->bind(':id', $q->qid); 
+            $supplier = $this->db->single();
+        
+            $this->db->query('INSERT into calander(title,status,date,customer,supplier) 
+            VALUES(:title,:status,:date,:customer,:supplier)');
+           
+            $this->db->bind(':title',$request->event_type);
+            $this->db->bind(':date',$request->date);
+            $this->db->bind(':customer',$request->idcustomer);
+            $this->db->bind(':supplier',$supplier->sid);
+            $this->db->bind(':status','Available');
             $this->db->execute();
         }
 
@@ -1268,6 +1304,8 @@ class Customer
     }
 
 
+
+
     public function sendMessage($data)
     {
         $sid = $_SESSION['user_id'];
@@ -1315,9 +1353,8 @@ class Customer
     public function getMessages($qid)
     {
 
-        $this->db->query('SELECT * FROM message WHERE qid =:qid AND sender =:sender ORDER BY date ASC, time ASC');
+        $this->db->query('SELECT * FROM message WHERE qid =:qid ORDER BY date ASC, time ASC');
         $this->db->bind(':qid', $qid);
-        $this->db->bind(':sender', $_SESSION['user_id']);
         $result = $this->db->resultSet();
 
         return $result;
