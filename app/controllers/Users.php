@@ -222,7 +222,7 @@ class Users extends Controller
                 redirect('eventplanners');
             } elseif ($userType === 'admin') {
                
-                redirect('admin');
+                redirect('admins');
 
             } elseif ($userType === 'supplier') {
               

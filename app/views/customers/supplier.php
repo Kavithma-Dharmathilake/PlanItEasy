@@ -23,10 +23,10 @@
 
             <div class="sidebar">
                 <a href="<?php echo URLROOT; ?>customers">
-                    <span class="material-icons-sharp" class="active">grid_view</span>
+                    <span class="material-icons-sharp">grid_view</span>
                     <h3>Dashboard</h3>
                 </a>
-                <a href="<?php echo URLROOT; ?>customers/events">
+                <a href="<?php echo URLROOT; ?>customers/events" class="active">
                     <span class="material-icons-sharp">man</span>
                     <h3>Events</h3>
                 </a>
@@ -34,9 +34,9 @@
                     <span class="material-icons-sharp">payments</span>
                     <h3>Payments</h3>
                 </a>
-                <a href="<?php echo URLROOT; ?>customers/message">
-                    <span class="material-icons-sharp">message</span>
-                    <h3>Messages</h3>
+                <a href="<?php echo URLROOT ?>customers/inquiry">
+                    <span class="material-icons-sharp">info</span>
+                    <h3>Inquiry</h3>
                 </a>
                 <a href="<?php echo URLROOT; ?>customers/profile">
                     <span class="material-icons-sharp">person</span>
@@ -61,8 +61,8 @@
             <div style="display:flex">
 
                 <div class="planner-title">
-                    <h1>Your Suppliers</h1>
-                    <h3>Easily organize all of your vendor planning so far (plus contact, book and more!).</h3>
+                    <h1 style="font-weight:600 ; font-size:3rem ; color:#03396c">Your Suppliers</h1>
+                    <h2 style="margin-top: 1.5rem ; margin-bottom:1.5rem ; font-weight: 500; ">Easily organize all of your vendor planning so far</h2>
                 </div>
 
 
@@ -79,7 +79,7 @@
                         </div>
                     </a>
 
-                    <a href="<?php echo URLROOT ?>customers/photography/<?php echo $data['request']->id; ?>">
+                    <a href="<?php echo URLROOT ?>customers/photography">
                         <div class="vendor-tab">
                             <img src="<?php echo URLROOT ?>public/images/photography.jpg" alt="">
                             <p>Photography</p>

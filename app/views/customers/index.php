@@ -130,6 +130,10 @@
                     <span class="material-icons-sharp">payments</span>
                     <h3>Payments</h3>
                 </a>
+                <a href="<?php echo URLROOT ?>customers/inquiry">
+                    <span class="material-icons-sharp">info</span>
+                    <h3>Inquiry</h3>
+                </a>
                 <!-- <a href="<?php echo URLROOT; ?>customers/message">
                     <span class="material-icons-sharp">message</span>
                     <h3>Messages</h3>
@@ -161,7 +165,7 @@
                     <small class="text-muted"><?php echo $_SESSION['user_role']?></small>
                 </div>
                 <div class="profile-photo">
-                    <img src="<?php echo URLROOT ?>public/images/photo2.jpg">
+                    <img src="<?php echo URLROOT ?>public/images/user.svg">
                 </div>
             </div>
 
